@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pedir Ayuda – SomAqui.cat</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fdfd;
+      color: #003333;
+    }
+
+    header {
+      background-color: #39e4c9;
+      color: white;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .logo-img {
+      position: absolute;
+      left: 2rem;
+      height: 90px;
+      width: auto;
+      user-select: none;
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    h2 {
+      color: #007d70;
+      margin-bottom: 0.5rem;
+    }
+
+    form {
+      background: white;
+      border: 2px solid #39e4c9;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin: 1rem 0 0.5rem;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .etiquetas-grupo {
+      margin-top: 1rem;
+    }
+
+    .grupo-titulo {
+      font-weight: 600;
+      margin-top: 1.5rem;
+      color: #004d4a;
+    }
+
+    .etiquetas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .etiqueta {
+      background-color: #e0fbf9;
+      border: 1px solid #39e4c9;
+      color: #004d4a;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .etiqueta input {
+      display: none;
+    }
+
+    .etiqueta.selected {
+      background-color: #39e4c9;
+      color: white;
+    }
+
+    button {
+      margin-top: 2rem;
+      background-color: #39e4c9;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2abbaa;
+    }
+
+    .privacidad {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 1.5rem;
+    }
+
+    /* Etiquetas seleccionadas JS */
+    .etiqueta input:checked + span {
+      background-color: #39e4c9;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
+    <h1>SomAqui.cat – Pedir Ayuda</h1>
+  </header>
+
+  <main>
+    <h2>🚨 Solicita ayuda en tu zona</h2>
+    <p>Este formulario conectará tu petición con vecinos o servicios cercanos.</p>
+
+    <form onsubmit="event.preventDefault(); alert('✅ Hemos recibido tu solicitud.'); this.reset();">
+      <label for="ubicacion">📍 Ubicación aproximada</label>
+      <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Calle Mayor, Reus" required />
+
+      <div class="etiquetas-grupo">
+        <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
+        <div class="etiquetas">
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Incendio" /><span>Incendios forestales</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Inundación" /><span>Lluvias intensas</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Calor" /><span>Ola de calor</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Frío" /><span>Ola de frío</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Viento" /><span>Vientos fuertes</span></label>
+        </div>
+
+        <div class="grupo-titulo">🛑 Cortes o fallos</div>
+        <div class="etiquetas">
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Luz" /><span>Corte de luz</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Agua" /><span>Corte de agua</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Gas" /><span>Corte de gas</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Internet" /><span>Corte de Internet</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Apagón" /><span>Apagón general</span></label>
+        </div>
+
+        <div class="grupo-titulo">👥 Necesidades humanas</div>
+        <div class="etiquetas">
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Mayor" /><span>Mayores solos</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Sin hogar" /><span>Personas sin hogar</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Movilidad" /><span>Movilidad reducida</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Alimentos" /><span>Falta de alimentos</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Medicamentos" /><span>Falta de medicamentos</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Transporte" /><span>Necesidad de transporte</span></label>
+        </div>
+
+        <div class="grupo-titulo">🧠 Apoyo psicosocial</div>
+        <div class="etiquetas">
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Ansiedad" /><span>Ansiedad o crisis</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Hablar" /><span>Necesito hablar</span></label>
+        </div>
+
+        <div class="grupo-titulo">🏘️ Problemas estructurales</div>
+        <div class="etiquetas">
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Derrumbe" /><span>Derrumbe</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Desalojo" /><span>Peligro de desalojo</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Bloqueo" /><span>Calles bloqueadas</span></label>
+        </div>
+
+        <div class="grupo-titulo">🧰 Infraestructura</div>
+        <div class="etiquetas">
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Recarga" /><span>Recarga saturada</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Centro cerrado" /><span>Centro cívico cerrado</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags" value="Colapso salud" /><span>Centro de salud colapsado</span></label>
+        </div>
+      </div>
+
+      <label for="descripcion">📝 Describe tu situación</label>
+      <textarea id="descripcion" name="descripcion" placeholder="Ej: Estoy sin electricidad y necesito comida..."></textarea>
+
+      <button type="submit">Pedir ayuda ahora</button>
+
+      <div class="privacidad">🔒 Tus datos no se comparten públicamente. Solo se usan para activar ayuda cercana según el tipo de emergencia.</div>
+    </form>
+  </main>
+</body>
+</html>
