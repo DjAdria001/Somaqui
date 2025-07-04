@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SomAqui.cat - Xarxa de suport local en emergències</title>
+<style>
+  /* Reset y base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0fdfd;
+    color: #003333;
+  }
+
+  header {
+    background-color: #39e4c9;
+    color: white;
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* Logo en header */
+  .logo-img {
+    position: absolute;
+    left: 2rem;
+    height: 100px;
+    width: auto;
+    user-select: none;
+  }
+
+  header h1 {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0;
+  }
+
+  main {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: #007d70;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: #004d4a;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  button {
+    background-color: #39e4c9;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.75rem 2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2abbaa;
+  }
+
+  /* Contenedor mapa + lista */
+  .map-list-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .map-container {
+    flex: 2;
+    height: 400px;
+    background: #c7f0ec;
+    border: 2px solid #39e4c9;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007d70;
+    font-size: 1.2rem;
+    font-style: italic;
+    user-select: none;
+  }
+
+  .emergencias-list {
+    flex: 1;
+    max-width: 300px;
+    background: white;
+    border: 2px solid #39e4c9;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 0 8px rgba(57, 228, 201, 0.4);
+    color: #004d4a;
+
+    /* Scroll vertical si supera 350px */
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  .emergencias-list h2 {
+    margin-top: 0;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #39e4c9;
+    padding-bottom: 0.3rem;
+  }
+
+  .emergencias-list ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+  }
+
+  .emergencias-list li {
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid #b2e8e0;
+    font-size: 1rem;
+  }
+
+  .emergencias-list li span {
+    display: block;
+    font-weight: 600;
+    color: #007d70;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .map-list-container {
+      flex-direction: column;
+    }
+    .map-container, .emergencias-list {
+      max-width: 100%;
+      flex: unset;
+      height: 300px;
+    }
+    .emergencias-list {
+      max-height: none;
+      overflow-y: visible;
+      margin-top: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .btn-group {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    button {
+      width: 100%;
+      padding: 1rem 0;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
+  <h1>SomAqui.cat – Xarxa de suport local en emergències</h1>
+</header>
+
+<main>
+  <section class="hero">
+    <h1>Organízate con tu comunidad para emergencias</h1>
+    <p>Conecta, pide y ofrece ayuda rápida en tu barrio o municipio</p>
+    <div class="btn-group">
+      <button type="button" onclick="alert('Formulario Necesito ayuda (pendiente)')">Necesito ayuda</button>
+      <button type="button" onclick="alert('Formulario Puedo ayudar (pendiente)')">Puedo ayudar</button>
+    </div>
+  </section>
+
+  <section class="map-list-container" aria-label="Mapa y lista de emergencias activas">
+    <div class="map-container" aria-label="Mapa de puntos de ayuda en emergencia">
+      Aquí irá el mapa colaborativo
+    </div>
+
+    <aside class="emergencias-list" aria-label="Lista de emergencias activas ordenadas por proximidad">
+      <h2>Emergencias activas</h2>
+      <ul>
+        <li>
+          <span>Incendio en Ribera d’Ebre</span>
+          Distancia: 2.1 km
+        </li>
+        <li>
+          <span>Ola de calor en Tarragona</span>
+          Distancia: 3.4 km
+        </li>
+        <li>
+          <span>Corte de luz en barrio Eixample</span>
+          Distancia: 5.2 km
+        </li>
+        <li>
+          <span>Inundación en el Delta</span>
+          Distancia: 7.8 km
+        </li>
+        <li>
+          <span>Tormenta fuerte en Baix Camp</span>
+          Distancia: 8.0 km
+        </li>
+        <li>
+          <span>Accidente vial en Tortosa</span>
+          Distancia: 12.4 km
+        </li>
+        <li>
+          <span>Alerta sanitaria en Reus</span>
+          Distancia: 15.7 km
+        </li>
+      </ul>
+    </aside>
+  </section>
+</main>
+
+<footer>
+  © 2025 SomAqui.cat | Proyecto colaborativo para emergencias locales en Cataluña
+</footer>
+</body>
+</html>
