@@ -9,7 +9,6 @@
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f0fdfd;
-      color: #003333;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -66,7 +65,7 @@
       margin-bottom: 0.5rem;
     }
 
-    input[type="text"],
+    input[type="email"],
     input[type="password"] {
       width: 100%;
       padding: 0.75rem;
@@ -96,7 +95,6 @@
     .small-text {
       text-align: center;
       font-size: 0.9rem;
-      color: #555;
       margin-top: 1rem;
     }
 
@@ -122,24 +120,24 @@
   <main>
     <div class="login-container">
       <h2>Accede a tu cuenta</h2>
-      <form action="validar_usuario.php" method="POST">
-        <label for="usuario">Correo electrónico</label>
-        <input type="text" id="usuario" name="usuario" placeholder="tucorreo@ejemplo.com" required />
+      <form action="login_usuario.php" method="POST">
+        <label for="correo">Correo electrónico</label>
+        <input type="email" id="correo" name="correo" required />
 
         <label for="password">Contraseña</label>
         <input type="password" id="password" name="password" required />
 
-        <button type="submit">Entrar</button>
+        <button type="submit">Iniciar sesión</button>
       </form>
 
       <div class="small-text">
-        ¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a>
+        ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
       </div>
     </div>
   </main>
 
   <footer>
-    © 2025 SomAqui.cat – Plataforma ciudadana para emergencias locales
+    © 2025 SomAqui.cat – Comunidad conectada para emergencias locales
   </footer>
 </body>
 </html>
