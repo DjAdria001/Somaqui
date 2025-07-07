@@ -172,6 +172,7 @@
         padding: 1rem 0;
       }
     }
+
     #map {
   height: 400px;
   width: 100%;
@@ -191,6 +192,9 @@
   src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js">
 </script>
 
+
+  </style>
+
 </head>
 <body>
   <header>
@@ -208,10 +212,7 @@
     </section>
 
     <section class="map-list-container" aria-label="Mapa y lista de emergencias activas">
-      <div class="map-container" id="map" aria-label="Mapa de puntos de ayuda en emergencia">
-        <!-- Mapa real aparecerá aquí -->
-      </div>
-
+      <div class="map-container" id="map" aria-label="Mapa de puntos de ayuda en emergencia"></div>
       <aside class="emergencias-list" aria-label="Lista de emergencias activas ordenadas por proximidad">
         <h2>Emergencias activas</h2>
         <ul>
@@ -227,48 +228,40 @@
     </section>
   </main>
 
+
+
+  <script>
+    // Inicializar el mapa de Leaflet y añadir marcadores de emergencias
+    var map = L.map('map').setView([41.3851, 2.1734], 8); // Cataluña
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    }).addTo(map);
+    const emergencias = [
+      {
+        titulo: 'Incendio en Ribera d’Ebre',
+        coords: [41.1456, 0.6381],
+      },
+      {
+        titulo: 'Ola de calor en Tarragona',
+        coords: [41.1189, 1.2445],
+      },
+      {
+        titulo: 'Corte de luz en Eixample',
+        coords: [41.3911, 2.1620],
+      },
+    ];
+    emergencias.forEach((emergencia) => {
+      L.marker(emergencia.coords)
+        .addTo(map)
+        .bindPopup(`<b>${emergencia.titulo}</b>`);
+    });
+  </script>
+
+
+
   <footer>
     © 2025 SomAqui.cat | Proyecto colaborativo para emergencias locales en Cataluña
   </footer>
-  <script>
-    // Inicializar el mapa de Leaflet
-    var map = L.map('map').setView([41.3851, 2.1734], 8); // Coordenadas de Cataluña
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-  </script>
-  <script>
-  // 1. Inicializar mapa
-  var map = L.map('map').setView([41.3851, 2.1734], 8); // Barcelona
-
-  // 2. Añadir capa de tiles (mapa base)
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-  }).addTo(map);
-
-  // 3. Ejemplo de marcadores de emergencias
-  const emergencias = [
-    {
-      titulo: 'Incendio en Ribera d’Ebre',
-      coords: [41.1456, 0.6381],
-    },
-    {
-      titulo: 'Ola de calor en Tarragona',
-      coords: [41.1189, 1.2445],
-    },
-    {
-      titulo: 'Corte de luz en Eixample',
-      coords: [41.3911, 2.1620],
-    },
-  ];
-
-  emergencias.forEach((emergencia) => {
-    L.marker(emergencia.coords)
-      .addTo(map)
-      .bindPopup(`<b>${emergencia.titulo}</b>`);
-  });
-</script>
 
 </body>
 </html>
