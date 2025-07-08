@@ -1,31 +1,18 @@
-<?php
-// Para mostrar mensaje de éxito si viene por GET
-$mensaje_exito = '';
-if (isset($_GET['success']) && $_GET['success'] == '1') {
-    $mensaje_exito = "Tu solicitud de ayuda se ha enviado correctamente.";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pedir Ayuda – SomAqui.cat</title>
-
-  <!-- Leaflet para el mapa -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <style>
-    /* Aquí va todo tu CSS (igual que antes) */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f0fdfd;
       color: #003333;
     }
-    /* ... resto del CSS ... */
     header {
       background-color: #39e4c9;
       color: white;
@@ -33,104 +20,108 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       position: relative;
     }
     .logo-link {
       position: absolute;
       left: 2rem;
-      display: flex;
-      align-items: center;
     }
     .logo-img {
       height: 70px;
-      width: auto;
       user-select: none;
     }
-    header h1 {
-      font-weight: 700;
-      font-size: 1.8rem;
-      margin: 0;
-      text-align: center;
-    }
+    h1 { font-size: 1.8rem; margin: 0; }
     main {
       max-width: 960px;
       margin: 2rem auto;
       padding: 1rem;
-    }
-    h2 {
-      color: #007d70;
-      margin-bottom: 0.5rem;
     }
     form {
       background: white;
       border: 2px solid #39e4c9;
       border-radius: 12px;
       padding: 2rem;
-      box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
     }
     label {
-      font-weight: 600;
+      font-weight: bold;
+      margin-top: 1rem;
       display: block;
-      margin: 1rem 0 0.5rem;
     }
-    input[type="text"],
-    textarea {
+    input[type="text"], input[type="email"], textarea {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.7rem;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
     }
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-    .etiquetas-grupo {
-      margin-top: 1rem;
-    }
-    .grupo-titulo {
-      font-weight: 600;
-      margin-top: 1.5rem;
-      color: #004d4a;
-    }
+    textarea { resize: vertical; min-height: 100px; }
     .etiquetas {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.6rem 0.8rem;
       margin-top: 0.5rem;
+      margin-bottom: 1.5rem;
     }
-    .etiqueta {
-      display: inline-flex;
-      align-items: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .etiqueta input {
-      display: none;
-    }
+    .etiqueta input { display: none; }
     .etiqueta span {
-      background-color: #e0fbf9;
+      background: #e0fbf9;
       border: 1px solid #39e4c9;
-      color: #004d4a;
-      padding: 0.4rem 0.8rem;
+      padding: 0.45rem 1rem;
       border-radius: 20px;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
+      cursor: pointer;
       user-select: none;
-    }
-    .etiqueta:hover span {
-      background-color: #b2f0ea;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
     }
     .etiqueta input:checked + span {
       background-color: #39e4c9;
       color: white;
       border-color: #39e4c9;
     }
+    .etiqueta span:hover {
+      background-color: #c1f3ed;
+    }
+    .grupo-titulo {
+      font-weight: bold;
+      margin-top: 1.8rem;
+      margin-bottom: 0.2rem;
+      color: #004d4a;
+      font-size: 1.1rem;
+    }
+    .ubicacion-mapa {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      max-width: 500px;
+      border: 2px solid #39e4c9;
+      border-radius: 8px;
+    }
+    .descripcion-ubicacion {
+      flex: 1;
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .mensaje-exito {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .checkbox-term {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
     button {
       margin-top: 2rem;
-      background-color: #39e4c9;
+      background: #39e4c9;
       color: white;
       border: none;
       padding: 0.8rem 2rem;
@@ -138,215 +129,172 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
       font-weight: bold;
       border-radius: 30px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #2abbaa;
     }
     .privacidad {
-      font-size: 0.9rem;
-      color: #666;
       margin-top: 1.5rem;
-    }
-    .ubicacion-mapa {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      flex-wrap: wrap;
-    }
-    #map {
-      height: 300px;
-      width: 100%;
-      max-width: 400px;
-      border: 2px solid #39e4c9;
-      border-radius: 8px;
-    }
-    .mensaje-exito {
-      background-color: #d4edda;
-      border: 1px solid #c3e6cb;
-      color: #155724;
-      padding: 1rem;
-      border-radius: 6px;
-      margin-bottom: 1rem;
-      font-weight: 600;
+      font-size: 0.9rem;
+      color: #555;
     }
   </style>
 </head>
 <body>
   <header>
-    <a href="Home.html" class="logo-link" title="Volver a Inicio">
-      <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
-    </a>
+    <a href="Home.html" class="logo-link"><img src="Imagenes/LogoO.png" class="logo-img" alt="Logo" /></a>
     <h1>SomAqui.cat – Pedir Ayuda</h1>
   </header>
 
   <main>
     <h2>🚨 Solicita ayuda en tu zona</h2>
-    <p>Este formulario conectará tu petición con vecinos o servicios cercanos.</p>
+    <p>Selecciona una o más situaciones que estás viviendo. La ubicación es aproximada y no se mostrará públicamente.</p>
 
-
+    <?php if ($mensaje_exito): ?>
+      <div class="mensaje-exito"><?= $mensaje_exito ?></div>
+    <?php endif; ?>
 
     <form action="enviar_ayuda.php" method="POST">
-      <label for="ubicacion">📍 Ubicación aproximada</label>
+      <label for="correo">📧 Correo electrónico *</label>
+      <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+
+      <label for="ubicacion">📍 Ubicación aproximada *</label>
       <div class="ubicacion-mapa">
-        <input type="text" id="ubicacion" name="ubicacion" placeholder="Haz clic en el mapa o escribe" required />
+        <input type="text" id="ubicacion" name="ubicacion" readonly required>
         <div id="map"></div>
-      </div>
-
-      <div class="etiquetas-grupo">
-        <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
-        <div class="etiquetas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios forestales</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias intensas</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de calor</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de frío</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos fuertes</span></label>
-        </div>
-
-        <div class="grupo-titulo">🛑 Cortes o fallos</div>
-        <div class="etiquetas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de luz</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de agua</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de gas</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de Internet</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón general</span></label>
-        </div>
-
-        <div class="grupo-titulo">👥 Necesidades humanas</div>
-        <div class="etiquetas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores solos</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin hogar</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad reducida</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de alimentos</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de medicamentos</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad de transporte</span></label>
-        </div>
-
-        <div class="grupo-titulo">🧠 Apoyo psicosocial</div>
-        <div class="etiquetas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito hablar</span></label>
-        </div>
-
-        <div class="grupo-titulo">🏘️ Problemas estructurales</div>
-        <div class="etiquetas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de desalojo</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles bloqueadas</span></label>
-        </div>
-
-        <div class="grupo-titulo">🧰 Infraestructura</div>
-        <div class="etiquetas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Recarga saturada" /><span>Recarga saturada</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico cerrado</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
-        </div>
-
-        <div class="grupo-titulo">➕ Otra emergencia</div>
-        <div class="etiquetas">
-          <label class="etiqueta">
-            <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
-            <span>Otros</span>
-          </label>
-        </div>
-
-        <div id="otros-texto-container" style="display:none; margin-top: 1rem;">
-          <label for="otros-detalle">Describe tu emergencia:</label>
-          <input type="text" id="otros-detalle" name="otros_detalle" placeholder="Ej: Escape de gas, colmena en casa..." />
+        <div class="descripcion-ubicacion">
+          Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
+          Es necesaria para conectar con servicios cercanos.
         </div>
       </div>
 
-      <label for="descripcion">📝 Describe tu situación</label>
-      <textarea id="descripcion" name="descripcion" placeholder="Ej: Estoy sin electricidad y necesito comida..."></textarea>
+      <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
+      <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
 
-      <button type="submit">Pedir ayuda ahora</button>
+      <label>🆘 Selecciona una o más etiquetas *</label>
 
-      <div class="privacidad">Tus datos no se comparten públicamente. Solo se usan para activar ayuda cercana según el tipo de emergencia.</div>
-      <div class="privacidad" style="color:#555; font-style: italic; margin-top:1.5rem; font-size:0.95rem;">
-        Por favor, utiliza este formulario de manera responsable para que podamos ayudarte mejor.
+      <!-- Categorías y etiquetas aquí (igual que tenías, eliminé duplicados y repetidos) -->
+      <!-- 🌪️ Emergencias climáticas -->
+      <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
+      <div class="etiquetas etiquetas-clima">
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios forestales</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias intensas</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de calor</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de frío</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos fuertes</span></label>
       </div>
+
+      <!-- 🛑 Cortes o fallos -->
+      <div class="grupo-titulo">🛑 Cortes o fallos</div>
+      <div class="etiquetas etiquetas-cortes">
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de luz</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de agua</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de gas</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de Internet</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón general</span></label>
+      </div>
+
+      <!-- 👥 Necesidades humanas -->
+      <div class="grupo-titulo">👥 Necesidades humanas</div>
+      <div class="etiquetas etiquetas-humanas">
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores solos</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin hogar</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad reducida</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de alimentos</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de medicamentos</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad de transporte</span></label>
+      </div>
+
+      <!-- 🧠 Apoyo psicosocial -->
+      <div class="grupo-titulo">🧠 Apoyo psicosocial</div>
+      <div class="etiquetas etiquetas-psicosocial">
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito hablar</span></label>
+      </div>
+
+      <!-- 🏘️ Problemas estructurales -->
+      <div class="grupo-titulo">🏘️ Problemas estructurales</div>
+      <div class="etiquetas etiquetas-estructurales">
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de desalojo</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles bloqueadas</span></label>
+      </div>
+
+      <!-- 🧰 Infraestructura -->
+      <div class="grupo-titulo">🧰 Infraestructura</div>
+      <div class="etiquetas etiquetas-infraestructura">
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Recarga saturada" /><span>Recarga saturada</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico cerrado</span></label>
+        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
+      </div>
+
+      <!-- ➕ Otra emergencia -->
+<div class="grupo-titulo">➕ Otra emergencia</div>
+<div class="etiquetas etiquetas-otros">
+  <label class="etiqueta">
+    <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
+    <span>Otros</span>
+  </label>
+</div>
+
+
+      <div id="otros-texto-container" style="display:none;">
+        <label for="otros_detalle">🔍 Describe tu emergencia:</label>
+        <input type="text" name="otros_detalle" id="otros_detalle">
+      </div>
+
+      <label for="descripcion">📝 Describe tu situación (opcional)</label>
+      <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad..."></textarea>
+
+      <div class="checkbox-term">
+        <input type="checkbox" id="terminos" required>
+        <label for="terminos">Acepto los <a href="#">términos y condiciones</a> *</label>
+      </div>
+
+      <button type="submit">Enviar solicitud</button>
+      <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
     </form>
   </main>
 
   <script>
     function toggleOtrosTexto() {
-      const check = document.getElementById('otros-check');
-      const contenedor = document.getElementById('otros-texto-container');
-      contenedor.style.display = check.checked ? 'block' : 'none';
+      document.getElementById('otros-texto-container').style.display =
+        document.getElementById('otros-check').checked ? 'block' : 'none';
     }
 
     const map = L.map('map').setView([41.1189, 1.2445], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    const marker = L.marker([0, 0], { draggable: false }).addTo(map).setOpacity(0);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    const marker = L.marker([0, 0], { draggable: false }).addTo(map);
-    marker.setOpacity(0);
-
-    const tarragonaBounds = L.latLngBounds(
-      [41.07, 1.18], // suroeste
-      [41.18, 1.33]  // noreste
-    );
+    const tarragonaBounds = L.latLngBounds([41.07, 1.18], [41.18, 1.33]);
 
     map.on('click', function (e) {
       const { lat, lng } = e.latlng;
       if (tarragonaBounds.contains([lat, lng])) {
-        marker.setLatLng([lat, lng]);
-        marker.setOpacity(1);
-
+        marker.setLatLng([lat, lng]).setOpacity(1);
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
           .then(res => res.json())
           .then(data => {
-            const dir = data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-            document.getElementById('ubicacion').value = dir;
-          })
-          .catch(() => {
-            document.getElementById('ubicacion').value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+            document.getElementById('ubicacion').value = data.display_name || `${lat},${lng}`;
           });
       } else {
-        alert('Solo puedes seleccionar ubicaciones dentro de Tarragona.');
+        alert("Solo puedes seleccionar dentro de Tarragona.");
       }
     });
 
-    // Validación para que al enviar se seleccione al menos una etiqueta y "Otros" tenga texto
-    document.querySelector('form').addEventListener('submit', function(event) {
-      const checkboxes = document.querySelectorAll('input[name="tags[]"]');
-      const algunoMarcado = Array.from(checkboxes).some(chk => chk.checked);
-
-      if (!algunoMarcado) {
-        alert('Por favor, selecciona al menos una emergencia.');
-        event.preventDefault();
+    document.querySelector('form').addEventListener('submit', function (e) {
+      const checks = document.querySelectorAll('input[name="tags[]"]');
+      const alguno = Array.from(checks).some(c => c.checked);
+      if (!alguno) {
+        alert("Selecciona al menos una etiqueta.");
+        e.preventDefault();
         return;
       }
-
-      const otrosCheck = document.getElementById('otros-check');
-      const otrosDetalle = document.getElementById('otros-detalle');
-
-      if (otrosCheck.checked && (!otrosDetalle.value.trim())) {
-        alert('Por favor, describe tu emergencia en el campo de texto.');
-        otrosDetalle.focus();
-        event.preventDefault();
-        return;
+      const otros = document.getElementById("otros-check");
+      const detalle = document.getElementById("otros_detalle");
+      if (otros && otros.checked && !detalle.value.trim()) {
+        alert("Describe tu emergencia en 'Otros'.");
+        detalle.focus();
+        e.preventDefault();
       }
     });
-      const mensaje = localStorage.getItem('mensajeExito');
-  if (mensaje) {
-    const div = document.createElement('div');
-    div.textContent = mensaje;
-    div.style.backgroundColor = '#d4edda';
-    div.style.border = '1px solid #c3e6cb';
-    div.style.color = '#155724';
-    div.style.padding = '1rem';
-    div.style.margin = '1rem auto';
-    div.style.maxWidth = '800px';
-    div.style.borderRadius = '6px';
-    div.style.fontWeight = '600';
-    div.style.textAlign = 'center';
-    document.body.insertBefore(div, document.body.firstChild);
-    localStorage.removeItem('mensajeExito');
-  }
   </script>
-
 </body>
 </html>
