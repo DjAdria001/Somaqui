@@ -2,8 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pedir Ayuda – SomAqui.cat</title>
+
+  <!-- Leaflet para el mapa -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <style>
     body {
       margin: 0;
@@ -19,14 +24,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
+      gap: 1rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .logo-link {
+      position: absolute;
+      left: 2rem;
+      display: flex;
+      align-items: center;
     }
 
     .logo-img {
-      position: absolute;
-      left: 2rem;
-      height: 90px;
+      height: 70px;
       width: auto;
       user-select: none;
     }
@@ -35,6 +46,7 @@
       font-weight: 700;
       font-size: 1.8rem;
       margin: 0;
+      text-align: center;
     }
 
     main {
@@ -94,23 +106,35 @@
     }
 
     .etiqueta {
-      background-color: #e0fbf9;
-      border: 1px solid #39e4c9;
-      color: #004d4a;
-      padding: 0.4rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
       cursor: pointer;
-      user-select: none;
+      transition: all 0.3s ease;
     }
 
     .etiqueta input {
       display: none;
     }
 
+    .etiqueta span {
+      background-color: #e0fbf9;
+      border: 1px solid #39e4c9;
+      color: #004d4a;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .etiqueta:hover span {
+      background-color: #b2f0ea;
+    }
+
     .etiqueta input:checked + span {
       background-color: #39e4c9;
       color: white;
+      border-color: #39e4c9;
     }
 
     button {
@@ -135,11 +159,28 @@
       color: #666;
       margin-top: 1.5rem;
     }
+
+    .ubicacion-mapa {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    #map {
+      height: 300px;
+      width: 100%;
+      max-width: 400px;
+      border: 2px solid #39e4c9;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
+    <a href="Home.html" class="logo-link" title="Volver a Inicio">
+      <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
+    </a>
     <h1>SomAqui.cat – Pedir Ayuda</h1>
   </header>
 
@@ -149,7 +190,10 @@
 
     <form action="enviar_ayuda.php" method="POST">
       <label for="ubicacion">📍 Ubicación aproximada</label>
-      <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej. Calle Mayor, Reus" required />
+      <div class="ubicacion-mapa">
+        <input type="text" id="ubicacion" name="ubicacion" placeholder="Haz clic en el mapa o escribe" required />
+        <div id="map"></div>
+      </div>
 
       <div class="etiquetas-grupo">
         <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
@@ -219,7 +263,11 @@
 
       <button type="submit">Pedir ayuda ahora</button>
 
-      <div class="privacidad">🔒 Tus datos no se comparten públicamente. Solo se usan para activar ayuda cercana según el tipo de emergencia.</div>
+      <div class="privacidad"> Tus datos no se comparten públicamente. Solo se usan para activar ayuda cercana según el tipo de emergencia.</div>
+<div class="privacidad" style="color:#555; font-style: italic; margin-top:1.5rem; font-size:0.95rem;">
+ Por favor, utiliza este formulario de manera responsable para que podamos ayudarte mejor.
+</div>
+
     </form>
   </main>
 
@@ -229,9 +277,70 @@
       const contenedor = document.getElementById('otros-texto-container');
       contenedor.style.display = check.checked ? 'block' : 'none';
     }
+
+    const map = L.map('map').setView([41.1189, 1.2445], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const marker = L.marker([0, 0], { draggable: false }).addTo(map);
+    marker.setOpacity(0);
+
+    const tarragonaBounds = L.latLngBounds(
+      [41.07, 1.18], // suroeste
+      [41.18, 1.33]  // noreste
+    );
+
+    map.on('click', function (e) {
+      const { lat, lng } = e.latlng;
+      if (tarragonaBounds.contains([lat, lng])) {
+        marker.setLatLng([lat, lng]);
+        marker.setOpacity(1);
+
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+          .then(res => res.json())
+          .then(data => {
+            const dir = data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+            document.getElementById('ubicacion').value = dir;
+          })
+          .catch(() => {
+            document.getElementById('ubicacion').value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+          });
+      } else {
+        alert('Solo puedes seleccionar ubicaciones dentro de Tarragona.');
+      }
+    });
+    document.querySelector('form').addEventListener('submit', function(event) {
+  const checkboxes = document.querySelectorAll('input[name="tags[]"]');
+  const algunoMarcado = Array.from(checkboxes).some(chk => chk.checked);
+
+  if (!algunoMarcado) {
+    alert('Por favor, selecciona al menos una emergencia.');
+    event.preventDefault(); // Cancela el envío del formulario
+  }
+});
+document.querySelector('form').addEventListener('submit', function(event) {
+  const checkboxes = document.querySelectorAll('input[name="tags[]"]');
+  const algunoMarcado = Array.from(checkboxes).some(chk => chk.checked);
+
+  if (!algunoMarcado) {
+    alert('Por favor, selecciona al menos una emergencia.');
+    event.preventDefault();
+    return;
+  }
+
+  const otrosCheck = document.getElementById('otros-check');
+  const otrosDetalle = document.getElementById('otros-detalle');
+
+  if (otrosCheck.checked && (!otrosDetalle.value.trim())) {
+    alert('Por favor, describe tu emergencia en el campo de texto.');
+    otrosDetalle.focus();
+    event.preventDefault();
+    return;
+  }
+});
+
   </script>
 </body>
-
-</html>
-
 </html>
