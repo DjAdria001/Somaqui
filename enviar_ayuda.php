@@ -1,56 +1,42 @@
 <?php
-// enviar_ayuda.php
+// Configura la conexión
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$dbname = 'somaqui';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    // Redirigir a formulario si acceden por GET
-    header("Location: pedir_ayuda.php");
-    exit;
+// Crear conexión
+$conexion = new mysqli($host, $user, $password, $dbname);
+if ($conexion->connect_error) {
+    die("Error de conexión: " . $conexion->connect_error);
 }
 
-// Configura tu conexión a la base de datos
-$host = "localhost";
-$db   = "somaqui";  // Cambia aquí por el nombre de tu base
-$user = "root";                  // Por defecto en local suele ser root
-$pass = "";  
+// Obtener y sanitizar datos del formulario
+$ubicacion = $_POST['ubicacion'] ?? '';
+$descripcion = $_POST['descripcion'] ?? '';
+$otros_detalle = $_POST['otros_detalle'] ?? '';
+$tags = $_POST['tags'] ?? [];
 
-$conexion = new mysqli($host, $user, $pass, $db);
-if ($conexion->connect_errno) {
-    die("Error de conexión a la base de datos: " . $conexion->connect_error);
+if (in_array("Otros", $tags) && $otros_detalle !== '') {
+    $tags[] = "Detalle: " . $otros_detalle;
 }
 
-// Recoger y sanitizar datos
-$ubicacion = trim($_POST['ubicacion'] ?? '');
-$descripcion = trim($_POST['descripcion'] ?? '');
-$otros_detalle = trim($_POST['otros_detalle'] ?? '');
-$etiquetas = $_POST['tags'] ?? [];
+// Convertir el array de tags a texto
+$tags_str = implode(', ', $tags);
 
-// Validaciones
-if (empty($ubicacion)) {
-    die("Error: La ubicación es obligatoria.");
-}
-if (empty($etiquetas)) {
-    die("Error: Selecciona al menos una etiqueta.");
-}
-if (in_array('Otros', $etiquetas) && empty($otros_detalle)) {
-    die("Error: Por favor describe la emergencia en el campo Otros.");
-}
-
-$etiquetas_str = implode(',', $etiquetas);
-
-// Insertar en base de datos con consulta preparada
-$stmt = $conexion->prepare("INSERT INTO peticiones_ayuda (ubicacion, descripcion, etiquetas, otros_detalle) VALUES (?, ?, ?, ?)");
-$stmt->bind_param("ssss", $ubicacion, $descripcion, $etiquetas_str, $otros_detalle);
+// Insertar en la base de datos
+$sql = "INSERT INTO peticiones_ayuda (ubicacion, tags, descripcion) VALUES (?, ?, ?)";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("sss", $ubicacion, $tags_str, $descripcion);
 
 if ($stmt->execute()) {
-    $stmt->close();
-    $conexion->close();
-    // Redirigir a página de éxito o mostrar mensaje
-    header("Location: pedir_ayuda.php?success=1");
-    exit;
+    // Redirigir al Home si todo va bien
+    header("Location: Home.html");
+    exit();
 } else {
-    $error = "Error al guardar la solicitud: " . $stmt->error;
-    $stmt->close();
-    $conexion->close();
-    die($error);
+    echo "Error al enviar la solicitud: " . $conexion->error;
 }
+
+$stmt->close();
+$conexion->close();
 ?>

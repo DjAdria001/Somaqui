@@ -184,9 +184,7 @@ if (isset($_GET['success']) && $_GET['success'] == '1') {
     <h2>🚨 Solicita ayuda en tu zona</h2>
     <p>Este formulario conectará tu petición con vecinos o servicios cercanos.</p>
 
-    <?php if ($mensaje_exito): ?>
-      <div class="mensaje-exito"><?= htmlspecialchars($mensaje_exito) ?></div>
-    <?php endif; ?>
+
 
     <form action="enviar_ayuda.php" method="POST">
       <label for="ubicacion">📍 Ubicación aproximada</label>
