@@ -14,26 +14,6 @@
       min-height: 100vh;
     }
 
-    header {
-      background-color: #39e4c9;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .logo-img {
-      position: absolute;
-      left: 2rem;
-      height: 80px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
 
     main {
       flex: 1;
@@ -51,6 +31,7 @@
       box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
       max-width: 400px;
       width: 100%;
+      margin-bottom: 2rem;
     }
 
     .login-container h2 {
@@ -111,31 +92,30 @@
     }
   </style>
   <script>
-  // Detectar si está dentro de un iframe
-  if (window.self !== window.top) {
-    document.addEventListener("DOMContentLoaded", () => {
-      const header = document.querySelector("header");
-      if (header) header.style.display = "none";
-    });
-  }
-</script>
+    try {
+      if (window.self !== window.top) {
+        document.addEventListener("DOMContentLoaded", () => {
+          const header = document.querySelector("header");
+          if (header) header.style.display = "none";
+        });
+      }
+    } catch(e) {
+      // En caso de error (cross-origin), no hacer nada
+    }
+  </script>
 
 </head>
 <body>
-  <header>
-    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
-    <h1>SomAqui.cat – Iniciar sesión</h1>
-  </header>
 
   <main>
     <div class="login-container">
       <h2>Accede a tu cuenta</h2>
-      <form action="login_usuario.php" method="POST">
+      <form action="login_usuario.php" method="POST" autocomplete="on" aria-label="Formulario de inicio de sesión">
         <label for="correo">Correo electrónico</label>
-        <input type="email" id="correo" name="correo" required />
+        <input type="email" id="correo" name="correo" required autocomplete="email" />
 
         <label for="password">Contraseña</label>
-        <input type="password" id="password" name="password" required />
+        <input type="password" id="password" name="password" required autocomplete="current-password" />
 
         <button type="submit">Iniciar sesión</button>
       </form>
@@ -145,9 +125,5 @@
       </div>
     </div>
   </main>
-
-  <footer>
-    © 2025 SomAqui.cat – Comunidad conectada para emergencias locales
-  </footer>
 </body>
 </html>
