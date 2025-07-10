@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SomAqui.cat - Xarxa de suport local en emergències</title>
+  <style>
+    /* Reset y base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0fdfd;
+      color: #003333;
+    }
+    header {
+      background-color: #39e4c9;
+      color: white;
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo-img {
+      position: absolute;
+      left: 2rem;
+      height: 100px;
+      width: auto;
+      user-select: none;
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: #007d70;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #004d4a;
+      margin-bottom: 1.5rem;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    button {
+      background-color: #39e4c9;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2abbaa;
+    }
+    .map-list-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .map-container {
+      flex: 2;
+      height: 400px;
+      background: #c7f0ec;
+      border: 2px solid #39e4c9;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #007d70;
+      font-size: 1.2rem;
+      font-style: italic;
+      user-select: none;
+    }
+    .emergencias-list {
+      flex: 1;
+      max-width: 300px;
+      background: white;
+      border: 2px solid #39e4c9;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 0 8px rgba(57, 228, 201, 0.4);
+      color: #004d4a;
+      max-height: 350px;
+      overflow-y: auto;
+    }
+    .emergencias-list h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+      border-bottom: 2px solid #39e4c9;
+      padding-bottom: 0.3rem;
+    }
+    .emergencias-list ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+    .emergencias-list li {
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid #b2e8e0;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .emergencias-list li span {
+      display: block;
+      font-weight: 600;
+      color: #007d70;
+    }
+    @media (max-width: 768px) {
+      .map-list-container {
+        flex-direction: column;
+      }
+      .map-container, .emergencias-list {
+        max-width: 100%;
+        flex: unset;
+        height: 300px;
+      }
+      .emergencias-list {
+        max-height: none;
+        overflow-y: visible;
+        margin-top: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .btn-group {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      button {
+        width: 100%;
+        padding: 1rem 0;
+      }
+    }
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 8px;
+      border: 2px solid #39e4c9;
+    }
+  </style>
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  />
+</head>
+<body>
+  <header>
+    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
+    <h1>SomAqui.cat – Xarxa de suport local en emergències</h1>
+
+    <!-- Botón login -->
+<button id="btn-login" style="position: absolute; right: 2rem; background: none; border: none; cursor: pointer;">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
+    <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
+  </svg>
+</button>
+
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Organízate con tu comunidad para emergencias</h1>
+      <p>Conecta, pide y ofrece ayuda rápida en tu barrio o municipio</p>
+      <div class="btn-group">
+        <button type="button" onclick="window.location.href='FormularioAyuda.html'">Necesito ayuda</button>
+      </div>
+    </section>
+
+    <section class="map-list-container" aria-label="Mapa y lista de emergencias activas">
+      <div class="map-container" id="map" aria-label="Mapa de puntos de ayuda en emergencia"></div>
+      <aside class="emergencias-list" aria-label="Lista de emergencias activas ordenadas por proximidad">
+        <h2>Emergencias activas</h2>
+        <ul id="lista-emergencias"></ul>
+      </aside>
+    </section>
+  </main>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+  ></script>
+
+ <script>
+  // Inicializar mapa centrado en Cataluña
+  const map = L.map('map').setView([41.6, 1.85], 7);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+  }).addTo(map);
+
+  const emergencias = [
+    {
+      titulo: 'Incendio en Paüls (Tarragona)',
+      coords: [40.9615, 0.4667],
+      fecha: '7 de julio de 2025',
+      detalles: 'Más de 3.000 hectáreas afectadas, confinamientos y evacuaciones parciales. Fuego cruzó el río Ebro.',
+      tipo: 'Incendio forestal',
+      estado: 'En curso'
+    },
+    {
+      titulo: 'Incendio en Pinell de Solsonès (Lleida)',
+      coords: [41.9282, 1.2517],
+      fecha: '7 de julio de 2025',
+      detalles: '35 hectáreas afectadas, estabilizado.',
+      tipo: 'Incendio forestal',
+      estado: 'Estabilizado'
+    },
+    {
+      titulo: 'Incendio en Torrefeta i Florejacs (Lleida)',
+      coords: [41.9964, 1.2350],
+      fecha: '2 de julio de 2025',
+      detalles: 'Más de 5.500 hectáreas, controlado, dos personas fallecidas.',
+      tipo: 'Incendio forestal',
+      estado: 'Controlado'
+    },
+    {
+      titulo: 'Tiroteo en Calldetenes (Barcelona)',
+      coords: [41.9639, 2.2828],
+      fecha: '7 de julio de 2025',
+      detalles: 'Hombre armado atrincherado con rehenes, dos muertos y cinco policías heridos.',
+      tipo: 'Suceso policial',
+      estado: 'Resuelto'
+    },
+    {
+      titulo: 'Ola de Calor en Cataluña',
+      coords: [41.6100, 1.8500],
+      fecha: 'Finales de junio a principios de julio de 2025',
+      detalles: 'Temperaturas superiores a 41°C, mínimas nocturnas altas, aumento de riesgo de incendios.',
+      tipo: 'Condiciones meteorológicas',
+      estado: 'Finalizada'
+    }
+  ];
+
+  const lista = document.getElementById("lista-emergencias");
+
+  emergencias.forEach(e => {
+    // Crear marcador y popup con info detallada
+    const marker = L.marker(e.coords)
+      .addTo(map)
+      .bindPopup(`
+        <strong>${e.titulo}</strong><br>
+        <em>Fecha:</em> ${e.fecha}<br>
+        <em>Tipo:</em> ${e.tipo}<br>
+        <em>Estado:</em> ${e.estado}<br>
+        <p>${e.detalles}</p>
+      `);
+
+    // Crear elemento lista
+    const item = document.createElement("li");
+    item.innerHTML = `
+      <strong>${e.titulo}</strong><br>
+      <small><em>${e.fecha} — ${e.estado}</em></small><br>
+      <p style="font-size: 0.9rem; margin-top: 0.3rem; color: #005050;">${e.detalles}</p>
+    `;
+    item.style.cursor = "pointer";
+    item.style.padding = "0.5rem 0";
+
+    // Al hacer clic, centrar el mapa y abrir el popup
+    item.addEventListener("click", () => {
+      map.setView(e.coords, 11);
+      marker.openPopup();
+    });
+
+    lista.appendChild(item);
+  });
+</script>
+
+
+  <footer>
+    © 2025 SomAqui.cat | Proyecto colaborativo para emergencias locales en Cataluña
+  </footer>
+
+ <!-- POPUP LOGIN CON IFRAME -->
+<div id="popup-login" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:white; padding:0; border-radius:10px; width:90%; max-width:400px; height:80%; position:relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+    <button id="cerrar-popup" style="position:absolute; top:0.5rem; right:0.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">×</button>
+    <iframe src="login.html" style="width:100%; height:100%; border:none; border-radius:10px;"></iframe>
+  </div>
+</div>
+
+<script>
+  const loginBtn = document.getElementById("btn-login");
+  const popup = document.getElementById("popup-login");
+  const cerrar = document.getElementById("cerrar-popup");
+
+  loginBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  cerrar.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  // Opcional: cerrar si se hace clic fuera del cuadro
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) popup.style.display = "none";
+  });
+</script>
+
+</body>
+</html>

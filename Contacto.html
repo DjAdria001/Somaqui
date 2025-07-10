@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto – SomAqui.cat</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0fdfd;
+      color: #003333;
+      margin: 0;
+    }
+    header {
+      background-color: #39e4c9;
+      padding: 1.5rem 2rem;
+      color: white;
+      text-align: center;
+    }
+    main {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: white;
+      border: 2px solid #39e4c9;
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.3rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    button {
+      margin-top: 1.5rem;
+      background-color: #39e4c9;
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    footer {
+      margin-top: 4rem;
+      background-color: #39e4c9;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    footer a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Contacto – SomAqui.cat</h1>
+  <p>¿Tienes preguntas, sugerencias o deseas colaborar? Escríbenos.</p>
+</header>
+
+<main>
+  <form action="enviar_contacto.php" method="POST">
+    <label for="nombre">Tu nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label for="correo">Correo electrónico</label>
+    <input type="email" id="correo" name="correo" required>
+
+    <label for="mensaje">Mensaje</label>
+    <textarea id="mensaje" name="mensaje" required></textarea>
+
+    <button type="submit">Enviar mensaje</button>
+  </form>
+</main>
+
+<footer>
+  <p>
+    <a href="index.html">Volver al inicio</a> |
+    <a href="mailto:contacto@somaqui.cat">contacto@somaqui.cat</a>
+  </p>
+  <small>© 2025 SomAqui.cat</small>
+</footer>
+
+</body>
+</html>
