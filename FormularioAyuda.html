@@ -147,10 +147,6 @@
     <h2>🚨 Solicita ayuda en tu zona</h2>
     <p>Selecciona una o más situaciones que estás viviendo. La ubicación es aproximada y no se mostrará públicamente.</p>
 
-    <?php if ($mensaje_exito): ?>
-      <div class="mensaje-exito"><?= $mensaje_exito ?></div>
-    <?php endif; ?>
-
     <form action="enviar_ayuda.php" method="POST">
       <label for="correo">📧 Correo electrónico *</label>
       <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
@@ -168,7 +164,7 @@
       <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
       <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
 
-      <label>🆘 Selecciona una o más etiquetas *</label>
+ <label>🆘 Selecciona una o más etiquetas *</label>
 
       <!-- Categorías y etiquetas aquí (igual que tenías, eliminé duplicados y repetidos) -->
       <!-- 🌪️ Emergencias climáticas -->
@@ -240,18 +236,44 @@
         <input type="text" name="otros_detalle" id="otros_detalle">
       </div>
 
+
       <label for="descripcion">📝 Describe tu situación (opcional)</label>
       <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad..."></textarea>
 
       <div class="checkbox-term">
         <input type="checkbox" id="terminos" required>
-        <label for="terminos">Acepto los <a href="#">términos y condiciones</a> *</label>
+        <label for="terminos">Acepto los <a href="#" id="abrir-terminos">términos y condiciones</a> *</label>
       </div>
 
       <button type="submit">Enviar solicitud</button>
       <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
     </form>
   </main>
+
+  <!-- MODAL de Términos y Condiciones -->
+  <div id="modal-terminos" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+    <div style="background:white; padding:2rem; border-radius:10px; max-width:700px; width:90%; height:90%; overflow:auto; position:relative;">
+      <button onclick="cerrarModal()" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+      <h2>Términos y Condiciones de Uso – SomAqui.cat</h2>
+      <p><strong>Última actualización: julio de 2025</strong></p>
+      <p><strong>1. Objeto del servicio</strong><br>SomAqui.cat permite a los usuarios registrarse para compartir su ubicación aproximada y necesidades específicas mediante etiquetas, conectarse con personas u organizaciones dispuestas a colaborar y participar en iniciativas comunitarias.</p>
+      <p><strong>2. Registro de usuarios</strong><br>Se recopilan datos como nombre/alias, correo electrónico y ubicación aproximada. El usuario debe proporcionar información veraz.</p>
+      <p><strong>3. Protección de datos personales</strong><br>Se aplica el RGPD. Los datos se tratan confidencialmente y no se comparten sin consentimiento.</p>
+      <p><strong>4. Uso adecuado</strong><br>Está prohibido el uso con fines fraudulentos, políticos, comerciales o discriminatorios.</p>
+      <p><strong>5. Limitación de responsabilidad</strong><br>SomAqui.cat actúa como intermediario. No garantiza la veracidad ni disponibilidad de ayuda.</p>
+      <p><strong>6. Modificaciones</strong><br>Nos reservamos el derecho a modificar los términos en cualquier momento.</p>
+      <p><strong>7. Aceptación</strong><br>Usar la plataforma implica aceptar estos términos.</p>
+      <hr>
+      <h3>Política de Privacidad</h3>
+      <p><strong>Responsable:</strong> SomAqui.cat</p>
+      <p><strong>Finalidad:</strong> Plataforma de ayuda comunitaria. Datos tratados para conectar necesidades con ayuda local.</p>
+      <p><strong>Base legal:</strong> Consentimiento del usuario.</p>
+      <p><strong>Acceso a datos:</strong> Solo el equipo de SomAqui.cat. No hay cesiones sin consentimiento.</p>
+      <p><strong>Conservación:</strong> Mientras seas usuario. Puedes solicitar la eliminación.</p>
+      <p><strong>Seguridad:</strong> Se aplican medidas técnicas y organizativas de protección.</p>
+      <p><strong>Derechos:</strong> Acceso, rectificación, eliminación, oposición. Contacta con nosotros para ejercerlos.</p>
+    </div>
+  </div>
 
   <script>
     function toggleOtrosTexto() {
@@ -294,6 +316,20 @@
         detalle.focus();
         e.preventDefault();
       }
+    });
+
+    // Modal
+    document.getElementById('abrir-terminos').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('modal-terminos').style.display = 'flex';
+    });
+
+    function cerrarModal() {
+      document.getElementById('modal-terminos').style.display = 'none';
+    }
+
+    document.getElementById('modal-terminos').addEventListener('click', function (e) {
+      if (e.target === this) cerrarModal();
     });
   </script>
 </body>
