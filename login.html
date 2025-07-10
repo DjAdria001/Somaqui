@@ -110,6 +110,16 @@
       color: #777;
     }
   </style>
+  <script>
+  // Detectar si está dentro de un iframe
+  if (window.self !== window.top) {
+    document.addEventListener("DOMContentLoaded", () => {
+      const header = document.querySelector("header");
+      if (header) header.style.display = "none";
+    });
+  }
+</script>
+
 </head>
 <body>
   <header>
