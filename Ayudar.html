@@ -3,108 +3,211 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SomAqui.cat - Xarxa de suport local en emergències</title>
+  <title>SomAqui.cat - Emergencias activas</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
-    /* Reset y base */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f0fdfd;
-      color: #003333;
-    }
-    header {
+    /* RESET y estilos base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0fdfd; color: #003333; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* HEADER y menú */
+
+    header.site-header {
       background-color: #39e4c9;
-      color: white;
-      padding: 0.8rem 2rem;
+      padding: 1rem 2rem;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
+      color: white;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
       position: relative;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+      flex-shrink: 0;
     }
-    .logo-img {
-      position: absolute;
-      left: 2rem;
-      height: 100px;
-      width: auto;
-      user-select: none;
-    }
-    header h1 {
+
+    header.site-header .logo {
       font-weight: 700;
       font-size: 1.8rem;
-      margin: 0;
+      text-decoration: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
     }
+    header.site-header .logo img {
+      height: 32px;
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    nav.main-nav .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav.main-nav .nav-item {
+      position: relative;
+    }
+
+    nav.main-nav .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    nav.main-nav .nav-link:hover,
+    nav.main-nav .nav-link:focus {
+      color: #006e5f;
+      outline: none;
+    }
+
+    /* Dropdown */
+
+    nav.main-nav .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 2.5rem;
+      left: 0;
+      background-color: #27b3a3;
+      border-radius: 6px;
+      min-width: 180px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      z-index: 2000;
+      padding: 0.5rem 0;
+    }
+
+    nav.main-nav .dropdown-menu li {
+      list-style: none;
+    }
+
+    nav.main-nav .dropdown-menu .dropdown-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    nav.main-nav .dropdown-menu .dropdown-link:hover,
+    nav.main-nav .dropdown-menu .dropdown-link:focus {
+      background-color: #0f6352;
+      outline: none;
+    }
+
+    /* Quitar dropdown por hover para evitar conflicto */
+    nav.main-nav .nav-item.dropdown:hover > .dropdown-menu,
+    nav.main-nav .nav-item.dropdown:focus-within > .dropdown-menu {
+      display: none;
+    }
+
+    /* Mostrar dropdown cuando está expanded */
+    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+      display: block !important;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav.main-nav .nav-list {
+        flex-direction: column;
+        background-color: #39e4c9;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 220px;
+        display: none;
+        border-radius: 0 0 8px 8px;
+        padding: 1rem 0;
+        gap: 0;
+        z-index: 1500;
+      }
+
+      nav.main-nav .nav-list.show {
+        display: flex;
+      }
+
+      nav.main-nav .nav-item {
+        width: 100%;
+      }
+
+      nav.main-nav .nav-link {
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+      }
+
+      nav.main-nav .dropdown-menu {
+        position: static;
+        background-color: #27b3a3;
+        box-shadow: none;
+        border-radius: 0;
+        padding-left: 2rem;
+        display: none !important; /* Se muestra con JS */
+      }
+
+      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+        display: block !important;
+      }
+    }
+
+    /* MAIN */
+
     main {
       max-width: 960px;
       margin: 2rem auto;
       padding: 0 1rem;
+      flex-grow: 1;
     }
-    .hero {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .hero h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.5rem;
-      color: #007d70;
-    }
-    .hero p {
-      font-size: 1.1rem;
-      color: #004d4a;
-      margin-bottom: 1.5rem;
-    }
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-    }
-    button {
-      background-color: #39e4c9;
-      border: none;
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.75rem 2rem;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #2abbaa;
-    }
+
     .map-list-container {
       display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
-      justify-content: center;
     }
-    .map-container {
+    #map {
       flex: 2;
       height: 400px;
-      background: #c7f0ec;
-      border: 2px solid #39e4c9;
+      width: 100%;
       border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #007d70;
-      font-size: 1.2rem;
-      font-style: italic;
-      user-select: none;
+      border: 2px solid #39e4c9;
+      min-width: 300px;
     }
     .emergencias-list {
       flex: 1;
-      max-width: 300px;
+      max-height: 400px;
+      overflow-y: auto;
       background: white;
       border: 2px solid #39e4c9;
       border-radius: 8px;
       padding: 1rem;
-      box-shadow: 0 0 8px rgba(57, 228, 201, 0.4);
-      color: #004d4a;
-      max-height: 350px;
-      overflow-y: auto;
+      min-width: 250px;
     }
     .emergencias-list h2 {
       margin-top: 0;
@@ -114,224 +217,298 @@
     }
     .emergencias-list ul {
       list-style: none;
-      padding-left: 0;
-      margin-top: 1rem;
+      padding: 0;
+      margin: 0;
     }
     .emergencias-list li {
       margin-bottom: 1rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid #b2e8e0;
-      font-size: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #ccc;
       cursor: pointer;
     }
-    .emergencias-list li span {
-      display: block;
-      font-weight: 600;
-      color: #007d70;
-    }
-    @media (max-width: 768px) {
-      .map-list-container {
-        flex-direction: column;
-      }
-      .map-container, .emergencias-list {
-        max-width: 100%;
-        flex: unset;
-        height: 300px;
-      }
-      .emergencias-list {
-        max-height: none;
-        overflow-y: visible;
-        margin-top: 1rem;
-      }
-    }
-    @media (max-width: 480px) {
-      .btn-group {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      button {
-        width: 100%;
-        padding: 1rem 0;
-      }
-      #btn-login {
-        display: none;
-      }
-    }
-    #map {
-      height: 400px;
+
+    select, input[type="text"], button {
+      margin-bottom: 0.5rem;
+      padding: 0.4rem;
       width: 100%;
+      font-size: 1rem;
       border-radius: 8px;
-      border: 2px solid #39e4c9;
+      border: 1px solid #ccc;
     }
+    #location-button {
+      background-color: #baf3ec;
+      border: none;
+      cursor: pointer;
+    }
+    #ver-cercanas {
+      background-color: #d2eaff;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+
     footer {
       background-color: #39e4c9;
       color: white;
       text-align: center;
-      padding: 1rem 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-top: 2rem;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      flex-shrink: 0;
     }
-    .leaflet-marker-icon {
-      cursor: pointer;
+    footer a {
+      color: white;
+      text-decoration: underline;
+      margin: 0 0.5rem;
+    }
+    footer small {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
     }
   </style>
-  <!-- Leaflet CSS -->
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-  />
 </head>
 <body>
-  <header>
-    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" class="logo-img" />
-    <h1>SomAqui.cat – Xarxa de suport local en emergències</h1>
 
-    <!-- Botón login -->
-    <button id="btn-login" aria-label="Abrir ventana de inicio de sesión" style="position: absolute; right: 2rem; background: none; border: none; cursor: pointer;">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
-        <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
-      </svg>
-    </button>
-  </header>
+<header class="site-header">
+  <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
+    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" style="height: 32px; width: auto; margin-right: 8px; vertical-align: middle;" />
+    SomAqui.cat
+  </a>
 
-  <main>
-    <section class="hero">
-      <h1>Organízate con tu comunidad para emergencias</h1>
-      <p>Conecta, pide y ofrece ayuda rápida en tu barrio o municipio</p>
-      <div class="btn-group">
-        <button type="button" onclick="window.location.href='FormularioAyuda.html'">Necesito ayuda</button>
-      </div>
-    </section>
+  <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+    <i class="fa fa-bars"></i>
+  </button>
 
-    <section class="map-list-container" aria-label="Mapa y lista de emergencias activas">
-      <div class="map-container" id="map" aria-label="Mapa de puntos de ayuda en emergencia"></div>
-      <aside class="emergencias-list" aria-label="Lista de emergencias activas ordenadas por proximidad" role="region" tabindex="0">
-        <h2>Emergencias activas</h2>
-        <ul id="lista-emergencias"></ul>
-      </aside>
-    </section>
-  </main>
+  <nav class="main-nav" role="navigation" aria-label="Menú principal">
+    <ul class="nav-list" id="main-menu">
+      <li class="nav-item"><a href="Home.html" class="nav-link">Home</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
+          <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+          <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="QuieroAyudar.html" class="nav-link">Quiero Ayudar</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Quienes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
+          <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
+          <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
+          <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Leaflet JS -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-  ></script>
+<main>
+  <section class="map-list-container">
+    <div id="map"></div>
+    <aside class="emergencias-list">
+      <h2>Emergencias activas</h2>
 
-  <script>
-    // Inicializar mapa centrado en Cataluña
-    const map = L.map('map').setView([41.6, 1.85], 7);
+      <input type="text" id="buscar-ubicacion" placeholder="🔍 Buscar lugar..." aria-label="Buscar lugar para centrar mapa" />
+      <select id="filtro-categoria" aria-label="Filtrar por categoría de emergencia">
+        <option value="">Todas las categorías</option>
+        <option value="incendio">🔥 Incendio</option>
+        <option value="inundación">💧 Inundación</option>
+        <option value="médica">🩺 Médica</option>
+        <option value="rescate">🚨 Rescate</option>
+        <option value="otros">🔍 Otros</option>
+      </select>
+      <button id="location-button" aria-label="Compartir mi ubicación">📍 Compartir mi ubicación</button>
+      <button id="ver-cercanas" aria-label="Ver solo emergencias cercanas (10 km)">🧭 Ver solo cercanas (10 km)</button>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors',
-    }).addTo(map);
+      <ul id="lista-emergencias"></ul>
+    </aside>
+  </section>
+</main>
 
-    const emergencias = [
-      {
-        titulo: 'Incendio en Paüls (Tarragona)',
-        coords: [40.9615, 0.4667],
-        fecha: '7 de julio de 2025',
-        detalles: 'Más de 3.000 hectáreas afectadas, confinamientos y evacuaciones parciales. Fuego cruzó el río Ebro.',
-        tipo: 'Incendio forestal',
-        estado: 'En curso'
-      },
-      {
-        titulo: 'Incendio en Pinell de Solsonès (Lleida)',
-        coords: [41.9282, 1.2517],
-        fecha: '7 de julio de 2025',
-        detalles: '35 hectáreas afectadas, estabilizado.',
-        tipo: 'Incendio forestal',
-        estado: 'Estabilizado'
-      },
-      {
-        titulo: 'Incendio en Torrefeta i Florejacs (Lleida)',
-        coords: [41.9964, 1.2350],
-        fecha: '2 de julio de 2025',
-        detalles: 'Más de 5.500 hectáreas, controlado, dos personas fallecidas.',
-        tipo: 'Incendio forestal',
-        estado: 'Controlado'
-      },
-      {
-        titulo: 'Tiroteo en Calldetenes (Barcelona)',
-        coords: [41.9639, 2.2828],
-        fecha: '7 de julio de 2025',
-        detalles: 'Hombre armado atrincherado con rehenes, dos muertos y cinco policías heridos.',
-        tipo: 'Suceso policial',
-        estado: 'Resuelto'
-      },
-      {
-        titulo: 'Ola de Calor en Cataluña',
-        coords: [41.6100, 1.8500],
-        fecha: 'Finales de junio a principios de julio de 2025',
-        detalles: 'Temperaturas superiores a 41°C, mínimas nocturnas altas, aumento de riesgo de incendios.',
-        tipo: 'Condiciones meteorológicas',
-        estado: 'Finalizada'
+<footer id="contacto">
+  <p>
+    <a href="#">Términos y condiciones</a> |
+    <a href="Contacto.html">Contacto</a> |
+    <a href="Home.html">Inicio</a>
+  </p>
+  <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
+</footer>
+
+<!-- Scripts -->
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script>
+  // Menú hamburguesa y dropdown móvil + escritorio con click
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navList = document.querySelector('.nav-list');
+  const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
+
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    navList.classList.toggle('show');
+  });
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault(); // Evitar navegación en el link padre
+      const parent = link.parentElement;
+      const expanded = parent.classList.toggle('expanded');
+      link.setAttribute('aria-expanded', expanded);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      navList.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', false);
+      dropdownLinks.forEach(link => {
+        const parent = link.parentElement;
+        parent.classList.remove('expanded');
+        link.setAttribute('aria-expanded', false);
+      });
+    }
+  });
+</script>
+
+<script>
+  // Código mapa y emergencias
+
+  const map = L.map('map').setView([41.1189, 1.2445], 13); // Tarragona
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors',
+  }).addTo(map);
+
+  const listaEmergencias = document.getElementById('lista-emergencias');
+  const filtroCategoria = document.getElementById('filtro-categoria');
+  const inputBusqueda = document.getElementById('buscar-ubicacion');
+  const locationButton = document.getElementById('location-button');
+  const verCercanasBtn = document.getElementById('ver-cercanas');
+
+  let userLocation = null;
+  let todasEmergencias = [];
+  let markers = [];
+
+  function distanciaKm(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  async function geocodificar(ubicacion) {
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ubicacion)}`);
+    const data = await res.json();
+    return data[0] ? { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) } : null;
+  }
+
+  async function cargarEmergencias(filtro = "", soloCercanas = false) {
+    // Limpiar markers anteriores
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+
+    listaEmergencias.innerHTML = "";
+    const res = await fetch('obtener_emergencias.php');
+    const datos = await res.json();
+    todasEmergencias = [];
+
+    for (const e of datos) {
+      if (!e.ubicacion) continue;
+      const coords = await geocodificar(e.ubicacion);
+      if (!coords) continue;
+      e.lat = coords.lat;
+      e.lon = coords.lon;
+
+      if (filtro && !(e.etiquetas || "").toLowerCase().includes(filtro.toLowerCase())) continue;
+      if (userLocation && soloCercanas) {
+        const dist = distanciaKm(userLocation.lat, userLocation.lon, e.lat, e.lon);
+        if (dist > 10) continue;
       }
-    ];
 
-    const lista = document.getElementById("lista-emergencias");
+      todasEmergencias.push(e);
+    }
 
-    emergencias.forEach(e => {
-      // Crear marcador y popup con info detallada
-      const marker = L.marker(e.coords)
-        .addTo(map)
-        .bindPopup(`
-          <strong>${e.titulo}</strong><br>
-          <em>Fecha:</em> ${e.fecha}<br>
-          <em>Tipo:</em> ${e.tipo}<br>
-          <em>Estado:</em> ${e.estado}<br>
-          <p>${e.detalles}</p>
-        `);
+    if (userLocation) {
+      todasEmergencias.sort((a, b) => {
+        const da = distanciaKm(userLocation.lat, userLocation.lon, a.lat, a.lon);
+        const db = distanciaKm(userLocation.lat, userLocation.lon, b.lat, b.lon);
+        return da - db;
+      });
+    }
 
-      // Crear elemento lista
-      const item = document.createElement("li");
-      item.innerHTML = `
-        <strong>${e.titulo}</strong><br>
-        <small><em>${e.fecha} — ${e.estado}</em></small><br>
-        <p style="font-size: 0.9rem; margin-top: 0.3rem; color: #005050;">${e.detalles}</p>
+    for (const e of todasEmergencias) {
+      const marker = L.marker([e.lat, e.lon]).addTo(map)
+        .bindPopup(`<strong>${e.ubicacion}</strong><br><em>${e.fecha}</em><br>${e.descripcion || ''}`);
+      markers.push(marker);
+
+      const li = document.createElement("li");
+      let distHtml = "";
+      if (userLocation) {
+        const d = distanciaKm(userLocation.lat, userLocation.lon, e.lat, e.lon).toFixed(1);
+        distHtml = `<p style="margin:0.2rem 0; color:#007f7f;">📍 A ${d} km de ti</p>`;
+      }
+
+      li.innerHTML = `
+        <strong>${e.ubicacion}</strong><br>
+        <small><em>${e.fecha}</em></small><br>
+        <p style="font-size: 0.9rem; color: #005050;">${e.descripcion || 'Sin descripción'}</p>
+        ${distHtml}
       `;
-      item.style.cursor = "pointer";
-      item.style.padding = "0.5rem 0";
-
-      // Al hacer clic, centrar el mapa y abrir el popup
-      item.addEventListener("click", () => {
-        map.setView(e.coords, 11);
+      li.addEventListener("click", () => {
+        map.setView([e.lat, e.lon], 13);
         marker.openPopup();
       });
+      listaEmergencias.appendChild(li);
+    }
 
-      lista.appendChild(item);
-    });
-  </script>
+    // Marcador usuario
+    if (userLocation) {
+      const userMarker = L.circleMarker([userLocation.lat, userLocation.lon], {
+        radius: 8, color: '#ff7800', fillColor: '#fffc00', fillOpacity: 0.8, weight: 2,
+      }).addTo(map).bindPopup("Tu ubicación");
+      markers.push(userMarker);
+    }
+  }
 
-  <footer>
-    © 2025 SomAqui.cat | Proyecto colaborativo para emergencias locales en Cataluña
-  </footer>
+  locationButton.addEventListener("click", () => {
+    if (!navigator.geolocation) return alert("Tu navegador no soporta geolocalización.");
+    navigator.geolocation.getCurrentPosition(pos => {
+      userLocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+      cargarEmergencias(filtroCategoria.value, false);
+      locationButton.disabled = true;
+    }, () => alert("Ubicación denegada."));
+  });
 
-  <!-- POPUP LOGIN CON IFRAME -->
-  <div id="popup-login" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
-    <div style="background:white; padding:0; border-radius:10px; width:90%; max-width:400px; height:80%; position:relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
-      <button id="cerrar-popup" style="position:absolute; top:0.5rem; right:0.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">×</button>
-      <iframe src="login.html" style="width:100%; height:100%; border:none; border-radius:10px;"></iframe>
-    </div>
-  </div>
+  filtroCategoria.addEventListener("change", () => {
+    cargarEmergencias(filtroCategoria.value, false);
+  });
 
-  <script>
-    const loginBtn = document.getElementById("btn-login");
-    const popup = document.getElementById("popup-login");
-    const cerrar = document.getElementById("cerrar-popup");
+  inputBusqueda.addEventListener("keypress", async e => {
+    if (e.key === "Enter") {
+      const val = inputBusqueda.value.trim();
+      if (!val) return;
+      const coords = await geocodificar(val);
+      if (coords) map.setView([coords.lat, coords.lon], 13);
+      else alert("Ubicación no encontrada.");
+    }
+  });
 
-    loginBtn.addEventListener("click", () => {
-      popup.style.display = "flex";
-    });
+  verCercanasBtn.addEventListener("click", () => {
+    if (!userLocation) return alert("Primero debes compartir ubicación.");
+    cargarEmergencias(filtroCategoria.value, true);
+  });
 
-    cerrar.addEventListener("click", () => {
-      popup.style.display = "none";
-    });
+  cargarEmergencias(); // Inicial
+</script>
 
-    // Opcional: cerrar si se hace clic fuera del cuadro
-    popup.addEventListener("click", (e) => {
-      if (e.target === popup) popup.style.display = "none";
-    });
-  </script>
 </body>
 </html>

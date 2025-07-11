@@ -2,51 +2,213 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SomAqui.cat – Red Cívica de Emergencia</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', sans-serif; color: #003333; background-color: #f0fdfd; }
 
-    nav {
-      background: white;
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    /* RESET y estilos base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fdfd;
+      color: #003333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* HEADER y menú */
+
+    header.site-header {
+      background-color: #39e4c9;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #39e4c9;
-    }
-    nav a {
-      color: #003333;
-      text-decoration: none;
-      margin: 0 1rem;
-      font-weight: bold;
-    }
-    nav a:hover { color: #39e4c9; }
-
-    header {
-      background-color: #39e4c9;
       color: white;
-      padding: 2rem 1rem;
-      text-align: center;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+      position: relative;
+      z-index: 1000;
+      flex-shrink: 0;
     }
-    header h1 { font-size: 2.5rem; }
-    header p { font-size: 1.2rem; margin-top: 0.5rem; }
+
+    header.site-header .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-decoration: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+    }
+    header.site-header .logo img {
+      height: 32px;
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    nav.main-nav .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav.main-nav .nav-item {
+      position: relative;
+    }
+
+    nav.main-nav .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    nav.main-nav .nav-link:hover,
+    nav.main-nav .nav-link:focus {
+      color: #006e5f;
+      outline: none;
+    }
+
+    /* Dropdown */
+
+    nav.main-nav .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 2.5rem;
+      left: 0;
+      background-color: #27b3a3;
+      border-radius: 6px;
+      min-width: 180px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      z-index: 2000;
+      padding: 0.5rem 0;
+    }
+
+    nav.main-nav .dropdown-menu li {
+      list-style: none;
+    }
+
+    nav.main-nav .dropdown-menu .dropdown-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    nav.main-nav .dropdown-menu .dropdown-link:hover,
+    nav.main-nav .dropdown-menu .dropdown-link:focus {
+      background-color: #0f6352;
+      outline: none;
+    }
+
+    /* Mostrar dropdown cuando tiene la clase expanded */
+    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+      display: block;
+    }
+
+    nav.main-nav .nav-item.dropdown:focus > .nav-link {
+      outline: 2px solid #006e5f;
+      outline-offset: 2px;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      nav.main-nav .nav-list {
+        flex-direction: column;
+        background-color: #39e4c9;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 220px;
+        display: none;
+        border-radius: 0 0 8px 8px;
+        padding: 1rem 0;
+        gap: 0;
+        z-index: 1500;
+      }
+
+      nav.main-nav .nav-list.show {
+        display: flex;
+      }
+
+      nav.main-nav .nav-item {
+        width: 100%;
+      }
+
+      nav.main-nav .nav-link {
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+      }
+
+      nav.main-nav .dropdown-menu {
+        position: static;
+        background-color: #27b3a3;
+        box-shadow: none;
+        border-radius: 0;
+        padding-left: 2rem;
+        display: none !important; /* Se muestra con JS */
+      }
+
+      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+        display: block !important;
+      }
+    }
+
+    /* MAIN */
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      flex-grow: 1;
+    }
+
+    /* Contenido principal */
 
     .hero {
       padding: 4rem 2rem;
       background-color: #e0fbf9;
       text-align: center;
+      border-radius: 12px;
+      margin-bottom: 3rem;
     }
     .hero h2 {
       font-size: 2rem;
       margin-bottom: 1rem;
+      color: #003333;
     }
     .hero p {
       font-size: 1.2rem;
       max-width: 700px;
-      margin: 0 auto 2rem;
+      margin: 0 auto;
+      color: #003333;
     }
     .hero a {
       background: #39e4c9;
@@ -54,7 +216,15 @@
       padding: 0.8rem 2rem;
       border-radius: 30px;
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
+      margin: 1.5rem 1rem 0 1rem;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .hero a:hover,
+    .hero a:focus {
+      background: #27b3a3;
+      outline: none;
     }
 
     .features {
@@ -62,7 +232,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
-      padding: 3rem 1rem;
+      padding: 0 1rem 3rem;
     }
     .feature {
       background: white;
@@ -71,6 +241,8 @@
       padding: 2rem;
       max-width: 300px;
       text-align: center;
+      color: #003333;
+      flex: 1 1 280px;
     }
     .feature i {
       font-size: 2rem;
@@ -81,14 +253,19 @@
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
     }
-    .feature p { font-size: 0.95rem; }
+    .feature p {
+      font-size: 0.95rem;
+    }
+
+    /* FOOTER */
 
     footer {
       background-color: #39e4c9;
       color: white;
-      padding: 2rem 1rem;
       text-align: center;
+      padding: 2rem 1rem;
       margin-top: 4rem;
+      flex-shrink: 0;
     }
     footer a {
       color: white;
@@ -104,58 +281,128 @@
 </head>
 <body>
 
-<nav>
-  <div><strong>SomAqui.cat</strong></div>
-  <div>
-    <a href="#como-funciona">¿Cómo funciona?</a>
-    <a href="#unete">Únete</a>
-    <a href="#contacto">Contacto</a>
-  </div>
-</nav>
+<header class="site-header">
+  <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
+    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" />
+    SomAqui.cat
+  </a>
 
-<header>
-  <h1>SomAqui.cat</h1>
-  <p>Conectamos personas que necesitan ayuda con quienes pueden ofrecerla, de forma local y segura.</p>
+  <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <nav class="main-nav" role="navigation" aria-label="Menú principal">
+    <ul class="nav-list" id="main-menu">
+      <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
+          <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+          <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="QuieroAyudar.html" class="nav-link">Quiero Ayudar</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Quienes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
+          <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
+          <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
+          <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
+    </ul>
+  </nav>
 </header>
 
-<section class="hero">
-  <h2>¿Necesitas ayuda o quieres ayudar?</h2>
-  <p>SomAqui.cat es una plataforma solidaria para responder a emergencias locales como cortes de servicios, necesidades básicas o catástrofes.</p>
-  <a href="FormularioAyuda.html">Quiero pedir ayuda</a>
-</section>
+<main>
+  <header>
+    <h1>SomAqui.cat</h1>
+    <p>Conectamos personas que necesitan ayuda con quienes pueden ofrecerla, de forma local y segura.</p>
+  </header>
 
-<section class="features" id="como-funciona">
-  <div class="feature">
-    <i class="fas fa-map-marker-alt"></i>
-    <h3>Ubicación segura</h3>
-    <p>Seleccionas tu ubicación aproximada en el mapa para recibir o ofrecer ayuda cerca.</p>
-  </div>
-  <div class="feature">
-    <i class="fas fa-hands-helping"></i>
-    <h3>Etiquetas temáticas</h3>
-    <p>Usamos categorías como alimentación, salud o clima para clasificar las necesidades.</p>
-  </div>
-  <div class="feature">
-    <i class="fas fa-users"></i>
-    <h3>Red comunitaria</h3>
-    <p>Otras personas, asociaciones o servicios pueden ver tu solicitud y ayudarte.</p>
-  </div>
-</section>
+  <section class="hero">
+    <h2>¿Necesitas ayuda o quieres ayudar?</h2>
+    <p>SomAqui.cat es una plataforma solidaria para responder a emergencias locales como cortes de servicios, necesidades básicas o catástrofes.</p>
+    <a href="FormularioAyuda.html">Quiero pedir ayuda</a>
+    <a href="Ayudar.html">Quiero ayudar</a>
+  </section>
 
-<section class="hero" id="unete">
-  <h2>Únete a la red</h2>
-  <p>Tu barrio te necesita. Puedes sumarte como voluntario o entidad colaboradora y marcar la diferencia.</p>
-  <a href="registro.html">Registrarme</a>
-</section>
+  <section class="features" id="como-funciona">
+    <div class="feature">
+      <i class="fas fa-map-marker-alt"></i>
+      <h3>Ubicación segura</h3>
+      <p>Seleccionas tu ubicación aproximada en el mapa para recibir o ofrecer ayuda cerca.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-hands-helping"></i>
+      <h3>Etiquetas temáticas</h3>
+      <p>Usamos categorías como alimentación, salud o clima para clasificar las necesidades.</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-users"></i>
+      <h3>Red comunitaria</h3>
+      <p>Otras personas, asociaciones o servicios pueden ver tu solicitud y ayudarte.</p>
+    </div>
+  </section>
+
+  <section class="hero" id="unete">
+    <h2>Únete a la red</h2>
+    <p>Tu barrio te necesita. Puedes sumarte como voluntario o entidad colaboradora y marcar la diferencia.</p>
+    <a href="registro.html">Registrarme</a>
+  </section>
+</main>
 
 <footer id="contacto">
   <p>
     <a href="#" onclick="alert('Aquí irá el modal de Términos')">Términos y condiciones</a> |
     <a href="Contacto.html">Contacto</a> |
-    <a href="#">Inicio</a>
+    <a href="Home.html">Inicio</a>
   </p>
   <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
 </footer>
+
+<script>
+  // Menú hamburguesa y dropdown móvil y escritorio con click
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navList = document.querySelector('.nav-list');
+  const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
+
+  // Toggle menú hamburguesa
+  menuToggle.addEventListener('click', () => {
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    navList.classList.toggle('show');
+  });
+
+  // Toggle dropdown en desktop y móvil, evitando navegación en padre
+  dropdownLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault(); // Evitar navegación en el enlace padre
+      const parent = link.parentElement;
+      const isExpanded = parent.classList.toggle('expanded');
+      link.setAttribute('aria-expanded', isExpanded);
+    });
+  });
+
+  // Al cambiar tamaño ventana, reset menú y dropdowns
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      navList.classList.remove('show');
+      menuToggle.setAttribute('aria-expanded', false);
+      dropdownLinks.forEach(link => {
+        const parent = link.parentElement;
+        parent.classList.remove('expanded');
+        link.setAttribute('aria-expanded', false);
+      });
+    }
+  });
+</script>
 
 </body>
 </html>
