@@ -112,16 +112,82 @@
       font-size: 0.9rem;
       color: #777;
     }
+
+    .checkbox-term {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .checkbox-term input[type="checkbox"] {
+      margin-right: 0.5rem;
+    }
+
+    #modal-terminos {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #modal-terminos .contenido {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 700px;
+      width: 90%;
+      height: 90%;
+      overflow: auto;
+      position: relative;
+    }
+
+    #modal-terminos h2, #modal-terminos h3 {
+      color: #007d70;
+    }
+
+    #modal-terminos p {
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+
+    #modal-terminos hr {
+      margin: 1.5rem 0;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+
+    #modal-terminos .cerrar {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #007d70;
+      cursor: pointer;
+    }
+
+    #modal-terminos a {
+      color: #007d70;
+      text-decoration: underline;
+    }
   </style>
-   <script>
-  // Detectar si está dentro de un iframe
-  if (window.self !== window.top) {
-    document.addEventListener("DOMContentLoaded", () => {
-      const header = document.querySelector("header");
-      if (header) header.style.display = "none";
-    });
-  }
-</script>
+  <script>
+    if (window.self !== window.top) {
+      document.addEventListener("DOMContentLoaded", () => {
+        const header = document.querySelector("header");
+        if (header) header.style.display = "none";
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -154,6 +220,11 @@
           Las contraseñas no coinciden.
         </div>
 
+        <div class="checkbox-term">
+          <input type="checkbox" id="terminos" required>
+          <label for="terminos">Acepto los <a href="#" id="abrir-terminos">términos y condiciones</a> *</label>
+        </div>
+
         <button type="submit">Registrarse</button>
       </form>
 
@@ -162,6 +233,30 @@
       </div>
     </div>
   </main>
+
+  <!-- Modal de Términos y Condiciones -->
+  <div id="modal-terminos">
+    <div class="contenido">
+      <button class="cerrar" onclick="cerrarModal()">&times;</button>
+      <h2>Términos y Condiciones de Uso – SomAqui.cat</h2>
+      <p><strong>Última actualización: julio de 2025</strong></p>
+      <p><strong>1. Objeto del servicio</strong><br>SomAqui.cat es una plataforma de ayuda comunitaria en emergencias. Al registrarte, puedes colaborar ofreciendo o solicitando ayuda local.</p>
+      <p><strong>2. Datos recopilados</strong><br>Durante el registro solicitamos tu nombre completo, correo electrónico, documento de identificación (DNI/NIE) y una contraseña. Esta información es necesaria para identificarte y garantizar un uso responsable de la plataforma.</p>
+      <p><strong>3. Protección de datos</strong><br>Tus datos se almacenan de forma segura y se tratan conforme al Reglamento General de Protección de Datos (RGPD). Nunca compartiremos tu información sin tu consentimiento expreso.</p>
+      <p><strong>4. Uso adecuado</strong><br>No está permitido usar SomAqui.cat con fines comerciales, fraudulentos, políticos ni discriminatorios. El usuario es responsable de la veracidad de los datos proporcionados.</p>
+      <p><strong>5. Responsabilidad</strong><br>La plataforma actúa como puente entre personas. No garantizamos la disponibilidad de ayuda ni la veracidad de todas las publicaciones.</p>
+      <p><strong>6. Cambios en los términos</strong><br>Nos reservamos el derecho de modificar estos términos. Se notificará cualquier cambio relevante en la web.</p>
+      <p><strong>7. Aceptación</strong><br>Al marcar la casilla y registrarte, confirmas que has leído y aceptas los presentes términos.</p>
+      <hr>
+      <h3>Política de Privacidad</h3>
+      <p><strong>Responsable:</strong> SomAqui.cat</p>
+      <p><strong>Finalidad:</strong> Gestionar el acceso de usuarios a la plataforma y facilitar conexiones de ayuda entre vecinos.</p>
+      <p><strong>Legitimación:</strong> Consentimiento expreso al registrarte.</p>
+      <p><strong>Destinatarios:</strong> Tus datos no serán compartidos con terceros sin tu consentimiento.</p>
+      <p><strong>Conservación:</strong> Conservamos tus datos mientras seas usuario activo. Puedes solicitar su eliminación en cualquier momento.</p>
+      <p><strong>Derechos:</strong> Tienes derecho a acceder, rectificar o eliminar tus datos. Escríbenos para ejercer tus derechos.</p>
+    </div>
+  </div>
 
   <footer>
     © 2025 SomAqui.cat – Comunidad conectada para emergencias locales
@@ -175,10 +270,25 @@
 
       if (pass !== confirm) {
         errorDiv.style.display = 'block';
-        return false; // Evita enviar formulario
+        return false;
       }
       errorDiv.style.display = 'none';
       return true;
+    }
+
+    // Mostrar modal
+    document.addEventListener("DOMContentLoaded", function () {
+      const modal = document.getElementById("modal-terminos");
+      const enlace = document.getElementById("abrir-terminos");
+
+      enlace.addEventListener("click", function (e) {
+        e.preventDefault();
+        modal.style.display = "flex";
+      });
+    });
+
+    function cerrarModal() {
+      document.getElementById("modal-terminos").style.display = "none";
     }
   </script>
 </body>

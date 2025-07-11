@@ -7,135 +7,311 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f0fdfd; color: #003333; min-height: 100vh; display: flex; flex-direction: column; }
-    header.site-header { background-color: #39e4c9; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; color: white; box-shadow: 0 2px 5px rgb(0 0 0 / 0.1); position: relative; z-index: 1000; flex-shrink: 0; }
-    header.site-header .logo { font-weight: 700; font-size: 1.8rem; text-decoration: none; color: white; display: inline-flex; align-items: center; }
-    header.site-header .logo img { height: 32px; width: auto; margin-right: 8px; }
-    .menu-toggle { display: none; background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; }
-    nav.main-nav .nav-list { list-style: none; display: flex; align-items: center; gap: 2rem; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fdfd;
+      color: #003333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.site-header {
+      background-color: #39e4c9;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+      position: relative;
+      z-index: 1000;
+      flex-shrink: 0;
+    }
+
+    header.site-header .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-decoration: none;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    header.site-header .logo img {
+      height: 32px;
+      width: auto;
+      margin-right: 8px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    nav.main-nav .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+    }
+
     nav.main-nav .nav-item { position: relative; }
-    nav.main-nav .nav-link { color: white; text-decoration: none; font-weight: 600; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 0.25rem; transition: color 0.3s ease; }
-    nav.main-nav .nav-link:hover, nav.main-nav .nav-link:focus { color: #006e5f; outline: none; }
-    nav.main-nav .dropdown-menu { display: none; position: absolute; top: 2.5rem; left: 0; background-color: #27b3a3; border-radius: 6px; min-width: 180px; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16); z-index: 2000; padding: 0.5rem 0; }
+    nav.main-nav .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.3s ease;
+    }
+
+    nav.main-nav .nav-link:hover,
+    nav.main-nav .nav-link:focus {
+      color: #006e5f;
+      outline: none;
+    }
+
+    nav.main-nav .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 2.5rem;
+      left: 0;
+      background-color: #27b3a3;
+      border-radius: 6px;
+      min-width: 180px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      z-index: 2000;
+      padding: 0.5rem 0;
+    }
+
     nav.main-nav .dropdown-menu li { list-style: none; }
-    nav.main-nav .dropdown-menu .dropdown-link { display: block; padding: 0.5rem 1rem; color: white; font-weight: 500; text-decoration: none; transition: background-color 0.2s ease; }
-    nav.main-nav .dropdown-menu .dropdown-link:hover, nav.main-nav .dropdown-menu .dropdown-link:focus { background-color: #0f6352; outline: none; }
-    nav.main-nav .nav-item.dropdown:hover > .dropdown-menu, nav.main-nav .nav-item.dropdown:focus-within > .dropdown-menu { display: none; }
-    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu { display: block !important; }
-    @media (max-width: 768px) { .menu-toggle { display: block; } nav.main-nav .nav-list { flex-direction: column; background-color: #39e4c9; position: absolute; top: 100%; right: 0; width: 220px; display: none; border-radius: 0 0 8px 8px; padding: 1rem 0; gap: 0; z-index: 1500; } nav.main-nav .nav-list.show { display: flex; } nav.main-nav .nav-item { width: 100%; } nav.main-nav .nav-link { padding: 0.75rem 1.5rem; width: 100%; } nav.main-nav .dropdown-menu { position: static; background-color: #27b3a3; box-shadow: none; border-radius: 0; padding-left: 2rem; display: none !important; } nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu { display: block !important; } }
-    main { max-width: 400px; margin: 2.5rem auto; padding: 2rem 1rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px #0001; }
-    h2 { text-align: center; margin-bottom: 1.5rem; }
-    form { display: flex; flex-direction: column; gap: 1rem; }
-    label { font-weight: 600; }
-    input[type="text"], input[type="email"], input[type="password"] { padding: 0.7rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
-    button[type="submit"] { background: #39e4c9; color: white; border: none; padding: 0.8rem; font-size: 1rem; font-weight: bold; border-radius: 30px; cursor: pointer; margin-top: 0.5rem; }
-    .cambio-form { text-align: center; margin-top: 1rem; }
-    .cambio-form a { color: #39e4c9; text-decoration: underline; cursor: pointer; }
-    .error { color: #c00; font-size: 0.95rem; text-align: center; }
+
+    nav.main-nav .dropdown-link {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    nav.main-nav .dropdown-link:hover,
+    nav.main-nav .dropdown-link:focus {
+      background-color: #0f6352;
+      outline: none;
+    }
+
+    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+      display: block !important;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+
+      nav.main-nav .nav-list {
+        flex-direction: column;
+        background-color: #39e4c9;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 220px;
+        display: none;
+        border-radius: 0 0 8px 8px;
+        padding: 1rem 0;
+        gap: 0;
+        z-index: 1500;
+      }
+
+      nav.main-nav .nav-list.show { display: flex; }
+
+      nav.main-nav .nav-item { width: 100%; }
+
+      nav.main-nav .nav-link {
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+      }
+
+      nav.main-nav .dropdown-menu {
+        position: static;
+        background-color: #27b3a3;
+        box-shadow: none;
+        border-radius: 0;
+        padding-left: 2rem;
+        display: none !important;
+      }
+
+      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+        display: block !important;
+      }
+    }
+
+    main {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 3rem 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px #0001;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.8rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      padding: 0.9rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1.1rem;
+    }
+
+    button[type="submit"] {
+      background: #39e4c9;
+      color: white;
+      border: none;
+      padding: 0.9rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #2abbaa;
+    }
+
+    .cambio-form {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .cambio-form a {
+      color: #39e4c9;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .error {
+      color: #c00;
+      font-size: 0.95rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
-<header class="site-header">
-  <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
-    <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" />
-    SomAqui.cat
-  </a>
-  <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
-    <i class="fa fa-bars"></i>
-  </button>
-  <nav class="main-nav" role="navigation" aria-label="Menú principal">
-    <ul class="nav-list" id="main-menu">
-      <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
-      <li class="nav-item dropdown" tabindex="0">
-        <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
-          Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
-        </a>
-        <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
-          <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
-          <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
-        </ul>
-      </li>
-      <li class="nav-item"><a href="QuieroAyudar.html" class="nav-link">Quiero Ayudar</a></li>
-      <li class="nav-item dropdown" tabindex="0">
-        <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
-          Quienes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
-        </a>
-        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
-          <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
-          <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
-          <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
-        </ul>
-      </li>
-      <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
-    </ul>
-  </nav>
-</header>
-<main>
-  <div id="form-login">
-    <h2>Iniciar sesión</h2>
-    <form action="login_usuario.php" method="POST">
-      <label for="login-email">Correo electrónico</label>
-      <input type="email" id="login-email" name="email" required autocomplete="username">
-      <label for="login-password">Contraseña</label>
-      <input type="password" id="login-password" name="password" required autocomplete="current-password">
-      <button type="submit">Entrar</button>
-    </form>
-    <div class="cambio-form">¿No tienes cuenta? <a onclick="mostrarRegistro()">Regístrate</a></div>
-  </div>
-  <div id="form-registro" style="display:none;">
-    <h2>Registro</h2>
-    <form action="registrar_usuario.php" method="POST">
-      <label for="reg-nombre">Nombre o alias</label>
-      <input type="text" id="reg-nombre" name="nombre" required>
-      <label for="reg-email">Correo electrónico</label>
-      <input type="email" id="reg-email" name="email" required autocomplete="username">
-      <label for="reg-password">Contraseña</label>
-      <input type="password" id="reg-password" name="password" required autocomplete="new-password">
-      <label for="reg-password2">Repetir contraseña</label>
-      <input type="password" id="reg-password2" name="password2" required autocomplete="new-password">
-      <button type="submit">Crear cuenta</button>
-    </form>
-    <div class="cambio-form">¿Ya tienes cuenta? <a onclick="mostrarLogin()">Inicia sesión</a></div>
-  </div>
-</main>
-<script>
-// Menú hamburguesa y dropdown
-const menuToggle = document.querySelector('.menu-toggle');
-const navList = document.querySelector('.nav-list');
-const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
-menuToggle.addEventListener('click', () => {
-  const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-  menuToggle.setAttribute('aria-expanded', !expanded);
-  navList.classList.toggle('show');
-});
-dropdownLinks.forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const parent = link.parentElement;
-    const expanded = parent.classList.toggle('expanded');
-    link.setAttribute('aria-expanded', expanded);
-  });
-});
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 768) {
-    navList.classList.remove('show');
-    menuToggle.setAttribute('aria-expanded', false);
-    dropdownLinks.forEach(link => {
-      const parent = link.parentElement;
-      parent.classList.remove('expanded');
-      link.setAttribute('aria-expanded', false);
+  <header class="site-header">
+    <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
+      <img src="Imagenes/LogoO.png" alt="Logo SomAqui.cat" />
+      SomAqui.cat
+    </a>
+    <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+      <i class="fa fa-bars"></i>
+    </button>
+    <nav class="main-nav" role="navigation" aria-label="Menú principal">
+      <ul class="nav-list" id="main-menu">
+        <li class="nav-item"><a href="Home.html" class="nav-link">Home</a></li>
+        <li class="nav-item dropdown" tabindex="0">
+          <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+            Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
+            <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+            <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="QuieroAyudar.html" class="nav-link">Quiero Ayudar</a></li>
+        <li class="nav-item dropdown" tabindex="0">
+          <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+            Quienes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
+            <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
+            <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
+            <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="form-login">
+      <h2>Iniciar sesión</h2>
+      <form action="login_usuario.php" method="POST">
+        <label for="login-email">Correo electrónico</label>
+        <input type="email" id="login-email" name="email" required autocomplete="username" />
+
+        <label for="login-password">Contraseña</label>
+        <input type="password" id="login-password" name="password" required autocomplete="current-password" />
+
+        <button type="submit">Entrar</button>
+      </form>
+
+      <div class="cambio-form">
+        ¿No tienes una cuenta? <a href="registro.html">Regístrate</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Menú hamburguesa y dropdown
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navList = document.querySelector('.nav-list');
+    const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
+
+    menuToggle.addEventListener('click', () => {
+      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', !expanded);
+      navList.classList.toggle('show');
     });
-  }
-});
-// Cambio entre login y registro
-function mostrarRegistro() {
-  document.getElementById('form-login').style.display = 'none';
-  document.getElementById('form-registro').style.display = 'block';
-}
-function mostrarLogin() {
-  document.getElementById('form-login').style.display = 'block';
-  document.getElementById('form-registro').style.display = 'none';
-}
-</script>
+
+    dropdownLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const parent = link.parentElement;
+        const expanded = parent.classList.toggle('expanded');
+        link.setAttribute('aria-expanded', expanded);
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        navList.classList.remove('show');
+        menuToggle.setAttribute('aria-expanded', false);
+        dropdownLinks.forEach(link => {
+          const parent = link.parentElement;
+          parent.classList.remove('expanded');
+          link.setAttribute('aria-expanded', false);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
