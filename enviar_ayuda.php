@@ -1,12 +1,11 @@
 <?php
-// enviar_ayuda.php
+session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header("Location: pedir_ayuda.php");
+    header("Location: H");
     exit;
 }
 
-// Configuración base de datos
 $host = "localhost";
 $db   = "somaqui";
 $user = "root";
@@ -17,7 +16,6 @@ if ($conexion->connect_errno) {
     die("❌ Error de conexión: " . $conexion->connect_error);
 }
 
-// Recoger datos del formulario
 $correo         = trim($_POST['correo'] ?? '');
 $ubicacion      = trim($_POST['ubicacion'] ?? '');
 $desc_ubic      = trim($_POST['desc_ubic'] ?? '');
@@ -25,7 +23,6 @@ $descripcion    = trim($_POST['descripcion'] ?? '');
 $otros_detalle  = trim($_POST['otros_detalle'] ?? '');
 $etiquetas      = $_POST['tags'] ?? [];
 
-// Validaciones
 if (empty($correo) || !filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     die("❌ Correo no válido.");
 }
@@ -41,18 +38,22 @@ if (in_array("Otros", $etiquetas) && empty($otros_detalle)) {
 
 $etiquetas_str = implode(',', $etiquetas);
 
-// Insertar en base de datos
 $stmt = $conexion->prepare("INSERT INTO peticiones_ayuda (correo, ubicacion, desc_ubic, descripcion, etiquetas, otros_detalle) VALUES (?, ?, ?, ?, ?, ?)");
-if (!$stmt) {
-    die("❌ Error en la preparación de la consulta: " . $conexion->error);
-}
-
 $stmt->bind_param("ssssss", $correo, $ubicacion, $desc_ubic, $descripcion, $etiquetas_str, $otros_detalle);
 
 if ($stmt->execute()) {
+    $id_emergencia = $stmt->insert_id;
     $stmt->close();
+
+    $stmt_chat = $conexion->prepare("INSERT INTO conversaciones (id_emergencia, correo_solicitante) VALUES (?, ?)");
+    $stmt_chat->bind_param("is", $id_emergencia, $correo);
+    $stmt_chat->execute();
+    $id_conversacion = $stmt_chat->insert_id;
+    $stmt_chat->close();
+
+    $_SESSION['correo_solicitante'] = $correo;
     $conexion->close();
-    header("Location: pedir_ayuda.php?success=1");
+    header("Location: chat.php?id=$id_conversacion");
     exit;
 } else {
     $error = "❌ Error al guardar la solicitud: " . $stmt->error;
