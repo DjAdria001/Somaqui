@@ -318,6 +318,12 @@
       <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
     </ul>
   </nav>
+  <!-- Botón login -->
+<button id="btn-login" style="position: absolute; left: 2rem; background: none; border: none; cursor: pointer;">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
+    <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
+  </svg>
+</button>
 </header>
 
 <main>
@@ -405,6 +411,31 @@
     }
   });
 </script>
+<!-- POPUP LOGIN CON IFRAME -->
+<div id="popup-login" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:white; padding:0; border-radius:10px; width:90%; max-width:400px; height:80%; position:relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+    <button id="cerrar-popup" style="position:absolute; top:0.5rem; right:0.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">×</button>
+    <iframe src="login.html" style="width:100%; height:100%; border:none; border-radius:10px;"></iframe>
+  </div>
+</div>
 
+<script>
+  const loginBtn = document.getElementById("btn-login");
+  const popup = document.getElementById("popup-login");
+  const cerrar = document.getElementById("cerrar-popup");
+
+  loginBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  cerrar.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  // Opcional: cerrar si se hace clic fuera del cuadro
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) popup.style.display = "none";
+  });
+</script>
 </body>
 </html>
