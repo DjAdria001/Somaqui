@@ -1,18 +1,39 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario_id'])) exit;
+// enviar_mensaje.php
+header('Content-Type: application/json');
 
-$usuario_id = $_SESSION['usuario_id'];
-$conversacion_id = intval($_POST['id']);
-$mensaje = trim($_POST['mensaje']);
+// Conexión a la base de datos
+$conexion = new mysqli('localhost', 'root', '', 'somaqui');
+if ($conexion->connect_error) {
+    echo json_encode(['error' => 'Error de conexión a la base de datos']);
+    exit;
+}
 
-if ($mensaje === "") exit;
+// Recibir datos POST
+$conversacion_id = isset($_POST['conversacion_id']) ? (int)$_POST['conversacion_id'] : 0;
+$autor_id = isset($_POST['autor_id']) ? (int)$_POST['autor_id'] : 0;
+$mensaje = isset($_POST['mensaje']) ? trim($_POST['mensaje']) : '';
 
-$conexion = new mysqli("localhost", "root", "", "somaqui");
+if ($conversacion_id <= 0 || $autor_id <= 0 || $mensaje === '') {
+    echo json_encode(['error' => 'Faltan datos obligatorios']);
+    exit;
+}
 
-$consulta = $conexion->prepare("
-  INSERT INTO mensajes_chat (conversacion_id, autor_id, mensaje)
-  VALUES (?, ?, ?)
-");
-$consulta->bind_param("iis", $conversacion_id, $usuario_id, $mensaje);
-$consulta->execute();
+// Insertar mensaje
+$stmt = $conexion->prepare("INSERT INTO mensajes (conversacion_id, autor_id, mensaje, enviado_en) VALUES (?, ?, ?, NOW())");
+if (!$stmt) {
+    echo json_encode(['error' => 'Error en la preparación de la consulta']);
+    exit;
+}
+
+$stmt->bind_param('iis', $conversacion_id, $autor_id, $mensaje);
+if ($stmt->execute()) {
+    echo json_encode(['success' => true, 'mensaje_id' => $stmt->insert_id]);
+} else {
+    echo json_encode(['error' => 'Error al guardar el mensaje']);
+}
+
+$stmt->close();
+$conexion->close();
+exit;
+?>
