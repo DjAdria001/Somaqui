@@ -13,31 +13,47 @@
     body { font-family: 'Segoe UI', sans-serif; background: #f0fdfd; color: #003333; min-height: 100vh; display: flex; flex-direction: column; }
 
     /* HEADER y menú */
-    header.site-header {
+   header.site-header {
       background-color: #39e4c9;
       padding: 1rem 2rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+      position: relative;
       color: white;
       box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
-      position: relative;
       z-index: 1000;
-      flex-shrink: 0;
     }
+
     header.site-header .logo {
-      font-weight: 700;
-      font-size: 1.8rem;
-      text-decoration: none;
-      color: white;
-      display: inline-flex;
-      align-items: center;
-    }
-    header.site-header .logo img {
-      height: 32px;
-      width: auto;
-      margin-right: 8px;
-    }
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+header.site-header .logo img {
+  height: 32px;
+  margin-right: 8px;
+}
+
+.header-top {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+
+#btn-login {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: white;
+}
+
     .menu-toggle {
       display: none;
       background: none;
@@ -103,6 +119,14 @@
     }
     nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
       display: block !important;
+    }
+    /* Menú abajo del logo */
+    nav.main-nav .nav-list {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
     }
     @media (max-width: 768px) {
       .menu-toggle { display: block; }
@@ -276,45 +300,73 @@
       font-size: 0.9rem;
       color: #555;
     }
+    footer {
+      background-color: #39e4c9;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+      flex-shrink: 0;
+    }
+    footer a {
+      color: white;
+      text-decoration: underline;
+      margin: 0 0.5rem;
+    }
+    footer small {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
   </style>
 </head>
 <body>
   <header class="site-header">
-    <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
-      <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
-      SomAqui.cat
-    </a>
-    <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
-      <i class="fa fa-bars"></i>
+  <div class="header-top">
+    <!-- Botón login a la derecha -->
+    <button id="btn-login" aria-label="Iniciar sesión">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
+        <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
+      </svg>
     </button>
-    <nav class="main-nav" role="navigation" aria-label="Menú principal">
-      <ul class="nav-list" id="main-menu">
-        <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
-        <li class="nav-item dropdown" tabindex="0">
-          <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
-            Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
-          </a>
-          <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
-            <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+  </div>
 
-          </ul>
-        </li>
-        <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero Ayudar</a></li>
-        <li class="nav-item dropdown" tabindex="0">
-          <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
-            Quienes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
-          </a>
-          <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
-            <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
-            <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
-            <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
-            <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
-      </ul>
-    </nav>
-  </header>
+  <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
+    <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
+    SomAqui.cat
+  </a>
+
+  <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+    <i class="fa fa-bars"></i>
+  </button>
+
+  <nav class="main-nav" role="navigation" aria-label="Menú principal">
+    <ul class="nav-list" id="main-menu">
+      <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
+          <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero Ayudar</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
+          <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
+          <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
+          <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
+          <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
 
   <main>
     <h2>🚨 Solicita ayuda en tu zona</h2>
@@ -448,21 +500,14 @@
     </div>
   </div>
 
-  <footer style="background-color: #39e4c9; color: white; padding: 2rem 1rem; text-align: center; margin-top: 4rem; border-top: 4px solid #2db1a3;">
-    <div style="max-width: 960px; margin: auto;">
-      <p style="font-size: 1.1rem; font-weight: bold; margin-bottom: 0.5rem;">SomAqui.cat – Red Cívica de Emergencia Local</p>
-      
-      <p style="margin: 0.5rem 0;">
-        <a href="#" onclick="document.getElementById('modal-terminos').style.display='flex'" style="color: white; text-decoration: underline;">Términos y Condiciones</a> |
-        <a href="mailto:contacto@somaqui.cat" style="color: white; text-decoration: underline;">Contacto</a> |
-        <a href="https://somaqui.cat" style="color: white; text-decoration: underline;">Inicio</a>
-      </p>
-
-      <p style="font-size: 0.85rem; color: #e0fdfa; margin-top: 1rem;">
-        © 2025 SomAqui.cat. Todos los derechos reservados.
-      </p>
-    </div>
-  </footer>
+  <footer id="contacto">
+  <p>
+    <a href="#" onclick="alert('Aquí irá el modal de Términos')">Términos y condiciones</a> |
+    <a href="Contacto.html">Contacto</a> |
+    <a href="Home.html">Inicio</a>
+  </p>
+  <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
+</footer>
 
   <script>
     function toggleOtrosTexto() {
