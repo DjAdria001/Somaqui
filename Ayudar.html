@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SomAqui.cat - Emergencias activas</title>
+  <title>SomAqui.cat - Quiero Ayudar</title>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
@@ -21,27 +21,43 @@
       background-color: #39e4c9;
       padding: 1rem 2rem;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
+      position: relative;
       color: white;
       box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
-      position: relative;
       z-index: 1000;
-      flex-shrink: 0;
     }
 
+    /* Logo centrado */
     header.site-header .logo {
       font-weight: 700;
       font-size: 1.8rem;
       text-decoration: none;
       color: white;
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
     }
     header.site-header .logo img {
       height: 32px;
-      width: auto;
       margin-right: 8px;
+    }
+
+    /* Login arriba derecha */
+    .header-top {
+      position: absolute;
+      top: 2.8rem;
+      right: 2rem;
+    }
+
+    #btn-login {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      color: white;
     }
 
     .menu-toggle {
@@ -54,18 +70,15 @@
     }
 
     nav.main-nav .nav-list {
-      list-style: none;
       display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 0;
-      padding: 0;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      list-style: none;
     }
-
     nav.main-nav .nav-item {
       position: relative;
     }
-
     nav.main-nav .nav-link {
       color: white;
       text-decoration: none;
@@ -77,15 +90,11 @@
       gap: 0.25rem;
       transition: color 0.3s ease;
     }
-
     nav.main-nav .nav-link:hover,
     nav.main-nav .nav-link:focus {
       color: #006e5f;
       outline: none;
     }
-
-    /* Dropdown */
-
     nav.main-nav .dropdown-menu {
       display: none;
       position: absolute;
@@ -98,11 +107,9 @@
       z-index: 2000;
       padding: 0.5rem 0;
     }
-
     nav.main-nav .dropdown-menu li {
       list-style: none;
     }
-
     nav.main-nav .dropdown-menu .dropdown-link {
       display: block;
       padding: 0.5rem 1rem;
@@ -111,31 +118,22 @@
       text-decoration: none;
       transition: background-color 0.2s ease;
     }
-
     nav.main-nav .dropdown-menu .dropdown-link:hover,
     nav.main-nav .dropdown-menu .dropdown-link:focus {
       background-color: #0f6352;
       outline: none;
     }
-
-    /* Quitar dropdown por hover para evitar conflicto */
-    nav.main-nav .nav-item.dropdown:hover > .dropdown-menu,
-    nav.main-nav .nav-item.dropdown:focus-within > .dropdown-menu {
-      display: none;
-    }
-
-    /* Mostrar dropdown cuando está expanded */
     nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
-      display: block !important;
+      display: block;
     }
-
-    /* Responsive */
-
+    nav.main-nav .nav-item.dropdown:focus > .nav-link {
+      outline: 2px solid #006e5f;
+      outline-offset: 2px;
+    }
     @media (max-width: 768px) {
       .menu-toggle {
         display: block;
       }
-
       nav.main-nav .nav-list {
         flex-direction: column;
         background-color: #39e4c9;
@@ -149,29 +147,24 @@
         gap: 0;
         z-index: 1500;
       }
-
       nav.main-nav .nav-list.show {
         display: flex;
       }
-
       nav.main-nav .nav-item {
         width: 100%;
       }
-
       nav.main-nav .nav-link {
         padding: 0.75rem 1.5rem;
         width: 100%;
       }
-
       nav.main-nav .dropdown-menu {
         position: static;
         background-color: #27b3a3;
         box-shadow: none;
         border-radius: 0;
         padding-left: 2rem;
-        display: none !important; /* Se muestra con JS */
+        display: none !important;
       }
-
       nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
         display: block !important;
       }
@@ -271,15 +264,21 @@
 <body>
 
 <header class="site-header">
+  <div class="header-top">
+    <!-- Botón login a la derecha -->
+    <button id="btn-login" aria-label="Iniciar sesión">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
+        <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
+      </svg>
+    </button>
+  </div>
   <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
     <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
     SomAqui.cat
   </a>
-
   <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
     <i class="fa fa-bars"></i>
   </button>
-
   <nav class="main-nav" role="navigation" aria-label="Menú principal">
     <ul class="nav-list" id="main-menu">
       <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
@@ -294,9 +293,9 @@
       <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero Ayudar</a></li>
       <li class="nav-item dropdown" tabindex="0">
         <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
-          Quienes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
+          ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
         </a>
-        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
+        <ul class="dropdown-menu" aria-label="Submenú Quiénes Somos">
           <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
           <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
           <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
@@ -340,6 +339,14 @@
   <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
 </footer>
 
+<!-- POPUP LOGIN CON IFRAME -->
+<div id="popup-login" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:white; padding:0; border-radius:10px; width:90%; max-width:400px; height:80%; position:relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+    <button id="cerrar-popup" style="position:absolute; top:0.5rem; right:0.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">×</button>
+    <iframe src="login.html" style="width:100%; height:100%; border:none; border-radius:10px;"></iframe>
+  </div>
+</div>
+
 <!-- Scripts -->
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
@@ -375,6 +382,23 @@
         link.setAttribute('aria-expanded', false);
       });
     }
+  });
+
+  // POPUP LOGIN
+  const loginBtn = document.getElementById("btn-login");
+  const popup = document.getElementById("popup-login");
+  const cerrar = document.getElementById("cerrar-popup");
+
+  loginBtn.addEventListener("click", () => {
+    popup.style.display = "flex";
+  });
+
+  cerrar.addEventListener("click", () => {
+    popup.style.display = "none";
+  });
+
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) popup.style.display = "none";
   });
 </script>
 
@@ -497,18 +521,18 @@
       const val = inputBusqueda.value.trim();
       if (!val) return;
       const coords = await geocodificar(val);
-      if (coords) map.setView([coords.lat, coords.lon], 13);
-      else alert("Ubicación no encontrada.");
+      if (coords) {
+        map.setView([coords.lat, coords.lon], 13);
+        cargarEmergencias();
+      }
     }
   });
 
   verCercanasBtn.addEventListener("click", () => {
-    if (!userLocation) return alert("Primero debes compartir ubicación.");
     cargarEmergencias(filtroCategoria.value, true);
   });
 
   cargarEmergencias(); // Inicial
 </script>
-
 </body>
 </html>
