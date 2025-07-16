@@ -55,6 +55,7 @@ header.site-header .logo img {
   color: white;
 }
 
+
     .menu-toggle {
       display: none;
       background: none;
@@ -318,6 +319,76 @@ header.site-header .logo img {
       display: block;
       margin-top: 1rem;
       font-size: 0.85rem;
+    }
+    /* Animación para campo activo */
+    .input-activo {
+      border: 2px solid #39e4c9 !important;
+      box-shadow: 0 0 8px #39e4c97a;
+      transition: box-shadow 0.3s, border 0.3s;
+    }
+    /* Animación para mostrar/ocultar campo Otros */
+    #otros-texto-container {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.4s;
+      opacity: 0;
+    }
+    #otros-texto-container.visible {
+      max-height: 80px;
+      opacity: 1;
+    }
+    /* Spinner para botón ubicación */
+    .spinner {
+      border: 3px solid #e0fbf9;
+      border-top: 3px solid #39e4c9;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    /* Acordeón de categorías */
+    .grupo-titulo {
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+    }
+    .grupo-titulo:hover {
+      background: #e0fbf9;
+    }
+    .etiquetas {
+      transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.4s;
+      overflow: hidden;
+      max-height: 500px;
+      opacity: 1;
+    }
+    .etiquetas.cerrado {
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .mensaje-exito-animado {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+      animation: fadeInScale 0.7s;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    @keyframes fadeInScale {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
@@ -617,6 +688,70 @@ header.site-header .logo img {
         });
       }
     });
+    /* Resalta campo activo */
+const campos = document.querySelectorAll('input, textarea');
+campos.forEach(el => {
+  el.addEventListener('focus', () => el.classList.add('input-activo'));
+  el.addEventListener('blur', () => el.classList.remove('input-activo'));
+});
+// 2. Animación suave para campo "Otros"
+const otrosCheck = document.getElementById('otros-check');
+const otrosCont = document.getElementById('otros-texto-container');
+if (otrosCheck && otrosCont) {
+  otrosCheck.addEventListener('change', () => {
+    if (otrosCheck.checked) {
+      otrosCont.classList.add('visible');
+    } else {
+      otrosCont.classList.remove('visible');
+    }
+  });
+}
+// 3. Scroll animado al primer error
+const form = document.querySelector('form');
+form.addEventListener('submit', function(e) {
+  const primerError = form.querySelector(':invalid');
+  if (primerError) {
+    e.preventDefault();
+    primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    primerError.classList.add('input-activo');
+    setTimeout(() => primerError.classList.remove('input-activo'), 1500);
+  } else {
+    e.preventDefault();
+    mostrarMensajeExito();
+    form.reset();
+    if (otrosCont) otrosCont.classList.remove('visible');
+  }
+});
+// 4. Mensaje de éxito animado
+function mostrarMensajeExito() {
+  let msg = document.createElement('div');
+  msg.className = 'mensaje-exito-animado';
+  msg.textContent = '¡Solicitud enviada con éxito!';
+  form.parentNode.insertBefore(msg, form);
+  setTimeout(() => msg.remove(), 3000);
+}
+// 5. Spinner en botón ubicación
+const btnUbic = document.getElementById('btn-detectar-ubicacion');
+if (btnUbic) {
+  btnUbic.addEventListener('click', () => {
+    const spinner = document.createElement('span');
+    spinner.className = 'spinner';
+    btnUbic.appendChild(spinner);
+    setTimeout(() => {
+      if (spinner.parentNode) spinner.parentNode.removeChild(spinner);
+    }, 4000);
+  });
+}
+// 6. Acordeón de categorías
+const titulos = document.querySelectorAll('.grupo-titulo');
+titulos.forEach(titulo => {
+  titulo.addEventListener('click', () => {
+    const etiquetas = titulo.nextElementSibling;
+    if (etiquetas && etiquetas.classList.contains('etiquetas')) {
+      etiquetas.classList.toggle('cerrado');
+    }
+  });
+});
   </script>
 </body>
 </html>
