@@ -246,7 +246,7 @@ nav.main-nav .nav-list {
 
     .features {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
       gap: 2rem;
       padding: 0 1rem 3rem;
@@ -259,19 +259,23 @@ nav.main-nav .nav-list {
       max-width: 300px;
       text-align: center;
       color: #003333;
-      flex: 1 1 280px;
+      flex: 1 1 0;
+      min-width: 220px;
     }
-    .feature i {
-      font-size: 2rem;
-      color: #39e4c9;
-      margin-bottom: 1rem;
+    @media (max-width: 900px) {
+      .features {
+        flex-wrap: wrap;
+      }
     }
-    .feature h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .feature p {
-      font-size: 0.95rem;
+    @media (max-width: 650px) {
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
+      .feature {
+        max-width: 100%;
+        width: 100%;
+      }
     }
 
     /* FOOTER */
