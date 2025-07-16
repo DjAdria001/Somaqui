@@ -371,23 +371,24 @@ header.site-header .logo img {
       <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
 
       <label for="ubicacion">📍 Ubicación aproximada *</label>
-      <div class="ubicacion-mapa">
-        <input type="text" id="ubicacion" name="ubicacion" readonly required>
+<div class="ubicacion-mapa">
+  <input type="text" id="ubicacion" name="ubicacion" readonly required>
 
-        <button type="button" id="btn-detectar-ubicacion">
-          ¿Quieres que detectemos tu ubicación automáticamente?
-        </button>
-                <div class="descripcion-ubicacion">
-          Si no funciona, selecciona manualmente en el mapa.
-        </div>
+  <button type="button" id="btn-detectar-ubicacion">
+    ¿Quieres que detectemos tu ubicación automáticamente?
+  </button>
 
-        <div id="map"></div>
-        <div class="descripcion-ubicacion">
-          Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
-          Es necesaria para conectar con servicios cercanos.
-        </div>
-      </div>
+  <div class="descripcion-ubicacion">
+    Si no funciona, selecciona manualmente en el mapa.
+  </div>
 
+  <div id="map"></div>
+
+  <!-- Recuadro movido aquí debajo del mapa -->
+  <div class="descripcion-ubicacion">
+    Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
+    Es necesaria para conectar con servicios cercanos.
+  </div>
       <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
       <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
 

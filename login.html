@@ -164,57 +164,60 @@
       box-shadow: 0 2px 12px #0001;
     }
 
-    h2 {
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid #39e4c9;
+      box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
+      max-width: 450px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .login-container h2 {
       text-align: center;
-      margin-bottom: 2rem;
-      font-size: 1.8rem;
+      color: #007d70;
+      margin-bottom: 1.5rem;
     }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-
     label {
+      display: block;
       font-weight: 600;
+      margin-bottom: 0.5rem;
     }
-
     input[type="text"],
     input[type="email"],
     input[type="password"] {
-      padding: 0.9rem;
+      width: 100%;
+      padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 6px;
-      font-size: 1.1rem;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
     }
-
     button[type="submit"] {
-      background: #39e4c9;
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #39e4c9;
       color: white;
-      border: none;
-      padding: 0.9rem;
-      font-size: 1.1rem;
       font-weight: bold;
+      border: none;
       border-radius: 30px;
+      font-size: 1rem;
       cursor: pointer;
-      margin-top: 0.5rem;
+      transition: background-color 0.3s ease;
     }
-
     button[type="submit"]:hover {
       background-color: #2abbaa;
     }
-
-    .cambio-form {
+    .small-text {
       text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
     }
-
-    .cambio-form a {
-      color: #39e4c9;
-      text-decoration: underline;
-      cursor: pointer;
+    .small-text a {
+      color: #007d70;
+      text-decoration: none;
     }
 
     .error {
@@ -228,7 +231,7 @@
   
 
   <main>
-    <div id="form-login">
+    <div class="login-container">
       <h2>Iniciar sesión</h2>
       <form action="login_usuario.php" method="POST">
         <label for="login-email">Correo electrónico</label>
@@ -239,8 +242,7 @@
 
         <button type="submit">Entrar</button>
       </form>
-
-      <div class="cambio-form">
+      <div class="small-text">
         ¿No tienes una cuenta? <a href="registro.html">Regístrate</a>
       </div>
     </div>
