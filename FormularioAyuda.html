@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="icon" href="Imagenes/LogoSF.png" type="image/png" />
   <style>
     /* RESET y estilos base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -36,7 +37,7 @@
   margin-bottom: 1rem;
 }
 header.site-header .logo img {
-  height: 39px;
+  height: 32px;
   margin-right: 8px;
 }
 
@@ -370,24 +371,9 @@ header.site-header .logo img {
       <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
 
       <label for="ubicacion">📍 Ubicación aproximada *</label>
-      <div class="ubicacion-mapa">
-        <input type="text" id="ubicacion" name="ubicacion" readonly required>
+<div class="ubicacion-mapa">
+  <input type="text" id="ubicacion" name="ubicacion" readonly required>
 
-<<<<<<< HEAD
-        <button type="button" id="btn-detectar-ubicacion">
-          ¿Quieres que detectemos tu ubicación automáticamente?
-        </button>
-                <div class="descripcion-ubicacion">
-          Si no funciona, selecciona manualmente en el mapa.
-        </div>
-
-        <div id="map"></div>
-        <div class="descripcion-ubicacion">
-          Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
-          Es necesaria para conectar con servicios cercanos.
-        </div>
-      </div>
-=======
   <button type="button" id="btn-detectar-ubicacion">
     ¿Quieres que detectemos tu ubicación automáticamente?
   </button>
@@ -395,8 +381,14 @@ header.site-header .logo img {
   <div class="descripcion-ubicacion">
     Si no funciona, selecciona manualmente en el mapa.
   </div>
->>>>>>> 72cfd8b5456ea0e4ff5dc331f430d7ec3812681f
 
+  <div id="map"></div>
+
+  <!-- Recuadro movido aquí debajo del mapa -->
+  <div class="descripcion-ubicacion">
+    Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
+    Es necesaria para conectar con servicios cercanos.
+  </div>
       <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
       <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
 
