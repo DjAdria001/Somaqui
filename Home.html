@@ -46,8 +46,9 @@ header.site-header .logo {
   margin-bottom: 1rem;
 }
 header.site-header .logo img {
-  height: 32px;
+  height: 39px;
   margin-right: 8px;
+ 
 }
 
     .menu-toggle {
@@ -75,7 +76,7 @@ header.site-header .logo img {
 
     /* Menú abajo del logo */
 nav.main-nav .nav-list {
-  display: flex;
+  display: flex;  
   gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
@@ -243,12 +244,10 @@ nav.main-nav .nav-list {
 
     .features {
       display: flex;
-      flex-direction: row;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: stretch;
       gap: 2rem;
       padding: 0 1rem 3rem;
-      flex-wrap: nowrap;
     }
     .feature {
       background: white;
@@ -258,11 +257,7 @@ nav.main-nav .nav-list {
       max-width: 300px;
       text-align: center;
       color: #003333;
-      flex: 1 1 0;
-      min-width: 220px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      flex: 1 1 280px;
     }
     .feature i {
       font-size: 2rem;
@@ -275,19 +270,6 @@ nav.main-nav .nav-list {
     }
     .feature p {
       font-size: 0.95rem;
-    }
-
-    @media (max-width: 700px) {
-      .features {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-      .feature {
-        max-width: 95vw;
-        min-width: 0;
-      }
     }
 
     /* FOOTER */
@@ -336,13 +318,20 @@ nav.main-nav .nav-list {
   <nav class="main-nav" role="navigation" aria-label="Menú principal">
     <ul class="nav-list" id="main-menu">
       <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
-      <li class="nav-item"><a href="FormularioAyuda.html" class="nav-link">Necesito Ayuda</a></li>
-      <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero ser voluntario</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
+          <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero Ayudar</a></li>
       <li class="nav-item dropdown" tabindex="0">
         <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
           ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
         </a>
-        <ul class="dropdown-menu" aria-label="Submenú Quiénes Somos">
+        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
           <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
           <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
           <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
