@@ -344,62 +344,19 @@
 <!-- Scripts -->
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<!-- ...todo tu código hasta el final se mantiene igual hasta este punto... -->
+
 <script>
-  // Menú hamburguesa y dropdown móvil + escritorio con click
-
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navList = document.querySelector('.nav-list');
-  const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
-
-  menuToggle.addEventListener('click', () => {
-    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-    menuToggle.setAttribute('aria-expanded', !expanded);
-    navList.classList.toggle('show');
-  });
-
-  dropdownLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault(); // Evitar navegación en el link padre
-      const parent = link.parentElement;
-      const expanded = parent.classList.toggle('expanded');
-      link.setAttribute('aria-expanded', expanded);
-    });
-  });
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-      navList.classList.remove('show');
-      menuToggle.setAttribute('aria-expanded', false);
-      dropdownLinks.forEach(link => {
-        const parent = link.parentElement;
-        parent.classList.remove('expanded');
-        link.setAttribute('aria-expanded', false);
-      });
-    }
-  });
-
-  // POPUP LOGIN
-  const loginBtn = document.getElementById("btn-login");
-  const popup = document.getElementById("popup-login");
-  const cerrar = document.getElementById("cerrar-popup");
-
-  loginBtn.addEventListener("click", () => {
+  // Función que abre el popup login y redirige con el parámetro
+  function mostrarPopupLoginConRedir(peticionId) {
+    const popup = document.getElementById("popup-login");
+    const iframe = popup.querySelector("iframe");
+    iframe.src = "login.html?next=chat.php?peticion=" + peticionId;
     popup.style.display = "flex";
-  });
+  }
 
-  cerrar.addEventListener("click", () => {
-    popup.style.display = "none";
-  });
-
-  popup.addEventListener("click", (e) => {
-    if (e.target === popup) popup.style.display = "none";
-  });
-</script>
-
-<script>
-  // Código mapa y emergencias
-
-  const map = L.map('map').setView([41.1189, 1.2445], 13); // Tarragona
+  // Código del mapa y emergencias
+  const map = L.map('map').setView([41.1189, 1.2445], 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors',
@@ -430,11 +387,10 @@
   }
 
   async function cargarEmergencias(filtro = "", soloCercanas = false) {
-    // Limpiar markers anteriores
     markers.forEach(m => map.removeLayer(m));
     markers = [];
-
     listaEmergencias.innerHTML = "";
+
     const res = await fetch('obtener_emergencias.php');
     const datos = await res.json();
     todasEmergencias = [];
@@ -465,7 +421,15 @@
 
     for (const e of todasEmergencias) {
       const marker = L.marker([e.lat, e.lon]).addTo(map)
-        .bindPopup(`<strong>${e.ubicacion}</strong><br><em>${e.fecha}</em><br>${e.descripcion || ''}`);
+        .bindPopup(`
+          <strong>${e.ubicacion}</strong><br>
+          <em>${e.fecha}</em><br>
+          ${e.descripcion || ''}<br><br>
+          <button onclick="mostrarPopupLoginConRedir(${e.id})"
+            style="margin-top:0.5rem; padding: 0.3rem 0.6rem; background:#007f7f; color:white; border:none; border-radius:6px; cursor:pointer;">
+            💬 Entrar al chat
+          </button>
+        `);
       markers.push(marker);
 
       const li = document.createElement("li");
@@ -488,7 +452,6 @@
       listaEmergencias.appendChild(li);
     }
 
-    // Marcador usuario
     if (userLocation) {
       const userMarker = L.circleMarker([userLocation.lat, userLocation.lon], {
         radius: 8, color: '#ff7800', fillColor: '#fffc00', fillOpacity: 0.8, weight: 2,

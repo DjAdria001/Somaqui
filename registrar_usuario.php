@@ -1,9 +1,9 @@
 <?php
 // Datos conexión
 $host = "localhost";
-$db   = "somaqui";  // Cambia aquí por el nombre de tu base
-$user = "root";                  // Por defecto en local suele ser root
-$pass = "";                      // Contraseña, normalmente vacía en local
+$db   = "somaqui";
+$user = "root";
+$pass = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
@@ -29,18 +29,18 @@ try {
     // Hashear contraseña
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Comprobar que correo y dni no existan
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuarios WHERE correo = ? OR dni = ?");
+    // Comprobar que correo y dni no existan en usuarios_login
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuarios_login WHERE correo = ? OR dni = ?");
     $stmt->execute([$correo, $dni]);
     if ($stmt->fetchColumn() > 0) {
         die("Correo o DNI ya registrado.");
     }
 
-    // Insertar usuario
-    $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, correo, dni, password) VALUES (?, ?, ?, ?)");
+    // Insertar usuario en usuarios_login, usando campo contrasena
+    $stmt = $pdo->prepare("INSERT INTO usuarios_login (nombre, correo, dni, contrasena) VALUES (?, ?, ?, ?)");
     $stmt->execute([$nombre, $correo, $dni, $passwordHash]);
 
-    echo "Usuario registrado correctamente. <a href='login_usuario.html'>Inicia sesión</a>";
+    echo "Usuario registrado correctamente. <a href='login.html'>Inicia sesión</a>";
 
 } catch (PDOException $e) {
     echo "Error en la base de datos: " . $e->getMessage();
