@@ -1,37 +1,39 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "somaqui");
+session_start();
 
-if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
-}
+// Datos conexión
+$host = "localhost";
+$db   = "somaqui";
+$user = "root";
+$pass = "";
 
-// Obtener datos del formulario
-$correo = $_POST['correo'];
-$passwordIngresada = $_POST['password'];
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Buscar usuario por correo
-$sql = "SELECT * FROM usuarios WHERE correo = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("s", $correo);
-$stmt->execute();
-$resultado = $stmt->get_result();
+    // Recoger y sanitizar datos
+    $correo = trim($_POST['email']);
+    $password = $_POST['password'];
 
-if ($resultado->num_rows === 1) {
-    $usuario = $resultado->fetch_assoc();
+    // Buscar usuario por correo
+    $stmt = $pdo->prepare("SELECT * FROM usuarios_login WHERE correo = ?");
+    $stmt->execute([$correo]);
+    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Verificar contraseña cifrada
-    if (password_verify($passwordIngresada, $usuario['password'])) {
-        session_start();
-        $_SESSION['usuario'] = $usuario['nombre'];
-        echo "<script>alert('Inicio de sesión exitoso'); window.location.href='Home.html';</script>";
+    if ($usuario && password_verify($password, $usuario['contrasena'])) {
+        // Login correcto
+        $_SESSION['usuario_id'] = $usuario['id'];
+        $_SESSION['usuario_nombre'] = $usuario['nombre'];
+        header("Location: dashboard.php"); // Cambia por la página que quieras mostrar tras login
+        exit();
     } else {
-        echo "<script>alert('Contraseña incorrecta'); window.history.back();</script>";
+        // Login incorrecto
+        $_SESSION['error'] = "Correo o contraseña incorrectos.";
+        header("Location: login.html");
+        exit();
     }
-} else {
-    echo "<script>alert('Usuario no encontrado'); window.history.back();</script>";
-}
 
-$stmt->close();
-$conexion->close();
+} catch (PDOException $e) {
+    echo "Error en la base de datos: " . $e->getMessage();
+}
 ?>
