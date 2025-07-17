@@ -8,8 +8,6 @@
   <!-- FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <link rel="icon" href="Imagenes/LogoSF.png" type="image/png" />
-
   <style>
     /* RESET y estilos base */
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,7 +46,7 @@ header.site-header .logo {
   margin-bottom: 1rem;
 }
 header.site-header .logo img {
-  height: 39px;
+  height: 3px;
   margin-right: 8px;
  
 }
@@ -246,7 +244,7 @@ nav.main-nav .nav-list {
 
     .features {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 2rem;
       padding: 0 1rem 3rem;
@@ -259,23 +257,19 @@ nav.main-nav .nav-list {
       max-width: 300px;
       text-align: center;
       color: #003333;
-      flex: 1 1 0;
-      min-width: 220px;
+      flex: 1 1 280px;
     }
-    @media (max-width: 900px) {
-      .features {
-        flex-wrap: wrap;
-      }
+    .feature i {
+      font-size: 2rem;
+      color: #39e4c9;
+      margin-bottom: 1rem;
     }
-    @media (max-width: 650px) {
-      .features {
-        flex-direction: column;
-        align-items: center;
-      }
-      .feature {
-        max-width: 100%;
-        width: 100%;
-      }
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      font-size: 0.95rem;
     }
 
     /* FOOTER */
@@ -311,23 +305,33 @@ nav.main-nav .nav-list {
       </svg>
     </button>
   </div>
+
   <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
     <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
     SomAqui.cat
   </a>
+
   <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
     <i class="fa fa-bars"></i>
   </button>
+
   <nav class="main-nav" role="navigation" aria-label="Menú principal">
     <ul class="nav-list" id="main-menu">
       <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
-      <li class="nav-item"><a href="FormularioAyuda.html" class="nav-link">Necesito Ayuda</a></li>
-      <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero ser voluntario</a></li>
+      <li class="nav-item dropdown" tabindex="0">
+        <a href="NecesitoAyuda.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+          Necesito Ayuda <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+        <ul class="dropdown-menu" aria-label="Submenú Necesito Ayuda">
+          <li><a href="FormularioAyuda.html" class="dropdown-link">Solicitar ayuda</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero Ayudar</a></li>
       <li class="nav-item dropdown" tabindex="0">
         <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
           ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
         </a>
-        <ul class="dropdown-menu" aria-label="Submenú Quiénes Somos">
+        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
           <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
           <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
           <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
