@@ -278,6 +278,65 @@ nav.main-nav .nav-list {
       }
     }
 
+    /* Collage Masonry Mejorado */
+    .collage-section {
+      max-width: 1100px;
+      margin: 3rem auto 2rem auto;
+      padding: 0 1rem;
+      text-align: center;
+    }
+    .collage-section h2 {
+      margin-bottom: 1.5rem;
+      color: #003333;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .collage {
+      column-count: 3;
+      column-gap: 18px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .collage-img {
+      width: 100%;
+      max-width: 100%;
+      height: 260px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      box-shadow: none;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(.4,2,.3,1), box-shadow 0.4s;
+      cursor: pointer;
+      background: transparent;
+      display: block;
+      break-inside: avoid;
+    }
+    .collage-img:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px rgba(57,228,201,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      z-index: 2;
+    }
+    @media (max-width: 900px) {
+      .collage {
+        column-count: 2;
+        column-gap: 12px;
+      }
+      .collage-img {
+        height: 180px;
+        border-radius: 8px;
+      }
+    }
+    @media (max-width: 600px) {
+      .collage {
+        column-count: 1;
+        column-gap: 0;
+      }
+      .collage-img {
+        height: 140px;
+        border-radius: 6px;
+      }
+    }
+
     /* FOOTER */
 
     footer {
@@ -376,6 +435,26 @@ nav.main-nav .nav-list {
     <p>Tu barrio te necesita. Puedes sumarte como voluntario o entidad colaboradora y marcar la diferencia.</p>
     <a href="registro.html">Registrarme</a>
       <a href="login.html">Iniciar Sesión</a>
+  </section>
+
+  <!-- Collage de Fotos -->
+  <section class="collage-section">
+    <h2>Galería Solidaria</h2>
+    <div class="collage">
+      <img src="Imagenes/acompañar.jpg" alt="Banner" class="collage-img">
+      <img src="Imagenes/ambulancia.jpg" alt="Cartel" class="collage-img">
+      <img src="Imagenes/comida.jpg" alt="Incendio" class="collage-img">
+      <img src="Imagenes/darcomida.jpg" alt="Inundación" class="collage-img">
+      <img src="Imagenes/mantas.jpg" alt="Emergencia médica" class="collage-img">
+      <img src="Imagenes/personamayor.jpg" alt="Otros" class="collage-img">
+      <img src="Imagenes/sillaruedas.jpg" alt="Rescate" class="collage-img">
+      <img src="Imagenes/barrer.jpg" alt="Voluntarios" class="collage-img">
+      <img src="Imagenes/hablar.jpg" alt="Voluntarios" class="collage-img">
+      <img src="Imagenes/levantar.jpg" alt="Voluntarios" class="collage-img">
+      <img src="Imagenes/medicamento.jpg" alt="Voluntarios" class="collage-img">
+      <img src="Imagenes/niños.jpg" alt="Voluntarios" class="collage-img">
+
+    </div>
   </section>
 </main>
 
