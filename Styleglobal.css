@@ -1,16 +1,21 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0fdfd;
-      color: #003333;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    /* HEADER y menú */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0fdfd;
+  color: #003333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    header.site-header {
+/* HEADER y menú */
+
+header.site-header {
   background-color: #39e4c9;
   padding: 1rem 2rem;
   display: flex;
@@ -22,7 +27,7 @@
   z-index: 1000;
 }
 
-   /* Logo centrado */
+/* Logo centrado */
 header.site-header .logo {
   font-weight: 700;
   font-size: 1.8rem;
@@ -33,21 +38,23 @@ header.site-header .logo {
   justify-content: center;
   margin-bottom: 1rem;
 }
+
 header.site-header .logo img {
   height: 39px;
   margin-right: 8px;
- 
+
 }
 
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-    /* Login arriba derecha */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* Login arriba derecha */
 .header-top {
   position: absolute;
   top: 2.8rem;
@@ -62,282 +69,302 @@ header.site-header .logo img {
   color: white;
 }
 
-    /* Menú abajo del logo */
+/* Menú abajo del logo */
 nav.main-nav .nav-list {
-  display: flex;  
+  display: flex;
   gap: 1.5rem;
   flex-wrap: wrap;
   justify-content: center;
   list-style: none;
 }
-    nav.main-nav .nav-item {
-      position: relative;
-    }
 
-    nav.main-nav .nav-link {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      transition: color 0.3s ease;
-    }
+nav.main-nav .nav-item {
+  position: relative;
+}
 
-    nav.main-nav .nav-link:hover,
-    nav.main-nav .nav-link:focus {
-      color: #006e5f;
-      outline: none;
-    }
+nav.main-nav .nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.3s ease;
+}
 
-    /* Dropdown */
+nav.main-nav .nav-link:hover,
+nav.main-nav .nav-link:focus {
+  color: #006e5f;
+  outline: none;
+}
 
-    nav.main-nav .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 2.5rem;
-      left: 0;
-      background-color: #27b3a3;
-      border-radius: 6px;
-      min-width: 180px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-      z-index: 2000;
-      padding: 0.5rem 0;
-    }
+/* Dropdown */
 
-    nav.main-nav .dropdown-menu li {
-      list-style: none;
-    }
+nav.main-nav .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  background-color: #27b3a3;
+  border-radius: 6px;
+  min-width: 180px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  z-index: 2000;
+  padding: 0.5rem 0;
+}
 
-    nav.main-nav .dropdown-menu .dropdown-link {
-      display: block;
-      padding: 0.5rem 1rem;
-      color: white;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background-color 0.2s ease;
-    }
+nav.main-nav .dropdown-menu li {
+  list-style: none;
+}
 
-    nav.main-nav .dropdown-menu .dropdown-link:hover,
-    nav.main-nav .dropdown-menu .dropdown-link:focus {
-      background-color: #0f6352;
-      outline: none;
-    }
+nav.main-nav .dropdown-menu .dropdown-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
 
-    /* Mostrar dropdown cuando tiene la clase expanded */
-    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
-      display: block;
-    }
+nav.main-nav .dropdown-menu .dropdown-link:hover,
+nav.main-nav .dropdown-menu .dropdown-link:focus {
+  background-color: #0f6352;
+  outline: none;
+}
 
-    nav.main-nav .nav-item.dropdown:focus > .nav-link {
-      outline: 2px solid #006e5f;
-      outline-offset: 2px;
-    }
+/* Mostrar dropdown cuando tiene la clase expanded */
+nav.main-nav .nav-item.dropdown.expanded>.dropdown-menu {
+  display: block;
+}
 
-    /* Responsive */
+nav.main-nav .nav-item.dropdown:focus>.nav-link {
+  outline: 2px solid #006e5f;
+  outline-offset: 2px;
+}
 
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
+/* Responsive */
 
-      nav.main-nav .nav-list {
-        flex-direction: column;
-        background-color: #39e4c9;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 220px;
-        display: none;
-        border-radius: 0 0 8px 8px;
-        padding: 1rem 0;
-        gap: 0;
-        z-index: 1500;
-      }
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
 
-      nav.main-nav .nav-list.show {
-        display: flex;
-      }
+  nav.main-nav .nav-list {
+    flex-direction: column;
+    background-color: #39e4c9;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 220px;
+    display: none;
+    border-radius: 0 0 8px 8px;
+    padding: 1rem 0;
+    gap: 0;
+    z-index: 1500;
+  }
 
-      nav.main-nav .nav-item {
-        width: 100%;
-      }
+  nav.main-nav .nav-list.show {
+    display: flex;
+  }
 
-      nav.main-nav .nav-link {
-        padding: 0.75rem 1.5rem;
-        width: 100%;
-      }
+  nav.main-nav .nav-item {
+    width: 100%;
+  }
 
-      nav.main-nav .dropdown-menu {
-        position: static;
-        background-color: #27b3a3;
-        box-shadow: none;
-        border-radius: 0;
-        padding-left: 2rem;
-        display: none !important; /* Se muestra con JS */
-      }
+  nav.main-nav .nav-link {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+  }
 
-      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
-        display: block !important;
-      }
-    }
+  nav.main-nav .dropdown-menu {
+    position: static;
+    background-color: #27b3a3;
+    box-shadow: none;
+    border-radius: 0;
+    padding-left: 2rem;
+    display: none !important;
+    /* Se muestra con JS */
+  }
 
-    /* MAIN */
+  nav.main-nav .nav-item.dropdown.expanded>.dropdown-menu {
+    display: block !important;
+  }
+}
 
-    main {
-      width: 92vw;
-      max-width: 1400px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-      flex-grow: 1;
-    }
+/* MAIN */
 
-    /* Contenido principal */
+main {
+  width: 92vw;
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  flex-grow: 1;
+}
 
-    .hero {
-      padding: 4rem 2rem;
-      background-color: #e0fbf9;
-      text-align: center;
-      border-radius: 12px;
-      margin-bottom: 3rem;
-    }
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #003333;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto;
-      color: #003333;
-    }
-    .hero a {
-      background: #39e4c9;
-      color: white;
-      padding: 0.8rem 2rem;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 700;
-      margin: 1.5rem 1rem 0 1rem;
-      display: inline-block;
-      transition: background-color 0.3s ease;
-    }
-    .hero a:hover,
-    .hero a:focus {
-      background: #27b3a3;
-      outline: none;
-    }
+/* Contenido principal */
 
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-      padding: 0 1rem 3rem;
-    }
-    .feature {
-      background: white;
-      border: 2px solid #39e4c9;
-      border-radius: 12px;
-      padding: 2rem;
-      max-width: 300px;
-      text-align: center;
-      color: #003333;
-      flex: 1 1 280px;
-    }
-    .feature i {
-      font-size: 2rem;
-      color: #39e4c9;
-      margin-bottom: 1rem;
-    }
-    .feature h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-    }
-    .feature p {
-      font-size: 0.95rem;
-    }
+.hero {
+  padding: 4rem 2rem;
+  background-color: #e0fbf9;
+  text-align: center;
+  border-radius: 12px;
+  margin-bottom: 3rem;
+}
 
-    /* Collage Masonry Mejorado */
-    .collage-section {
-      width: 92vw;
-      max-width: 1400px;
-      margin: 3rem auto 2rem auto;
-      padding: 0 2rem;
-      text-align: center;
-    }
-    .collage-section h2 {
-      margin-bottom: 1.5rem;
-      color: #003333;
-      font-size: 1.5rem;
-      font-weight: 700;
-    }
-    .collage {
-      column-count: 3;
-      column-gap: 18px;
-      width: 100%;
-      margin: 0 auto;
-    }
-    .collage-img {
-      width: 100%;
-      max-width: 100%;
-      height: 260px;
-      margin-bottom: 18px;
-      border-radius: 12px;
-      box-shadow: none;
-      object-fit: cover;
-      transition: transform 0.4s cubic-bezier(.4,2,.3,1), box-shadow 0.4s;
-      cursor: pointer;
-      background: transparent;
-      display: block;
-      break-inside: avoid;
-    }
-    .collage-img:hover {
-      transform: scale(1.08) rotate(-2deg);
-      box-shadow: 0 8px 32px rgba(0,228,201,0.18), 0 2px 8px rgba(0,0,0,0.10);
-      z-index: 2;
-    }
-    @media (max-width: 900px) {
-      .collage {
-        column-count: 2;
-        column-gap: 12px;
-      }
-      .collage-img {
-        height: 180px;
-        border-radius: 8px;
-      }
-    }
-    @media (max-width: 600px) {
-      .collage {
-        column-count: 1;
-        column-gap: 0;
-      }
-      .collage-img {
-        height: 140px;
-        border-radius: 6px;
-      }
-    }
+.hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #003333;
+}
 
-    /* FOOTER */
+.hero p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #003333;
+}
 
-    footer {
-      background-color: #39e4c9;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 4rem;
-      flex-shrink: 0;
-    }
-    footer a {
-      color: white;
-      text-decoration: underline;
-      margin: 0 0.5rem;
-    }
-    footer small {
-      display: block;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-    }
+.hero a {
+  background: #39e4c9;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 1.5rem 1rem 0 1rem;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+.hero a:hover,
+.hero a:focus {
+  background: #27b3a3;
+  outline: none;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 1rem 3rem;
+}
+
+.feature {
+  background: white;
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 300px;
+  text-align: center;
+  color: #003333;
+  flex: 1 1 280px;
+}
+
+.feature i {
+  font-size: 2rem;
+  color: #39e4c9;
+  margin-bottom: 1rem;
+}
+
+.feature h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  font-size: 0.95rem;
+}
+
+/* Collage Masonry Mejorado */
+.collage-section {
+  width: 92vw;
+  max-width: 1400px;
+  margin: 3rem auto 2rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.collage-section h2 {
+  margin-bottom: 1.5rem;
+  color: #003333;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.collage {
+  column-count: 3;
+  column-gap: 18px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.collage-img {
+  width: 100%;
+  max-width: 100%;
+  height: 260px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: none;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(.4, 2, .3, 1), box-shadow 0.4s;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+  break-inside: avoid;
+}
+
+.collage-img:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(0, 228, 201, 0.18), 0 2px 8px rgba(0, 0, 0, 0.10);
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .collage {
+    column-count: 2;
+    column-gap: 12px;
+  }
+
+  .collage-img {
+    height: 180px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .collage {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .collage-img {
+    height: 140px;
+    border-radius: 6px;
+  }
+}
+
+/* FOOTER */
+
+footer {
+  background-color: #39e4c9;
+  color: white;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  flex-shrink: 0;
+}
+
+footer a {
+  color: white;
+  text-decoration: underline;
+  margin: 0 0.5rem;
+}
+
+footer small {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
