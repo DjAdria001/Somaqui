@@ -1,0 +1,68 @@
+/* Estilos específicos para formularios de contacto */
+/* Usar junto con Styleglobal.css para evitar duplicación */
+
+/* Ajuste específico para login en páginas de contacto */
+.header-top {
+  position: absolute;
+  top: 1.4rem;
+  right: 2rem;
+}
+
+/* MAIN específico para formularios de contacto */
+main {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+/* Estilos específicos para formularios */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #003333;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 700;
+  color: #003333;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button {
+  margin-top: 1.5rem;
+  background-color: #39e4c9;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+button:hover,
+button:focus {
+  background-color: #27b3a3;
+  outline: none;
+}
