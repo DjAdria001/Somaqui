@@ -309,6 +309,118 @@
       margin-top: 1rem;
       font-size: 0.85rem;
     }
+    /* Tarjetas equipo animadas y compactas */
+    .equipo-container {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto 2rem auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .equipo-container > div {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      gap: 2.5rem;
+      width: 100%;
+    }
+    .miembro.miembro-horizontal {
+      background: white;
+      border: 2px solid #39e4c9;
+      border-radius: 14px;
+      padding: 1.5rem 1rem;
+      max-width: 300px;
+      min-width: 220px;
+      text-align: center;
+      color: #003333;
+      font-family: 'Segoe UI',sans-serif;
+      box-shadow: 0 2px 8px rgba(0,228,201,0.08);
+      transition: transform 0.35s cubic-bezier(.4,2,.3,1), box-shadow 0.35s;
+      cursor: pointer;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.7s forwards;
+    }
+    .miembro.miembro-horizontal:hover {
+      transform: scale(1.07) translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,228,201,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      z-index: 2;
+    }
+    .miembro-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 0.7rem;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,228,201,0.10);
+    }
+    .miembro-nombre {
+      font-size: 1.15rem;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+      color: #003333;
+    }
+    .miembro-rol {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #006e5f;
+      margin-bottom: 0.3rem;
+    }
+    .miembro-desc {
+      font-size: 0.95rem;
+      color: #003333;
+      margin-bottom: 0.3rem;
+    }
+    .miembro-social a {
+      color: #27b3a3;
+      font-size: 1.2rem;
+      margin: 0 0.3rem;
+      transition: color 0.2s;
+    }
+    .miembro-social a:hover {
+      color: #39e4c9;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 900px) {
+      .equipo-container {
+        padding: 0 0.5rem;
+      }
+      .equipo-container > div {
+        gap: 1.2rem;
+      }
+      .miembro.miembro-horizontal {
+        max-width: 180px;
+        min-width: 140px;
+        padding: 1rem 0.5rem;
+      }
+      .miembro-img {
+        width: 55px;
+        height: 55px;
+      }
+    }
+    @media (max-width: 600px) {
+      .equipo-container > div {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 1rem;
+      }
+      .miembro.miembro-horizontal {
+        min-width: 140px;
+        max-width: 140px;
+        padding: 0.7rem 0.3rem;
+      }
+      .miembro-img {
+        width: 40px;
+        height: 40px;
+      }
+    }
   </style>
 </head>
 <body>
