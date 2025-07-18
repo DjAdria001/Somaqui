@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,13 +9,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="icon" href="Imagenes/LogoSF.png" type="image/png" />
+  <link rel="stylesheet" href="style.css">
   <style>
     /* RESET y estilos base */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f0fdfd; color: #003333; min-height: 100vh; display: flex; flex-direction: column; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fdfd;
+      color: #003333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
     /* HEADER y menú */
-   header.site-header {
+    header.site-header {
       background-color: #39e4c9;
       padding: 1rem 2rem;
       display: flex;
@@ -27,33 +41,34 @@
     }
 
     header.site-header .logo {
-  font-weight: 700;
-  font-size: 1.8rem;
-  text-decoration: none;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1rem;
-}
-header.site-header .logo img {
-  height: 39px;
-  margin-right: 8px;
-}
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-decoration: none;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
 
-.header-top {
-  position: absolute;
-  top: 2.8rem;
-  right: 2rem;
-}
+    header.site-header .logo img {
+      height: 39px;
+      margin-right: 8px;
+    }
 
-#btn-login {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: white;
-}
+    .header-top {
+      position: absolute;
+      top: 2.8rem;
+      right: 2rem;
+    }
+
+    #btn-login {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      color: white;
+    }
 
 
     .menu-toggle {
@@ -64,6 +79,7 @@ header.site-header .logo img {
       font-size: 1.8rem;
       cursor: pointer;
     }
+
     nav.main-nav .nav-list {
       list-style: none;
       display: flex;
@@ -72,7 +88,11 @@ header.site-header .logo img {
       margin: 0;
       padding: 0;
     }
-    nav.main-nav .nav-item { position: relative; }
+
+    nav.main-nav .nav-item {
+      position: relative;
+    }
+
     nav.main-nav .nav-link {
       color: white;
       text-decoration: none;
@@ -84,11 +104,13 @@ header.site-header .logo img {
       gap: 0.25rem;
       transition: color 0.3s ease;
     }
+
     nav.main-nav .nav-link:hover,
     nav.main-nav .nav-link:focus {
       color: #006e5f;
       outline: none;
     }
+
     nav.main-nav .dropdown-menu {
       display: none;
       position: absolute;
@@ -101,7 +123,11 @@ header.site-header .logo img {
       z-index: 2000;
       padding: 0.5rem 0;
     }
-    nav.main-nav .dropdown-menu li { list-style: none; }
+
+    nav.main-nav .dropdown-menu li {
+      list-style: none;
+    }
+
     nav.main-nav .dropdown-menu .dropdown-link {
       display: block;
       padding: 0.5rem 1rem;
@@ -110,18 +136,22 @@ header.site-header .logo img {
       text-decoration: none;
       transition: background-color 0.2s ease;
     }
+
     nav.main-nav .dropdown-menu .dropdown-link:hover,
     nav.main-nav .dropdown-menu .dropdown-link:focus {
       background-color: #0f6352;
       outline: none;
     }
-    nav.main-nav .nav-item.dropdown:hover > .dropdown-menu,
-    nav.main-nav .nav-item.dropdown:focus-within > .dropdown-menu {
+
+    nav.main-nav .nav-item.dropdown:hover>.dropdown-menu,
+    nav.main-nav .nav-item.dropdown:focus-within>.dropdown-menu {
       display: none;
     }
-    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+
+    nav.main-nav .nav-item.dropdown.expanded>.dropdown-menu {
       display: block !important;
     }
+
     /* Menú abajo del logo */
     nav.main-nav .nav-list {
       display: flex;
@@ -130,8 +160,12 @@ header.site-header .logo img {
       justify-content: center;
       list-style: none;
     }
+
     @media (max-width: 768px) {
-      .menu-toggle { display: block; }
+      .menu-toggle {
+        display: block;
+      }
+
       nav.main-nav .nav-list {
         flex-direction: column;
         background-color: #39e4c9;
@@ -145,12 +179,20 @@ header.site-header .logo img {
         gap: 0;
         z-index: 1500;
       }
-      nav.main-nav .nav-list.show { display: flex; }
-      nav.main-nav .nav-item { width: 100%; }
+
+      nav.main-nav .nav-list.show {
+        display: flex;
+      }
+
+      nav.main-nav .nav-item {
+        width: 100%;
+      }
+
       nav.main-nav .nav-link {
         padding: 0.75rem 1.5rem;
         width: 100%;
       }
+
       nav.main-nav .dropdown-menu {
         position: static;
         background-color: #27b3a3;
@@ -159,10 +201,12 @@ header.site-header .logo img {
         padding-left: 2rem;
         display: none !important;
       }
-      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+
+      nav.main-nav .nav-item.dropdown.expanded>.dropdown-menu {
         display: block !important;
       }
     }
+
     /* MAIN y resto de estilos originales... */
     body {
       margin: 0;
@@ -170,6 +214,7 @@ header.site-header .logo img {
       background: #f0fdfd;
       color: #003333;
     }
+
     header {
       background-color: #39e4c9;
       color: white;
@@ -179,39 +224,56 @@ header.site-header .logo img {
       justify-content: center;
       position: relative;
     }
+
     .logo-link {
       position: absolute;
       left: 2rem;
     }
+
     .logo-img {
       height: 70px;
       user-select: none;
     }
-    h1 { font-size: 1.8rem; margin: 0; }
+
+    h1 {
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
     main {
       max-width: 960px;
       margin: 2rem auto;
       padding: 1rem;
     }
+
     form {
       background: white;
       border: 2px solid #39e4c9;
       border-radius: 12px;
       padding: 2rem;
     }
+
     label {
       font-weight: bold;
       margin-top: 1rem;
       display: block;
     }
-    input[type="text"], input[type="email"], textarea {
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
       width: 100%;
       padding: 0.7rem;
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
     }
-    textarea { resize: vertical; min-height: 100px; }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
     .etiquetas {
       display: flex;
       flex-wrap: wrap;
@@ -219,7 +281,11 @@ header.site-header .logo img {
       margin-top: 0.5rem;
       margin-bottom: 1.5rem;
     }
-    .etiqueta input { display: none; }
+
+    .etiqueta input {
+      display: none;
+    }
+
     .etiqueta span {
       background: #e0fbf9;
       border: 1px solid #39e4c9;
@@ -230,14 +296,17 @@ header.site-header .logo img {
       font-size: 0.95rem;
       transition: all 0.2s ease;
     }
-    .etiqueta input:checked + span {
+
+    .etiqueta input:checked+span {
       background-color: #39e4c9;
       color: white;
       border-color: #39e4c9;
     }
+
     .etiqueta span:hover {
       background-color: #c1f3ed;
     }
+
     .grupo-titulo {
       font-weight: bold;
       margin-top: 1.8rem;
@@ -245,12 +314,14 @@ header.site-header .logo img {
       color: #004d4a;
       font-size: 1.1rem;
     }
+
     .ubicacion-mapa {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
       flex-direction: column;
     }
+
     #map {
       height: 400px;
       width: 100%;
@@ -258,10 +329,12 @@ header.site-header .logo img {
       border: 2px solid #39e4c9;
       border-radius: 8px;
     }
+
     .descripcion-ubicacion {
       font-size: 0.9rem;
       color: #555;
     }
+
     .mensaje-exito {
       background: #d4edda;
       border: 1px solid #c3e6cb;
@@ -270,12 +343,14 @@ header.site-header .logo img {
       border-radius: 6px;
       margin-bottom: 1rem;
     }
+
     .checkbox-term {
       margin-top: 1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
+
     button[type="submit"] {
       margin-top: 2rem;
       background: #39e4c9;
@@ -287,21 +362,24 @@ header.site-header .logo img {
       border-radius: 30px;
       cursor: pointer;
     }
+
     #btn-detectar-ubicacion {
       margin-bottom: 1rem;
-      background:#2db1a3;
-      color:white;
-      border:none;
-      padding:0.5rem 1rem;
-      border-radius:6px;
-      cursor:pointer;
+      background: #2db1a3;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
       max-width: 250px;
     }
+
     .privacidad {
       margin-top: 1.5rem;
       font-size: 0.9rem;
       color: #555;
     }
+
     footer {
       background-color: #39e4c9;
       color: white;
@@ -310,33 +388,39 @@ header.site-header .logo img {
       margin-top: 4rem;
       flex-shrink: 0;
     }
+
     footer a {
       color: white;
       text-decoration: underline;
       margin: 0 0.5rem;
     }
+
     footer small {
       display: block;
       margin-top: 1rem;
       font-size: 0.85rem;
     }
+
     /* Animación para campo activo */
     .input-activo {
       border: 2px solid #39e4c9 !important;
       box-shadow: 0 0 8px #39e4c97a;
       transition: box-shadow 0.3s, border 0.3s;
     }
+
     /* Animación para mostrar/ocultar campo Otros */
     #otros-texto-container {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.4s;
+      transition: max-height 0.5s cubic-bezier(.4, 2, .6, 1), opacity 0.4s;
       opacity: 0;
     }
+
     #otros-texto-container.visible {
       max-height: 80px;
       opacity: 1;
     }
+
     /* Spinner para botón ubicación */
     .spinner {
       border: 3px solid #e0fbf9;
@@ -349,10 +433,17 @@ header.site-header .logo img {
       vertical-align: middle;
       margin-left: 8px;
     }
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
+
     /* Acordeón de categorías */
     .grupo-titulo {
       cursor: pointer;
@@ -361,20 +452,24 @@ header.site-header .logo img {
       padding: 0.2rem 0.5rem;
       border-radius: 6px;
     }
+
     .grupo-titulo:hover {
       background: #e0fbf9;
     }
+
     .etiquetas {
-      transition: max-height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.4s;
+      transition: max-height 0.5s cubic-bezier(.4, 2, .6, 1), opacity 0.4s;
       overflow: hidden;
       max-height: 500px;
       opacity: 1;
     }
+
     .etiquetas.cerrado {
       max-height: 0;
       opacity: 0;
       pointer-events: none;
     }
+
     .mensaje-exito-animado {
       background: #d4edda;
       border: 1px solid #c3e6cb;
@@ -386,195 +481,240 @@ header.site-header .logo img {
       text-align: center;
       font-size: 1.1rem;
     }
+
     @keyframes fadeInScale {
-      0% { opacity: 0; transform: scale(0.9); }
-      100% { opacity: 1; transform: scale(1); }
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
     }
   </style>
-  <link rel="stylesheet" href="Style.css">
 </head>
+
 <body>
   <header class="site-header">
-  <div class="header-top">
-    <!-- Botón login a la derecha -->
-    <button id="btn-login" aria-label="Iniciar sesión">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
-        <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
-      </svg>
+    <div class="header-top">
+      <!-- Botón login a la derecha -->
+      <button id="btn-login" aria-label="Iniciar sesión">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
+          <path
+            d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z" />
+        </svg>
+      </button>
+    </div>
+
+    <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
+      <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
+      SomAqui.cat
+    </a>
+
+    <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+      <i class="fa fa-bars"></i>
     </button>
-  </div>
 
-  <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
-    <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
-    SomAqui.cat
-  </a>
-
-  <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
-    <i class="fa fa-bars"></i>
-  </button>
-
-  <nav class="main-nav" role="navigation" aria-label="Menú principal">
-    <ul class="nav-list" id="main-menu">
-      <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
-      <li class="nav-item"><a href="FormularioAyuda.html" class="nav-link">Necesito Ayuda</a></li>
-      <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero ser voluntario</a></li>
-      <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
-      <li class="nav-item dropdown" tabindex="0">
-        <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
-          ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
-        </a>
-        <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
-          <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
-          <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
-          <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
-          <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
+    <nav class="main-nav" role="navigation" aria-label="Menú principal">
+      <ul class="nav-list" id="main-menu">
+        <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="FormularioAyuda.html" class="nav-link">Necesito Ayuda</a></li>
+        <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero ser voluntario</a></li>
+        <li class="nav-item dropdown" tabindex="0">
+          <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+            ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </a>
+          <ul class="dropdown-menu" aria-label="Submenú Quienes Somos">
+            <li><a href="Equipo.html" class="dropdown-link">Equipo</a></li>
+            <li><a href="MisionVision.html" class="dropdown-link">Misión y Visión</a></li>
+            <li><a href="Transparencia.html" class="dropdown-link">Transparencia</a></li>
+            <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
     <h2>🚨 Solicita ayuda en tu zona</h2>
-    <p>Selecciona una o más situaciones que estás viviendo. La ubicación es aproximada y no se mostrará públicamente.</p>
+    <p>Selecciona una o más situaciones que estás viviendo. La ubicación es aproximada y no se mostrará públicamente.
+    </p>
 
     <form action="enviar_ayuda.php" method="POST">
       <label for="correo">📧 Correo electrónico *</label>
       <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
 
       <label for="ubicacion">📍 Ubicación aproximada *</label>
-<div class="ubicacion-mapa">
-  <input type="text" id="ubicacion" name="ubicacion" readonly required>
+      <div class="ubicacion-mapa">
+        <input type="text" id="ubicacion" name="ubicacion" readonly required>
 
-  <button type="button" id="btn-detectar-ubicacion">
-    ¿Quieres que detectemos tu ubicación automáticamente?
-  </button>
+        <button type="button" id="btn-detectar-ubicacion">
+          ¿Quieres que detectemos tu ubicación automáticamente?
+        </button>
 
-  <div class="descripcion-ubicacion">
-    Si no funciona, selecciona manualmente en el mapa.
-  </div>
+        <div class="descripcion-ubicacion">
+          Si no funciona, selecciona manualmente en el mapa.
+        </div>
 
-  <div id="map"></div>
+        <div id="map"></div>
 
-  <!-- Recuadro movido aquí debajo del mapa -->
-  <div class="descripcion-ubicacion">
-    Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
-    Es necesaria para conectar con servicios cercanos.
-  </div>
-      <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
-      <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
+        <!-- Recuadro movido aquí debajo del mapa -->
+        <div class="descripcion-ubicacion">
+          Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
+          Es necesaria para conectar con servicios cercanos.
+        </div>
+        <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
+        <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
 
-      <label>🆘 Selecciona una o más etiquetas *</label>
+        <label>🆘 Selecciona una o más etiquetas *</label>
 
-      <!-- Categorías y etiquetas aquí -->
-      <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
-      <div class="etiquetas etiquetas-clima">
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios forestales</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias intensas</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de calor</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de frío</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos fuertes</span></label>
-      </div>
+        <!-- Categorías y etiquetas aquí -->
+        <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
+        <div class="etiquetas etiquetas-clima">
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios
+              forestales</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias
+              intensas</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de
+              calor</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de
+              frío</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos
+              fuertes</span></label>
+        </div>
 
-      <div class="grupo-titulo">🛑 Cortes o fallos</div>
-      <div class="etiquetas etiquetas-cortes">
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de luz</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de agua</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de gas</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de Internet</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón general</span></label>
-      </div>
+        <div class="grupo-titulo">🛑 Cortes o fallos</div>
+        <div class="etiquetas etiquetas-cortes">
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de
+              luz</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de
+              agua</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de
+              gas</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de
+              Internet</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón
+              general</span></label>
+        </div>
 
-      <div class="grupo-titulo">👥 Necesidades humanas</div>
-      <div class="etiquetas etiquetas-humanas">
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores solos</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin hogar</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad reducida</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de alimentos</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de medicamentos</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad de transporte</span></label>
-      </div>
+        <div class="grupo-titulo">👥 Necesidades humanas</div>
+        <div class="etiquetas etiquetas-humanas">
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores
+              solos</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin
+              hogar</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad
+              reducida</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de
+              alimentos</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de
+              medicamentos</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad
+              de transporte</span></label>
+        </div>
 
-      <div class="grupo-titulo">🧠 Apoyo psicosocial</div>
-      <div class="etiquetas etiquetas-psicosocial">
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito hablar</span></label>
-      </div>
+        <div class="grupo-titulo">🧠 Apoyo psicosocial</div>
+        <div class="etiquetas etiquetas-psicosocial">
+          <label class="etiqueta"><input type="checkbox" name="tags[]"
+              value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito
+              hablar</span></label>
+        </div>
 
-      <div class="grupo-titulo">🏘️ Problemas estructurales</div>
-      <div class="etiquetas etiquetas-estructurales">
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de desalojo</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles bloqueadas</span></label>
-      </div>
+        <div class="grupo-titulo">🏘️ Problemas estructurales</div>
+        <div class="etiquetas etiquetas-estructurales">
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de
+              desalojo</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles
+              bloqueadas</span></label>
+        </div>
 
-      <div class="grupo-titulo">🧰 Infraestructura</div>
-      <div class="etiquetas etiquetas-infraestructura">
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Recarga saturada" /><span>Recarga saturada</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico cerrado</span></label>
-        <label class="etiqueta"><input type="checkbox" name="tags[]" value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
-      </div>
+        <div class="grupo-titulo">🧰 Infraestructura</div>
+        <div class="etiquetas etiquetas-infraestructura">
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Recarga saturada" /><span>Recarga
+              saturada</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico
+              cerrado</span></label>
+          <label class="etiqueta"><input type="checkbox" name="tags[]"
+              value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
+        </div>
 
-      <div class="grupo-titulo">➕ Otra emergencia</div>
-      <div class="etiquetas etiquetas-otros">
-        <label class="etiqueta">
-          <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
-          <span>Otros</span>
-        </label>
-      </div>
+        <div class="grupo-titulo">➕ Otra emergencia</div>
+        <div class="etiquetas etiquetas-otros">
+          <label class="etiqueta">
+            <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
+            <span>Otros</span>
+          </label>
+        </div>
 
-      <div id="otros-texto-container" style="display:none;">
-        <label for="otros_detalle">🔍 Describe tu emergencia:</label>
-        <input type="text" name="otros_detalle" id="otros_detalle">
-      </div>
+        <div id="otros-texto-container" style="display:none;">
+          <label for="otros_detalle">🔍 Describe tu emergencia:</label>
+          <input type="text" name="otros_detalle" id="otros_detalle">
+        </div>
 
-      <label for="descripcion">📝 Describe tu situación (opcional)</label>
-      <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad..."></textarea>
+        <label for="descripcion">📝 Describe tu situación (opcional)</label>
+        <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad..."></textarea>
 
-      <div class="checkbox-term">
-        <input type="checkbox" id="terminos" required>
-        <label for="terminos">Acepto los <a href="#" id="abrir-terminos">términos y condiciones</a> *</label>
-      </div>
+        <div class="checkbox-term">
+          <input type="checkbox" id="terminos" required>
+          <label for="terminos">Acepto los <a href="#" id="abrir-terminos">términos y condiciones</a> *</label>
+        </div>
 
-      <button type="submit">Enviar solicitud</button>
-      <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
-      <div class="privacidad">Porfavor, Usar este formulario de manera seria y responsable.</div>
+        <button type="submit">Enviar solicitud</button>
+        <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
+        <div class="privacidad">Porfavor, Usar este formulario de manera seria y responsable.</div>
     </form>
   </main>
 
   <!-- MODAL de Términos y Condiciones -->
-  <div id="modal-terminos" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
-    <div style="background:white; padding:2rem; border-radius:10px; max-width:700px; width:90%; height:90%; overflow:auto; position:relative;">
-      <button onclick="cerrarModal()" style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
+  <div id="modal-terminos"
+    style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
+    <div
+      style="background:white; padding:2rem; border-radius:10px; max-width:700px; width:90%; height:90%; overflow:auto; position:relative;">
+      <button onclick="cerrarModal()"
+        style="position:absolute; top:10px; right:15px; background:none; border:none; font-size:1.5rem; cursor:pointer;">&times;</button>
       <h2>Términos y Condiciones de Uso – SomAqui.cat</h2>
       <p><strong>Última actualización: julio de 2025</strong></p>
-      <p><strong>1. Objeto del servicio</strong><br>SomAqui.cat permite a los usuarios registrarse para compartir su ubicación aproximada y necesidades específicas mediante etiquetas, conectarse con personas u organizaciones dispuestas a colaborar y participar en iniciativas comunitarias.</p>
-      <p><strong>2. Registro de usuarios</strong><br>Se recopilan datos como nombre/alias, correo electrónico y ubicación aproximada. El usuario debe proporcionar información veraz.</p>
-      <p><strong>3. Protección de datos personales</strong><br>Se aplica el RGPD. Los datos se tratan confidencialmente y no se comparten sin consentimiento.</p>
-      <p><strong>4. Uso adecuado</strong><br>Está prohibido el uso con fines fraudulentos, políticos, comerciales o discriminatorios.</p>
-      <p><strong>5. Limitación de responsabilidad</strong><br>SomAqui.cat actúa como intermediario. No garantiza la veracidad ni disponibilidad de ayuda.</p>
-      <p><strong>6. Modificaciones</strong><br>Nos reservamos el derecho a modificar los términos en cualquier momento.</p>
+      <p><strong>1. Objeto del servicio</strong><br>SomAqui.cat permite a los usuarios registrarse para compartir su
+        ubicación aproximada y necesidades específicas mediante etiquetas, conectarse con personas u organizaciones
+        dispuestas a colaborar y participar en iniciativas comunitarias.</p>
+      <p><strong>2. Registro de usuarios</strong><br>Se recopilan datos como nombre/alias, correo electrónico y
+        ubicación aproximada. El usuario debe proporcionar información veraz.</p>
+      <p><strong>3. Protección de datos personales</strong><br>Se aplica el RGPD. Los datos se tratan confidencialmente
+        y no se comparten sin consentimiento.</p>
+      <p><strong>4. Uso adecuado</strong><br>Está prohibido el uso con fines fraudulentos, políticos, comerciales o
+        discriminatorios.</p>
+      <p><strong>5. Limitación de responsabilidad</strong><br>SomAqui.cat actúa como intermediario. No garantiza la
+        veracidad ni disponibilidad de ayuda.</p>
+      <p><strong>6. Modificaciones</strong><br>Nos reservamos el derecho a modificar los términos en cualquier momento.
+      </p>
       <p><strong>7. Aceptación</strong><br>Usar la plataforma implica aceptar estos términos.</p>
       <hr>
       <h3>Política de Privacidad</h3>
       <p><strong>Responsable:</strong> SomAqui.cat</p>
-      <p><strong>Finalidad:</strong> Plataforma de ayuda comunitaria. Datos tratados para conectar necesidades con ayuda local.</p>
+      <p><strong>Finalidad:</strong> Plataforma de ayuda comunitaria. Datos tratados para conectar necesidades con ayuda
+        local.</p>
       <p><strong>Base legal:</strong> Consentimiento del usuario.</p>
       <p><strong>Acceso a datos:</strong> Solo el equipo de SomAqui.cat. No hay cesiones sin consentimiento.</p>
       <p><strong>Conservación:</strong> Mientras seas usuario. Puedes solicitar la eliminación.</p>
       <p><strong>Seguridad:</strong> Se aplican medidas técnicas y organizativas de protección.</p>
-      <p><strong>Derechos:</strong> Acceso, rectificación, eliminación, oposición. Contacta con nosotros para ejercerlos.</p>
+      <p><strong>Derechos:</strong> Acceso, rectificación, eliminación, oposición. Contacta con nosotros para
+        ejercerlos.</p>
     </div>
   </div>
 
   <footer id="contacto">
-  <p>
-    <a href="#" onclick="alert('Aquí irá el modal de Términos')">Términos y condiciones</a> |
-    <a href="Contacto.html">Contacto</a> |
-    <a href="Home.html">Inicio</a>
-  </p>
-  <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
-</footer>
+    <p>
+      <a href="#" onclick="alert('Aquí irá el modal de Términos')">Términos y condiciones</a> |
+      <a href="Contacto.html">Contacto</a> |
+      <a href="Home.html">Inicio</a>
+    </p>
+    <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
+  </footer>
 
   <script>
     function toggleOtrosTexto() {
@@ -647,7 +787,7 @@ header.site-header .logo img {
     const modal = document.getElementById('modal-terminos');
     const abrirTerminos = document.getElementById('abrir-terminos');
 
-    abrirTerminos.addEventListener('click', function(e) {
+    abrirTerminos.addEventListener('click', function (e) {
       e.preventDefault();
       modal.style.display = 'flex';
     });
@@ -657,7 +797,7 @@ header.site-header .logo img {
     }
 
     // Cerrar modal al clicar fuera del contenido
-    modal.addEventListener('click', function(e) {
+    modal.addEventListener('click', function (e) {
       if (e.target === modal) cerrarModal();
     });
 
@@ -690,98 +830,71 @@ header.site-header .logo img {
       }
     });
     /* Resalta campo activo */
-const campos = document.querySelectorAll('input, textarea');
-campos.forEach(el => {
-  el.addEventListener('focus', () => el.classList.add('input-activo'));
-  el.addEventListener('blur', () => el.classList.remove('input-activo'));
-});
-// 2. Animación suave para campo "Otros"
-const otrosCheck = document.getElementById('otros-check');
-const otrosCont = document.getElementById('otros-texto-container');
-if (otrosCheck && otrosCont) {
-  otrosCheck.addEventListener('change', () => {
-    if (otrosCheck.checked) {
-      otrosCont.classList.add('visible');
-    } else {
-      otrosCont.classList.remove('visible');
+    const campos = document.querySelectorAll('input, textarea');
+    campos.forEach(el => {
+      el.addEventListener('focus', () => el.classList.add('input-activo'));
+      el.addEventListener('blur', () => el.classList.remove('input-activo'));
+    });
+    // 2. Animación suave para campo "Otros"
+    const otrosCheck = document.getElementById('otros-check');
+    const otrosCont = document.getElementById('otros-texto-container');
+    if (otrosCheck && otrosCont) {
+      otrosCheck.addEventListener('change', () => {
+        if (otrosCheck.checked) {
+          otrosCont.classList.add('visible');
+        } else {
+          otrosCont.classList.remove('visible');
+        }
+      });
     }
-  });
-}
-// 3. Scroll animado al primer error
-const form = document.querySelector('form');
-form.addEventListener('submit', function(e) {
-  const primerError = form.querySelector(':invalid');
-  if (primerError) {
-    e.preventDefault();
-    primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    primerError.classList.add('input-activo');
-    setTimeout(() => primerError.classList.remove('input-activo'), 1500);
-  } else {
-    e.preventDefault();
-    mostrarMensajeExito();
-    form.reset();
-    if (otrosCont) otrosCont.classList.remove('visible');
-  }
-});
-// 4. Mensaje de éxito animado
-function mostrarMensajeExito() {
-  let msg = document.createElement('div');
-  msg.className = 'mensaje-exito-animado';
-  msg.textContent = '¡Solicitud enviada con éxito!';
-  form.parentNode.insertBefore(msg, form);
-  setTimeout(() => msg.remove(), 3000);
-}
-// 5. Spinner en botón ubicación
-const btnUbic = document.getElementById('btn-detectar-ubicacion');
-if (btnUbic) {
-  btnUbic.addEventListener('click', () => {
-    const spinner = document.createElement('span');
-    spinner.className = 'spinner';
-    btnUbic.appendChild(spinner);
-    setTimeout(() => {
-      if (spinner.parentNode) spinner.parentNode.removeChild(spinner);
-    }, 4000);
-  });
-}
-// 6. Acordeón de categorías
-const titulos = document.querySelectorAll('.grupo-titulo');
-titulos.forEach(titulo => {
-  titulo.addEventListener('click', () => {
-    const etiquetas = titulo.nextElementSibling;
-    if (etiquetas && etiquetas.classList.contains('etiquetas')) {
-      etiquetas.classList.toggle('cerrado');
+    // 3. Scroll animado al primer error
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function (e) {
+      const primerError = form.querySelector(':invalid');
+      if (primerError) {
+        e.preventDefault();
+        primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        primerError.classList.add('input-activo');
+        setTimeout(() => primerError.classList.remove('input-activo'), 1500);
+      } else {
+        e.preventDefault();
+        mostrarMensajeExito();
+        form.reset();
+        if (otrosCont) otrosCont.classList.remove('visible');
+      }
+    });
+    // 4. Mensaje de éxito animado
+    function mostrarMensajeExito() {
+      let msg = document.createElement('div');
+      msg.className = 'mensaje-exito-animado';
+      msg.textContent = '¡Solicitud enviada con éxito!';
+      form.parentNode.insertBefore(msg, form);
+      setTimeout(() => msg.remove(), 3000);
     }
-  });
-});
-
-// 7. Funcionalidad del login (popup)
-const loginBtn = document.getElementById("btn-login");
-const popupLogin = document.getElementById("popup-login");
-const cerrarPopup = document.getElementById("cerrar-popup");
-
-if (loginBtn && popupLogin && cerrarPopup) {
-  loginBtn.addEventListener("click", () => {
-    popupLogin.style.display = "flex";
-  });
-
-  cerrarPopup.addEventListener("click", () => {
-    popupLogin.style.display = "none";
-  });
-
-  // Opcional: cerrar si se hace clic fuera del cuadro
-  popupLogin.addEventListener("click", (e) => {
-    if (e.target === popupLogin) popupLogin.style.display = "none";
-  });
-}
+    // 5. Spinner en botón ubicación
+    const btnUbic = document.getElementById('btn-detectar-ubicacion');
+    if (btnUbic) {
+      btnUbic.addEventListener('click', () => {
+        const spinner = document.createElement('span');
+        spinner.className = 'spinner';
+        btnUbic.appendChild(spinner);
+        setTimeout(() => {
+          if (spinner.parentNode) spinner.parentNode.removeChild(spinner);
+        }, 4000);
+      });
+    }
+    // 6. Acordeón de categorías
+    const titulos = document.querySelectorAll('.grupo-titulo');
+    titulos.forEach(titulo => {
+      titulo.addEventListener('click', () => {
+        const etiquetas = titulo.nextElementSibling;
+        if (etiquetas && etiquetas.classList.contains('etiquetas')) {
+          etiquetas.classList.toggle('cerrado');
+        }
+      });
+    });
   </script>
-
-<!-- POPUP LOGIN CON IFRAME -->
-<div id="popup-login" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
-  <div style="background:white; padding:0; border-radius:10px; width:90%; max-width:400px; height:80%; position:relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
-    <button id="cerrar-popup" style="position:absolute; top:0.5rem; right:0.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer;">×</button>
-    <iframe src="login.html" style="width:100%; height:100%; border:none; border-radius:10px;"></iframe>
-  </div>
-</div>
-
+  <script src=""></script>
 </body>
+
 </html>
