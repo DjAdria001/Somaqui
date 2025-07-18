@@ -7,287 +7,288 @@
   <link rel="icon" href="Imagenes/LogoSF.png" type="image/png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    /* RESET y estilos base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Segoe UI', sans-serif;
       background: #f0fdfd;
       color: #003333;
-      margin: 0;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-    header {
-      background: #39e4c9;
-      color: white;
-      padding: 2rem 0 1rem 0;
-      text-align: center;
-    }
-    .equipo-container {
-      display: flex;
-      flex-direction: column;
-      gap: 2.5rem;
-      padding: 3rem 2vw 2rem 2vw;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .miembro {
-      background: white;
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(57,228,201,0.10), 0 2px 8px rgba(0,0,0,0.08);
-      padding: 2.5rem 2rem 2rem 2rem;
-      max-width: 320px;
-      flex: 1 1 260px;
-      text-align: center;
-      position: relative;
-      transition: transform 0.35s cubic-bezier(.4,2,.3,1), box-shadow 0.35s cubic-bezier(.4,2,.3,1);
-      animation: fadeInUp 1s cubic-bezier(.4,2,.3,1);
-    }
-    .miembro:hover {
-      transform: translateY(-12px) scale(1.06) rotate(-2deg);
-      box-shadow: 0 12px 36px rgba(57,228,201,0.22), 0 2px 8px rgba(0,0,0,0.12);
-      z-index: 2;
-    }
-    .miembro-img {
-      width: 110px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #39e4c9;
-      margin-bottom: 1.2rem;
-      background: #e0fbf9;
-      box-shadow: 0 2px 8px rgba(57,228,201,0.10);
-      transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
-      animation: popIn 1.2s cubic-bezier(.4,2,.3,1);
-    }
-    .miembro:hover .miembro-img {
-      box-shadow: 0 8px 32px rgba(57,228,201,0.18);
-      border-color: #27b3a3;
-      transform: scale(1.08) rotate(-2deg);
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(40px) scale(0.95); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.7); }
-      80% { opacity: 1; transform: scale(1.08); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-    .miembro-nombre {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      color: #003333;
-    }
-    .miembro-rol {
-      font-size: 1.05rem;
-      color: #27b3a3;
-      margin-bottom: 0.7rem;
-      font-weight: 600;
-    }
-    .miembro-desc {
-      font-size: 1rem;
-      color: #444;
-      margin-bottom: 1.2rem;
-    }
-    .miembro-social {
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-top: 0.5rem;
-    }
-    .miembro-social a {
-      color: #39e4c9;
-      font-size: 1.3rem;
-      transition: color 0.2s, transform 0.2s;
-    }
-    .miembro-social a:hover {
-      color: #003333;
-      transform: scale(1.2) rotate(-8deg);
-    }
-    @media (max-width: 900px) {
-      .equipo-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-      }
-      .miembro {
-        max-width: 95vw;
-      }
-    }
-    .site-header {
-      position: relative;
-      z-index: 1000;
-      background: #39e4c9;
-      color: white;
-      padding: 1rem 0;
+    /* HEADER y menú */
+    header.site-header {
+      background-color: #39e4c9;
+      padding: 1rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
+      position: relative;
+      color: white;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+      z-index: 1000;
     }
     .header-top {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      padding: 0 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: absolute;
+      top: 2.8rem;
+      right: 2rem;
     }
     #btn-login {
-      background: transparent;
+      background: none;
       border: none;
       cursor: pointer;
-      outline: none;
       padding: 0;
-      margin: 0;
+      color: white;
     }
-    .logo {
+    header.site-header .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      text-decoration: none;
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: white;
-      text-decoration: none;
-      margin: 1rem 0;
+      margin-bottom: 1rem;
     }
-    .logo img {
-      height: 50px;
-      width: auto;
-      margin-right: 0.5rem;
+    header.site-header .logo img {
+      height: 39px;
+      margin-right: 8px;
     }
     .menu-toggle {
       display: none;
-      background: transparent;
+      background: none;
       border: none;
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       cursor: pointer;
-      padding: 0;
-      margin: 0;
-      align-self: flex-end;
-      margin-right: 2rem;
     }
-    .main-nav {
-      width: 100%;
+    nav.main-nav .nav-list {
       display: flex;
-      justify-content: center;
+      gap: 1.5rem;
       flex-wrap: wrap;
-      padding: 0 2rem;
-    }
-    .nav-list {
+      justify-content: center;
       list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
     }
-    .nav-item {
-      margin: 0 1rem;
+    nav.main-nav .nav-item {
       position: relative;
     }
-    .nav-link {
+    nav.main-nav .nav-link {
       color: white;
       text-decoration: none;
-      padding: 0.5rem 0;
+      font-weight: 600;
       font-size: 1rem;
-      transition: color 0.3s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition: color 0.3s ease;
     }
-    .nav-link:hover,
-    .nav-link:focus {
-      color: #003333;
+    nav.main-nav .nav-link:hover,
+    nav.main-nav .nav-link:focus {
+      color: #006e5f;
+      outline: none;
     }
-    .dropdown-menu {
+    nav.main-nav .dropdown-menu {
       display: none;
       position: absolute;
-      background: #39e4c9;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      top: 100%;
+      top: 2.5rem;
       left: 0;
-      z-index: 1000;
+      background-color: #27b3a3;
+      border-radius: 6px;
+      min-width: 180px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+      z-index: 2000;
+      padding: 0.5rem 0;
     }
-    .dropdown-link {
-      color: white;
-      text-decoration: none;
+    nav.main-nav .dropdown-menu li {
+      list-style: none;
+    }
+    nav.main-nav .dropdown-menu .dropdown-link {
+      display: block;
       padding: 0.5rem 1rem;
+      color: white;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    nav.main-nav .dropdown-menu .dropdown-link:hover,
+    nav.main-nav .dropdown-menu .dropdown-link:focus {
+      background-color: #0f6352;
+      outline: none;
+    }
+    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
       display: block;
-      transition: background 0.3s;
     }
-    .dropdown-link:hover {
-      background: rgba(255,255,255,0.1);
+    nav.main-nav .nav-item.dropdown:focus > .nav-link {
+      outline: 2px solid #006e5f;
+      outline-offset: 2px;
     }
-    .nav-item.dropdown:hover .dropdown-menu,
-    .nav-item.dropdown:focus-within .dropdown-menu {
-      display: block;
-    }
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       .menu-toggle {
         display: block;
       }
-      .main-nav {
-        display: none;
+      nav.main-nav .nav-list {
         flex-direction: column;
-        width: 100%;
+        background-color: #39e4c9;
         position: absolute;
         top: 100%;
-        left: 0;
-        background: #39e4c9;
+        right: 0;
+        width: 220px;
+        display: none;
+        border-radius: 0 0 8px 8px;
         padding: 1rem 0;
+        gap: 0;
+        z-index: 1500;
       }
-      .nav-item {
-        margin: 0;
+      nav.main-nav .nav-list.show {
+        display: flex;
       }
-      .nav-link {
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
+      nav.main-nav .nav-item {
+        width: 100%;
       }
-      .dropdown-menu {
+      nav.main-nav .nav-link {
+        padding: 0.75rem 1.5rem;
+        width: 100%;
+      }
+      nav.main-nav .dropdown-menu {
         position: static;
-        display: block;
-        padding: 0;
-        border-radius: 0;
+        background-color: #27b3a3;
         box-shadow: none;
+        border-radius: 0;
+        padding-left: 2rem;
+        display: none !important;
       }
-      .dropdown-link {
-        padding: 0.5rem 2rem;
+      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+        display: block !important;
       }
     }
-    .miembro-horizontal {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      max-width: 540px;
-      width: 100%;
-      padding: 2rem 1.5rem;
-      gap: 1.5rem;
+    main {
+      width: 92vw;
+      max-width: 1400px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      flex-grow: 1;
+    }
+    .hero {
+      padding: 4rem 2rem;
+      background-color: #e0fbf9;
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #003333;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
       margin: 0 auto;
-      box-sizing: border-box;
+      color: #003333;
     }
-    .miembro-horizontal .miembro-img {
-      width: 110px;
-      height: 110px;
-      min-width: 110px;
-      min-height: 110px;
-      margin-bottom: 0;
+    .hero a {
+      background: #39e4c9;
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      margin: 1.5rem 1rem 0 1rem;
+      display: inline-block;
+      transition: background-color 0.3s ease;
     }
-    .miembro-info {
-      flex: 1;
-      text-align: left;
+    .hero a:hover,
+    .hero a:focus {
+      background: #27b3a3;
+      outline: none;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0 1rem 3rem;
+    }
+    .feature {
+      background: white;
+      border: 2px solid #39e4c9;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 300px;
+      text-align: center;
+      color: #003333;
+      flex: 1 1 280px;
+    }
+    .feature i {
+      font-size: 2rem;
+      color: #39e4c9;
+      margin-bottom: 1rem;
+    }
+    .feature h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .feature p {
+      font-size: 0.95rem;
+    }
+    .collage-section {
+      width: 92vw;
+      max-width: 1400px;
+      margin: 3rem auto 2rem auto;
+      padding: 0 2rem;
+      text-align: center;
+    }
+    .collage-section h2 {
+      margin-bottom: 1.5rem;
+      color: #003333;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .collage {
+      column-count: 3;
+      column-gap: 18px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .collage-img {
+      width: 100%;
+      max-width: 100%;
+      height: 260px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      box-shadow: none;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(.4,2,.3,1), box-shadow 0.4s;
+      cursor: pointer;
+      background: transparent;
+      display: block;
+      break-inside: avoid;
+    }
+    .collage-img:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px rgba(0,228,201,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      z-index: 2;
     }
     @media (max-width: 900px) {
-      .miembro-horizontal {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        max-width: 95vw;
-        gap: 1rem;
+      .collage {
+        column-count: 2;
+        column-gap: 12px;
       }
-      .miembro-info {
-        text-align: center;
+      .collage-img {
+        height: 180px;
+        border-radius: 8px;
+      }
+    }
+    @media (max-width: 600px) {
+      .collage {
+        column-count: 1;
+        column-gap: 0;
+      }
+      .collage-img {
+        height: 140px;
+        border-radius: 6px;
       }
     }
     footer {
@@ -313,23 +314,19 @@
 <body>
   <header class="site-header">
     <div class="header-top">
-      <!-- Botón login a la derecha -->
       <button id="btn-login" aria-label="Iniciar sesión">
         <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
           <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z"/>
         </svg>
       </button>
     </div>
-
     <a href="Home.html" class="logo" aria-label="Ir a la página principal de SomAqui.cat">
       <img src="Imagenes/LogoSF.png" alt="Logo SomAqui.cat" />
       SomAqui.cat
     </a>
-
     <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
       <i class="fa fa-bars"></i>
     </button>
-
     <nav class="main-nav" role="navigation" aria-label="Menú principal">
       <ul class="nav-list" id="main-menu">
         <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
@@ -350,10 +347,8 @@
       </ul>
     </nav>
   </header>
-  <div style="height:2.5rem"></div>
-
-  <!-- Presentación innovadora del equipo -->
-  <section style="text-align:center; margin:2.5rem 0 1.5rem 0;">
+  <main>
+      <section style="text-align:center; margin:2.5rem 0 1.5rem 0;">
     <h2 style="font-size:2.1rem; color:#003333; margin-bottom:0.5rem; font-weight:800; letter-spacing:-1px;">Nuestro equipo</h2>
     <p style="font-size:1.15rem; color:#27b3a3; max-width:600px; margin:0 auto; font-weight:500;">
       Cuatro mentes, un solo propósito: unir personas, tecnología y empatía para crear soluciones reales en momentos de emergencia.
@@ -414,6 +409,7 @@
       </div>
     </div>
   </section>
+  </main>
 
 <footer id="contacto">
   <p>
