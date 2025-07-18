@@ -1,0 +1,230 @@
+ /* Estilos específicos para el formulario de ayuda */
+/* Usar junto con Styleglobal.css para evitar duplicación */
+
+/* Estilos específicos del formulario de ayuda */
+form {
+  background: white;
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 1rem;
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Estilos específicos de etiquetas */
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  transition: max-height 0.5s cubic-bezier(.4, 2, .6, 1), opacity 0.4s;
+  overflow: hidden;
+  max-height: 500px;
+  opacity: 1;
+}
+
+.etiquetas.cerrado {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.etiqueta input {
+  display: none;
+}
+
+.etiqueta span {
+  background: #e0fbf9;
+  border: 1px solid #39e4c9;
+  padding: 0.45rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.etiqueta input:checked+span {
+  background-color: #39e4c9;
+  color: white;
+  border-color: #39e4c9;
+}
+
+.etiqueta span:hover {
+  background-color: #c1f3ed;
+}
+
+/* Títulos de grupo con acordeón */
+.grupo-titulo {
+  font-weight: bold;
+  margin-top: 1.8rem;
+  margin-bottom: 0.2rem;
+  color: #004d4a;
+  font-size: 1.1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+.grupo-titulo:hover {
+  background: #e0fbf9;
+}
+
+/* Estilos específicos del mapa */
+.ubicacion-mapa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  max-width: 500px;
+  border: 2px solid #39e4c9;
+  border-radius: 8px;
+}
+
+.descripcion-ubicacion {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Botón de detectar ubicación */
+#btn-detectar-ubicacion {
+  margin-bottom: 1rem;
+  background: #2db1a3;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  max-width: 250px;
+}
+
+/* Mensajes de éxito */
+.mensaje-exito {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.mensaje-exito-animado {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  animation: fadeInScale 0.7s;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Checkbox de términos */
+.checkbox-term {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+  margin-top: 2rem;
+  background: #39e4c9;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* Nota de privacidad */
+.privacidad {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Animación para campo activo */
+.input-activo {
+  border: 2px solid #39e4c9 !important;
+  box-shadow: 0 0 8px #39e4c97a;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+/* Animación para mostrar/ocultar campo Otros */
+#otros-texto-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(.4, 2, .6, 1), opacity 0.4s;
+  opacity: 0;
+}
+
+#otros-texto-container.visible {
+  max-height: 80px;
+  opacity: 1;
+}
+
+/* Spinner para botón ubicación */
+.spinner {
+  border: 3px solid #e0fbf9;
+  border-top: 3px solid #39e4c9;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+/* Animaciones */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
