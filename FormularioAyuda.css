@@ -88,37 +88,142 @@ textarea {
   background: #e0fbf9;
 }
 
-/* Estilos específicos del mapa */
+/* Estilos específicos del mapa y layout */
 .ubicacion-mapa {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor del mapa (50% del espacio) */
+.mapa-contenedor {
+  flex: 1;
+  min-width: 45%;
+  display: flex;
   flex-direction: column;
+  gap: 1rem;
+}
+
+/* Display de ubicación como botón */
+.ubicacion-display {
+  background: #e0fbf9;
+  color: #003333;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid #39e4c9;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: inherit;
+}
+
+.ubicacion-display:hover {
+  background: #c1f3ed;
+  border-color: #27b3a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(57, 228, 201, 0.2);
+}
+
+.ubicacion-display:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(57, 228, 201, 0.2);
+}
+
+/* Estado cuando se está detectando ubicación */
+.ubicacion-display.detectando {
+  background: #fff3cd;
+  border-color: #ffc107;
+  color: #856404;
+}
+
+/* Estado cuando se ha detectado la ubicación */
+.ubicacion-display.ubicacion-detectada {
+  background: #d1ecf1;
+  border-color: #bee5eb;
+  color: #0c5460;
+  cursor: default;
+}
+
+.ubicacion-display.ubicacion-detectada:hover {
+  background: #d1ecf1;
+  border-color: #bee5eb;
+  transform: none;
+  box-shadow: none;
 }
 
 #map {
   height: 400px;
   width: 100%;
-  max-width: 500px;
   border: 2px solid #39e4c9;
   border-radius: 8px;
+}
+
+/* Contenedor para el formulario de la derecha (50% del espacio) */
+.form-derecha {
+  flex: 1;
+  min-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: #f8fdfd;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #e0fbf9;
+  box-shadow: 0 2px 8px rgba(0,228,201,0.1);
+  height: fit-content;
+}
+
+.form-derecha label {
+  margin-top: 0;
+  font-weight: bold;
+  color: #003333;
+}
+
+.form-derecha input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-derecha input:focus {
+  border-color: #39e4c9;
+  outline: none;
+  box-shadow: 0 0 5px rgba(57, 228, 201, 0.3);
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 900px) {
+  .ubicacion-mapa {
+    flex-direction: column;
+  }
+  
+  .mapa-contenedor,
+  .form-derecha {
+    flex: 1;
+    min-width: 100%;
+  }
+  
+  #map {
+    height: 300px;
+  }
+  
+  .form-derecha {
+    padding: 1.5rem;
+  }
 }
 
 .descripcion-ubicacion {
   font-size: 0.9rem;
   color: #555;
-}
-
-/* Botón de detectar ubicación */
-#btn-detectar-ubicacion {
-  margin-bottom: 1rem;
-  background: #2db1a3;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  max-width: 250px;
 }
 
 /* Mensajes de éxito */
