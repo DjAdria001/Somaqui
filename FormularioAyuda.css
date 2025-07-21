@@ -15,13 +15,15 @@ main {
 }
 
 .titulo-emergencia {
-  font-size: 1.8rem;
+  font-size: 1.8rem !important;
   font-weight: bold;
-  color: #004d4a;
-  margin: 0 0 1rem 0;
+  color: #004d4a !important;
+  margin: 0 auto 1rem auto !important;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  text-align: center;
+  text-align: center !important;
+  width: 100%;
+  display: block;
 }
 
 /* Actualizar estilo del subtítulo */
@@ -35,7 +37,7 @@ main {
 }
 
 /* Estilos para el encabezado y texto introductorio */
-main h2 {
+main h2:not(.titulo-emergencia) {
   text-align: center;
   margin: 0 auto 0.3rem;
   line-height: 1.4;
@@ -380,22 +382,6 @@ textarea {
   font-size: 1rem;
   line-height: 1.5;
   resize: vertical;
-}
-
-/* Sección de emergencia */
-.seccion-emergencia {
-  text-align: center;
-  margin: 3rem 0 2rem 0;
-  padding: 1.5rem 0;
-}
-
-.titulo-emergencia {
-  font-size: 2.2rem;
-  font-weight: bold;
-  color: #d32f2f;
-  margin: 0 0 1rem 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 /* Responsive para pantallas pequeñas */
