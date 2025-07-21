@@ -41,6 +41,7 @@
         <li class="nav-item"><a href="Home.html" class="nav-link" aria-current="page">Home</a></li>
         <li class="nav-item"><a href="FormularioAyuda.html" class="nav-link">Necesito Ayuda</a></li>
         <li class="nav-item"><a href="Ayudar.html" class="nav-link">Quiero ser voluntario</a></li>
+        <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
         <li class="nav-item dropdown" tabindex="0">
           <a href="QuienesSomos.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
             ¿Quiénes Somos? <i class="fa fa-caret-down" aria-hidden="true"></i>
@@ -52,7 +53,6 @@
             <li><a href="PreguntasFrecuentes.html" class="dropdown-link">Preguntas frecuentes</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a href="Contacto.html" class="nav-link">Contacto</a></li>
       </ul>
     </nav>
   </header>
@@ -63,32 +63,40 @@
     </p>
 
     <form action="enviar_ayuda.php" method="POST">
-      <label for="correo">📧 Correo electrónico *</label>
-      <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
-
-      <label for="ubicacion">📍 Ubicación aproximada *</label>
       <div class="ubicacion-mapa">
-        <input type="text" id="ubicacion" name="ubicacion" readonly required>
+        <!-- Mapa a la izquierda -->
+        <div class="mapa-contenedor">
+          <!-- Campo oculto para enviar la ubicación -->
+          <input type="hidden" id="ubicacion" name="ubicacion" required>
+          
+          <!-- Texto visible de la ubicación como botón -->
+          <button type="button" id="ubicacion-texto" class="ubicacion-display">
+            📍 ¿Detectar mi ubicación automáticamente?
+          </button>
 
-        <button type="button" id="btn-detectar-ubicacion">
-          ¿Quieres que detectemos tu ubicación automáticamente?
-        </button>
+          <div class="descripcion-ubicacion">
+            Haz clic arriba para detectar automáticamente o selecciona manualmente en el mapa.
+            Es necesaria para conectar con servicios cercanos.
+          </div>
 
-        <div class="descripcion-ubicacion">
-          Si no funciona, selecciona manualmente en el mapa.
+          <div id="map"></div>
+
+          
         </div>
 
-        <div id="map"></div>
-
-        <!-- Recuadro movido aquí debajo del mapa -->
-        <div class="descripcion-ubicacion">
-          Haz clic en el mapa para seleccionar tu ubicación aproximada.<br>
-          Es necesaria para conectar con servicios cercanos.
+        <!-- Formulario a la derecha -->
+        <div class="form-derecha">
+         
+          
+          <label for="correo">📧 Correo electrónico *</label>
+          <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+          
+          <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
+          <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
         </div>
-        <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
-        <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
+      </div>
 
-        <label>🆘 Selecciona una o más etiquetas *</label>
+      <label>🆘 Selecciona una o más etiquetas *</label>
 
         <!-- Categorías y etiquetas aquí -->
         <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
