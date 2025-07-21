@@ -1,5 +1,22 @@
- /* Estilos específicos para el formulario de ayuda */
+/* Estilos específicos para el formulario de ayuda */
 /* Usar junto con Styleglobal.css para evitar duplicación */
+
+/* Estilos para el encabezado y texto introductorio */
+main h2 {
+  text-align: center;
+  margin: 2rem auto;
+  line-height: 1.4;
+  max-width: 800px;
+}
+
+main > p {
+  text-align: center;
+  margin: 1.5rem auto 2.5rem;
+  line-height: 1.6;
+  max-width: 700px;
+  font-size: 1.1rem;
+  color: #555;
+}
 
 /* Estilos específicos del formulario de ayuda */
 form {
