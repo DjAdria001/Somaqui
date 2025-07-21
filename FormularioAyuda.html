@@ -71,7 +71,7 @@
           
           <!-- Texto visible de la ubicación como botón -->
           <button type="button" id="ubicacion-texto" class="ubicacion-display">
-            📍 ¿Detectar mi ubicación automáticamente?
+            📍 Detectar mi ubicación automáticamente
           </button>
 
           <div class="descripcion-ubicacion">
@@ -89,16 +89,28 @@
         <!-- Formulario a la derecha -->
         <div class="form-derecha">
          
+          <label for="nombre">👤 Nombre o alias *</label>
+          <input type="text" name="nombre" id="nombre" required placeholder="Tu nombre o alias">
           
           <label for="correo">📧 Correo electrónico *</label>
           <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
           
           <label for="telefono">📱 Teléfono móvil (opcional)</label>
           <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 612 345 678">
+
+          <label for="personales">👥 ¿Es solo para ti o para otras personas también?</label>
+          <input type="text" name="personales" id="personales" placeholder="Ej: Solo para mí o para mi familia">
+
+          <label for ="tiempo">⏰ ¿Desde cuándo ocurre la situación? *</label>
+          <input type="text" name="tiempo" id="tiempo" required placeholder="Ej: 30 minutos">
+
         </div>
       </div>
 
-      <label class="etiquetas-titulo">🆘 Selecciona una o más etiquetas *</label>
+      <div class="seccion-emergencia">
+        <h2 class="titulo-emergencia">Emergencia</h2>
+        <label class="etiquetas-titulo">🆘 Selecciona una o más etiquetas *</label>
+      </div>
 
       <!-- Grid de categorías organizadas en recuadros -->
       <div class="categorias-grid">
@@ -165,7 +177,6 @@
             <h3>🏘️ Problemas estructurales</h3>
           </div>
           <div class="etiquetas">
-            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
             <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de desalojo</span></label>
             <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles bloqueadas</span></label>
             <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundación interna en la vivienda" /><span>Inundación interna en la vivienda</span></label>
@@ -279,7 +290,7 @@
     </div>
   </div>
 
-  <script src="formularioAyuda.js"></script>
+  <script src="formularioAyuda.js?v=20250121"></script>
 </body>
 
 </html>
