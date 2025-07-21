@@ -58,7 +58,7 @@
 .teoria-cambio {
   text-align: center;
   padding: 4rem 2rem;
-  background-color: #ffffff;
+  background-color: #f0fdfd;
   color: #222;
   font-family: 'Segoe UI', sans-serif;
 }
@@ -85,7 +85,7 @@
 
 .grafico-cambio {
   flex: 0 0 280px;
-  background-color: #ffffff;
+  background-color: #f0fdfd;
   border-radius: 50%;
   padding: 2rem;
   display: flex;
