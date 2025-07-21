@@ -17,48 +17,85 @@ map.on('click', function (e) {
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
             .then(res => res.json())
             .then(data => {
-                document.getElementById('ubicacion').value = data.display_name || `${lat},${lng}`;
+                const direccion = data.display_name || `${lat},${lng}`;
+                document.getElementById('ubicacion').value = direccion;
+                
+                // Actualizar botón con ubicación seleccionada
+                const btnUbicacion = document.getElementById('ubicacion-texto');
+                btnUbicacion.classList.remove('detectando');
+                btnUbicacion.classList.add('ubicacion-detectada');
+                btnUbicacion.textContent = `📍 ${direccion.split(',')[0]}`;
+                btnUbicacion.disabled = false;
             })
             .catch(() => {
-                document.getElementById('ubicacion').value = `${lat},${lng}`;
+                const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
+                document.getElementById('ubicacion').value = coordenadas;
+                
+                // Actualizar botón con coordenadas
+                const btnUbicacion = document.getElementById('ubicacion-texto');
+                btnUbicacion.classList.remove('detectando');
+                btnUbicacion.classList.add('ubicacion-detectada');
+                btnUbicacion.textContent = `📍 ${coordenadas}`;
+                btnUbicacion.disabled = false;
             });
     } else {
         alert("Por favor, selecciona una ubicación dentro de Tarragona.");
     }
 });
 
-const btnDetectarUbicacion = document.getElementById('btn-detectar-ubicacion');
+const btnDetectarUbicacion = document.getElementById('ubicacion-texto');
 btnDetectarUbicacion.addEventListener('click', () => {
     if (!navigator.geolocation) {
         alert("Tu navegador no soporta la geolocalización.");
         return;
     }
+    
+    // Cambiar estado visual del botón
+    btnDetectarUbicacion.classList.add('detectando');
     btnDetectarUbicacion.disabled = true;
-    btnDetectarUbicacion.textContent = "Detectando ubicación...";
+    btnDetectarUbicacion.textContent = "🔍 Detectando ubicación...";
 
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude: lat, longitude: lng } = position.coords;
         if (!tarragonaBounds.contains([lat, lng])) {
             alert("Tu ubicación está fuera de Tarragona. Por favor, selecciona manualmente en el mapa.");
+            btnDetectarUbicacion.classList.remove('detectando');
             btnDetectarUbicacion.disabled = false;
-            btnDetectarUbicacion.textContent = "¿Quieres que detectemos tu ubicación automáticamente?";
+            btnDetectarUbicacion.textContent = "📍 ¿Detectar mi ubicación automáticamente?";
             return;
         }
+        
+        // Ubicar marcador y centrar mapa
         marker.setLatLng([lat, lng]).setOpacity(1);
         map.setView([lat, lng], 14);
+        
+        // Obtener dirección y actualizar campos
         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
             .then(res => res.json())
             .then(data => {
-                document.getElementById('ubicacion').value = data.display_name || `${lat},${lng}`;
-            })
-            .finally(() => {
+                const direccion = data.display_name || `${lat},${lng}`;
+                document.getElementById('ubicacion').value = direccion;
+                
+                // Actualizar botón con ubicación detectada
+                btnDetectarUbicacion.classList.remove('detectando');
+                btnDetectarUbicacion.classList.add('ubicacion-detectada');
+                btnDetectarUbicacion.textContent = `📍 ${direccion.split(',')[0]}`;
                 btnDetectarUbicacion.disabled = false;
-                btnDetectarUbicacion.textContent = "¿Quieres que detectemos tu ubicación automáticamente?";
+            })
+            .catch(() => {
+                const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
+                document.getElementById('ubicacion').value = coordenadas;
+                
+                btnDetectarUbicacion.classList.remove('detectando');
+                btnDetectarUbicacion.classList.add('ubicacion-detectada');
+                btnDetectarUbicacion.textContent = `📍 ${coordenadas}`;
+                btnDetectarUbicacion.disabled = false;
             });
     }, error => {
         alert("No se pudo obtener la ubicación automáticamente: " + error.message);
+        btnDetectarUbicacion.classList.remove('detectando');
         btnDetectarUbicacion.disabled = false;
-        btnDetectarUbicacion.textContent = "¿Quieres que detectemos tu ubicación automáticamente?";
+        btnDetectarUbicacion.textContent = "📍 ¿Detectar mi ubicación automáticamente?";
     }, {
         enableHighAccuracy: true,
         timeout: 10000
