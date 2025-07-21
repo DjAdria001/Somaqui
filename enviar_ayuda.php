@@ -6,14 +6,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$host = "localhost";
-$db   = "somaqui";
-$user = "root";
-$pass = "";
+// Conexión exacta con los datos de Neon
+$host = 'ep-late-unit-aezrfzox-pooler.c-2.us-east-2.aws.neon.tech';
+$db   = 'neondb';
+$user = 'neondb_owner';
+$pass = 'npg_m0xErCsGegB5'; // ⚠️ ¡Este dato es sensible! Guárdalo en .env si subes el código a producción.
+$port = 5432;
+$sslmode = 'require';
 
-$conexion = new mysqli($host, $user, $pass, $db);
-if ($conexion->connect_errno) {
-    die("❌ Error de conexión: " . $conexion->connect_error);
+try {
+    $pdo = new PDO(
+        "pgsql:host=$host;port=$port;dbname=$db;sslmode=$sslmode",
+        $user,
+        $pass,
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+} catch (PDOException $e) {
+    die("❌ Error de conexión: " . $e->getMessage());
 }
 
 $correo         = trim($_POST['correo'] ?? '');
@@ -38,27 +47,23 @@ if (in_array("Otros", $etiquetas) && empty($otros_detalle)) {
 
 $etiquetas_str = implode(',', $etiquetas);
 
-$stmt = $conexion->prepare("INSERT INTO peticiones_ayuda (correo, ubicacion, desc_ubic, descripcion, etiquetas, otros_detalle) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $correo, $ubicacion, $desc_ubic, $descripcion, $etiquetas_str, $otros_detalle);
+try {
+    // Insertar la emergencia
+    $stmt = $pdo->prepare("INSERT INTO peticiones_ayuda (correo, ubicacion, desc_ubic, descripcion, etiquetas, otros_detalle) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$correo, $ubicacion, $desc_ubic, $descripcion, $etiquetas_str, $otros_detalle]);
 
-if ($stmt->execute()) {
-    $id_emergencia = $stmt->insert_id;
-    $stmt->close();
+    $id_emergencia = $pdo->lastInsertId();
 
-    $stmt_chat = $conexion->prepare("INSERT INTO conversaciones (id_emergencia, correo_solicitante) VALUES (?, ?)");
-    $stmt_chat->bind_param("is", $id_emergencia, $correo);
-    $stmt_chat->execute();
-    $id_conversacion = $stmt_chat->insert_id;
-    $stmt_chat->close();
+    // Insertar la conversación asociada
+    $stmt_chat = $pdo->prepare("INSERT INTO conversaciones (id_emergencia, correo_solicitante) VALUES (?, ?)");
+    $stmt_chat->execute([$id_emergencia, $correo]);
+
+    $id_conversacion = $pdo->lastInsertId();
 
     $_SESSION['correo_solicitante'] = $correo;
-    $conexion->close();
     header("Location: chat.php?id=$id_conversacion");
     exit;
-} else {
-    $error = "❌ Error al guardar la solicitud: " . $stmt->error;
-    $stmt->close();
-    $conexion->close();
-    die($error);
+} catch (PDOException $e) {
+    die("❌ Error al guardar la solicitud: " . $e->getMessage());
 }
 ?>
