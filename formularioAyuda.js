@@ -8,63 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('otros-check').checked ? 'block' : 'none';
     }
 
-    // Función para obtener dirección formateada (solo calle y número)
-    function obtenerDireccionFormateada(lat, lng) {
-        return fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`)
-            .then(res => res.json())
-            .then(data => {
-                console.log('Datos completos de Nominatim:', data);
-                
-                if (data.address) {
-                    // Construir dirección con solo calle y número
-                    let direccion = '';
-                    
-                    // Obtener nombre de la calle
-                    const calle = data.address.road || 
-                                 data.address.pedestrian || 
-                                 data.address.footway || 
-                                 data.address.path || 
-                                 data.address.street;
-                    
-                    // Obtener número de casa
-                    const numero = data.address.house_number;
-                    
-                    // Construir dirección
-                    if (calle) {
-                        direccion = calle;
-                        if (numero) {
-                            direccion += ' ' + numero;
-                        }
-                    } else {
-                        // Si no hay calle, usar barrio o área
-                        direccion = data.address.neighbourhood || 
-                                   data.address.suburb || 
-                                   data.address.city_district || 
-                                   data.address.quarter ||
-                                   'Ubicación sin dirección específica';
-                    }
-                    
-                    // Agregar ciudad si es necesario
-                    const ciudad = data.address.city || data.address.town || data.address.village;
-                    if (ciudad && !direccion.includes(ciudad)) {
-                        direccion += ', ' + ciudad;
-                    }
-                    
-                    console.log('Dirección formateada:', direccion);
-                    return direccion;
-                } else {
-                    const coordenadas = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                    console.log('No se encontró dirección, usando coordenadas:', coordenadas);
-                    return coordenadas;
-                }
-            })
-            .catch(error => {
-                console.error('Error al obtener dirección:', error.message);
-                const coordenadas = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                return coordenadas;
-            });
-    }
-
     const map = L.map('map').setView([41.1189, 1.2445], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
     const marker = L.marker([0, 0], { draggable: false }).addTo(map).setOpacity(0);
@@ -73,25 +16,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     map.on('click', function (e) {
         const { lat, lng } = e.latlng;
-        console.log('Click en mapa:', lat, lng);
-        
         if (tarragonaBounds.contains([lat, lng])) {
             marker.setLatLng([lat, lng]).setOpacity(1);
-            
-            // Obtener dirección formateada
-            obtenerDireccionFormateada(lat, lng).then(direccion => {
-                document.getElementById('ubicacion').value = direccion;
-                
-                // Actualizar botón con ubicación seleccionada
-                const btnUbicacion = document.getElementById('ubicacion-texto');
-                btnUbicacion.classList.remove('detectando');
-                btnUbicacion.classList.add('ubicacion-detectada');
-                btnUbicacion.textContent = `📍 ${direccion}`;
-                btnUbicacion.disabled = false;
-            });
+            fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                .then(res => res.json())
+                .then(data => {
+                    const direccion = data.display_name || `${lat},${lng}`;
+                    document.getElementById('ubicacion').value = direccion;
+                    
+                    // Actualizar botón con ubicación seleccionada
+                    const btnUbicacion = document.getElementById('ubicacion-texto');
+                    btnUbicacion.classList.remove('detectando');
+                    btnUbicacion.classList.add('ubicacion-detectada');
+                    btnUbicacion.textContent = `📍 ${direccion.split(',')[0]}`;
+                    btnUbicacion.disabled = false;
+                })
+                .catch(() => {
+                    const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
+                    document.getElementById('ubicacion').value = coordenadas;
+                    
+                    // Actualizar botón con coordenadas
+                    const btnUbicacion = document.getElementById('ubicacion-texto');
+                    btnUbicacion.classList.remove('detectando');
+                    btnUbicacion.classList.add('ubicacion-detectada');
+                    btnUbicacion.textContent = `📍 ${coordenadas}`;
+                    btnUbicacion.disabled = false;
+                });
         } else {
             alert("Por favor, selecciona una ubicación dentro de Tarragona.");
-            console.log('Ubicación fuera de Tarragona');
         }
     });
 
@@ -132,28 +84,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Ubicar marcador y centrar mapa
                 marker.setLatLng([lat, lng]).setOpacity(1);
-                map.setView([lat, lng], 15);
+                map.setView([lat, lng], 14);
                 
-                // Obtener dirección formateada usando la misma función que el click
-                obtenerDireccionFormateada(lat, lng).then(direccion => {
-                    document.getElementById('ubicacion').value = direccion;
-                    
-                    // Actualizar botón con ubicación detectada
-                    btnDetectarUbicacion.classList.remove('detectando');
-                    btnDetectarUbicacion.classList.add('ubicacion-detectada');
-                    btnDetectarUbicacion.textContent = `📍 ${direccion}`;
-                    btnDetectarUbicacion.disabled = false;
-                    console.log('Ubicación actualizada correctamente:', direccion);
-                }).catch((error) => {
-                    console.error('Error al obtener dirección:', error);
-                    const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
-                    document.getElementById('ubicacion').value = coordenadas;
-                    
-                    btnDetectarUbicacion.classList.remove('detectando');
-                    btnDetectarUbicacion.classList.add('ubicacion-detectada');
-                    btnDetectarUbicacion.textContent = `📍 ${coordenadas}`;
-                    btnDetectarUbicacion.disabled = false;
-                });
+                // Obtener dirección y actualizar campos
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const direccion = data.display_name || `${lat},${lng}`;
+                        document.getElementById('ubicacion').value = direccion;
+                        
+                        // Actualizar botón con ubicación detectada
+                        btnDetectarUbicacion.classList.remove('detectando');
+                        btnDetectarUbicacion.classList.add('ubicacion-detectada');
+                        btnDetectarUbicacion.textContent = `📍 ${direccion.split(',')[0]}`;
+                        btnDetectarUbicacion.disabled = false;
+                        console.log('Ubicación actualizada correctamente');
+                    })
+                    .catch((error) => {
+                            console.error('Error al obtener dirección:', error);
+                        const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
+                        document.getElementById('ubicacion').value = coordenadas;
+                        
+                        btnDetectarUbicacion.classList.remove('detectando');
+                        btnDetectarUbicacion.classList.add('ubicacion-detectada');
+                        btnDetectarUbicacion.textContent = `📍 ${coordenadas}`;
+                        btnDetectarUbicacion.disabled = false;
+                    });
             }, error => {
                 console.error('Error de geolocalización:', error);
                 alert("No se pudo obtener la ubicación automáticamente: " + error.message);

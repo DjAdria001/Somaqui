@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Ubicación</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,7 +18,6 @@
             cursor: pointer;
             font-size: 16px;
             margin: 10px 0;
-            width: 100%;
         }
         .detectando {
             background: #ffc107;
@@ -37,13 +34,6 @@
             max-height: 200px;
             overflow-y: auto;
         }
-        #map {
-            height: 400px;
-            width: 100%;
-            border: 2px solid #007bff;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
     </style>
 </head>
 <body>
@@ -52,8 +42,6 @@
     <button type="button" id="ubicacion-texto" class="ubicacion-display">
         📍 ¿Detectar mi ubicación automáticamente?
     </button>
-    
-    <div id="map"></div>
     
     <input type="hidden" id="ubicacion" name="ubicacion">
     
@@ -65,95 +53,6 @@
             logDiv.innerHTML += new Date().toLocaleTimeString() + ': ' + message + '<br>';
             logDiv.scrollTop = logDiv.scrollHeight;
         }
-        
-        // Función para obtener dirección formateada (solo calle y número)
-        function obtenerDireccionFormateada(lat, lng) {
-            return fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1`)
-                .then(res => res.json())
-                .then(data => {
-                    log('Datos completos de Nominatim: ' + JSON.stringify(data, null, 2));
-                    
-                    if (data.address) {
-                        // Construir dirección con solo calle y número
-                        let direccion = '';
-                        
-                        // Obtener nombre de la calle
-                        const calle = data.address.road || 
-                                     data.address.pedestrian || 
-                                     data.address.footway || 
-                                     data.address.path || 
-                                     data.address.street;
-                        
-                        // Obtener número de casa
-                        const numero = data.address.house_number;
-                        
-                        // Construir dirección
-                        if (calle) {
-                            direccion = calle;
-                            if (numero) {
-                                direccion += ' ' + numero;
-                            }
-                        } else {
-                            // Si no hay calle, usar barrio o área
-                            direccion = data.address.neighbourhood || 
-                                       data.address.suburb || 
-                                       data.address.city_district || 
-                                       data.address.quarter ||
-                                       'Ubicación sin dirección específica';
-                        }
-                        
-                        // Agregar ciudad si es necesario
-                        const ciudad = data.address.city || data.address.town || data.address.village;
-                        if (ciudad && !direccion.includes(ciudad)) {
-                            direccion += ', ' + ciudad;
-                        }
-                        
-                        log('Dirección formateada: ' + direccion);
-                        return direccion;
-                    } else {
-                        const coordenadas = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                        log('No se encontró dirección, usando coordenadas: ' + coordenadas);
-                        return coordenadas;
-                    }
-                })
-                .catch(error => {
-                    log('Error al obtener dirección: ' + error.message);
-                    const coordenadas = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-                    return coordenadas;
-                });
-        }
-        
-        // Inicializar mapa
-        const map = L.map('map').setView([41.1189, 1.2445], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        const marker = L.marker([0, 0], { draggable: false }).addTo(map).setOpacity(0);
-        
-        const tarragonaBounds = L.latLngBounds([41.07, 1.18], [41.18, 1.33]);
-        
-        // Evento click en mapa
-        map.on('click', function (e) {
-            const { lat, lng } = e.latlng;
-            log('Click en mapa: ' + lat + ', ' + lng);
-            
-            if (tarragonaBounds.contains([lat, lng])) {
-                marker.setLatLng([lat, lng]).setOpacity(1);
-                
-                // Obtener dirección formateada
-                obtenerDireccionFormateada(lat, lng).then(direccion => {
-                    document.getElementById('ubicacion').value = direccion;
-                    
-                    // Actualizar botón con ubicación seleccionada
-                    const btnUbicacion = document.getElementById('ubicacion-texto');
-                    btnUbicacion.classList.remove('detectando');
-                    btnUbicacion.classList.add('ubicacion-detectada');
-                    btnUbicacion.textContent = `📍 ${direccion}`;
-                    btnUbicacion.disabled = false;
-                });
-            } else {
-                alert("Por favor, selecciona una ubicación dentro de Tarragona.");
-                log('Ubicación fuera de Tarragona');
-            }
-        });
         
         const btnDetectarUbicacion = document.getElementById('ubicacion-texto');
         
@@ -182,31 +81,31 @@
                     log('Ubicación obtenida: ' + JSON.stringify(position.coords));
                     const { latitude: lat, longitude: lng } = position.coords;
                     
-                    // Centrar mapa en la ubicación detectada
-                    map.setView([lat, lng], 15);
-                    marker.setLatLng([lat, lng]).setOpacity(1);
-                    
-                    // Obtener dirección formateada usando la misma función que el click
-                    obtenerDireccionFormateada(lat, lng).then(direccion => {
-                        document.getElementById('ubicacion').value = direccion;
-                        
-                        // Actualizar botón con ubicación detectada
-                        btnDetectarUbicacion.classList.remove('detectando');
-                        btnDetectarUbicacion.classList.add('ubicacion-detectada');
-                        btnDetectarUbicacion.textContent = `📍 ${direccion}`;
-                        btnDetectarUbicacion.disabled = false;
-                        log('Ubicación actualizada correctamente: ' + direccion);
-                    }).catch((error) => {
-                        log('Error al obtener dirección: ' + error.message);
-                        const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
-                        document.getElementById('ubicacion').value = coordenadas;
-                        
-                        btnDetectarUbicacion.classList.remove('detectando');
-                        btnDetectarUbicacion.classList.add('ubicacion-detectada');
-                        btnDetectarUbicacion.textContent = `📍 ${coordenadas}`;
-                        btnDetectarUbicacion.disabled = false;
-                        log('Ubicación actualizada con coordenadas: ' + coordenadas);
-                    });
+                    // Obtener dirección y actualizar campos
+                    fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                        .then(res => res.json())
+                        .then(data => {
+                            const direccion = data.display_name || `${lat},${lng}`;
+                            document.getElementById('ubicacion').value = direccion;
+                            
+                            // Actualizar botón con ubicación detectada
+                            btnDetectarUbicacion.classList.remove('detectando');
+                            btnDetectarUbicacion.classList.add('ubicacion-detectada');
+                            btnDetectarUbicacion.textContent = `📍 ${direccion.split(',')[0]}`;
+                            btnDetectarUbicacion.disabled = false;
+                            log('Ubicación actualizada correctamente: ' + direccion);
+                        })
+                        .catch((error) => {
+                            log('Error al obtener dirección: ' + error.message);
+                            const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
+                            document.getElementById('ubicacion').value = coordenadas;
+                            
+                            btnDetectarUbicacion.classList.remove('detectando');
+                            btnDetectarUbicacion.classList.add('ubicacion-detectada');
+                            btnDetectarUbicacion.textContent = `📍 ${coordenadas}`;
+                            btnDetectarUbicacion.disabled = false;
+                            log('Ubicación actualizada con coordenadas: ' + coordenadas);
+                        });
                 }, error => {
                     log('ERROR de geolocalización: ' + error.code + ' - ' + error.message);
                     alert("No se pudo obtener la ubicación automáticamente: " + error.message);

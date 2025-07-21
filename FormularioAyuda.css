@@ -1,22 +1,5 @@
-/* Estilos específicos para el formulario de ayuda */
+ /* Estilos específicos para el formulario de ayuda */
 /* Usar junto con Styleglobal.css para evitar duplicación */
-
-/* Estilos para el encabezado y texto introductorio */
-main h2 {
-  text-align: center;
-  margin: 1rem auto 0.5rem;
-  line-height: 1.4;
-  max-width: 800px;
-}
-
-main > p {
-  text-align: center;
-  margin: 0.5rem auto 1.5rem;
-  line-height: 1.5;
-  max-width: 700px;
-  font-size: 1rem;
-  color: #555;
-}
 
 /* Estilos específicos del formulario de ayuda */
 form {
@@ -217,121 +200,6 @@ textarea {
   box-shadow: 0 0 5px rgba(57, 228, 201, 0.3);
 }
 
-/* Diseño en cuadrícula para las categorías */
-.etiquetas-titulo {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin: 2rem 0 1.5rem 0;
-  display: block;
-  text-align: center;
-  color: #333;
-}
-
-.categorias-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-}
-
-.categoria-recuadro {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border: 2px solid #39e4c9;
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.categoria-recuadro:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.categoria-header {
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #39e4c9;
-}
-
-.categoria-header h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #2c3e50;
-  font-weight: 600;
-}
-
-.categoria-recuadro .etiquetas {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-}
-
-.categoria-recuadro .etiqueta {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 0.6rem 1rem;
-  margin: 0;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.categoria-recuadro .etiqueta:hover {
-  background: #f0f8ff;
-  border-color: #39e4c9;
-  transform: translateX(3px);
-}
-
-.categoria-recuadro .etiqueta input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  cursor: pointer;
-}
-
-.categoria-recuadro .etiqueta span {
-  font-size: 0.95rem;
-  color: #333;
-  font-weight: 500;
-}
-
-.categoria-recuadro .etiqueta input[type="checkbox"]:checked + span {
-  color: #39e4c9;
-  font-weight: 600;
-}
-
-.categoria-otros {
-  grid-column: 1 / -1;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.descripcion-seccion {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 12px;
-  border: 2px solid #39e4c9;
-}
-
-.descripcion-seccion label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.8rem;
-}
-
-.descripcion-seccion textarea {
-  min-height: 120px;
-  font-size: 1rem;
-  line-height: 1.5;
-  resize: vertical;
-}
-
 /* Responsive para pantallas pequeñas */
 @media (max-width: 900px) {
   .ubicacion-mapa {
@@ -350,21 +218,6 @@ textarea {
   
   .form-derecha {
     padding: 1.5rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .categorias-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .categoria-recuadro {
-    padding: 1rem;
-  }
-  
-  .categoria-otros {
-    grid-column: 1;
   }
 }
 
