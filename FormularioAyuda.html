@@ -59,7 +59,7 @@
 
   <main>
     <h2>🚨 Solicita ayuda en tu zona</h2>
-    <p>Selecciona una o más situaciones que estás viviendo. La ubicación es aproximada y no se mostrará públicamente.
+    <p>Selecciona una o más situaciones que estás viviendo. La ubicación no se mostrará públicamente.
     </p>
 
     <form action="enviar_ayuda.php" method="POST">
@@ -98,95 +98,110 @@
         </div>
       </div>
 
-      <label>🆘 Selecciona una o más etiquetas *</label>
+      <label class="etiquetas-titulo">🆘 Selecciona una o más etiquetas *</label>
 
-        <!-- Categorías y etiquetas aquí -->
-        <div class="grupo-titulo">🌪️ Emergencias climáticas</div>
-        <div class="etiquetas etiquetas-clima">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios
-              forestales</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias
-              intensas</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de
-              calor</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de
-              frío</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos
-              fuertes</span></label>
+      <!-- Grid de categorías organizadas en recuadros -->
+      <div class="categorias-grid">
+        <!-- Emergencias climáticas -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🌪️ Emergencias climáticas</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios forestales</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias intensas</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de calor</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de frío</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos fuertes</span></label>
+          </div>
         </div>
 
-        <div class="grupo-titulo">🛑 Cortes o fallos</div>
-        <div class="etiquetas etiquetas-cortes">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de
-              luz</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de
-              agua</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de
-              gas</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de
-              Internet</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón
-              general</span></label>
+        <!-- Cortes o fallos -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🛑 Cortes o fallos</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de luz</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de agua</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de gas</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de Internet</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón general</span></label>
+          </div>
         </div>
 
-        <div class="grupo-titulo">👥 Necesidades humanas</div>
-        <div class="etiquetas etiquetas-humanas">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores
-              solos</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin
-              hogar</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad
-              reducida</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de
-              alimentos</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de
-              medicamentos</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad
-              de transporte</span></label>
+        <!-- Necesidades humanas -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>👥 Necesidades humanas</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores solos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin hogar</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad reducida</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de alimentos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de medicamentos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad de transporte</span></label>
+          </div>
         </div>
 
-        <div class="grupo-titulo">🧠 Apoyo psicosocial</div>
-        <div class="etiquetas etiquetas-psicosocial">
-          <label class="etiqueta"><input type="checkbox" name="tags[]"
-              value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito
-              hablar</span></label>
+        <!-- Apoyo psicosocial -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🧠 Apoyo psicosocial</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito hablar</span></label>
+          </div>
         </div>
 
-        <div class="grupo-titulo">🏘️ Problemas estructurales</div>
-        <div class="etiquetas etiquetas-estructurales">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de
-              desalojo</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles
-              bloqueadas</span></label>
+        <!-- Problemas estructurales -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🏘️ Problemas estructurales</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Derrumbe" /><span>Derrumbe</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de desalojo</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles bloqueadas</span></label>
+          </div>
         </div>
 
-        <div class="grupo-titulo">🧰 Infraestructura</div>
-        <div class="etiquetas etiquetas-infraestructura">
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Recarga saturada" /><span>Recarga
-              saturada</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico
-              cerrado</span></label>
-          <label class="etiqueta"><input type="checkbox" name="tags[]"
-              value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
+        <!-- Infraestructura -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🧰 Infraestructura</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Recarga saturada" /><span>Recarga saturada</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico cerrado</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
+          </div>
         </div>
 
-        <div class="grupo-titulo">➕ Otra emergencia</div>
-        <div class="etiquetas etiquetas-otros">
-          <label class="etiqueta">
-            <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
-            <span>Otros</span>
-          </label>
+        <!-- Otra emergencia -->
+        <div class="categoria-recuadro categoria-otros">
+          <div class="categoria-header">
+            <h3>➕ Otra emergencia</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta">
+              <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
+              <span>Otros</span>
+            </label>
+          </div>
+          <div id="otros-texto-container" style="display:none; margin-top: 1rem;">
+            <label for="otros_detalle">🔍 Describe tu emergencia:</label>
+            <input type="text" name="otros_detalle" id="otros_detalle" placeholder="Describe brevemente tu situación...">
+          </div>
         </div>
+      </div>
 
-        <div id="otros-texto-container" style="display:none;">
-          <label for="otros_detalle">🔍 Describe tu emergencia:</label>
-          <input type="text" name="otros_detalle" id="otros_detalle">
-        </div>
-
+      <div class="descripcion-seccion">
         <label for="descripcion">📝 Describe tu situación (opcional)</label>
-        <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad..."></textarea>
+        <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad desde hace 3 horas y necesito ayuda urgente..."></textarea>
+      </div>
 
         <div class="checkbox-term">
           <input type="checkbox" id="terminos" required>
@@ -195,7 +210,7 @@
 
         <button type="submit">Enviar solicitud</button>
         <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
-        <div class="privacidad">Porfavor, Usar este formulario de manera seria y responsable.</div>
+        <div class="privacidad">Por favor, usa este formulario de manera seria y responsable.</div>
     </form>
   </main>
 
