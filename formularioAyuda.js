@@ -165,13 +165,3 @@ if (btnUbic) {
         }, 4000);
     });
 }
-// 6. Acordeón de categorías
-const titulos = document.querySelectorAll('.grupo-titulo');
-titulos.forEach(titulo => {
-    titulo.addEventListener('click', () => {
-        const etiquetas = titulo.nextElementSibling;
-        if (etiquetas && etiquetas.classList.contains('etiquetas')) {
-            etiquetas.classList.toggle('cerrado');
-        }
-    });
-});

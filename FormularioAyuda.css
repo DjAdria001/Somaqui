@@ -34,35 +34,31 @@ textarea {
 .etiquetas {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem 0.8rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
-  transition: max-height 0.5s cubic-bezier(.4, 2, .6, 1), opacity 0.4s;
-  overflow: hidden;
-  max-height: 500px;
-  opacity: 1;
+  gap: 0.5rem;
 }
 
-.etiquetas.cerrado {
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
 }
 
 .etiqueta input {
-  display: none;
+  flex-shrink: 0;
 }
 
 .etiqueta span {
-  background: #e0fbf9;
-  border: 1px solid #39e4c9;
-  padding: 0.45rem 1rem;
-  border-radius: 20px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 0.95rem;
-  transition: all 0.2s ease;
+  margin-left: 0.4rem;
+  line-height: 1.2;
+  word-break: break-word;
 }
+
 
 .etiqueta input:checked+span {
   background-color: #39e4c9;
