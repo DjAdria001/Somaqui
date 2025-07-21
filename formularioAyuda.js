@@ -190,15 +190,33 @@ function mostrarMensajeExito() {
     form.parentNode.insertBefore(msg, form);
     setTimeout(() => msg.remove(), 3000);
 }
-// 5. Spinner en botón ubicación
-const btnUbic = document.getElementById('btn-detectar-ubicacion');
-if (btnUbic) {
-    btnUbic.addEventListener('click', () => {
-        const spinner = document.createElement('span');
-        spinner.className = 'spinner';
-        btnUbic.appendChild(spinner);
-        setTimeout(() => {
-            if (spinner.parentNode) spinner.parentNode.removeChild(spinner);
-        }, 4000);
-    });
+// 5. Funcionalidad del login (popup)
+const loginBtn = document.getElementById("btn-login");
+const popupLogin = document.getElementById("popup-login");
+const cerrarPopup = document.getElementById("cerrar-popup");
+
+if (loginBtn && popupLogin && cerrarPopup) {
+  loginBtn.addEventListener("click", () => {
+    popupLogin.style.display = "flex";
+  });
+
+  cerrarPopup.addEventListener("click", () => {
+    popupLogin.style.display = "none";
+  });
+
+  // Opcional: cerrar si se hace clic fuera del cuadro
+  popupLogin.addEventListener("click", (e) => {
+    if (e.target === popupLogin) popupLogin.style.display = "none";
+  });
 }
+
+// 6. Acordeón de categorías
+const titulos = document.querySelectorAll('.grupo-titulo');
+titulos.forEach(titulo => {
+  titulo.addEventListener('click', () => {
+    const etiquetas = titulo.nextElementSibling;
+    if (etiquetas && etiquetas.classList.contains('etiquetas')) {
+      etiquetas.classList.toggle('cerrado');
+    }
+  });
+});
