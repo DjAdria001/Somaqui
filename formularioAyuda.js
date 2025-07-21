@@ -21,7 +21,26 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
                 .then(res => res.json())
                 .then(data => {
-                    const direccion = data.display_name || `${lat},${lng}`;
+                    // Construir dirección de calle en lugar del nombre completo
+                    let direccion = '';
+                    if (data.address) {
+                        const calle = data.address.road || data.address.pedestrian || data.address.path || '';
+                        const numero = data.address.house_number || '';
+                        const barrio = data.address.neighbourhood || data.address.suburb || '';
+                        const ciudad = data.address.city || data.address.town || data.address.village || 'Tarragona';
+                        
+                        if (calle) {
+                            direccion = calle;
+                            if (numero) direccion += ` ${numero}`;
+                            if (barrio && barrio !== ciudad) direccion += `, ${barrio}`;
+                            direccion += `, ${ciudad}`;
+                        } else {
+                            direccion = `${ciudad} (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+                        }
+                    } else {
+                        direccion = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                    }
+                    
                     document.getElementById('ubicacion').value = direccion;
                     
                     // Actualizar botón con ubicación seleccionada
@@ -32,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     btnUbicacion.disabled = false;
                 })
                 .catch(() => {
-                    const coordenadas = `${lat.toFixed(4)},${lng.toFixed(4)}`;
+                    const coordenadas = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
                     document.getElementById('ubicacion').value = coordenadas;
                     
                     // Actualizar botón con coordenadas
@@ -90,7 +109,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
                     .then(res => res.json())
                     .then(data => {
-                        const direccion = data.display_name || `${lat},${lng}`;
+                        // Construir dirección de calle en lugar del nombre completo
+                        let direccion = '';
+                        if (data.address) {
+                            const calle = data.address.road || data.address.pedestrian || data.address.path || '';
+                            const numero = data.address.house_number || '';
+                            const barrio = data.address.neighbourhood || data.address.suburb || '';
+                            const ciudad = data.address.city || data.address.town || data.address.village || 'Tarragona';
+                            
+                            if (calle) {
+                                direccion = calle;
+                                if (numero) direccion += ` ${numero}`;
+                                if (barrio && barrio !== ciudad) direccion += `, ${barrio}`;
+                                direccion += `, ${ciudad}`;
+                            } else {
+                                direccion = `${ciudad} (${lat.toFixed(4)}, ${lng.toFixed(4)})`;
+                            }
+                        } else {
+                            direccion = `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+                        }
+                        
                         document.getElementById('ubicacion').value = direccion;
                         
                         // Actualizar botón con ubicación detectada
