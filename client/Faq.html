@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Preguntas Frecuentes - SomAquí.cat</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <style>
+    .faq-container {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem;
+      font-family: inherit;
+      color: #00332f;
+    }
+
+    .faq-container h1 {
+      text-align: center;
+      color: #007c75;
+      margin-bottom: 2rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #ccc;
+      padding: 1rem 0;
+    }
+
+    .faq-question {
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 0;
+      font-size: 1.5rem;
+      color: #39e4c9;
+    }
+
+    .faq-item.active .faq-question::after {
+      content: '–';
+    }
+
+    .faq-answer {
+      display: none;
+      padding-top: 0.5rem;
+      color: #444;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Tu navegación -->
+  </header>
+
+  <main class="faq-container">
+    <h1>Preguntas Frecuentes</h1>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Qué es SomAquí.cat?</div>
+      <div class="faq-answer">SomAquí.cat es una plataforma para reportar incidencias locales en tu comunidad, como basura, vandalismo, problemas de accesibilidad, etc.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Cómo puedo enviar un reporte?</div>
+      <div class="faq-answer">Puedes ir a la página de reportes, introducir tu dirección, seleccionar el lugar en el mapa y completar el formulario con los detalles del problema.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Necesito registrarme?</div>
+      <div class="faq-answer">No es obligatorio, pero registrarte te permite hacer seguimiento de tus reportes y recibir notificaciones.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Quién recibe los reportes?</div>
+      <div class="faq-answer">Los reportes son enviados a los ayuntamientos o entidades responsables locales. También se publican en la plataforma para transparencia.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">¿Es gratuito el uso de SomAquí.cat?</div>
+      <div class="faq-answer">Sí, el uso es completamente gratuito para los ciudadanos.</div>
+    </div>
+  </main>
+
+  <footer>
+    <!-- Tu footer -->
+  </footer>
+
+  <script>
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>
