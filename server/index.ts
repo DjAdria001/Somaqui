@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const MONGO_URI = 'mongodb+srv://Somaqui:Rul0xMlLWkGQnnUm@cluster0.hg3zlsp.mongodb.net/somaqui?retryWrites=true&w=majority&appName=Cluster0';
+dotenv.config(); // ← Esto carga el archivo .env
 
+const MONGO_URI = process.env.MONGO_URI as string;
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
