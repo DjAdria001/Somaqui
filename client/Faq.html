@@ -5,85 +5,100 @@
   <title>Preguntas Frecuentes - SomAquí.cat</title>
   <link rel="stylesheet" href="estilos.css" />
   <style>
-    .faq-container {
-      max-width: 900px;
-      margin: auto;
-      padding: 2rem;
+    body {
       font-family: inherit;
+      margin: 0;
+      background-color: #f9f9f9;
       color: #00332f;
     }
 
-    .faq-container h1 {
-      text-align: center;
-      color: #007c75;
-      margin-bottom: 2rem;
+    .faq-container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 2rem;
+      display: flex;
+      gap: 2rem;
     }
 
-    .faq-item {
-      border-bottom: 1px solid #ccc;
-      padding: 1rem 0;
+    .faq-left {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid #ccc;
     }
 
-    .faq-question {
-      font-weight: bold;
+    .faq-button {
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 1rem;
       cursor: pointer;
-      position: relative;
+      font-weight: bold;
+      color: #007c75;
+      transition: background 0.3s;
     }
 
-    .faq-question::after {
-      content: '+';
-      position: absolute;
-      right: 0;
-      font-size: 1.5rem;
-      color: #39e4c9;
+    .faq-button:hover,
+    .faq-button.active {
+      background-color: #e0f5f3;
     }
 
-    .faq-item.active .faq-question::after {
-      content: '–';
+    .faq-right {
+      width: 70%;
+      padding: 1rem;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     .faq-answer {
       display: none;
-      padding-top: 0.5rem;
-      color: #444;
     }
 
-    .faq-item.active .faq-answer {
+    .faq-answer.active {
       display: block;
+    }
+
+    h1 {
+      text-align: center;
+      color: #007c75;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
+
   <header>
     <!-- Tu navegación -->
   </header>
 
+  <h1>Preguntas Frecuentes</h1>
+
   <main class="faq-container">
-    <h1>Preguntas Frecuentes</h1>
-
-    <div class="faq-item">
-      <div class="faq-question">¿Qué es SomAquí.cat?</div>
-      <div class="faq-answer">SomAquí.cat es una plataforma para reportar incidencias locales en tu comunidad, como basura, vandalismo, problemas de accesibilidad, etc.</div>
+    <div class="faq-left">
+      <button class="faq-button active" data-target="faq1">¿Qué es SomAquí.cat?</button>
+      <button class="faq-button" data-target="faq2">¿Cómo puedo enviar un reporte?</button>
+      <button class="faq-button" data-target="faq3">¿Necesito registrarme?</button>
+      <button class="faq-button" data-target="faq4">¿Quién recibe los reportes?</button>
+      <button class="faq-button" data-target="faq5">¿Es gratuito el uso de SomAquí.cat?</button>
     </div>
 
-    <div class="faq-item">
-      <div class="faq-question">¿Cómo puedo enviar un reporte?</div>
-      <div class="faq-answer">Puedes ir a la página de reportes, introducir tu dirección, seleccionar el lugar en el mapa y completar el formulario con los detalles del problema.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">¿Necesito registrarme?</div>
-      <div class="faq-answer">No es obligatorio, pero registrarte te permite hacer seguimiento de tus reportes y recibir notificaciones.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">¿Quién recibe los reportes?</div>
-      <div class="faq-answer">Los reportes son enviados a los ayuntamientos o entidades responsables locales. También se publican en la plataforma para transparencia.</div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-question">¿Es gratuito el uso de SomAquí.cat?</div>
-      <div class="faq-answer">Sí, el uso es completamente gratuito para los ciudadanos.</div>
+    <div class="faq-right">
+      <div id="faq1" class="faq-answer active">
+        <p>SomAquí.cat es una plataforma para reportar incidencias locales en tu comunidad, como basura, vandalismo, problemas de accesibilidad, etc.</p>
+      </div>
+      <div id="faq2" class="faq-answer">
+        <p>Puedes ir a la página de reportes, introducir tu dirección, seleccionar el lugar en el mapa y completar el formulario con los detalles del problema.</p>
+      </div>
+      <div id="faq3" class="faq-answer">
+        <p>No es obligatorio, pero registrarte te permite hacer seguimiento de tus reportes y recibir notificaciones.</p>
+      </div>
+      <div id="faq4" class="faq-answer">
+        <p>Los reportes son enviados a los ayuntamientos o entidades responsables locales. También se publican en la plataforma para transparencia.</p>
+      </div>
+      <div id="faq5" class="faq-answer">
+        <p>Sí, el uso es completamente gratuito para los ciudadanos.</p>
+      </div>
     </div>
   </main>
 
@@ -92,12 +107,19 @@
   </footer>
 
   <script>
-    const faqItems = document.querySelectorAll('.faq-item');
+    const buttons = document.querySelectorAll('.faq-button');
+    const answers = document.querySelectorAll('.faq-answer');
 
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
-      question.addEventListener('click', () => {
-        item.classList.toggle('active');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Quitar clase activa de botones y respuestas
+        buttons.forEach(b => b.classList.remove('active'));
+        answers.forEach(a => a.classList.remove('active'));
+
+        // Activar el clicado
+        button.classList.add('active');
+        const target = button.dataset.target;
+        document.getElementById(target).classList.add('active');
       });
     });
   </script>
