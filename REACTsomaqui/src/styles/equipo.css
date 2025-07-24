@@ -1,0 +1,455 @@
+/* Estilos para la página de Equipo */
+.equipo-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Header Section */
+.equipo-header {
+  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.equipo-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="team-grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23team-grid)"/></svg>');
+  opacity: 0.3;
+}
+
+.equipo-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.equipo-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.equipo-header .subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 0;
+  opacity: 0.95;
+  font-weight: 300;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Mission Statement */
+.mission-statement {
+  padding: 80px 0;
+  background: white;
+}
+
+.mission-content h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.mission-content p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.mission-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-top: 3rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 30px 20px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  border-top: 4px solid #6f42c1;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #6f42c1;
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Team Members */
+.team-members {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.team-members h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.team-card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.team-photo {
+  margin-bottom: 25px;
+}
+
+.photo-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: white;
+  font-size: 3rem;
+}
+
+.team-info h3 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.team-info h4 {
+  font-size: 1rem;
+  color: #6f42c1;
+  margin-bottom: 15px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.team-info p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.team-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.team-social a {
+  background: #f8f9fa;
+  color: #6f42c1;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.team-social a:hover {
+  background: #6f42c1;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Advisors */
+.advisors {
+  padding: 80px 0;
+  background: white;
+}
+
+.advisors h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.advisors-intro {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.advisors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.advisor-card {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  border-left: 4px solid #6f42c1;
+}
+
+.advisor-info h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.advisor-info h4 {
+  font-size: 1rem;
+  color: #6f42c1;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.advisor-info p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Values */
+.values {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.values h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.value-item {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.value-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.value-icon {
+  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  color: white;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+}
+
+.value-item h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.value-item p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Join Team */
+.join-team {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  color: white;
+  text-align: center;
+}
+
+.join-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.join-content p {
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  opacity: 0.95;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.join-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.join-actions button {
+  background: white;
+  color: #6f42c1;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.join-actions button:hover {
+  background: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .values-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .equipo-header h1 {
+    font-size: 2rem;
+  }
+  
+  .equipo-header .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .mission-stats {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .advisors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .join-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .join-actions button {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .equipo-header {
+    padding: 60px 0;
+  }
+  
+  .mission-statement,
+  .team-members,
+  .advisors,
+  .values,
+  .join-team {
+    padding: 60px 0;
+  }
+  
+  .team-card,
+  .value-item {
+    padding: 20px;
+  }
+  
+  .photo-placeholder {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+  
+  .value-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+}

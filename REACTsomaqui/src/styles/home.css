@@ -1,0 +1,210 @@
+/* Estilos específicos para la página Home */
+
+/* Estilos específicos del slider */
+.slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.slider {
+  display: flex;
+  height: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slider-container .prev,
+.slider-container .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(57, 228, 201, 0.8);
+  border: none;
+  padding: 0.8rem 1.2rem;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 2;
+  transition: background-color 0.3s ease;
+}
+
+.slider-container .prev:hover,
+.slider-container .next:hover {
+  background-color: rgba(39, 179, 163, 0.9);
+}
+
+.prev { 
+  left: 10px; 
+}
+
+.next { 
+  right: 10px; 
+}
+
+/* Estilos específicos del change theory */
+.teoria-cambio {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: #f0fdfd;
+  color: #222;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.teoria-cambio h2 {
+  font-size: 2.4rem;
+  color: #39e4c9;
+  margin-bottom: 1rem;
+}
+
+.teoria-cambio .subtitulo {
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  color: #444;
+}
+
+.contenido-cambio {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.grafico-cambio {
+  flex: 0 0 280px;
+  background-color: #f0fdfd;
+  border-radius: 50%;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grafico-cambio img {
+  max-width: 100%;
+  height: auto;
+}
+
+.pasos-cambio {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 520px;
+}
+
+.paso {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.paso img {
+  width: 55px;
+  height: 55px;
+}
+
+.paso strong {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.paso p {
+  margin-top: 0.3rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Collage Masonry */
+.collage-section {
+  width: 92vw;
+  max-width: 1400px;
+  margin: 3rem auto 2rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.collage-section h2 {
+  margin-bottom: 1.5rem;
+  color: #003333;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.collage {
+  column-count: 3;
+  column-gap: 18px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.collage-img {
+  width: 100%;
+  max-width: 100%;
+  height: 260px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  box-shadow: none;
+  object-fit: cover;
+  transition: transform 0.4s cubic-bezier(.4, 2, .3, 1), box-shadow 0.4s;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+  break-inside: avoid;
+}
+
+.collage-img:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(0, 228, 201, 0.18), 0 2px 8px rgba(0, 0, 0, 0.10);
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .collage {
+    column-count: 2;
+    column-gap: 12px;
+  }
+
+  .collage-img {
+    height: 180px;
+    border-radius: 8px;
+  }
+  
+  .contenido-cambio {
+    flex-direction: column;
+  }
+
+  .grafico-cambio {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .collage {
+    column-count: 1;
+    column-gap: 0;
+  }
+
+  .collage-img {
+    height: 140px;
+    border-radius: 6px;
+  }
+}

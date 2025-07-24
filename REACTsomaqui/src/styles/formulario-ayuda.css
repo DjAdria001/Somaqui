@@ -1,0 +1,432 @@
+/* Estilos específicos para el formulario de ayuda */
+
+/* Reducir espacio entre header y contenido principal */
+main {
+  margin-top: 0.5rem !important;
+  padding-top: 0.2rem !important;
+}
+
+/* Sección de emergencia */
+.seccion-emergencia {
+  text-align: center;
+  margin: 3rem 0 2rem 0;
+  padding: 1.5rem 0;
+}
+
+.titulo-emergencia {
+  font-size: 1.8rem !important;
+  font-weight: bold;
+  color: #004d4a !important;
+  margin: 0 auto 1rem auto !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center !important;
+  width: 100%;
+  display: block;
+}
+
+/* Actualizar estilo del subtítulo */
+.etiquetas-titulo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 0;
+  display: block;
+  text-align: center;
+  color: #333;
+}
+
+/* Estilos para el encabezado y texto introductorio */
+main h2:not(.titulo-emergencia) {
+  text-align: center;
+  margin: 0 auto 0.3rem;
+  line-height: 1.4;
+  max-width: 800px;
+  font-size: 1.8rem;
+  color: #004d4a;
+  font-weight: bold;
+}
+
+main > p {
+  text-align: center;
+  margin: 0.3rem auto 1.2rem;
+  line-height: 1.5;
+  max-width: 700px;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Estilos específicos del formulario de ayuda */
+form {
+  background: white;
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 1rem;
+  display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Estilos específicos de etiquetas */
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+.etiqueta input {
+  flex-shrink: 0;
+}
+
+.etiqueta span {
+  margin-left: 0.4rem;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.etiqueta input:checked+span {
+  color: #39e4c9;
+  font-weight: 600;
+}
+
+.etiqueta:has(input:checked) {
+  background: rgba(57, 228, 201, 0.08);
+  border-color: #39e4c9;
+}
+
+.etiqueta span:hover {
+  background-color: #c1f3ed;
+}
+
+/* Estilos específicos del mapa y layout */
+.ubicacion-mapa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  flex-direction: row;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor del mapa (50% del espacio) */
+.mapa-contenedor {
+  flex: 1;
+  min-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Display de ubicación como botón */
+.ubicacion-display {
+  background: #e0fbf9;
+  color: #003333;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  border: 2px solid #39e4c9;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  font-family: inherit;
+}
+
+.ubicacion-display:hover {
+  background: #c1f3ed;
+  border-color: #27b3a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(57, 228, 201, 0.2);
+}
+
+.ubicacion-display:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(57, 228, 201, 0.2);
+}
+
+/* Estado cuando se está detectando ubicación */
+.ubicacion-display.detectando {
+  background: #fff3cd;
+  border-color: #ffc107;
+  color: #856404;
+}
+
+/* Estado cuando se ha detectado la ubicación */
+.ubicacion-display.ubicacion-detectada {
+  background: #d1ecf1;
+  border-color: #bee5eb;
+  color: #0c5460;
+  cursor: default;
+}
+
+.ubicacion-display.ubicacion-detectada:hover {
+  background: #d1ecf1;
+  border-color: #bee5eb;
+  transform: none;
+  box-shadow: none;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border: 2px solid #39e4c9;
+  border-radius: 8px;
+}
+
+/* Contenedor para el formulario de la derecha (50% del espacio) */
+.form-derecha {
+  flex: 1;
+  min-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: #f8fdfd;
+  padding: 2rem;
+  border-radius: 12px;
+  border: 2px solid #e0fbf9;
+  box-shadow: 0 2px 8px rgba(0,228,201,0.1);
+  height: auto;
+  align-self: stretch;
+}
+
+.form-derecha label {
+  margin-top: 0;
+  font-weight: bold;
+  color: #003333;
+}
+
+.form-derecha input {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-derecha input:focus {
+  border-color: #39e4c9;
+  outline: none;
+  box-shadow: 0 0 5px rgba(57, 228, 201, 0.3);
+}
+
+/* Diseño en cuadrícula para las categorías */
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.categoria-recuadro {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.categoria-recuadro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.categoria-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #39e4c9;
+}
+
+.categoria-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.categoria-recuadro .etiquetas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.categoria-recuadro .etiqueta {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  margin: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.categoria-recuadro .etiqueta:hover {
+  background: #f0f8ff;
+  border-color: #39e4c9;
+  transform: translateX(3px);
+}
+
+.categoria-recuadro .etiqueta input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.categoria-recuadro .etiqueta span {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.categoria-recuadro .etiqueta input[type="checkbox"]:checked + span {
+  color: #39e4c9;
+  font-weight: 600;
+}
+
+.categoria-recuadro .etiqueta input[type="checkbox"]:checked {
+  accent-color: #39e4c9;
+}
+
+.categoria-recuadro .etiqueta:has(input[type="checkbox"]:checked) {
+  background: rgba(57, 228, 201, 0.08);
+  border-color: #39e4c9;
+}
+
+.categoria-otros {
+  grid-column: 1 / -1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.descripcion-seccion {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #39e4c9;
+}
+
+.descripcion-seccion label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.8rem;
+}
+
+.descripcion-seccion textarea {
+  min-height: 120px;
+  font-size: 1rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* Checkbox de términos */
+.checkbox-term {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Botón de envío */
+button[type="submit"] {
+  margin-top: 2rem;
+  background: #39e4c9;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background: #27b3a3;
+}
+
+/* Nota de privacidad */
+.privacidad {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+.descripcion-ubicacion {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 900px) {
+  .ubicacion-mapa {
+    flex-direction: column;
+  }
+  
+  .mapa-contenedor,
+  .form-derecha {
+    flex: 1;
+    min-width: 100%;
+  }
+  
+  #map {
+    height: 300px;
+  }
+  
+  .form-derecha {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .categorias-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .categoria-recuadro {
+    padding: 1rem;
+  }
+  
+  .categoria-otros {
+    grid-column: 1;
+  }
+}

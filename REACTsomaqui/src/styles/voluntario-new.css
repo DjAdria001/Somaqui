@@ -1,0 +1,569 @@
+/* Estilos para la página de Voluntario */
+.voluntario-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+/* Header Section */
+.voluntario-header {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.voluntario-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+.voluntario-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.voluntario-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.voluntario-header .subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+  font-weight: 300;
+}
+
+.btn-registro-voluntario {
+  background: #ff6b35;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-registro-voluntario:hover {
+  background: #e55a2b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+}
+
+/* Habilidades Section */
+.habilidades-section {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.habilidades-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.habilidades-section p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.habilidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  margin-top: 2rem;
+}
+
+.habilidad-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid #f0f0f0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.habilidad-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: #007bff;
+}
+
+.habilidad-card.selected {
+  border-color: #007bff;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+}
+
+.habilidad-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.habilidad-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Emergencias Section */
+.emergencias-section {
+  padding: 80px 0;
+  background: #f8f9fa;
+}
+
+.emergencias-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.emergencias-section > .container > p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.filtros button {
+  background: white;
+  border: 2px solid #ddd;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  color: #555;
+}
+
+.filtros button:hover,
+.filtros button.active {
+  background: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+/* Grid de Emergencias */
+.emergencias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+.emergencia-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+}
+
+.emergencia-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.emergencia-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.emergencia-tipo {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.emergencia-tipo.incendio {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.emergencia-tipo.inundacion {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.emergencia-tipo.medica {
+  background: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.emergencia-tipo.rescate {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.emergencia-estado {
+  background: #4caf50;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.emergencia-card h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.emergencia-ubicacion,
+.emergencia-fecha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.emergencia-ubicacion i,
+.emergencia-fecha i {
+  color: #007bff;
+  width: 16px;
+}
+
+.btn-ayudar {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 15px;
+  width: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-ayudar:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+/* Como Funciona Section */
+.como-funciona {
+  padding: 80px 0;
+  background: white;
+}
+
+.como-funciona h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.paso {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.paso-numero {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.paso h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.paso p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 30px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #999;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.volunteer-form {
+  padding: 30px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.skills-checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: normal !important;
+}
+
+.checkbox-label:hover {
+  background: #f8f9fa;
+  border-color: #007bff;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: auto;
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.checkbox-label input[type="checkbox"]:checked + span {
+  color: #007bff;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.form-actions button {
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.form-actions button[type="button"] {
+  background: #f8f9fa;
+  color: #666;
+  border-color: #e0e0e0;
+}
+
+.form-actions button[type="button"]:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.form-actions .btn-primary {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.form-actions .btn-primary:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .voluntario-header h1 {
+    font-size: 2rem;
+  }
+  
+  .voluntario-header .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .habilidades-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  
+  .habilidad-card {
+    padding: 20px 15px;
+  }
+  
+  .emergencias-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .pasos-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .filtros {
+    gap: 10px;
+  }
+  
+  .filtros button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .modal-content {
+    margin: 10px;
+    max-height: 95vh;
+  }
+  
+  .volunteer-form {
+    padding: 20px;
+  }
+  
+  .skills-checkbox-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions button {
+    width: 100%;
+  }
+}

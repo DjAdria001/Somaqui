@@ -1,0 +1,6 @@
+<!-- Placeholder banner -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="800" height="350">
+  <rect width="800" height="350" fill="#39e4c9"/>
+  <text x="400" y="175" text-anchor="middle" fill="white" font-size="48" font-family="Arial">SomAqui.cat</text>
+  <text x="400" y="220" text-anchor="middle" fill="white" font-size="24" font-family="Arial">Comunidad de Ayuda</text>
+</svg>
