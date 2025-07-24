@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import LogoImage from '../assets/LogoSF.png';
 
 interface HeaderProps {
   onLoginClick?: () => void;
@@ -58,7 +59,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
       </div>
 
       <Link to="/" className="logo" aria-label="Ir a la página principal de SomAqui.cat">
-        <img src="/images/LogoSF.svg" alt="Logo SomAqui.cat" />
+        <img src={LogoImage} alt="Logo SomAqui.cat" />
         SomAqui.cat
       </Link>
 

@@ -208,3 +208,101 @@
     border-radius: 6px;
   }
 }
+
+/* Nuevas secciones de imágenes */
+
+/* Sección de tipos de emergencias */
+.emergency-types {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.emergency-types h2 {
+  font-size: 2.2rem;
+  color: #39e4c9;
+  margin-bottom: 3rem;
+}
+
+.emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.emergency-card {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.emergency-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.2);
+  border-color: #39e4c9;
+}
+
+.emergency-card img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+.emergency-card h3 {
+  color: #003333;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Sección de actividades de ayuda */
+.help-activities {
+  padding: 4rem 2rem;
+  background-color: #f0fdfd;
+  text-align: center;
+}
+
+.help-activities h2 {
+  font-size: 2.2rem;
+  color: #39e4c9;
+  margin-bottom: 3rem;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.activity-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activity-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(57, 228, 201, 0.3);
+}
+
+.activity-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.activity-card h3 {
+  color: #003333;
+  font-size: 1.2rem;
+  margin: 0;
+}

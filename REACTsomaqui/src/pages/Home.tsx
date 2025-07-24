@@ -5,18 +5,27 @@ import '../styles/home.css';
 
 const Home: React.FC = () => {
   const sliderImages = [
-    { src: '/images/Banner.svg', alt: 'Comunidad de ayuda' },
-    { src: '/images/Banner.svg', alt: 'Situaciones de emergencia' },
-    { src: '/images/Banner.svg', alt: 'Asistencia médica' },
+    { src: '/images/medicamento.jpg', alt: 'Comunidad de ayuda SomAqui' },
+    { src: '/images/levantar.jpg', alt: 'Situaciones de emergencia' },
+    { src: '/images/Ayuda.png', alt: 'Asistencia y apoyo' },
   ];
 
-  const collageImages = [
-    '/images/Banner.svg',
-    '/images/Banner.svg',
-    '/images/Banner.svg',
-    '/images/Banner.svg',
-    '/images/Banner.svg',
-    '/images/Banner.svg',
+  const emergencyTypeImages = [
+    { src: '/images/icono_medica.png', alt: 'Emergencia médica', title: 'Asistencia médica' },
+    { src: '/images/icono_incendio.png', alt: 'Incendios', title: 'Incendios' },
+    { src: '/images/icono_inundacion.png', alt: 'Inundaciones', title: 'Inundaciones' },
+    { src: '/images/icono_rescate.png', alt: 'Rescate', title: 'Rescate' },
+    { src: '/images/icono_otros.png', alt: 'Otras emergencias', title: 'Otras emergencias' },
+    { src: '/images/icono_default.png', alt: 'Ayuda general', title: 'Ayuda general' },
+  ];
+
+  const helpActivityImages = [
+    { src: '/images/ambulancia.jpg', alt: 'Transporte de emergencia', title: 'Transporte' },
+    { src: '/images/comida.jpg', alt: 'Proporcionar comida', title: 'Alimentación' },
+    { src: '/images/medicamento.jpg', alt: 'Medicamentos', title: 'Medicamentos' },
+    { src: '/images/acompanar.jpg', alt: 'Acompañamiento', title: 'Acompañamiento' },
+    { src: '/images/mantas.jpg', alt: 'Ropa y mantas', title: 'Ropa y abrigo' },
+    { src: '/images/hablar.jpg', alt: 'Apoyo emocional', title: 'Apoyo emocional' },
   ];
 
   return (
@@ -26,7 +35,7 @@ const Home: React.FC = () => {
 
       {/* Sección hero */}
       <section className="hero">
-        <h2>🤝 Conectamos a quienes necesitan ayuda con quienes pueden ofrecerla</h2>
+        <h2> Conectamos a quienes necesitan ayuda con quienes pueden ofrecerla</h2>
         <p>
           SomAqui.cat es una plataforma comunitaria que facilita la conexión entre personas 
           que necesitan asistencia y voluntarios dispuestos a ayudar en situaciones de emergencia.
@@ -68,6 +77,32 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* Tipos de emergencias que manejamos */}
+      <section className="emergency-types">
+        <h2>🚨 Tipos de emergencias que atendemos</h2>
+        <div className="emergency-grid">
+          {emergencyTypeImages.map((emergency, index) => (
+            <div key={index} className="emergency-card">
+              <img src={emergency.src} alt={emergency.alt} />
+              <h3>{emergency.title}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Formas de ayudar */}
+      {/* <section className="help-activities">
+        <h2>💪 Formas en las que puedes ayudar</h2>
+        <div className="activities-grid">
+          {helpActivityImages.map((activity, index) => (
+            <div key={index} className="activity-card">
+              <img src={activity.src} alt={activity.alt} />
+              <h3>{activity.title}</h3>
+            </div>
+          ))}
+        </div>
+      </section> */}
+
       {/* Teoría del cambio */}
       <section className="teoria-cambio">
         <h2>¿Cómo funciona SomAqui.cat?</h2>
@@ -77,12 +112,12 @@ const Home: React.FC = () => {
         
         <div className="contenido-cambio">
           <div className="grafico-cambio">
-            <img src="/images/LogoSF.svg" alt="Proceso de ayuda comunitaria" />
+            <img src="/images/Globo.png" alt="Proceso de ayuda comunitaria" />
           </div>
           
           <div className="pasos-cambio">
             <div className="paso">
-              <img src="/images/LogoSF.svg" alt="Paso 1" />
+              <img src="/images/Icono1.png" alt="Paso 1" />
               <div>
                 <strong>1. Solicita ayuda</strong>
                 <p>
@@ -93,7 +128,7 @@ const Home: React.FC = () => {
             </div>
             
             <div className="paso">
-              <img src="/images/LogoSF.svg" alt="Paso 2" />
+              <img src="/images/Icono2.png" alt="Paso 2" />
               <div>
                 <strong>2. Conectamos voluntarios</strong>
                 <p>
@@ -104,7 +139,7 @@ const Home: React.FC = () => {
             </div>
             
             <div className="paso">
-              <img src="/images/LogoSF.svg" alt="Paso 3" />
+              <img src="/images/Icono3.png" alt="Paso 3" />
               <div>
                 <strong>3. Recibe ayuda</strong>
                 <p>
@@ -117,20 +152,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Galería de imágenes */}
-      <section className="collage-section">
-        <h2>🌟 Juntos somos más fuertes</h2>
-        <div className="collage">
-          {collageImages.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Imagen comunitaria ${index + 1}`}
-              className="collage-img"
-            />
-          ))}
-        </div>
-      </section>
+     
     </main>
   );
 };
