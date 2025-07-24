@@ -1,14 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "rootDir": "./",
-    "outDir": "./dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "types": ["node"]
+    "target": "ES6",                 // Compila a ES6 (ideal para Node.js)
+    "module": "commonjs",           // Usa módulos CommonJS (para Node.js)
+    "moduleResolution": "node",     // Para que encuentre módulos en node_modules
+    "rootDir": "./src",
+    "outDir": "./dist",             // Carpeta donde se guarda el JavaScript compilado
+    "strict": true,                 // Activa modo estricto de TypeScript
+    "esModuleInterop": true,        // Permite importar módulos CommonJS como ESModules
+    "types": ["node"]               // Incluye los tipos de Node.js
   },
-  "include": ["**/*.ts"],
+  "include": ["src/**/*.ts"],           // Incluye todos los .ts del proyecto
   "exclude": ["node_modules", "dist"]
 }
