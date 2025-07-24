@@ -395,8 +395,27 @@
   window.onload = initMap;
 </script>
 
+  <script src="js/menu.js"></script>
   <script src="js/formularioAyuda.js?v=20250121"></script>
   <script src="js/login.js"></script>
+  
+  <script>
+    // Función global para mostrar popup con tamaño dinámico
+    function mostrarPopupLoginConTamano(src) {
+      if (window.mostrarPopupLogin) {
+        window.mostrarPopupLogin(src);
+      } else {
+        // Fallback
+        const popup = document.getElementById("popup-login");
+        const iframe = popup.querySelector("iframe");
+        iframe.src = src;
+        popup.style.display = "flex";
+      }
+    }
+    
+    // Hacer la función disponible globalmente
+    window.mostrarPopupLoginConTamano = mostrarPopupLoginConTamano;
+  </script>
 </body>
 
 </html>
