@@ -542,3 +542,34 @@ footer small {
     padding: 15px 20px;
   }
 }
+
+/* Leaflet Map Styles - Fix para asegurar que los estilos se carguen */
+@import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
+/* Fix adicional para iconos de Leaflet */
+.leaflet-default-icon-path {
+  background-image: url('https://unpkg.com/leaflet@1.9.4/dist/images/');
+}
+
+/* Asegurar que el contenedor del mapa tenga el tamaño correcto */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  font-family: inherit;
+}
+
+/* Fix para los controles de zoom */
+.leaflet-control-zoom a {
+  text-decoration: none;
+}
+
+/* Fix para el popup */
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+}
+
+.leaflet-popup-content {
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.4;
+}

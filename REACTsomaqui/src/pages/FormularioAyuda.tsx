@@ -129,16 +129,25 @@ const FormularioAyuda: React.FC = () => {
   };
 
   const handleLocationSelect = (lat: number, lng: number) => {
+    console.log('📍 Ubicación seleccionada:', { lat, lng });
+    
     const ubicacionStr = `${lat.toFixed(6)},${lng.toFixed(6)}`;
     setFormData(prev => ({
       ...prev,
       ubicacion: ubicacionStr
     }));
-    setUbicacionTexto(`📍 Ubicación seleccionada: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+    
+    const displayText = `📍 Ubicación seleccionada: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+    setUbicacionTexto(displayText);
+    
+    console.log('✅ Datos del formulario actualizados:', { ubicacion: ubicacionStr });
   };
 
   const detectLocation = () => {
+    console.log('🔍 Iniciando detección de ubicación...');
+    
     if (!navigator.geolocation) {
+      console.error('❌ Geolocalización no soportada');
       alert('Tu navegador no soporta geolocalización. Por favor, selecciona tu ubicación manualmente en el mapa.');
       return;
     }
@@ -146,10 +155,22 @@ const FormularioAyuda: React.FC = () => {
     setIsDetectingLocation(true);
     setUbicacionTexto('🔍 Detectando ubicación...');
 
+    // Verificar permisos primero
+    navigator.permissions?.query({name: 'geolocation'}).then((result) => {
+      console.log('📍 Estado de permisos de geolocalización:', result.state);
+    }).catch(() => {
+      console.log('📍 No se pudo verificar el estado de permisos');
+    });
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log('Ubicación detectada:', { latitude, longitude });
+        const { latitude, longitude, accuracy } = position.coords;
+        console.log('✅ Ubicación detectada exitosamente:', { 
+          latitude, 
+          longitude, 
+          accuracy,
+          timestamp: new Date(position.timestamp).toLocaleString()
+        });
         
         // Actualizar los datos del formulario
         handleLocationSelect(latitude, longitude);
@@ -157,47 +178,57 @@ const FormularioAyuda: React.FC = () => {
         // Actualizar el mapa
         if (mapRef.current) {
           try {
+            console.log('🗺️ Actualizando posición en el mapa...');
             mapRef.current.updateLocation(latitude, longitude);
+            console.log('✅ Mapa actualizado correctamente');
           } catch (error) {
-            console.error('Error al actualizar el mapa:', error);
+            console.error('❌ Error al actualizar el mapa:', error);
           }
+        } else {
+          console.warn('⚠️ Referencia del mapa no disponible');
         }
         
         setIsDetectingLocation(false);
         setUbicacionTexto(`📍 Ubicación detectada: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
       },
       (error) => {
-        console.error('Error al obtener ubicación:', error);
+        console.error('❌ Error al obtener ubicación:', error);
         setIsDetectingLocation(false);
         
         let errorMessage = 'No se pudo obtener la ubicación. ';
         
         switch (error.code) {
           case error.PERMISSION_DENIED:
-            errorMessage += 'Permisos de ubicación denegados. Por favor, permite el acceso a tu ubicación y vuelve a intentarlo.';
+            errorMessage += 'Permisos de ubicación denegados. Por favor, permite el acceso a tu ubicación en la configuración del navegador y vuelve a intentarlo.';
+            console.error('❌ Permisos denegados por el usuario');
             break;
           case error.POSITION_UNAVAILABLE:
-            errorMessage += 'Información de ubicación no disponible.';
+            errorMessage += 'Información de ubicación no disponible. Verifica tu conexión GPS o WiFi.';
+            console.error('❌ Posición no disponible');
             break;
           case error.TIMEOUT:
-            errorMessage += 'La solicitud de ubicación tardó demasiado tiempo.';
+            errorMessage += 'La solicitud de ubicación tardó demasiado tiempo. Inténtalo de nuevo.';
+            console.error('❌ Timeout en la solicitud de ubicación');
             break;
           default:
-            errorMessage += 'Error desconocido.';
+            errorMessage += 'Error desconocido al acceder a tu ubicación.';
+            console.error('❌ Error desconocido:', error.message);
             break;
         }
         
-        errorMessage += ' Puedes seleccionar tu ubicación manualmente haciendo clic en el mapa.';
+        errorMessage += '\n\n💡 Puedes seleccionar tu ubicación manualmente haciendo clic en el mapa.';
         
         alert(errorMessage);
         setUbicacionTexto('📍 Detectar mi ubicación automáticamente');
       },
       {
         enableHighAccuracy: true,
-        timeout: 15000, // Aumentar timeout a 15 segundos
-        maximumAge: 300000 // 5 minutos
+        timeout: 15000, // 15 segundos
+        maximumAge: 60000 // 1 minuto
       }
     );
+    
+    console.log('⏳ Solicitud de geolocalización enviada...');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -272,6 +303,38 @@ const FormularioAyuda: React.FC = () => {
                     className="detect-location-btn"
                   >
                     {ubicacionTexto}
+                  </button>
+                  
+                  {/* Botón de debug temporal */}
+                  <button 
+                    type="button" 
+                    onClick={() => {
+                      console.log('🔍 Debug del mapa:', {
+                        mapRef: !!mapRef.current,
+                        ubicacion: formData.ubicacion,
+                        isDetecting: isDetectingLocation
+                      });
+                      if (mapRef.current) {
+                        console.log('✅ Referencia del mapa disponible');
+                        // Probar con coordenadas de Barcelona
+                        mapRef.current.updateLocation(41.3851, 2.1734);
+                      } else {
+                        console.error('❌ Referencia del mapa no disponible');
+                      }
+                    }}
+                    className="debug-btn"
+                    style={{
+                      background: '#666',
+                      color: 'white',
+                      border: 'none',
+                      padding: '0.5rem 1rem',
+                      borderRadius: '4px',
+                      fontSize: '0.8rem',
+                      marginTop: '0.5rem',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    🔍 Debug Mapa
                   </button>
                   
                   <div className="ubicacion-input-group">
