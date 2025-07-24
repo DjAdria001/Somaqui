@@ -1,20 +1,17 @@
-// server/models/ayuda.model.ts
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const AyudaSchema = new mongoose.Schema({
-  id: String,
-  ubicacion: String,
-  desc_ubic: String,
-  descripcion: String,
-  etiquetas: String,
-  otros_detalle: String,
-  fecha_envio: String,
-  correo: String,
-  estado: String,
-  coords: {
-    lat: Number,
-    lng: Number
-  }
+const ayudaSchema = new Schema({
+  ubicacion: { type: String, required: true }, // formato "lat,lng"
+  desc_ubic: { type: String, default: '' },
+  nombre: { type: String, required: true },
+  correo: { type: String, required: true },
+  telefono: { type: String, default: '' },
+  personales: { type: String, default: '' },
+  tiempo: { type: String, required: true },
+  tags: { type: [String], required: true },
+  otros_detalle: { type: String, default: '' },
+  descripcion: { type: String, default: '' },
+  fecha_envio: { type: Date, default: Date.now },
 });
 
-export default mongoose.model('Ayuda', AyudaSchema);
+export default model('Ayuda', ayudaSchema);
