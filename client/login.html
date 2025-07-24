@@ -6,8 +6,107 @@
   <title>Iniciar sesión – SomAqui.cat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
-  <link rel="stylesheet" href="css/Styleglobal.css" />
-  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="/Somaqui/client/css/Styleglobal.css" />
+  <link rel="stylesheet" href="/Somaqui/client/css/login.css" />
+  
+  <!-- Estilos inline para asegurar funcionamiento en iframe -->
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0fdfd;
+      color: #003333;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    main {
+      width: 100%;
+      max-width: 500px;
+      margin: 0;
+      padding: 1rem;
+    }
+    
+    .login-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 2px solid #39e4c9;
+      box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
+      width: 100%;
+    }
+    
+    .login-container h2 {
+      text-align: center;
+      color: #007d70;
+      margin-bottom: 1.5rem;
+      margin-top: 0;
+    }
+    
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #003333;
+    }
+    
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+    
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #39e4c9;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(57, 228, 201, 0.2);
+    }
+    
+    button[type="submit"] {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #39e4c9;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    button[type="submit"]:hover {
+      background-color: #2abbaa;
+    }
+    
+    .small-text {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+    
+    .small-text a {
+      color: #007d70;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .small-text a:hover {
+      color: #005a4f;
+      text-decoration: underline;
+    }
+  </style>
 
 </head>
 <body>
@@ -26,10 +125,26 @@
         <button type="submit">Entrar</button>
       </form>
       <div class="small-text">
-        ¿No tienes una cuenta? <a href="registro.html">Regístrate</a>
+        ¿No tienes una cuenta? <a href="#" onclick="abrirRegistro()">Regístrate</a>
       </div>
     </div>
   </main>
+
+  <script>
+    function abrirRegistro() {
+      // Si estamos en un iframe, usar el parent
+      if (window.parent && window.parent !== window) {
+        if (window.parent.mostrarPopupLoginConTamano) {
+          window.parent.mostrarPopupLoginConTamano('registro.html');
+        } else {
+          window.parent.location.href = 'registro.html';
+        }
+      } else {
+        // Si no estamos en iframe, navegar normalmente
+        window.location.href = 'registro.html';
+      }
+    }
+  </script>
 
 </body>
 </html>
