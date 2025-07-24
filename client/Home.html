@@ -177,38 +177,6 @@
   <script src="js/menu.js"></script>
   <script src="js/login.js"></script>
   <script src="js/slider.js"></script>
-  
-  <!-- Script de prueba temporal para dropdown -->
-  <script>
-    // Test directo del dropdown
-    document.addEventListener('DOMContentLoaded', function() {
-      console.log('Test script cargado');
-      
-      // Botón de prueba temporal
-      const testBtn = document.createElement('button');
-      testBtn.textContent = 'Test Dropdown';
-      testBtn.style.position = 'fixed';
-      testBtn.style.top = '10px';
-      testBtn.style.left = '10px';
-      testBtn.style.zIndex = '9999';
-      testBtn.style.background = 'red';
-      testBtn.style.color = 'white';
-      testBtn.style.padding = '10px';
-      testBtn.style.border = 'none';
-      testBtn.style.borderRadius = '5px';
-      
-      testBtn.addEventListener('click', function() {
-        const dropdown = document.querySelector('.nav-item.dropdown');
-        if (dropdown) {
-          dropdown.classList.toggle('expanded');
-          console.log('Dropdown classes:', dropdown.className);
-          console.log('Dropdown menu display:', window.getComputedStyle(dropdown.querySelector('.dropdown-menu')).display);
-        }
-      });
-      
-      document.body.appendChild(testBtn);
-    });
-  </script>
  
 </body>
 
