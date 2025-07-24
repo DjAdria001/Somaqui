@@ -135,11 +135,21 @@ nav.main-nav .dropdown-menu .dropdown-link:focus {
 }
 
 /* Mostrar dropdown cuando tiene la clase expanded */
-nav.main-nav .nav-item.dropdown.expanded>.dropdown-menu {
-  display: block;
+nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
+  display: block !important;
+  visibility: visible;
+  opacity: 1;
 }
 
-nav.main-nav .nav-item.dropdown:focus>.nav-link {
+/* Estados adicionales para asegurar funcionalidad */
+nav.main-nav .nav-item.dropdown .dropdown-menu {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+nav.main-nav .nav-item.dropdown:focus > .nav-link {
   outline: 2px solid #006e5f;
   outline-offset: 2px;
 }
