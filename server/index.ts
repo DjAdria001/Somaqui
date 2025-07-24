@@ -1,33 +1,28 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import cors from 'cors';
-import cerrarEmergencia from './routes/cerrarEmergencia';
-import peticiones from './routes/peticiones';
+import { connectDB } from './db';
+import peticionesRouter from './routes/peticiones';
+import cerrarEmergenciaRouter from './routes/cerrarEmergencia';
+
+
+
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-app.use(cors());
+// Middleware básico
 app.use(express.json());
-
-// Rutas
-app.use(cerrarEmergencia);
-app.use(peticiones);
-
-// Conexión MongoDB
-mongoose.connect(process.env.MONGO_URI as string, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-} as any)
-.then(() => {
-  console.log('✅ Conectado a MongoDB Atlas');
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
+app.use('/api', cerrarEmergenciaRouter);
+// Ruta de prueba
+app.get('/', (req, res) => {
+  res.send('Servidor funcionando correctamente 🚀');
+});
+app.use('/api', peticionesRouter);
+// Iniciar conexión y servidor
+connectDB().then(() => {
+  app.listen(port, () => {
+    console.log(`✅ Servidor iniciado en http://localhost:${port}`);
   });
-})
-.catch(err => {
-  console.error('❌ Error al conectar a MongoDB:', err);
 });

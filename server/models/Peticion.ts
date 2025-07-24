@@ -1,4 +1,15 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
-const PeticionSchema = new mongoose.Schema({}, { strict: false });
-export default mongoose.model('Peticion', PeticionSchema, 'peticiones_ayuda');
+export interface IPeticion extends Document {
+  descripcion: string;
+  ubicacion: string;
+  fecha: Date;
+}
+
+const PeticionSchema: Schema = new Schema({
+  descripcion: { type: String, required: true },
+  ubicacion: { type: String, required: true },
+  fecha: { type: Date, default: Date.now },
+});
+
+export default mongoose.model<IPeticion>('Peticion', PeticionSchema);

@@ -1,4 +1,14 @@
-import mongoose from 'mongoose';
+// models/Mensaje.ts
+import mongoose, { Schema, Document } from 'mongoose';
 
-const MensajeSchema = new mongoose.Schema({}, { strict: false });
-export default mongoose.model('Mensaje', MensajeSchema, 'mensajes');
+export interface IMensaje extends Document {
+  conversacion_id: mongoose.Types.ObjectId;
+  // otros campos...
+}
+
+const MensajeSchema = new Schema({
+  conversacion_id: { type: Schema.Types.ObjectId, ref: 'Conversacion', required: true },
+  // otros campos...
+});
+
+export default mongoose.model<IMensaje>('Mensaje', MensajeSchema);

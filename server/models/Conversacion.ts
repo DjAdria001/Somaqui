@@ -1,4 +1,14 @@
-import mongoose from 'mongoose';
+// models/Conversacion.ts
+import mongoose, { Schema, Document } from 'mongoose';
 
-const ConversacionSchema = new mongoose.Schema({}, { strict: false });
-export default mongoose.model('Conversacion', ConversacionSchema, 'conversaciones');
+export interface IConversacion extends Document {
+  id_emergencia: mongoose.Types.ObjectId;
+  // otros campos...
+}
+
+const ConversacionSchema = new Schema({
+  id_emergencia: { type: Schema.Types.ObjectId, ref: 'PeticionAyuda', required: true },
+  // otros campos...
+});
+
+export default mongoose.model<IConversacion>('Conversacion', ConversacionSchema);
