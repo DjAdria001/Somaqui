@@ -10,6 +10,7 @@ import Equipo from './pages/Equipo';
 import MisionVision from './pages/MisionVision';
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes';
 import Contacto from './pages/Contacto';
+import './App.css';
 import './styles/global.css';
 
 function App() {
@@ -29,15 +30,17 @@ function App() {
       <Router>
         <div className="App">
           <Header onLoginClick={handleLoginClick} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/formulario-ayuda" element={<FormularioAyuda />} />
-            <Route path="/voluntario" element={<Voluntario />} />
-            <Route path="/equipo" element={<Equipo />} />
-            <Route path="/mision-vision" element={<MisionVision />} />
-            <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
-            <Route path="/contacto" element={<Contacto />} />
-          </Routes>
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/formulario-ayuda" element={<FormularioAyuda />} />
+              <Route path="/voluntario" element={<Voluntario />} />
+              <Route path="/equipo" element={<Equipo />} />
+              <Route path="/mision-vision" element={<MisionVision />} />
+              <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />
+              <Route path="/contacto" element={<Contacto />} />
+            </Routes>
+          </main>
           <Footer onTermsClick={handleTermsClick} />
 
           {/* Login Modal */}

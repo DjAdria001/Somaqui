@@ -9,8 +9,6 @@ body {
   background: #f0fdfd;
   color: #003333;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
 /* HEADER y menú */
