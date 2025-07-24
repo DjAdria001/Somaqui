@@ -5,195 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Iniciar sesión – SomAqui.cat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <link rel="stylesheet" href="/Somaqui/client/css/Styleglobal.css" />
+  <link rel="stylesheet" href="/Somaqui/client/css/login.css" />
+  
+  <!-- Estilos inline para asegurar funcionamiento en iframe -->
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
+      margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f0fdfd;
       color: #003333;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-    }
-
-    header.site-header {
-      background-color: #39e4c9;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      color: white;
-      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
-      position: relative;
-      z-index: 1000;
-      flex-shrink: 0;
+      justify-content: center;
     }
-
-    header.site-header .logo {
-      font-weight: 700;
-      font-size: 1.8rem;
-      text-decoration: none;
-      color: white;
-      display: inline-flex;
-      align-items: center;
-    }
-
-    header.site-header .logo img {
-      height: 32px;
-      width: auto;
-      margin-right: 8px;
-    }
-
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    nav.main-nav .nav-list {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav.main-nav .nav-item { position: relative; }
-    nav.main-nav .nav-link {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      transition: color 0.3s ease;
-    }
-
-    nav.main-nav .nav-link:hover,
-    nav.main-nav .nav-link:focus {
-      color: #006e5f;
-      outline: none;
-    }
-
-    nav.main-nav .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 2.5rem;
-      left: 0;
-      background-color: #27b3a3;
-      border-radius: 6px;
-      min-width: 180px;
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-      z-index: 2000;
-      padding: 0.5rem 0;
-    }
-
-    nav.main-nav .dropdown-menu li { list-style: none; }
-
-    nav.main-nav .dropdown-link {
-      display: block;
-      padding: 0.5rem 1rem;
-      color: white;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background-color 0.2s ease;
-    }
-
-    nav.main-nav .dropdown-link:hover,
-    nav.main-nav .dropdown-link:focus {
-      background-color: #0f6352;
-      outline: none;
-    }
-
-    nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
-      display: block !important;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-
-      nav.main-nav .nav-list {
-        flex-direction: column;
-        background-color: #39e4c9;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 220px;
-        display: none;
-        border-radius: 0 0 8px 8px;
-        padding: 1rem 0;
-        gap: 0;
-        z-index: 1500;
-      }
-
-      nav.main-nav .nav-list.show { display: flex; }
-
-      nav.main-nav .nav-item { width: 100%; }
-
-      nav.main-nav .nav-link {
-        padding: 0.75rem 1.5rem;
-        width: 100%;
-      }
-
-      nav.main-nav .dropdown-menu {
-        position: static;
-        background-color: #27b3a3;
-        box-shadow: none;
-        border-radius: 0;
-        padding-left: 2rem;
-        display: none !important;
-      }
-
-      nav.main-nav .nav-item.dropdown.expanded > .dropdown-menu {
-        display: block !important;
-      }
-    }
-
+    
     main {
-      max-width: 600px;
-      margin: 3rem auto;
-      padding: 3rem 2rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px #0001;
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
-
+    
     .login-container {
       background: white;
       padding: 2rem;
       border-radius: 12px;
       border: 2px solid #39e4c9;
       box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
-      max-width: 450px;
       width: 100%;
-      margin: 0 auto;
+      max-width: 400px;
+      min-width: 300px;
     }
+    
     .login-container h2 {
       text-align: center;
       color: #007d70;
       margin-bottom: 1.5rem;
+      margin-top: 0;
+      font-size: 1.5rem;
     }
+    
     label {
       display: block;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      color: #003333;
+      font-size: 0.9rem;
     }
-    input[type="text"],
+    
     input[type="email"],
     input[type="password"] {
       width: 100%;
       padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 6px;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
       font-size: 1rem;
+      transition: border-color 0.3s ease;
     }
+    
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #39e4c9;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(57, 228, 201, 0.2);
+    }
+    
     button[type="submit"] {
       width: 100%;
       padding: 0.8rem;
@@ -205,27 +92,63 @@
       font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-top: 0.5rem;
     }
+    
     button[type="submit"]:hover {
       background-color: #2abbaa;
     }
+    
     .small-text {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #555;
       margin-top: 1rem;
     }
+    
     .small-text a {
       color: #007d70;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
-
-    .error {
-      color: #c00;
-      font-size: 0.95rem;
-      text-align: center;
+    
+    .small-text a:hover {
+      color: #005a4f;
+      text-decoration: underline;
+    }
+    
+    /* Adaptación específica para iframe */
+    @media (max-height: 600px) {
+      main {
+        min-height: auto;
+        padding: 0.5rem;
+      }
+      
+      .login-container {
+        padding: 1.5rem;
+      }
+      
+      .login-container h2 {
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+      
+      input[type="email"],
+      input[type="password"] {
+        margin-bottom: 0.8rem;
+        padding: 0.6rem;
+      }
+    }
+    
+    /* Para popups muy pequeños */
+    @media (max-width: 350px) {
+      .login-container {
+        padding: 1rem;
+        min-width: auto;
+      }
     }
   </style>
+
 </head>
 <body>
   
@@ -243,43 +166,26 @@
         <button type="submit">Entrar</button>
       </form>
       <div class="small-text">
-        ¿No tienes una cuenta? <a href="registro.html">Regístrate</a>
+        ¿No tienes una cuenta? <a href="#" onclick="abrirRegistro()">Regístrate</a>
       </div>
     </div>
   </main>
 
   <script>
-    // Menú hamburguesa y dropdown
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navList = document.querySelector('.nav-list');
-    const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
-
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      navList.classList.toggle('show');
-    });
-
-    dropdownLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const parent = link.parentElement;
-        const expanded = parent.classList.toggle('expanded');
-        link.setAttribute('aria-expanded', expanded);
-      });
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        navList.classList.remove('show');
-        menuToggle.setAttribute('aria-expanded', false);
-        dropdownLinks.forEach(link => {
-          const parent = link.parentElement;
-          parent.classList.remove('expanded');
-          link.setAttribute('aria-expanded', false);
-        });
+    function abrirRegistro() {
+      // Si estamos en un iframe, usar el parent
+      if (window.parent && window.parent !== window) {
+        if (window.parent.mostrarPopupLoginConTamano) {
+          window.parent.mostrarPopupLoginConTamano('registro.html');
+        } else {
+          window.parent.location.href = 'registro.html';
+        }
+      } else {
+        // Si no estamos en iframe, navegar normalmente
+        window.location.href = 'registro.html';
       }
-    });
+    }
   </script>
+
 </body>
 </html>

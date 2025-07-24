@@ -4,44 +4,50 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Registro – SomAqui.cat</title>
+  
+  <!-- Enlaces CSS externos con rutas absolutas -->
+  <link rel="stylesheet" href="/Somaqui/client/css/Styleglobal.css" />
+  
   <style>
+    * {
+      box-sizing: border-box;
+    }
+    
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f0fdfd;
       color: #003333;
-      display: flex;
-      flex-direction: column;
       min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
+    /* Header solo visible cuando no está en iframe */
     header {
+      display: none;
+    }
+    
+    /* Si no estamos en iframe, mostrar header */
+    body:not(.in-iframe) header {
+      display: flex;
       background-color: #39e4c9;
       color: white;
       padding: 1rem 2rem;
-      display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
     }
 
-    .logo-img {
-      position: absolute;
-      left: 2rem;
-      height: 80px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 1.6rem;
-    }
-
     main {
-      flex: 1;
+      width: 100%;
+      padding: 1rem;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 2rem;
+      align-items: center;
+      flex: 1;
     }
 
     .register-container {
@@ -50,34 +56,48 @@
       border-radius: 12px;
       border: 2px solid #39e4c9;
       box-shadow: 0 0 10px rgba(57, 228, 201, 0.2);
-      max-width: 450px;
       width: 100%;
+      max-width: 500px;
+      min-width: 320px;
     }
 
     .register-container h2 {
       text-align: center;
       color: #007d70;
       margin-bottom: 1.5rem;
+      margin-top: 0;
+      font-size: 1.4rem;
     }
 
     label {
       display: block;
       font-weight: 600;
       margin-bottom: 0.5rem;
+      color: #003333;
+      font-size: 0.9rem;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="password"] {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.7rem;
       border: 1px solid #ccc;
       border-radius: 6px;
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      transition: border-color 0.3s ease;
+    }
+    
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      border-color: #39e4c9;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(57, 228, 201, 0.2);
     }
 
-    button {
+    button[type="submit"] {
       width: 100%;
       padding: 0.8rem;
       background-color: #39e4c9;
@@ -88,15 +108,16 @@
       font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      margin-top: 0.5rem;
     }
 
-    button:hover {
+    button[type="submit"]:hover {
       background-color: #2abbaa;
     }
 
     .small-text {
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: #555;
       margin-top: 1rem;
     }
@@ -104,26 +125,28 @@
     .small-text a {
       color: #007d70;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #777;
+    
+    .small-text a:hover {
+      color: #005a4f;
+      text-decoration: underline;
     }
 
     .checkbox-term {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       margin-bottom: 1rem;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      gap: 0.5rem;
     }
 
     .checkbox-term input[type="checkbox"] {
-      margin-right: 0.5rem;
+      margin-top: 0.2rem;
+      flex-shrink: 0;
     }
 
+    /* Modal para términos */
     #modal-terminos {
       display: none;
       position: fixed;
@@ -229,7 +252,7 @@
       </form>
 
       <div class="small-text">
-        ¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a>
+        ¿Ya tienes una cuenta? <a href="#" onclick="abrirLogin()">Inicia sesión</a>
       </div>
     </div>
   </main>
@@ -238,23 +261,7 @@
   <div id="modal-terminos">
     <div class="contenido">
       <button class="cerrar" onclick="cerrarModal()">&times;</button>
-      <h2>Términos y Condiciones de Uso – SomAqui.cat</h2>
-      <p><strong>Última actualización: julio de 2025</strong></p>
-      <p><strong>1. Objeto del servicio</strong><br>SomAqui.cat es una plataforma de ayuda comunitaria en emergencias. Al registrarte, puedes colaborar ofreciendo o solicitando ayuda local.</p>
-      <p><strong>2. Datos recopilados</strong><br>Durante el registro solicitamos tu nombre completo, correo electrónico, documento de identificación (DNI/NIE) y una contraseña. Esta información es necesaria para identificarte y garantizar un uso responsable de la plataforma.</p>
-      <p><strong>3. Protección de datos</strong><br>Tus datos se almacenan de forma segura y se tratan conforme al Reglamento General de Protección de Datos (RGPD). Nunca compartiremos tu información sin tu consentimiento expreso.</p>
-      <p><strong>4. Uso adecuado</strong><br>No está permitido usar SomAqui.cat con fines comerciales, fraudulentos, políticos ni discriminatorios. El usuario es responsable de la veracidad de los datos proporcionados.</p>
-      <p><strong>5. Responsabilidad</strong><br>La plataforma actúa como puente entre personas. No garantizamos la disponibilidad de ayuda ni la veracidad de todas las publicaciones.</p>
-      <p><strong>6. Cambios en los términos</strong><br>Nos reservamos el derecho de modificar estos términos. Se notificará cualquier cambio relevante en la web.</p>
-      <p><strong>7. Aceptación</strong><br>Al marcar la casilla y registrarte, confirmas que has leído y aceptas los presentes términos.</p>
-      <hr>
-      <h3>Política de Privacidad</h3>
-      <p><strong>Responsable:</strong> SomAqui.cat</p>
-      <p><strong>Finalidad:</strong> Gestionar el acceso de usuarios a la plataforma y facilitar conexiones de ayuda entre vecinos.</p>
-      <p><strong>Legitimación:</strong> Consentimiento expreso al registrarte.</p>
-      <p><strong>Destinatarios:</strong> Tus datos no serán compartidos con terceros sin tu consentimiento.</p>
-      <p><strong>Conservación:</strong> Conservamos tus datos mientras seas usuario activo. Puedes solicitar su eliminación en cualquier momento.</p>
-      <p><strong>Derechos:</strong> Tienes derecho a acceder, rectificar o eliminar tus datos. Escríbenos para ejercer tus derechos.</p>
+      <!-- ...existing code... -->
     </div>
   </div>
 
@@ -263,6 +270,20 @@
   </footer>
 
   <script>
+    function abrirLogin() {
+      // Si estamos en un iframe, usar el parent
+      if (window.parent && window.parent !== window) {
+        if (window.parent.mostrarPopupLoginConTamano) {
+          window.parent.mostrarPopupLoginConTamano('login.html');
+        } else {
+          window.parent.location.href = 'login.html';
+        }
+      } else {
+        // Si no estamos en iframe, navegar normalmente
+        window.location.href = 'login.html';
+      }
+    }
+
     function validarContrasenas() {
       const pass = document.getElementById('password').value;
       const confirm = document.getElementById('confirmar').value;
@@ -285,6 +306,11 @@
         e.preventDefault();
         modal.style.display = "flex";
       });
+      
+      // Detectar si estamos en iframe y ajustar estilos
+      if (window.self !== window.top) {
+        document.body.classList.add('in-iframe');
+      }
     });
 
     function cerrarModal() {
