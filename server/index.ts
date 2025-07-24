@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './db';
 import peticionesRouter from './routes/peticiones';
 import cerrarEmergenciaRouter from './routes/cerrarEmergencia';
-
+import enviarAyudaRouter from './routes/enviarAyuda';
 
 
 
@@ -19,6 +19,8 @@ app.use('/api', cerrarEmergenciaRouter);
 app.get('/', (req, res) => {
   res.send('Servidor funcionando correctamente 🚀');
 });
+// después de app.use(express.json());
+app.use(enviarAyudaRouter);
 app.use('/api', peticionesRouter);
 // Iniciar conexión y servidor
 connectDB().then(() => {

@@ -230,21 +230,52 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Scroll animado al primer error
-    const form = document.querySelector('form');
-    form.addEventListener('submit', function (e) {
-        const primerError = form.querySelector(':invalid');
-        if (primerError) {
-            e.preventDefault();
-            primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            primerError.classList.add('input-activo');
-            setTimeout(() => primerError.classList.remove('input-activo'), 1500);
-        } else {
-            e.preventDefault();
-            mostrarMensajeExito();
-            form.reset();
-            if (otrosCont) otrosCont.classList.remove('visible');
+    form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const primerError = form.querySelector(':invalid');
+    if (primerError) {
+        primerError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        primerError.classList.add('input-activo');
+        setTimeout(() => primerError.classList.remove('input-activo'), 1500);
+        return;
+    }
+
+    const formData = new FormData(form);
+
+    const data = {
+        correo: formData.get('correo'),
+        ubicacion: formData.get('ubicacion'),
+        desc_ubic: formData.get('desc_ubic'),
+        descripcion: formData.get('descripcion'),
+        otros_detalle: formData.get('otros_detalle'),
+        tags: formData.getAll('tags') // importante si usas checkboxes
+    };
+
+    try {
+        const response = await fetch('/api/enviar-ayuda', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(`❌ Error: ${result.error || 'Error desconocido al enviar solicitud.'}`);
+            return;
         }
-    });
+
+        // Redirige al chat
+        window.location.href = `/chat/${result.conversacionId}`;
+    } catch (error) {
+        console.error('Error al enviar solicitud:', error);
+        alert("❌ Error de red al enviar la solicitud.");
+    }
+});
+
     
     // Mensaje de éxito animado
     function mostrarMensajeExito() {
