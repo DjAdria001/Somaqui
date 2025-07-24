@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import RegisterModal from './components/RegisterModal';
 import Home from './pages/Home';
 import FormularioAyuda from './pages/FormularioAyuda';
 import Voluntario from './pages/Voluntario';
@@ -15,6 +16,7 @@ import './styles/global.css';
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   const handleLoginClick = () => {
@@ -23,6 +25,16 @@ function App() {
 
   const handleTermsClick = () => {
     setShowTermsModal(true);
+  };
+
+  const switchToRegister = () => {
+    setShowLoginModal(false);
+    setShowRegisterModal(true);
+  };
+
+  const switchToLogin = () => {
+    setShowRegisterModal(false);
+    setShowLoginModal(true);
   };
 
   return (
@@ -72,7 +84,7 @@ function App() {
                   </div>
                 </form>
                 <div className="register-link">
-                  <p>¿No tienes cuenta? <a href="#">Regístrate aquí</a></p>
+                  <p>¿No tienes cuenta? <button type="button" onClick={switchToRegister} className="link-button">Regístrate aquí</button></p>
                 </div>
               </div>
             </div>
@@ -109,6 +121,14 @@ function App() {
                 </div>
               </div>
             </div>
+          )}
+
+          {/* Register Modal */}
+          {showRegisterModal && (
+            <RegisterModal 
+              onClose={() => setShowRegisterModal(false)} 
+              onSwitchToLogin={switchToLogin}
+            />
           )}
         </div>
       </Router>

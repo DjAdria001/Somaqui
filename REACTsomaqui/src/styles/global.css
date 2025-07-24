@@ -102,6 +102,28 @@ nav.main-nav .nav-link.active {
   font-weight: 700;
 }
 
+/* Estilos específicos para botón dropdown */
+nav.main-nav .nav-item.dropdown .nav-link {
+  background: none;
+  border: none;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.3s ease;
+}
+
+nav.main-nav .nav-item.dropdown .nav-link:hover,
+nav.main-nav .nav-item.dropdown .nav-link:focus {
+  color: #006e5f;
+  outline: none;
+  text-decoration: none;
+}
+
 /* Dropdown */
 nav.main-nav .dropdown-menu {
   display: none;
@@ -346,6 +368,11 @@ footer small {
   max-width: 700px;
 }
 
+.modal-content.register-modal {
+  max-width: 650px;
+  max-height: 85vh;
+}
+
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -356,7 +383,7 @@ footer small {
 
 .modal-header h3 {
   font-size: 1.5rem;
-  color: #333;
+  color: #004d4a;
   margin: 0;
   font-weight: 600;
 }
@@ -394,7 +421,7 @@ footer small {
 .login-form .form-group label {
   display: block;
   font-weight: 600;
-  color: #333;
+  color: #004d4a;
   margin-bottom: 8px;
   font-size: 0.95rem;
 }
@@ -411,8 +438,8 @@ footer small {
 
 .login-form .form-group input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  border-color: #39e4c9;
+  box-shadow: 0 0 0 3px rgba(57, 228, 201, 0.1);
 }
 
 .login-form .form-actions {
@@ -423,7 +450,7 @@ footer small {
 }
 
 .login-form .btn-primary {
-  background: #007bff;
+  background: #39e4c9;
   color: white;
   border: none;
   padding: 12px 25px;
@@ -435,11 +462,11 @@ footer small {
 }
 
 .login-form .btn-primary:hover {
-  background: #0056b3;
+  background: #27b3a3;
 }
 
 .login-form .forgot-password {
-  color: #007bff;
+  color: #39e4c9;
   text-decoration: none;
   font-size: 0.9rem;
   text-align: center;
@@ -462,13 +489,30 @@ footer small {
 }
 
 .register-link a {
-  color: #007bff;
+  color: #39e4c9;
   text-decoration: none;
   font-weight: 600;
 }
 
 .register-link a:hover {
   text-decoration: underline;
+}
+
+.login-link {
+  padding: 20px 30px;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
+  text-align: center;
+}
+
+.login-link p {
+  margin: 0;
+  color: #666;
+}
+
+.login-link .link-button {
+  color: #39e4c9;
+  font-weight: 600;
 }
 
 /* Terms Content */
@@ -495,7 +539,147 @@ footer small {
   margin-bottom: 15px;
 }
 
-/* Utility Classes */
+/* Register Form Styles */
+.register-form {
+  padding: 25px 30px;
+  max-height: none;
+  overflow: visible;
+}
+
+.register-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.register-form .form-group {
+  margin-bottom: 0.8rem;
+}
+
+.register-form .form-group label {
+  display: block;
+  font-weight: 600;
+  color: #004d4a;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.register-form .form-group input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.register-form .form-group input:focus {
+  outline: none;
+  border-color: #39e4c9;
+  box-shadow: 0 0 0 3px rgba(57, 228, 201, 0.1);
+}
+
+.register-form .form-group input.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+}
+
+.register-form .error-message {
+  display: block;
+  color: #e74c3c;
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
+.register-form .checkbox-group {
+  margin: 1rem 0;
+}
+
+.register-form .checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #004d4a;
+}
+
+.register-form .checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.register-form .checkmark {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ddd;
+  border-radius: 3px;
+  flex-shrink: 0;
+  background: white;
+}
+
+.register-form .checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background: #39e4c9;
+  border-color: #39e4c9;
+}
+
+.register-form .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.register-form .form-actions {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #39e4c9;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .register-form .form-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .register-form {
+    padding: 20px;
+  }
+  
+  .modal-content.register-modal {
+    max-width: 95vw;
+    max-height: 90vh;
+    margin: 5vh auto;
+  }
+}
 .text-center {
   text-align: center;
 }

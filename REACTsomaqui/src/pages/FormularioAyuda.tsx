@@ -524,55 +524,61 @@ const FormularioAyuda: React.FC = () => {
             <h2>🏷️ ¿Qué tipo de ayuda necesitas?</h2>
             <p>Selecciona todas las categorías que apliquen a tu situación:</p>
 
-            {Object.entries(categorias).map(([key, categoria]) => (
-              <div key={key} className="categoria-group">
-                <h3>{categoria.titulo}</h3>
-                <div className="tags-grid">
-                  {categoria.opciones.map((opcion) => (
-                    <label key={opcion.value} className="tag-checkbox">
-                      <input
-                        type="checkbox"
-                        value={opcion.value}
-                        checked={formData.tags.includes(opcion.value)}
-                        onChange={(e) => handleTagChange(opcion.value, e.target.checked)}
-                      />
-                      <span className="checkmark"></span>
-                      {opcion.label}
-                    </label>
-                  ))}
+            <div className="categorias-grid">
+              {Object.entries(categorias).map(([key, categoria]) => (
+                <div key={key} className="categoria-recuadro">
+                  <div className="categoria-header">
+                    <h3>{categoria.titulo}</h3>
+                  </div>
+                  <div className="etiquetas">
+                    {categoria.opciones.map((opcion) => (
+                      <label key={opcion.value} className="etiqueta">
+                        <input
+                          type="checkbox"
+                          value={opcion.value}
+                          checked={formData.tags.includes(opcion.value)}
+                          onChange={(e) => handleTagChange(opcion.value, e.target.checked)}
+                        />
+                        <span>{opcion.label}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
             {/* Opción "Otros" */}
-            <div className="categoria-group">
-              <h3>🔧 Otros</h3>
-              <div className="tags-grid">
-                <label className="tag-checkbox">
-                  <input
-                    type="checkbox"
-                    value="Otros"
-                    checked={formData.tags.includes('Otros')}
-                    onChange={(e) => handleTagChange('Otros', e.target.checked)}
-                  />
-                  <span className="checkmark"></span>
-                  Otros (especificar)
-                </label>
-              </div>
-              
-              {showOtrosDetalle && (
-                <div className="form-group">
-                  <label htmlFor="otros_detalle">Especifica qué otro tipo de ayuda necesitas:</label>
-                  <input
-                    type="text"
-                    id="otros_detalle"
-                    name="otros_detalle"
-                    value={formData.otros_detalle}
-                    onChange={handleInputChange}
-                    placeholder="Describe brevemente tu necesidad específica"
-                  />
+            <div className="categoria-otros">
+              <div className="categoria-recuadro">
+                <div className="categoria-header">
+                  <h3>🔧 Otros</h3>
                 </div>
-              )}
+                <div className="etiquetas">
+                  <label className="etiqueta">
+                    <input
+                      type="checkbox"
+                      value="Otros"
+                      checked={formData.tags.includes('Otros')}
+                      onChange={(e) => handleTagChange('Otros', e.target.checked)}
+                    />
+                    <span>Otros (especificar)</span>
+                  </label>
+                </div>
+                
+                {showOtrosDetalle && (
+                  <div className="form-group">
+                    <label htmlFor="otros_detalle">Especifica qué otro tipo de ayuda necesitas:</label>
+                    <input
+                      type="text"
+                      id="otros_detalle"
+                      name="otros_detalle"
+                      value={formData.otros_detalle}
+                      onChange={handleInputChange}
+                      placeholder="Describe brevemente tu necesidad específica"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </section>
 
@@ -632,7 +638,7 @@ const FormularioAyuda: React.FC = () => {
       {/* Modal de términos y condiciones */}
       {showTermsModal && (
         <div className="modal-overlay" onClick={() => setShowTermsModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content terms-modal" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <h3>Términos y Condiciones</h3>
               <button 
@@ -643,18 +649,40 @@ const FormularioAyuda: React.FC = () => {
               </button>
             </div>
             <div className="modal-body">
-              <p>Al utilizar esta plataforma, aceptas:</p>
-              <ul>
-                <li>Proporcionar información veraz sobre tu situación</li>
-                <li>Usar el servicio únicamente para emergencias reales</li>
-                <li>Tratamiento de tus datos personales para gestionar la solicitud</li>
-                <li>Posible contacto directo de voluntarios registrados</li>
-                <li>Responsabilidad propia en la interacción con voluntarios</li>
-              </ul>
-              <p>
-                SomAqui actúa como intermediario entre personas que necesitan ayuda y voluntarios.
-                No nos hacemos responsables de las acciones de terceros.
-              </p>
+              <h4>Términos y Condiciones de Uso – SomAqui.cat</h4>
+              <p><strong>Última actualización: julio de 2025</strong></p>
+              
+              <div className="terms-content">
+                <h5>1. Objeto del servicio</h5>
+                <p>SomAqui.cat permite a los usuarios registrarse para compartir su ubicación aproximada y necesidades específicas mediante etiquetas, conectarse con personas u organizaciones dispuestas a colaborar y participar en iniciativas comunitarias.</p>
+                
+                <h5>2. Registro de usuarios</h5>
+                <p>Se recopilan datos como nombre/alias, correo electrónico y ubicación aproximada. El usuario debe proporcionar información veraz.</p>
+                
+                <h5>3. Protección de datos personales</h5>
+                <p>Se aplica el RGPD. Los datos se tratan confidencialmente y no se comparten sin consentimiento.</p>
+                
+                <h5>4. Uso adecuado</h5>
+                <p>Está prohibido el uso con fines fraudulentos, políticos, comerciales o discriminatorios.</p>
+                
+                <h5>5. Limitación de responsabilidad</h5>
+                <p>SomAqui.cat actúa como intermediario. No garantiza la veracidad ni disponibilidad de ayuda.</p>
+                
+                <h5>6. Modificaciones</h5>
+                <p>Nos reservamos el derecho a modificar los términos en cualquier momento.</p>
+                
+                <h5>7. Aceptación</h5>
+                <p>Usar la plataforma implica aceptar estos términos.</p>
+                
+                <h4>Política de Privacidad</h4>
+                <p><strong>Responsable:</strong> SomAqui.cat</p>
+                <p><strong>Finalidad:</strong> Plataforma de ayuda comunitaria. Datos tratados para conectar necesidades con ayuda local.</p>
+                <p><strong>Base legal:</strong> Consentimiento del usuario.</p>
+                <p><strong>Acceso a datos:</strong> Solo el equipo de SomAqui.cat. No hay cesiones sin consentimiento.</p>
+                <p><strong>Conservación:</strong> Mientras seas usuario. Puedes solicitar la eliminación.</p>
+                <p><strong>Seguridad:</strong> Se aplican medidas técnicas y organizativas de protección.</p>
+                <p><strong>Derechos:</strong> Acceso, rectificación, eliminación, oposición. Contacta con nosotros para ejercerlos.</p>
+              </div>
             </div>
             <div className="modal-footer">
               <button 

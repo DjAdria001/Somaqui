@@ -15,6 +15,7 @@ const Voluntario: React.FC = () => {
   const [filter, setFilter] = useState<string>('');
   const [showVolunteerModal, setShowVolunteerModal] = useState(false);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Simulamos datos de emergencias
   useEffect(() => {
@@ -270,6 +271,18 @@ const Voluntario: React.FC = () => {
                   <option value="emergencias">Solo emergencias</option>
                   <option value="flexible">Flexible</option>
                 </select>
+              </div>
+
+              <div className="form-group">
+                <label className="checkbox-label terms-checkbox">
+                  <input 
+                    type="checkbox" 
+                    checked={termsAccepted}
+                    onChange={() => setTermsAccepted(!termsAccepted)}
+                    required
+                  />
+                  <span>Acepto los términos y condiciones y autorizo el tratamiento de mis datos personales *</span>
+                </label>
               </div>
               
               <div className="form-actions">
