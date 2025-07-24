@@ -6,7 +6,8 @@
   <title>Iniciar sesión – SomAqui.cat</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
-  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="css/Styleglobal.css" />
+  <link rel="stylesheet" href="css/login.css" />
 
 </head>
 <body>
@@ -30,38 +31,5 @@
     </div>
   </main>
 
-  <script>
-    // Menú hamburguesa y dropdown
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navList = document.querySelector('.nav-list');
-    const dropdownLinks = document.querySelectorAll('.nav-item.dropdown > .nav-link');
-
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      navList.classList.toggle('show');
-    });
-
-    dropdownLinks.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const parent = link.parentElement;
-        const expanded = parent.classList.toggle('expanded');
-        link.setAttribute('aria-expanded', expanded);
-      });
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        navList.classList.remove('show');
-        menuToggle.setAttribute('aria-expanded', false);
-        dropdownLinks.forEach(link => {
-          const parent = link.parentElement;
-          parent.classList.remove('expanded');
-          link.setAttribute('aria-expanded', false);
-        });
-      }
-    });
-  </script>
 </body>
 </html>
