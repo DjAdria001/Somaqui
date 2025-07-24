@@ -146,8 +146,8 @@
     <section class="hero" id="unete">
       <h2>Únete a la red</h2>
       <p>Tu barrio te necesita. Puedes sumarte como voluntario o entidad colaboradora y marcar la diferencia.</p>
-      <a href="registro.html">Registrarme</a>
-      <a href="login.html">Iniciar Sesión</a>
+      <a href="#" onclick="mostrarPopupLoginConTamano('registro.html')">Registrarme</a>
+      <a href="#" onclick="mostrarPopupLoginConTamano('login.html')">Iniciar Sesión</a>
     </section>
 
     
@@ -176,6 +176,24 @@
   <script src="js/menu.js"></script>
   <script src="js/login.js"></script>
   <script src="js/slider.js"></script>
+  
+  <script>
+    // Función global para mostrar popup con tamaño dinámico
+    function mostrarPopupLoginConTamano(src) {
+      if (window.mostrarPopupLogin) {
+        window.mostrarPopupLogin(src);
+      } else {
+        // Fallback
+        const popup = document.getElementById("popup-login");
+        const iframe = popup.querySelector("iframe");
+        iframe.src = src;
+        popup.style.display = "flex";
+      }
+    }
+    
+    // Hacer la función disponible globalmente
+    window.mostrarPopupLoginConTamano = mostrarPopupLoginConTamano;
+  </script>
  
 </body>
 

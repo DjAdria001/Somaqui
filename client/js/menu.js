@@ -14,6 +14,38 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('dropdownItems:', dropdownItems.length);
     console.log('dropdownLinks:', dropdownLinks.length);
 
+    // Función para ajustar tamaño del popup según el contenido
+    function ajustarTamanoPopup(src) {
+        const popup = document.getElementById('popup-login');
+        const popupContent = popup.querySelector('div');
+        
+        if (src.includes('registro') || src.includes('register')) {
+            // Tamaño para registro (más grande)
+            popupContent.style.width = '95%';
+            popupContent.style.maxWidth = '900px';
+            popupContent.style.height = '95%';
+            popupContent.style.minHeight = '700px';
+        } else {
+            // Tamaño para login (más pequeño)
+            popupContent.style.width = '90%';
+            popupContent.style.maxWidth = '500px';
+            popupContent.style.height = '70%';
+            popupContent.style.minHeight = '450px';
+        }
+    }
+
+    // Override de la función de login para manejar tamaños dinámicos
+    window.mostrarPopupLogin = function(src = 'login.html') {
+        const popup = document.getElementById('popup-login');
+        const iframe = popup.querySelector('iframe');
+        
+        // Ajustar tamaño antes de mostrar
+        ajustarTamanoPopup(src);
+        
+        iframe.src = src;
+        popup.style.display = 'flex';
+    };
+
     // Toggle menú hamburguesa
     if (menuToggle && navList) {
         menuToggle.addEventListener('click', function(e) {
@@ -24,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function() {
             navList.classList.toggle('show');
         });
     }
+
+    // ...existing code...
 
     // Toggle dropdown - Método mejorado
     dropdownItems.forEach(function(dropdown, index) {
