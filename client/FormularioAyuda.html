@@ -9,9 +9,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <link rel="icon" href="Imagenes/LogoSF.png" type="image/png" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="css/Styleglobal.css" />
-  <link rel="stylesheet" href="css/FormularioAyuda.css" />
+  <link rel="stylesheet" href="style.css">
+ 
+  <link rel="stylesheet" href="css/Styleglobal.css">
+  <link rel="stylesheet" href="css/FormularioAyuda.css">
 </head>
 
 <body>
@@ -57,14 +58,18 @@
 
   <main>
     <h2>🚨 Solicita ayuda en tu zona</h2>
-    <p>Selecciona una o más situaciones que estás viviendo. La ubicación no se mostrará públicamente.</p>
+    <p>Selecciona una o más situaciones que estás viviendo. La ubicación no se mostrará públicamente.
+    </p>
 
-    <form id="form-ayuda" novalidate>
+    <form action="enviar_ayuda.php" method="POST">
       <div class="ubicacion-mapa">
+        <!-- Mapa a la izquierda -->
         <div class="mapa-contenedor">
-          <input type="hidden" id="ubicacion" name="ubicacion" required />
-
-          <button type="button" id="ubicacion-texto" class="ubicacion-display" aria-label="Detectar ubicación automáticamente">
+          <!-- Campo oculto para enviar la ubicación -->
+          <input type="hidden" id="ubicacion" name="ubicacion" required>
+          
+          <!-- Texto visible de la ubicación como botón -->
+          <button type="button" id="ubicacion-texto" class="ubicacion-display">
             📍 Detectar mi ubicación automáticamente
           </button>
 
@@ -73,27 +78,31 @@
             Es necesaria para conectar con servicios cercanos.
           </div>
 
-          <div id="map" style="height: 250px; margin-bottom: 1rem;"></div>
+          <div id="map"></div>
 
           <label for="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
-          <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio..." />
+          <input type="text" name="desc_ubic" id="desc_ubic" placeholder="Ej: En la rotonda, cerca del ambulatorio...">
+          
         </div>
 
+        <!-- Formulario a la derecha -->
         <div class="form-derecha">
+         
           <label for="nombre">👤 Nombre o alias *</label>
-          <input type="text" name="nombre" id="nombre" required placeholder="Tu nombre o alias" />
-
+          <input type="text" name="nombre" id="nombre" required placeholder="Tu nombre o alias">
+          
           <label for="correo">📧 Correo electrónico *</label>
-          <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com" />
-
+          <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+          
           <label for="telefono">📱 Teléfono móvil (opcional)</label>
-          <input type="tel" name="telefono" id="telefono" placeholder="Ej: 612 345 678" />
+          <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 612 345 678">
 
           <label for="personales">👥 ¿Es solo para ti o para otras personas también?</label>
-          <input type="text" name="personales" id="personales" placeholder="Ej: Solo para mí o para mi familia" />
+          <input type="text" name="personales" id="personales" placeholder="Ej: Solo para mí o para mi familia">
 
-          <label for="tiempo">⏰ ¿Desde cuándo ocurre la situación? *</label>
-          <input type="text" name="tiempo" id="tiempo" required placeholder="Ej: 30 minutos" />
+          <label for ="tiempo">⏰ ¿Desde cuándo ocurre la situación? *</label>
+          <input type="text" name="tiempo" id="tiempo" required placeholder="Ej: 30 minutos">
+
         </div>
       </div>
 
@@ -102,29 +111,128 @@
         <label class="etiquetas-titulo">🆘 Selecciona una o más etiquetas *</label>
       </div>
 
+      <!-- Grid de categorías organizadas en recuadros -->
       <div class="categorias-grid">
-        <!-- Aquí van todas las categorías y etiquetas igual que antes -->
-        <!-- ... copia las etiquetas aquí ... -->
-        <!-- Para abreviar no las repito, en tu archivo copia las etiquetas de tu ejemplo -->
+        <!-- Emergencias climáticas -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🌪️ Emergencias climáticas</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Incendios forestales" /><span>Incendios forestales</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundaciones" /><span>Lluvias intensas</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de calor" /><span>Ola de calor</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ola de frío" /><span>Ola de frío</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Vientos fuertes" /><span>Vientos fuertes</span></label>
+          </div>
+        </div>
+
+        <!-- Cortes o fallos -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🛑 Cortes o fallos</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de luz" /><span>Corte de luz</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de agua" /><span>Corte de agua</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de gas" /><span>Corte de gas</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Corte de Internet" /><span>Corte de Internet</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Apagón general" /><span>Apagón general</span></label>
+          </div>
+        </div>
+
+        <!-- Necesidades humanas -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>👥 Necesidades humanas</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Mayores solos" /><span>Mayores solos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Personas sin hogar" /><span>Personas sin hogar</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Movilidad reducida" /><span>Movilidad reducida</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de alimentos" /><span>Falta de alimentos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de medicamentos" /><span>Falta de medicamentos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesidad de transporte" /><span>Necesidad de transporte</span></label>
+          </div>
+        </div>
+
+        <!-- Apoyo psicosocial -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🧠 Apoyo psicosocial</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ansiedad o crisis emocional" /><span>Ansiedad o crisis emocional</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito hablar" /><span>Necesito hablar</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Necesito contención emocional" /><span>Necesito contención emocional</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Acompañamiento" /><span>Acompañamiento</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Ataques de pánico" /><span>Ataques de pánico</span></label>
+          </div>
+        </div>
+
+        <!-- Problemas estructurales -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🏘️ Problemas estructurales</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Desalojo" /><span>Peligro de desalojo</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Calles bloqueadas" /><span>Calles bloqueadas</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Inundación interna en la vivienda" /><span>Inundación interna en la vivienda</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Daños en la vivienda (techos, paredes, ventanas)" /><span>Daños en la vivienda (techos, paredes, ventanas)</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Riesgo de derrumbe por lluvias o sismos" /><span>Riesgo de derrumbe por lluvias o sismos</span></label>
+          </div>
+        </div>
+
+        <!-- Infraestructura -->
+        <div class="categoria-recuadro">
+          <div class="categoria-header">
+            <h3>🧰 Infraestructura</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Alcantarillado colapsado o desbordado" /><span>Alcantarillado colapsado o desbordado</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Centro cerrado" /><span>Centro cívico cerrado</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Colapso en centros de salud" /><span>Centro de salud colapsado</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Falta de servicios básicos" /><span>Falta de servicios básicos</span></label>
+            <label class="etiqueta"><input type="checkbox" name="tags[]" value="Problemas de infraestructura" /><span>Problemas de infraestructura</span></label>
+          </div>
+        </div>
+
+        <!-- Otra emergencia -->
+        <div class="categoria-recuadro categoria-otros">
+          <div class="categoria-header">
+            <h3>➕ Otra emergencia</h3>
+          </div>
+          <div class="etiquetas">
+            <label class="etiqueta">
+              <input type="checkbox" id="otros-check" name="tags[]" value="Otros" onchange="toggleOtrosTexto()" />
+              <span>Otros</span>
+            </label>
+          </div>
+          <div id="otros-texto-container" style="display:none; margin-top: 1rem;">
+            <label for="otros_detalle">🔍 Describe tu emergencia:</label>
+            <input type="text" name="otros_detalle" id="otros_detalle" placeholder="Describe brevemente tu situación...">
+          </div>
+        </div>
       </div>
 
       <div class="descripcion-seccion">
         <label for="descripcion">📝 Describe tu situación (opcional)</label>
-        <textarea name="descripcion" id="descripcion"
-          placeholder="Ej: Estoy sin electricidad desde hace 3 horas y necesito ayuda urgente..."></textarea>
+        <textarea name="descripcion" id="descripcion" placeholder="Ej: Estoy sin electricidad desde hace 3 horas y necesito ayuda urgente..."></textarea>
       </div>
 
-      <div class="checkbox-term">
-        <input type="checkbox" id="terminos" required />
-        <label for="terminos">Acepto los <a href="#" id="abrir-terminos">términos y condiciones</a> *</label>
-      </div>
+        <div class="checkbox-term">
+          <input type="checkbox" id="terminos" required>
+          <label for="terminos">Acepto los <a href="#" id="abrir-terminos">términos y condiciones</a> *</label>
+        </div>
 
-      <button type="submit">Enviar solicitud</button>
-      <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
-      <div class="privacidad">Por favor, usa este formulario de manera seria y responsable.</div>
+        <button type="submit">Enviar solicitud</button>
+        <div class="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
+        <div class="privacidad">Por favor, usa este formulario de manera seria y responsable.</div>
     </form>
   </main>
 
+  <!-- MODAL de Términos y Condiciones -->
   <div id="modal-terminos"
     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; justify-content:center; align-items:center;">
     <div
@@ -147,7 +255,7 @@
       <p><strong>6. Modificaciones</strong><br>Nos reservamos el derecho a modificar los términos en cualquier momento.
       </p>
       <p><strong>7. Aceptación</strong><br>Usar la plataforma implica aceptar estos términos.</p>
-      <hr />
+      <hr>
       <h3>Política de Privacidad</h3>
       <p><strong>Responsable:</strong> SomAqui.cat</p>
       <p><strong>Finalidad:</strong> Plataforma de ayuda comunitaria. Datos tratados para conectar necesidades con ayuda
@@ -163,164 +271,26 @@
 
   <footer id="contacto">
     <p>
-      <a href="#" onclick="abrirModal()">Términos y condiciones</a> |
+      <a href="#" onclick="alert('Aquí irá el modal de Términos')">Términos y condiciones</a> |
       <a href="Contacto.html">Contacto</a> |
       <a href="Home.html">Inicio</a>
     </p>
     <small>© 2025 SomAqui.cat – Todos los derechos reservados.</small>
   </footer>
 
-  <script>
-    // Variables globales
-    let map, marker;
+  <!-- POPUP LOGIN CON IFRAME -->
+  <div id="popup-login"
+    style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
+    <div
+      style="background:white; padding:0; border-radius:10px; width:95%; max-width:800px; height:90%; min-height:600px; position:relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+      <button id="cerrar-popup"
+        style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; cursor:pointer; z-index:10;">×</button>
+      <iframe src="login.html" style="width:100%; height:100%; border:none; border-radius:10px;"></iframe>
+    </div>
+  </div>
 
-    // Inicializar mapa Leaflet
-    function initMap() {
-      map = L.map('map').setView([41.3851, 2.1734], 13); // Barcelona por defecto
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-        maxZoom: 19,
-      }).addTo(map);
-
-      // Marcador arrastrable para seleccionar ubicación manual
-      marker = L.marker([41.3851, 2.1734], { draggable: true }).addTo(map);
-
-      marker.on('dragend', () => {
-        const pos = marker.getLatLng();
-        document.getElementById('ubicacion').value = `${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-      });
-
-      // Al clicar en mapa cambia marcador
-      map.on('click', e => {
-        marker.setLatLng(e.latlng);
-        document.getElementById('ubicacion').value = `${e.latlng.lat.toFixed(6)},${e.latlng.lng.toFixed(6)}`;
-      });
-    }
-
-    // Detectar ubicación automática
-    document.getElementById('ubicacion-texto').addEventListener('click', () => {
-      if (!navigator.geolocation) {
-        alert('Geolocalización no está soportada por tu navegador.');
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const lat = pos.coords.latitude;
-          const lng = pos.coords.longitude;
-
-          marker.setLatLng([lat, lng]);
-          map.setView([lat, lng], 15);
-          document.getElementById('ubicacion').value = `${lat.toFixed(6)},${lng.toFixed(6)}`;
-          document.getElementById('ubicacion-texto').textContent = `📍 Ubicación detectada: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-        },
-        () => alert('No se pudo obtener la ubicación. Por favor, permite acceso o selecciona manualmente.'),
-        { enableHighAccuracy: true, timeout: 10000 }
-      );
-    });
-
-    // Toggle campo texto "Otros"
-    const otrosCheck = document.getElementById('otros-check');
-    const otrosTexto = document.getElementById('otros-texto-container');
-
-    otrosCheck.addEventListener('change', () => {
-      otrosTexto.style.display = otrosCheck.checked ? 'block' : 'none';
-      if (!otrosCheck.checked) {
-        document.getElementById('otros_detalle').value = '';
-      }
-    });
-
-    // Modal términos y condiciones
-    const modal = document.getElementById('modal-terminos');
-    const abrirTerminos = document.getElementById('abrir-terminos');
-
-    abrirTerminos.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.style.display = 'flex';
-    });
-
-    function cerrarModal() {
-      modal.style.display = 'none';
-    }
-
-    window.cerrarModal = cerrarModal; // Para que funcione onclick en HTML
-
-    // Manejo envío formulario
-    document.getElementById('form-ayuda').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      // Validaciones básicas
-      const ubicacion = document.getElementById('ubicacion').value.trim();
-      if (!ubicacion) {
-        alert('Por favor, indica tu ubicación o usa el botón para detectarla.');
-        return;
-      }
-
-      const nombre = document.getElementById('nombre').value.trim();
-      const correo = document.getElementById('correo').value.trim();
-      const tiempo = document.getElementById('tiempo').value.trim();
-      const terminos = document.getElementById('terminos').checked;
-
-      if (!nombre || !correo || !tiempo) {
-        alert('Por favor, completa los campos obligatorios.');
-        return;
-      }
-
-      if (!terminos) {
-        alert('Debes aceptar los términos y condiciones para enviar la solicitud.');
-        return;
-      }
-
-      // Obtener etiquetas seleccionadas
-      const tags = [...document.querySelectorAll('input[name="tags[]"]:checked')].map(input => input.value);
-
-      if (tags.length === 0) {
-        alert('Por favor, selecciona al menos una etiqueta de emergencia.');
-        return;
-      }
-
-      // Construir objeto para enviar
-      const data = {
-        ubicacion,
-        desc_ubic: document.getElementById('desc_ubic').value.trim(),
-        nombre,
-        correo,
-        telefono: document.getElementById('telefono').value.trim(),
-        personales: document.getElementById('personales').value.trim(),
-        tiempo,
-        tags,
-        otros_detalle: document.getElementById('otros_detalle').value.trim(),
-        descripcion: document.getElementById('descripcion').value.trim(),
-      };
-
-      try {
-        const response = await fetch('http://localhost:3000/api/ayuda', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-
-        if (!response.ok) {
-          const error = await response.text();
-          alert('Error al enviar la solicitud: ' + error);
-          return;
-        }
-
-        alert('Solicitud enviada con éxito. Gracias por usar SomAqui.cat');
-        document.getElementById('form-ayuda').reset();
-        document.getElementById('ubicacion-texto').textContent = '📍 Detectar mi ubicación automáticamente';
-        otrosTexto.style.display = 'none';
-        marker.setLatLng([41.3851, 2.1734]);
-        map.setView([41.3851, 2.1734], 13);
-        document.getElementById('ubicacion').value = '';
-      } catch (err) {
-        alert('Error de red: ' + err.message);
-      }
-    });
-
-    // Inicializa el mapa cuando cargue la página
-    window.onload = initMap;
-  </script>
+  <script src="js/formularioAyuda.js?v=20250121"></script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>
