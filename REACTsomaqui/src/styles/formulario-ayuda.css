@@ -6,83 +6,118 @@ main {
   padding-top: 0.2rem !important;
 }
 
-/* Sección de emergencia */
-.seccion-emergencia {
-  text-align: center;
-  margin: 3rem 0 2rem 0;
-  padding: 1.5rem 0;
+/* Contenedor principal del formulario */
+.formulario-ayuda-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.titulo-emergencia {
-  font-size: 1.8rem !important;
-  font-weight: bold;
-  color: #004d4a !important;
-  margin: 0 auto 1rem auto !important;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-align: center !important;
+.formulario-header {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.formulario-header h1 {
+  font-size: 1.8rem;
+  color: #004d4a;
+  margin-bottom: 0.3rem;
+}
+
+.formulario-header p {
+  font-size: 1rem;
+  color: #666;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Layout horizontal para ubicación y contacto */
+.ubicacion-contacto-section {
+  margin-bottom: 2rem;
+}
+
+.ubicacion-mapa {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor del mapa (lado izquierdo) */
+.mapa-contenedor {
+  flex: 1;
+  min-width: 50%;
+}
+
+.mapa-contenedor h2 {
+  font-size: 1.4rem;
+  color: #004d4a;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.ubicacion-controls {
+  margin-bottom: 1rem;
+}
+
+.detect-location-btn {
+  background: #39e4c9;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
-  display: block;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
 }
 
-/* Actualizar estilo del subtítulo */
-.etiquetas-titulo {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin: 0;
+.detect-location-btn:hover:not(:disabled) {
+  background: #27b3a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(57, 228, 201, 0.3);
+}
+
+.detect-location-btn:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.detect-location-btn:disabled:hover {
+  background: #bbb;
+}
+
+.ubicacion-input-group {
+  margin-bottom: 1rem;
+}
+
+.ubicacion-input-group label {
   display: block;
-  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
   color: #333;
 }
 
-/* Estilos para el encabezado y texto introductorio */
-main h2:not(.titulo-emergencia) {
-  text-align: center;
-  margin: 0 auto 0.3rem;
-  line-height: 1.4;
-  max-width: 800px;
-  font-size: 1.8rem;
-  color: #004d4a;
-  font-weight: bold;
-}
-
-main > p {
-  text-align: center;
-  margin: 0.3rem auto 1.2rem;
-  line-height: 1.5;
-  max-width: 700px;
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Estilos específicos del formulario de ayuda */
-form {
-  background: white;
-  border: 2px solid #39e4c9;
-  border-radius: 12px;
-  padding: 2rem;
-}
-
-label {
-  font-weight: bold;
-  margin-top: 1rem;
-  display: block;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
+.ubicacion-input-group input {
   width: 100%;
-  padding: 0.7rem;
+  padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
 }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
+.map-container {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #39e4c9;
 }
 
 /* Estilos específicos de etiquetas */
@@ -201,8 +236,7 @@ textarea {
 #map {
   height: 400px;
   width: 100%;
-  border: 2px solid #39e4c9;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 /* Contenedor para el formulario de la derecha (50% del espacio) */
@@ -211,34 +245,96 @@ textarea {
   min-width: 45%;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   background: #f8fdfd;
   padding: 2rem;
   border-radius: 12px;
   border: 2px solid #e0fbf9;
   box-shadow: 0 2px 8px rgba(0,228,201,0.1);
-  height: auto;
-  align-self: stretch;
+  height: fit-content;
+  align-self: flex-start;
+}
+
+.form-derecha h2 {
+  font-size: 1.4rem;
+  color: #004d4a;
+  margin-bottom: 1rem;
+  margin-top: 0;
+  text-align: left;
+}
+
+.form-derecha .form-group {
+  margin-bottom: 1rem;
 }
 
 .form-derecha label {
   margin-top: 0;
+  margin-bottom: 0.5rem;
   font-weight: bold;
   color: #003333;
+  display: block;
 }
 
 .form-derecha input {
+  width: 100%;
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .form-derecha input:focus {
   border-color: #39e4c9;
   outline: none;
   box-shadow: 0 0 5px rgba(57, 228, 201, 0.3);
+}
+
+/* Estilos para el formulario general */
+.ayuda-form {
+  background: white;
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+/* Estilos generales para inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Estilos específicos de etiquetas */
+.etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  background: #f0f0f0;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  max-width: 100%;
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
 }
 
 /* Diseño en cuadrícula para las categorías */
@@ -364,41 +460,293 @@ textarea {
   gap: 0.5rem;
 }
 
+/* Secciones del formulario */
+.tags-section,
+.descripcion-section,
+.terms-section,
+.submit-section {
+  margin: 2rem 0;
+}
+
+.tags-section h2,
+.descripcion-section h2 {
+  font-size: 1.4rem;
+  color: #004d4a;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tags-section p {
+  text-align: center;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Categorías de etiquetas */
+.categoria-group {
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 2px solid #39e4c9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.categoria-group h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #39e4c9;
+}
+
+.tags-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.tag-checkbox {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  margin: 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tag-checkbox:hover {
+  background: #f0f8ff;
+  border-color: #39e4c9;
+  transform: translateX(3px);
+}
+
+.tag-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #39e4c9;
+}
+
+.tag-checkbox .checkmark {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.tag-checkbox input[type="checkbox"]:checked + .checkmark {
+  color: #39e4c9;
+  font-weight: 600;
+}
+
+.tag-checkbox:has(input[type="checkbox"]:checked) {
+  background: rgba(57, 228, 201, 0.08);
+  border-color: #39e4c9;
+}
+
+/* Términos y condiciones */
+.terms-section {
+  margin: 2rem 0;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.terms-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #39e4c9;
+}
+
+.terms-link {
+  color: #39e4c9;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+}
+
+.terms-link:hover {
+  color: #27b3a3;
+}
+
 /* Botón de envío */
-button[type="submit"] {
-  margin-top: 2rem;
+.submit-section {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.submit-btn {
   background: #39e4c9;
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  min-width: 250px;
 }
 
-button[type="submit"]:hover {
+.submit-btn:hover {
+  background: #27b3a3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(57, 228, 201, 0.3);
+}
+
+.submit-help {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-content.terms-modal {
+  max-width: 600px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #004d4a;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-body {
+  margin: 1rem 0;
+}
+
+.modal-body h4 {
+  color: #004d4a;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.modal-body p, .modal-body li {
+  line-height: 1.5;
+  color: #333;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.modal-btn-primary,
+.modal-btn-secondary {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.modal-btn-primary {
+  background: #39e4c9;
+  color: white;
+}
+
+.modal-btn-primary:hover {
   background: #27b3a3;
 }
 
-/* Nota de privacidad */
-.privacidad {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #555;
-  text-align: center;
+.modal-btn-secondary {
+  background: #f8f9fa;
+  color: #333;
+  border: 1px solid #ddd;
 }
 
-.descripcion-ubicacion {
-  font-size: 0.9rem;
-  color: #555;
+.modal-btn-secondary:hover {
+  background: #e9ecef;
+}
+
+.terms-content h4 {
+  color: #004d4a;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.terms-content p {
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
 /* Responsive para pantallas pequeñas */
 @media (max-width: 900px) {
   .ubicacion-mapa {
     flex-direction: column;
+    gap: 1.5rem;
   }
   
   .mapa-contenedor,
@@ -414,9 +762,30 @@ button[type="submit"]:hover {
   .form-derecha {
     padding: 1.5rem;
   }
+
+  .mapa-contenedor h2,
+  .form-derecha h2 {
+    text-align: center;
+  }
 }
 
 @media (max-width: 768px) {
+  .formulario-ayuda-container {
+    padding: 0 0.5rem;
+  }
+
+  .ayuda-form {
+    padding: 1.5rem;
+  }
+
+  .ubicacion-mapa {
+    gap: 1rem;
+  }
+
+  .form-derecha {
+    padding: 1rem;
+  }
+
   .categorias-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -428,5 +797,13 @@ button[type="submit"]:hover {
   
   .categoria-otros {
     grid-column: 1;
+  }
+
+  .formulario-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .formulario-header p {
+    font-size: 0.9rem;
   }
 }

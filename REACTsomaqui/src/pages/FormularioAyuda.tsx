@@ -41,62 +41,62 @@ const FormularioAyuda: React.FC = () => {
     climaticas: {
       titulo: '🌪️ Emergencias climáticas',
       opciones: [
-        'Incendios forestales',
-        'Lluvias intensas',
-        'Ola de calor',
-        'Ola de frío',
-        'Vientos fuertes'
+        { value: 'Incendios forestales', label: 'Incendios forestales' },
+        { value: 'Inundaciones', label: 'Lluvias intensas' },
+        { value: 'Ola de calor', label: 'Ola de calor' },
+        { value: 'Ola de frío', label: 'Ola de frío' },
+        { value: 'Vientos fuertes', label: 'Vientos fuertes' }
       ]
     },
     cortes: {
       titulo: '🛑 Cortes o fallos',
       opciones: [
-        'Corte de luz',
-        'Corte de agua',
-        'Corte de gas',
-        'Corte de Internet',
-        'Apagón general'
+        { value: 'Corte de luz', label: 'Corte de luz' },
+        { value: 'Corte de agua', label: 'Corte de agua' },
+        { value: 'Corte de gas', label: 'Corte de gas' },
+        { value: 'Corte de Internet', label: 'Corte de Internet' },
+        { value: 'Apagón general', label: 'Apagón general' }
       ]
     },
     humanas: {
       titulo: '👥 Necesidades humanas',
       opciones: [
-        'Mayores solos',
-        'Personas sin hogar',
-        'Movilidad reducida',
-        'Falta de alimentos',
-        'Falta de medicamentos',
-        'Necesidad de transporte'
+        { value: 'Mayores solos', label: 'Mayores solos' },
+        { value: 'Personas sin hogar', label: 'Personas sin hogar' },
+        { value: 'Movilidad reducida', label: 'Movilidad reducida' },
+        { value: 'Falta de alimentos', label: 'Falta de alimentos' },
+        { value: 'Falta de medicamentos', label: 'Falta de medicamentos' },
+        { value: 'Necesidad de transporte', label: 'Necesidad de transporte' }
       ]
     },
     psicosocial: {
       titulo: '🧠 Apoyo psicosocial',
       opciones: [
-        'Ansiedad o crisis emocional',
-        'Necesito hablar',
-        'Necesito contención emocional',
-        'Acompañamiento',
-        'Ataques de pánico'
+        { value: 'Ansiedad o crisis emocional', label: 'Ansiedad o crisis emocional' },
+        { value: 'Necesito hablar', label: 'Necesito hablar' },
+        { value: 'Necesito contención emocional', label: 'Necesito contención emocional' },
+        { value: 'Acompañamiento', label: 'Acompañamiento' },
+        { value: 'Ataques de pánico', label: 'Ataques de pánico' }
       ]
     },
     estructurales: {
       titulo: '🏘️ Problemas estructurales',
       opciones: [
-        'Peligro de desalojo',
-        'Calles bloqueadas',
-        'Inundación interna en la vivienda',
-        'Daños en la vivienda (techos, paredes, ventanas)',
-        'Riesgo de derrumbe por lluvias o sismos'
+        { value: 'Desalojo', label: 'Peligro de desalojo' },
+        { value: 'Calles bloqueadas', label: 'Calles bloqueadas' },
+        { value: 'Inundación interna en la vivienda', label: 'Inundación interna en la vivienda' },
+        { value: 'Daños en la vivienda (techos, paredes, ventanas)', label: 'Daños en la vivienda (techos, paredes, ventanas)' },
+        { value: 'Riesgo de derrumbe por lluvias o sismos', label: 'Riesgo de derrumbe por lluvias o sismos' }
       ]
     },
     infraestructura: {
       titulo: '🧰 Infraestructura',
       opciones: [
-        'Alcantarillado colapsado o desbordado',
-        'Centro cívico cerrado',
-        'Centro de salud colapsado',
-        'Falta de servicios básicos',
-        'Problemas de infraestructura'
+        { value: 'Alcantarillado colapsado o desbordado', label: 'Alcantarillado colapsado o desbordado' },
+        { value: 'Centro cerrado', label: 'Centro cívico cerrado' },
+        { value: 'Colapso en centros de salud', label: 'Centro de salud colapsado' },
+        { value: 'Falta de servicios básicos', label: 'Falta de servicios básicos' },
+        { value: 'Problemas de infraestructura', label: 'Problemas de infraestructura' }
       ]
     }
   };
@@ -109,8 +109,8 @@ const FormularioAyuda: React.FC = () => {
     }));
   };
 
-  const handleTagChange = (tag: string, checked: boolean) => {
-    if (tag === 'Otros') {
+  const handleTagChange = (value: string, checked: boolean) => {
+    if (value === 'Otros') {
       setShowOtrosDetalle(checked);
       if (!checked) {
         setFormData(prev => ({
@@ -123,8 +123,8 @@ const FormularioAyuda: React.FC = () => {
     setFormData(prev => ({
       ...prev,
       tags: checked 
-        ? [...prev.tags, tag]
-        : prev.tags.filter(t => t !== tag)
+        ? [...prev.tags, value]
+        : prev.tags.filter(t => t !== value)
     }));
   };
 
@@ -139,7 +139,7 @@ const FormularioAyuda: React.FC = () => {
 
   const detectLocation = () => {
     if (!navigator.geolocation) {
-      alert('Geolocalización no soportada en este navegador');
+      alert('Tu navegador no soporta geolocalización. Por favor, selecciona tu ubicación manualmente en el mapa.');
       return;
     }
 
@@ -149,25 +149,53 @@ const FormularioAyuda: React.FC = () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
+        console.log('Ubicación detectada:', { latitude, longitude });
+        
+        // Actualizar los datos del formulario
         handleLocationSelect(latitude, longitude);
         
         // Actualizar el mapa
         if (mapRef.current) {
-          mapRef.current.updateLocation(latitude, longitude);
+          try {
+            mapRef.current.updateLocation(latitude, longitude);
+          } catch (error) {
+            console.error('Error al actualizar el mapa:', error);
+          }
         }
         
         setIsDetectingLocation(false);
+        setUbicacionTexto(`📍 Ubicación detectada: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
       },
       (error) => {
         console.error('Error al obtener ubicación:', error);
-        alert('No se pudo obtener la ubicación. Por favor, selecciona manualmente en el mapa.');
-        setUbicacionTexto('📍 Selecciona tu ubicación en el mapa');
         setIsDetectingLocation(false);
+        
+        let errorMessage = 'No se pudo obtener la ubicación. ';
+        
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage += 'Permisos de ubicación denegados. Por favor, permite el acceso a tu ubicación y vuelve a intentarlo.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage += 'Información de ubicación no disponible.';
+            break;
+          case error.TIMEOUT:
+            errorMessage += 'La solicitud de ubicación tardó demasiado tiempo.';
+            break;
+          default:
+            errorMessage += 'Error desconocido.';
+            break;
+        }
+        
+        errorMessage += ' Puedes seleccionar tu ubicación manualmente haciendo clic en el mapa.';
+        
+        alert(errorMessage);
+        setUbicacionTexto('📍 Detectar mi ubicación automáticamente');
       },
       {
         enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 300000
+        timeout: 15000, // Aumentar timeout a 15 segundos
+        maximumAge: 300000 // 5 minutos
       }
     );
   };
@@ -223,278 +251,277 @@ const FormularioAyuda: React.FC = () => {
   };
 
   return (
-    <main>
-      <h2>🚨 Solicita ayuda en tu zona</h2>
-      <p>
-        Selecciona una o más situaciones que estás viviendo. La ubicación no se mostrará públicamente.
-      </p>
+    <div className="formulario-ayuda-container">
+      <header className="formulario-header">
+        <h1>Solicitar ayuda inmediata</h1>
+        <p>Conectamos tu necesidad con voluntarios cercanos</p>
+      </header>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="ubicacion-mapa">
-          {/* Mapa a la izquierda */}
-          <div className="mapa-contenedor">
-            <button 
-              type="button" 
-              className={`ubicacion-display ${isDetectingLocation ? 'detectando' : formData.ubicacion ? 'ubicacion-detectada' : ''}`}
-              onClick={detectLocation}
-              disabled={isDetectingLocation}
-            >
-              {ubicacionTexto}
-            </button>
-
-            <div className="descripcion-ubicacion">
-              Haz clic arriba para detectar automáticamente o selecciona manualmente en el mapa.
-              Es necesaria para conectar con servicios cercanos.
-            </div>
-
-            <MapComponent
-              ref={mapRef}
-              onLocationSelect={handleLocationSelect}
-              height="400px"
-            />
-
-            <label htmlFor="desc_ubic">🗺️ Detalles de ubicación (opcional)</label>
-            <input
-              type="text"
-              name="desc_ubic"
-              id="desc_ubic"
-              value={formData.desc_ubic}
-              onChange={handleInputChange}
-              placeholder="Ej: En la rotonda, cerca del ambulatorio..."
-            />
-          </div>
-
-          {/* Formulario a la derecha */}
-          <div className="form-derecha">
-            <label htmlFor="nombre">👤 Nombre o alias *</label>
-            <input
-              type="text"
-              name="nombre"
-              id="nombre"
-              value={formData.nombre}
-              onChange={handleInputChange}
-              required
-              placeholder="Tu nombre o alias"
-            />
-
-            <label htmlFor="correo">📧 Correo electrónico *</label>
-            <input
-              type="email"
-              name="correo"
-              id="correo"
-              value={formData.correo}
-              onChange={handleInputChange}
-              required
-              placeholder="ejemplo@correo.com"
-            />
-
-            <label htmlFor="telefono">📱 Teléfono móvil (opcional)</label>
-            <input
-              type="tel"
-              name="telefono"
-              id="telefono"
-              value={formData.telefono}
-              onChange={handleInputChange}
-              placeholder="Ej: 612 345 678"
-            />
-
-            <label htmlFor="personales">👥 ¿Es solo para ti o para otras personas también?</label>
-            <input
-              type="text"
-              name="personales"
-              id="personales"
-              value={formData.personales}
-              onChange={handleInputChange}
-              placeholder="Ej: Solo para mí o para mi familia"
-            />
-
-            <label htmlFor="tiempo">⏰ ¿Desde cuándo ocurre la situación? *</label>
-            <input
-              type="text"
-              name="tiempo"
-              id="tiempo"
-              value={formData.tiempo}
-              onChange={handleInputChange}
-              required
-              placeholder="Ej: 30 minutos"
-            />
-          </div>
-        </div>
-
-        <div className="seccion-emergencia">
-          <h2 className="titulo-emergencia">Emergencia</h2>
-          <label className="etiquetas-titulo">🆘 Selecciona una o más etiquetas *</label>
-        </div>
-
-        {/* Grid de categorías */}
-        <div className="categorias-grid">
-          {Object.entries(categorias).map(([key, categoria]) => (
-            <div key={key} className="categoria-recuadro">
-              <div className="categoria-header">
-                <h3>{categoria.titulo}</h3>
-              </div>
-              <div className="etiquetas">
-                {categoria.opciones.map((opcion) => (
-                  <label key={opcion} className="etiqueta">
+      <div className="formulario-content">
+        <form onSubmit={handleSubmit} className="ayuda-form">
+          {/* Sección de ubicación y contacto - Layout horizontal */}
+          <section className="ubicacion-contacto-section">
+            <div className="ubicacion-mapa">
+              {/* Sección de ubicación - Lado izquierdo */}
+              <div className="mapa-contenedor">
+                <div className="ubicacion-controls">
+                  <button 
+                    type="button" 
+                    onClick={detectLocation}
+                    disabled={isDetectingLocation}
+                    className="detect-location-btn"
+                  >
+                    {ubicacionTexto}
+                  </button>
+                  
+                  <div className="ubicacion-input-group">
+                    <label htmlFor="desc_ubic">Descripción específica del lugar:</label>
                     <input
-                      type="checkbox"
-                      checked={formData.tags.includes(opcion)}
-                      onChange={(e) => handleTagChange(opcion, e.target.checked)}
+                      type="text"
+                      id="desc_ubic"
+                      name="desc_ubic"
+                      value={formData.desc_ubic}
+                      onChange={handleInputChange}
+                      placeholder="Ej: Calle Mayor 123, 2º piso, puerta izquierda"
                     />
-                    <span>{opcion}</span>
-                  </label>
-                ))}
+                  </div>
+                </div>
+
+                <div className="map-container">
+                  <MapComponent 
+                    ref={mapRef}
+                    onLocationSelect={handleLocationSelect}
+                    height="400px"
+                  />
+                </div>
+              </div>
+
+              {/* Sección de contacto - Lado derecho */}
+              <div className="form-derecha">
+                <h2>📞 Información de contacto</h2>
+                
+                <div className="form-group">
+                  <label htmlFor="nombre">Nombre completo:</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="correo">Correo electrónico:</label>
+                  <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    value={formData.correo}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="telefono">Teléfono de contacto:</label>
+                  <input
+                    type="tel"
+                    id="telefono"
+                    name="telefono"
+                    value={formData.telefono}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="personales">¿Cuántas personas necesitan ayuda?</label>
+                  <input
+                    type="number"
+                    id="personales"
+                    name="personales"
+                    value={formData.personales}
+                    onChange={handleInputChange}
+                    min="1"
+                    placeholder="1"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="tiempo">¿Desde cuándo ocurre la situación?</label>
+                  <input
+                    type="text"
+                    id="tiempo"
+                    name="tiempo"
+                    value={formData.tiempo}
+                    onChange={handleInputChange}
+                    placeholder="Ej: 30 minutos, 2 días..."
+                  />
+                </div>
               </div>
             </div>
-          ))}
+          </section>
 
-          {/* Categoría "Otros" */}
-          <div className="categoria-recuadro categoria-otros">
-            <div className="categoria-header">
-              <h3>➕ Otra emergencia</h3>
+          {/* Sección de etiquetas/categorías */}
+          <section className="tags-section">
+            <h2>🏷️ ¿Qué tipo de ayuda necesitas?</h2>
+            <p>Selecciona todas las categorías que apliquen a tu situación:</p>
+
+            {Object.entries(categorias).map(([key, categoria]) => (
+              <div key={key} className="categoria-group">
+                <h3>{categoria.titulo}</h3>
+                <div className="tags-grid">
+                  {categoria.opciones.map((opcion) => (
+                    <label key={opcion.value} className="tag-checkbox">
+                      <input
+                        type="checkbox"
+                        value={opcion.value}
+                        checked={formData.tags.includes(opcion.value)}
+                        onChange={(e) => handleTagChange(opcion.value, e.target.checked)}
+                      />
+                      <span className="checkmark"></span>
+                      {opcion.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* Opción "Otros" */}
+            <div className="categoria-group">
+              <h3>🔧 Otros</h3>
+              <div className="tags-grid">
+                <label className="tag-checkbox">
+                  <input
+                    type="checkbox"
+                    value="Otros"
+                    checked={formData.tags.includes('Otros')}
+                    onChange={(e) => handleTagChange('Otros', e.target.checked)}
+                  />
+                  <span className="checkmark"></span>
+                  Otros (especificar)
+                </label>
+              </div>
+              
+              {showOtrosDetalle && (
+                <div className="form-group">
+                  <label htmlFor="otros_detalle">Especifica qué otro tipo de ayuda necesitas:</label>
+                  <input
+                    type="text"
+                    id="otros_detalle"
+                    name="otros_detalle"
+                    value={formData.otros_detalle}
+                    onChange={handleInputChange}
+                    placeholder="Describe brevemente tu necesidad específica"
+                  />
+                </div>
+              )}
             </div>
-            <div className="etiquetas">
-              <label className="etiqueta">
-                <input
-                  type="checkbox"
-                  checked={formData.tags.includes('Otros')}
-                  onChange={(e) => handleTagChange('Otros', e.target.checked)}
-                />
-                <span>Otros</span>
+          </section>
+
+          {/* Sección de descripción */}
+          <section className="descripcion-section">
+            <h2>📝 Descripción detallada</h2>
+            <div className="form-group">
+              <label htmlFor="descripcion">
+                Describe tu situación con el mayor detalle posible para que los voluntarios puedan prepararse adecuadamente:
               </label>
+              <textarea
+                id="descripcion"
+                name="descripcion"
+                value={formData.descripcion}
+                onChange={handleInputChange}
+                rows={6}
+                placeholder="Ej: Tengo 3 niños pequeños y necesito ayuda para trasladar algunas pertenencias desde el segundo piso. El ascensor no funciona y no tengo transporte. También necesitaríamos algo de comida para esta noche..."
+                required
+              />
             </div>
-            {showOtrosDetalle && (
-              <div style={{ marginTop: '1rem' }}>
-                <label htmlFor="otros_detalle">🔍 Describe tu emergencia:</label>
-                <input
-                  type="text"
-                  name="otros_detalle"
-                  id="otros_detalle"
-                  value={formData.otros_detalle}
-                  onChange={handleInputChange}
-                  placeholder="Describe brevemente tu situación..."
-                />
-              </div>
-            )}
+          </section>
+
+          {/* Términos y condiciones */}
+          <section className="terms-section">
+            <label className="terms-checkbox">
+              <input
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => setTermsAccepted(e.target.checked)}
+                required
+              />
+              <span className="checkmark"></span>
+              Acepto los{' '}
+              <button 
+                type="button" 
+                className="terms-link"
+                onClick={() => setShowTermsModal(true)}
+              >
+                términos y condiciones
+              </button>
+              {' '}y autorizo el tratamiento de mis datos personales para gestionar mi solicitud de ayuda.
+            </label>
+          </section>
+
+          {/* Botón de envío */}
+          <div className="submit-section">
+            <button type="submit" className="submit-btn">
+              🚨 Enviar solicitud de ayuda
+            </button>
+            <p className="submit-help">
+              Una vez enviada tu solicitud, notificaremos a voluntarios cercanos que podrán contactarte directamente.
+            </p>
           </div>
-        </div>
-
-        <div className="descripcion-seccion">
-          <label htmlFor="descripcion">📝 Describe tu situación (opcional)</label>
-          <textarea
-            name="descripcion"
-            id="descripcion"
-            value={formData.descripcion}
-            onChange={handleInputChange}
-            placeholder="Ej: Estoy sin electricidad desde hace 3 horas y necesito ayuda urgente..."
-          />
-        </div>
-
-        <div className="checkbox-term">
-          <input
-            type="checkbox"
-            id="terminos"
-            checked={termsAccepted}
-            onChange={(e) => setTermsAccepted(e.target.checked)}
-            required
-          />
-          <label htmlFor="terminos">
-            Acepto los{' '}
-            <button
-              type="button"
-              onClick={() => setShowTermsModal(true)}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#39e4c9',
-                textDecoration: 'underline',
-                cursor: 'pointer'
-              }}
-            >
-              términos y condiciones
-            </button>{' '}
-            *
-          </label>
-        </div>
-
-        <button type="submit">Enviar solicitud</button>
-        
-        <div className="privacidad">Tus datos se usan únicamente para activar ayuda cercana.</div>
-        <div className="privacidad">Por favor, usa este formulario de manera seria y responsable.</div>
-      </form>
+        </form>
+      </div>
 
       {/* Modal de términos y condiciones */}
       {showTermsModal && (
-        <div 
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0,0,0,0.5)',
-            zIndex: 1000,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-          onClick={() => setShowTermsModal(false)}
-        >
-          <div
-            style={{
-              background: 'white',
-              padding: '2rem',
-              borderRadius: '10px',
-              maxWidth: '700px',
-              width: '90%',
-              height: '90%',
-              overflow: 'auto',
-              position: 'relative'
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setShowTermsModal(false)}
-              style={{
-                position: 'absolute',
-                top: '10px',
-                right: '15px',
-                background: 'none',
-                border: 'none',
-                fontSize: '1.5rem',
-                cursor: 'pointer'
-              }}
-            >
-              ×
-            </button>
-            
-            <h2>Términos y Condiciones de Uso – SomAqui.cat</h2>
-            <p><strong>Última actualización: julio de 2025</strong></p>
-            
-            <p><strong>1. Objeto del servicio</strong><br />
-            SomAqui.cat permite a los usuarios registrarse para compartir su ubicación aproximada y necesidades específicas mediante etiquetas, conectarse con personas u organizaciones dispuestas a colaborar y participar en iniciativas comunitarias.</p>
-            
-            <p><strong>2. Registro de usuarios</strong><br />
-            Se recopilan datos como nombre/alias, correo electrónico y ubicación aproximada. El usuario debe proporcionar información veraz.</p>
-            
-            <p><strong>3. Protección de datos personales</strong><br />
-            Se aplica el RGPD. Los datos se tratan confidencialmente y no se comparten sin consentimiento.</p>
-            
-            <p><strong>4. Uso adecuado</strong><br />
-            Está prohibido el uso con fines fraudulentos, políticos, comerciales o discriminatorios.</p>
-            
-            <p><strong>5. Limitación de responsabilidad</strong><br />
-            SomAqui.cat actúa como intermediario. No garantiza la veracidad ni disponibilidad de ayuda.</p>
-            
-            <p><strong>6. Modificaciones</strong><br />
-            Nos reservamos el derecho a modificar los términos en cualquier momento.</p>
-            
-            <p><strong>7. Aceptación</strong><br />
-            Usar la plataforma implica aceptar estos términos.</p>
+        <div className="modal-overlay" onClick={() => setShowTermsModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h3>Términos y Condiciones</h3>
+              <button 
+                className="modal-close"
+                onClick={() => setShowTermsModal(false)}
+              >
+                ×
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Al utilizar esta plataforma, aceptas:</p>
+              <ul>
+                <li>Proporcionar información veraz sobre tu situación</li>
+                <li>Usar el servicio únicamente para emergencias reales</li>
+                <li>Tratamiento de tus datos personales para gestionar la solicitud</li>
+                <li>Posible contacto directo de voluntarios registrados</li>
+                <li>Responsabilidad propia en la interacción con voluntarios</li>
+              </ul>
+              <p>
+                SomAqui actúa como intermediario entre personas que necesitan ayuda y voluntarios.
+                No nos hacemos responsables de las acciones de terceros.
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button 
+                className="modal-btn-primary"
+                onClick={() => {
+                  setTermsAccepted(true);
+                  setShowTermsModal(false);
+                }}
+              >
+                Aceptar
+              </button>
+              <button 
+                className="modal-btn-secondary"
+                onClick={() => setShowTermsModal(false)}
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 };
 
