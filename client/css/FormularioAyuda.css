@@ -240,6 +240,33 @@ textarea {
   align-self: stretch;
 }
 
+.form-derecha .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-derecha .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-derecha .form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .form-derecha .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .form-derecha .form-group.full-width {
+    grid-column: 1;
+  }
+}
+
 .form-derecha label {
   margin-top: 0;
   font-weight: bold;

@@ -87,22 +87,32 @@
 
         <!-- Formulario a la derecha -->
         <div class="form-derecha">
-         
-          <label for="nombre">👤 Nombre o alias *</label>
-          <input type="text" name="nombre" id="nombre" required placeholder="Tu nombre o alias">
-          
-          <label for="correo">📧 Correo electrónico *</label>
-          <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
-          
-          <label for="telefono">📱 Teléfono móvil (opcional)</label>
-          <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 612 345 678">
-
-          <label for="personales">👥 ¿Es solo para ti o para otras personas también?</label>
-          <input type="text" name="personales" id="personales" placeholder="Ej: Solo para mí o para mi familia">
-
-          <label for ="tiempo">⏰ ¿Desde cuándo ocurre la situación? *</label>
-          <input type="text" name="tiempo" id="tiempo" required placeholder="Ej: 30 minutos">
-
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="nombre">👤 Nombre o alias *</label>
+              <input type="text" name="nombre" id="nombre" required placeholder="Tu nombre o alias">
+            </div>
+            
+            <div class="form-group">
+              <label for="telefono">📱 Teléfono móvil (opcional)</label>
+              <input type="tel" name="telefono" id="telefono" required placeholder="Ej: 612 345 678">
+            </div>
+            
+            <div class="form-group">
+              <label for="correo">📧 Correo electrónico *</label>
+              <input type="email" name="correo" id="correo" required placeholder="ejemplo@correo.com">
+            </div>
+            
+            <div class="form-group">
+              <label for ="tiempo">⏰ ¿Desde cuándo ocurre la situación? *</label>
+              <input type="text" name="tiempo" id="tiempo" required placeholder="Ej: 30 minutos">
+            </div>
+            
+            <div class="form-group full-width">
+              <label for="personales">👥 ¿Es solo para ti o para otras personas también?</label>
+              <input type="text" name="personales" id="personales" placeholder="Ej: Solo para mí o para mi familia">
+            </div>
+          </div>
         </div>
       </div>
 

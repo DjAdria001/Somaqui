@@ -10,13 +10,45 @@
 
 /* MAIN específico para formularios de contacto */
 main {
-  max-width: 600px;
+  max-width: 800px;
   margin: 2rem auto;
   background: white;
   border: 2px solid #39e4c9;
   border-radius: 12px;
   padding: 2rem;
   flex-grow: 1;
+}
+
+/* Grid para formularios */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .form-group.full-width {
+    grid-column: 1;
+  }
+  
+  main {
+    max-width: 90%;
+  }
 }
 
 /* Estilos específicos para formularios */
