@@ -128,7 +128,7 @@ const FormularioAyuda: React.FC = () => {
     }));
   };
 
-  const handleLocationSelect = (lat: number, lng: number) => {
+  const handleLocationSelect = async (lat: number, lng: number) => {
     console.log('📍 Ubicación seleccionada:', { lat, lng });
     
     const ubicacionStr = `${lat.toFixed(6)},${lng.toFixed(6)}`;
@@ -137,10 +137,107 @@ const FormularioAyuda: React.FC = () => {
       ubicacion: ubicacionStr
     }));
     
+    // Mostrar coordenadas inicialmente
     const displayText = `📍 Ubicación seleccionada: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
     setUbicacionTexto(displayText);
     
     console.log('✅ Datos del formulario actualizados:', { ubicacion: ubicacionStr });
+    
+    // Intentar obtener la dirección
+    const address = await getAddressFromCoordinates(lat, lng);
+    
+    if (address) {
+      console.log('✅ Dirección obtenida para ubicación seleccionada:', address);
+      setUbicacionTexto(`📍 ${address}`);
+      
+      // Actualizar el campo de descripción con la dirección
+      setFormData(prev => ({
+        ...prev,
+        desc_ubic: address
+      }));
+    }
+  };
+
+  // Función para obtener la dirección a partir de coordenadas (geocodificación inversa)
+  const getAddressFromCoordinates = async (lat: number, lng: number) => {
+    try {
+      console.log('🔍 Obteniendo dirección para coordenadas:', { lat, lng });
+      
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&addressdetails=1&accept-language=es`
+      );
+      
+      if (!response.ok) {
+        throw new Error('Error en la respuesta del servicio de geocodificación');
+      }
+      
+      const data = await response.json();
+      console.log('📍 Respuesta de geocodificación:', data);
+      
+      if (data && data.address) {
+        // Extraer los componentes más relevantes de la dirección
+        const address = data.address;
+        let shortAddress = '';
+        
+        // Obtener el nombre de la calle (prioridad en order)
+        const street = address.road || address.pedestrian || address.cycleway || address.footway || address.path;
+        
+        // Obtener el número de casa
+        const houseNumber = address.house_number;
+        
+        if (street) {
+          // Formatear la calle: convertir a minúsculas y limpiar
+          shortAddress = street.toLowerCase();
+          
+          // Añadir número si existe
+          if (houseNumber) {
+            shortAddress += ` ${houseNumber}`;
+          }
+        } else {
+          // Si no hay calle específica, usar otros elementos más específicos primero
+          const fallback = address.amenity || address.building || address.neighbourhood || address.suburb || address.hamlet;
+          if (fallback) {
+            shortAddress = fallback.toLowerCase();
+          }
+        }
+        
+        // Si tenemos una dirección pero es muy genérica, añadir contexto
+        if (shortAddress && (shortAddress.length < 10 || !houseNumber)) {
+          const context = address.neighbourhood || address.suburb || address.village || address.town;
+          if (context && !shortAddress.includes(context.toLowerCase())) {
+            shortAddress += `, ${context.toLowerCase()}`;
+          }
+        }
+        
+        if (shortAddress) {
+          console.log('✅ Dirección corta generada:', shortAddress);
+          return shortAddress;
+        }
+        
+        // Si no pudimos construir una dirección específica, usar display_name pero simplificado
+        if (data.display_name) {
+          const parts = data.display_name.split(',');
+          // Tomar solo la primera parte y limpiarla
+          const firstPart = parts[0].trim().toLowerCase();
+          
+          // Si la primera parte es muy larga, cortarla
+          if (firstPart.length > 50) {
+            const words = firstPart.split(' ');
+            shortAddress = words.slice(0, 4).join(' ');
+          } else {
+            shortAddress = firstPart;
+          }
+          
+          console.log('✅ Dirección simplificada generada:', shortAddress);
+          return shortAddress;
+        }
+      }
+      
+      return null;
+    } catch (error) {
+      console.error('❌ Error al obtener la dirección:', error);
+      return null;
+    }
   };
 
   const detectLocation = () => {
@@ -163,7 +260,7 @@ const FormularioAyuda: React.FC = () => {
     });
 
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { latitude, longitude, accuracy } = position.coords;
         console.log('✅ Ubicación detectada exitosamente:', { 
           latitude, 
@@ -172,8 +269,12 @@ const FormularioAyuda: React.FC = () => {
           timestamp: new Date(position.timestamp).toLocaleString()
         });
         
-        // Actualizar los datos del formulario
-        handleLocationSelect(latitude, longitude);
+        // Actualizar los datos del formulario con las coordenadas
+        const ubicacionStr = `${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+        setFormData(prev => ({
+          ...prev,
+          ubicacion: ubicacionStr
+        }));
         
         // Actualizar el mapa
         if (mapRef.current) {
@@ -188,8 +289,28 @@ const FormularioAyuda: React.FC = () => {
           console.warn('⚠️ Referencia del mapa no disponible');
         }
         
-        setIsDetectingLocation(false);
+        // Mostrar coordenadas inicialmente
         setUbicacionTexto(`📍 Ubicación detectada: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+        
+        // Intentar obtener la dirección
+        setUbicacionTexto('🔍 Obteniendo dirección...');
+        const address = await getAddressFromCoordinates(latitude, longitude);
+        
+        if (address) {
+          console.log('✅ Dirección obtenida:', address);
+          setUbicacionTexto(`📍 ${address}`);
+          
+          // Actualizar el campo de descripción con la dirección
+          setFormData(prev => ({
+            ...prev,
+            desc_ubic: address
+          }));
+        } else {
+          console.warn('⚠️ No se pudo obtener la dirección');
+          setUbicacionTexto(`📍 Ubicación detectada: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
+        }
+        
+        setIsDetectingLocation(false);
       },
       (error) => {
         console.error('❌ Error al obtener ubicación:', error);
@@ -305,48 +426,19 @@ const FormularioAyuda: React.FC = () => {
                     {ubicacionTexto}
                   </button>
                   
-                  {/* Botón de debug temporal */}
-                  <button 
-                    type="button" 
-                    onClick={() => {
-                      console.log('🔍 Debug del mapa:', {
-                        mapRef: !!mapRef.current,
-                        ubicacion: formData.ubicacion,
-                        isDetecting: isDetectingLocation
-                      });
-                      if (mapRef.current) {
-                        console.log('✅ Referencia del mapa disponible');
-                        // Probar con coordenadas de Barcelona
-                        mapRef.current.updateLocation(41.3851, 2.1734);
-                      } else {
-                        console.error('❌ Referencia del mapa no disponible');
-                      }
-                    }}
-                    className="debug-btn"
-                    style={{
-                      background: '#666',
-                      color: 'white',
-                      border: 'none',
-                      padding: '0.5rem 1rem',
-                      borderRadius: '4px',
-                      fontSize: '0.8rem',
-                      marginTop: '0.5rem',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    🔍 Debug Mapa
-                  </button>
-                  
                   <div className="ubicacion-input-group">
-                    <label htmlFor="desc_ubic">Descripción específica del lugar:</label>
+                    <label htmlFor="desc_ubic">Dirección específica del lugar:</label>
                     <input
                       type="text"
                       id="desc_ubic"
                       name="desc_ubic"
                       value={formData.desc_ubic}
                       onChange={handleInputChange}
-                      placeholder="Ej: Calle Mayor 123, 2º piso, puerta izquierda"
+                      placeholder="Se completará automáticamente al detectar ubicación..."
                     />
+                    <small style={{color: '#666', fontSize: '0.8rem', marginTop: '0.25rem', display: 'block'}}>
+                      💡 Este campo se completa automáticamente cuando detectas tu ubicación
+                    </small>
                   </div>
                 </div>
 

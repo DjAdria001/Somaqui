@@ -337,12 +337,14 @@ textarea {
   overflow: hidden;
 }
 
-/* Diseño en cuadrícula para las categorías */
+/* Diseño en cuadrícula para las categorías - 3 columnas x 2 filas */
 .categorias-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
   gap: 1.5rem;
   margin: 1.5rem 0;
+  max-width: 1200px;
 }
 
 .categoria-recuadro {
@@ -425,9 +427,9 @@ textarea {
 }
 
 .categoria-otros {
-  grid-column: 1 / -1;
+  grid-column: 1 / -1; /* Ocupa toda la fila */
   max-width: 600px;
-  margin: 0 auto;
+  margin: 1rem auto 0 auto; /* Centrado y con margen superior */
 }
 
 .descripcion-seccion {
@@ -769,6 +771,19 @@ textarea {
   }
 }
 
+/* Media query para tablets - 2 columnas */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .categorias-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 1.2rem;
+  }
+  
+  .categoria-otros {
+    grid-column: 1 / -1; /* Sigue ocupando toda la fila */
+  }
+}
+
 @media (max-width: 768px) {
   .formulario-ayuda-container {
     padding: 0 0.5rem;
@@ -788,6 +803,7 @@ textarea {
 
   .categorias-grid {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
     gap: 1rem;
   }
   
