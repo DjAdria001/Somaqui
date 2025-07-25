@@ -925,8 +925,8 @@
 @media (max-width: 480px) {
   .hero {
     padding: 2rem 1rem;
-    border-radius: 8px;
-background-color: #006e5f;
+    border-radius: 15px;
+
   }
   
   .features {
