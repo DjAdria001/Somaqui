@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/voluntario-new.css';
+import { ref, onValue } from 'firebase/database';
+import { database } from '../firebase'; // ajusta la ruta si es diferente
 
 interface Emergency {
-  id: number;
+  id: string;
   tipo: string;
   ubicacion: string;
   descripcion: string;
   fecha: string;
   estado: string;
 }
+
 
 const Voluntario: React.FC = () => {
   const [emergencies, setEmergencies] = useState<Emergency[]>([]);
@@ -17,36 +20,23 @@ const Voluntario: React.FC = () => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  // Simulamos datos de emergencias
   useEffect(() => {
-    const mockEmergencies: Emergency[] = [
-      {
-        id: 1,
-        tipo: 'incendio',
-        ubicacion: 'Barcelona, España',
-        descripcion: 'Incendio forestal en la zona norte de la ciudad',
-        fecha: '2024-01-15',
-        estado: 'activa'
-      },
-      {
-        id: 2,
-        tipo: 'inundacion',
-        ubicacion: 'Valencia, España',
-        descripcion: 'Inundaciones por lluvias torrenciales',
-        fecha: '2024-01-14',
-        estado: 'activa'
-      },
-      {
-        id: 3,
-        tipo: 'medica',
-        ubicacion: 'Madrid, España',
-        descripcion: 'Necesidad de personal médico voluntario',
-        fecha: '2024-01-13',
-        estado: 'activa'
-      }
-    ];
-    setEmergencies(mockEmergencies);
-  }, []);
+  const emergenciesRef = ref(database, 'Emergencias');
+  onValue(emergenciesRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      const formatted: Emergency[] = Object.entries(data).map(([id, value]: any) => ({
+        id, // ahora id es una string (key de Firebase)
+        tipo: value.tipo || 'otro',
+        ubicacion: value.ubicacion || '',
+        descripcion: value.descripcion || '',
+        fecha: value.fecha || new Date().toISOString(),
+        estado: 'activa' // puedes cambiar esto si usas un campo real
+      }));
+      setEmergencies(formatted);
+    }
+  });
+}, []);
 
   const handleSkillToggle = (skill: string) => {
     setSelectedSkills(prev => 
