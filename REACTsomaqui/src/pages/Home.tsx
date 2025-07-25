@@ -21,49 +21,6 @@ const Home: React.FC = () => {
 
   return (
     <main>
-      {/* Sección ¿Cómo funciona? */}
-      <section className="como-funciona">
-        <div className="container">
-          <h2>¿Cómo Funciona SomAqui.cat?</h2>
-          <p className="subtitle">Un proceso simple y efectivo para conectar ayuda</p>
-          <div className="pasos-grid">
-            <div className="paso">
-              <div className="paso-icono">
-                <div className="paso-numero">1</div>
-                <i className="fa fa-user-plus" aria-hidden="true"></i>
-              </div>
-              <div className="paso-contenido">
-                <h3>Regístrate</h3>
-                <p>Completa tu perfil con tus habilidades y disponibilidad para ayudar a tu comunidad</p>
-              </div>
-            </div>
-            <div className="paso">
-              <div className="paso-icono">
-                <div className="paso-numero">2</div>
-                <i className="fa fa-search" aria-hidden="true"></i>
-              </div>
-              <div className="paso-contenido">
-                <h3>Encuentra Oportunidades</h3>
-                <p>Explora las emergencias activas en tu zona y encuentra donde puedes ayudar más</p>
-              </div>
-            </div>
-            <div className="paso">
-              <div className="paso-icono">
-                <div className="paso-numero">3</div>
-                <i className="fa fa-heart" aria-hidden="true"></i>
-              </div>
-              <div className="paso-contenido">
-                <h3>Ayuda y Conecta</h3>
-                <p>Conecta con personas que necesitan ayuda y marca la diferencia en tu comunidad</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Slider de imágenes */}
-      <Slider images={sliderImages} />
-
       {/* Sección hero */}
       <section className="hero">
         <h2> Conectamos a quienes necesitan ayuda con quienes pueden ofrecerla</h2>
@@ -74,6 +31,9 @@ const Home: React.FC = () => {
         <Link to="/ayuda">Pedir ayuda ahora</Link>
         <Link to="/voluntario">Ser voluntario</Link>
       </section>
+
+      {/* Slider de imágenes */}
+      <Slider images={sliderImages} />
 
       {/* Características principales */}
       <section className="features">
@@ -121,24 +81,12 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Formas de ayudar */}
-      {/* <section className="help-activities">
-        <h2>💪 Formas en las que puedes ayudar</h2>
-        <div className="activities-grid">
-          {helpActivityImages.map((activity, index) => (
-            <div key={index} className="activity-card">
-              <img src={activity.src} alt={activity.alt} />
-              <h3>{activity.title}</h3>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
       {/* Teoría del cambio */}
       <section className="teoria-cambio">
-        <h2>¿Cómo funciona SomAqui.cat?</h2>
+        <h2>Teoría del Cambio</h2>
         <p className="subtitulo">
-          Un proceso simple para conectar necesidades con soluciones
+          Nuestro objetivo es amplificar 20 millones de voces ciudadanas antes de 2026.
+¿Cómo lo lograremos? A través de esta hipótesis en tres partes:
         </p>
         
         <div className="contenido-cambio">
@@ -150,10 +98,10 @@ const Home: React.FC = () => {
             <div className="paso">
               <img src="/images/Icono1.png" alt="Paso 1" />
               <div>
-                <strong>1. Solicita ayuda</strong>
+                <strong>Parte 1: Tecnología</strong>
                 <p>
-                  Describe tu situación y ubicación en nuestro formulario. 
-                  Tu información se mantiene privada y segura.
+                  Proporcionamos herramientas digitales y experiencia 
+                  a organizaciones alineadas con nuestra misión.
                 </p>
               </div>
             </div>
@@ -161,10 +109,10 @@ const Home: React.FC = () => {
             <div className="paso">
               <img src="/images/Icono2.png" alt="Paso 2" />
               <div>
-                <strong>2. Conectamos voluntarios</strong>
+                <strong>Parte 2: Colaboradores</strong>
                 <p>
-                  Notificamos a voluntarios cercanos que pueden ayudar 
-                  con tu situación específica.
+                  Aliados utilizan nuestra plataforma para 
+                  recopilar datos y elevar las voces ciudadanas.
                 </p>
               </div>
             </div>
@@ -172,18 +120,16 @@ const Home: React.FC = () => {
             <div className="paso">
               <img src="/images/Icono3.png" alt="Paso 3" />
               <div>
-                <strong>3. Recibe ayuda</strong>
+                <strong>Parte 3: Impacto Social</strong>
                 <p>
-                  Los voluntarios se ponen en contacto contigo para 
-                  coordinar la asistencia que necesitas.
+                  A medida que las voces se amplifican, se fortalece 
+                  la efectividad de las organizaciones y el cambio social.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-     
     </main>
   );
 };
