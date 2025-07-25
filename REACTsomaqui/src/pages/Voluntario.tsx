@@ -177,29 +177,6 @@ const Voluntario: React.FC = () => {
         </div>
       </section>
 
-      {/* Como Funciona Section */}
-      <section className="como-funciona">
-        <div className="container">
-          <h2>¿Cómo Funciona?</h2>
-          <div className="pasos-grid">
-            <div className="paso">
-              <div className="paso-numero">1</div>
-              <h3>Regístrate</h3>
-              <p>Completa tu perfil de voluntario con tus habilidades y disponibilidad</p>
-            </div>
-            <div className="paso">
-              <div className="paso-numero">2</div>
-              <h3>Encuentra Oportunidades</h3>
-              <p>Explora las emergencias activas y encuentra donde puedes ayudar más</p>
-            </div>
-            <div className="paso">
-              <div className="paso-numero">3</div>
-              <h3>Ayuda</h3>
-              <p>Conecta con las personas que necesitan ayuda y marca la diferencia</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Modal de Registro de Voluntario */}
       {showVolunteerModal && (
