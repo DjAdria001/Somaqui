@@ -924,8 +924,8 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 3rem 2rem;
-    border-radius: 15px;
+    padding: 2rem 1rem;
+    border-radius: 8px;
 
   }
   
