@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import MapComponent from '../components/MapComponent';
 import '../styles/formulario-ayuda.css';
+import { ref, push, set } from 'firebase/database';
+import { database } from '../firebase';
 
 interface FormData {
   ubicacion: string;
@@ -375,7 +377,12 @@ const FormularioAyuda: React.FC = () => {
       console.log('Enviando solicitud de ayuda:', formData);
       
       // Simular envío
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const emergenciaRef = ref(database, 'Emergencias');
+      const newRef = push(emergenciaRef);
+      await set(newRef, {
+        ...formData,
+        fecha_envio: new Date().toISOString(),
+      });
       
       alert('Solicitud enviada con éxito. Pronto recibirás ayuda de voluntarios cercanos.');
       

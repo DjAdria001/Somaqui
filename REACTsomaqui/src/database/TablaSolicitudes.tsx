@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react'; // Not needed with React 17+ and new JSX transform
 
 interface FormData {
   ubicacion: string;

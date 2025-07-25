@@ -11,6 +11,8 @@ import Equipo from './pages/Equipo';
 import MisionVision from './pages/MisionVision';
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes';
 import Contacto from './pages/Contacto';
+// Importamos el nuevo componente Emergencias
+import Emergencias from './pages/Emergencias';
 import './App.css';
 import './styles/global.css';
 
@@ -47,6 +49,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/formulario-ayuda" element={<FormularioAyuda />} />
               <Route path="/ayuda" element={<FormularioAyuda />} />
+              {/* Nueva ruta para Emergencias */}
+              <Route path="/emergencias" element={<Emergencias />} />
               <Route path="/voluntario" element={<Voluntario />} />
               <Route path="/equipo" element={<Equipo />} />
               <Route path="/mision-vision" element={<MisionVision />} />
