@@ -62,43 +62,10 @@ const Voluntario: React.FC = () => {
   ];
 
   return (
+    
     <main className="voluntario-page">
-      {/* Header Section */}
-      <section className="voluntario-header">
-        <div className="container">
-          <h1>Quiero ser Voluntario</h1>
-          <p className="subtitle">Únete a nuestra comunidad de ayuda mutua</p>
-          <button 
-            className="btn-registro-voluntario"
-            onClick={() => setShowVolunteerModal(true)}
-          >
-            Registrarme como Voluntario
-          </button>
-        </div>
-      </section>
 
-      {/* Habilidades Section */}
-      <section className="habilidades-section">
-        <div className="container">
-          <h2>¿En qué puedes ayudar?</h2>
-          <p>Selecciona las habilidades que puedes ofrecer como voluntario:</p>
-          
-          <div className="habilidades-grid">
-            {volunteerSkills.map(skill => (
-              <div 
-                key={skill.id}
-                className={`habilidad-card ${selectedSkills.includes(skill.id) ? 'selected' : ''}`}
-                onClick={() => handleSkillToggle(skill.id)}
-              >
-                <div className="habilidad-icon">{skill.icon}</div>
-                <h3>{skill.label}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Emergencias Activas Section */}
+       {/* Emergencias Activas Section */}
       <section className="emergencias-section">
         <div className="container">
           <h2>Emergencias Activas</h2>
@@ -166,6 +133,42 @@ const Voluntario: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* Header Section */}
+      <section className="voluntario-header">
+        <div className="container">
+          <h1>Quiero ser Voluntario</h1>
+          <p className="subtitle">Únete a nuestra comunidad de ayuda mutua</p>
+          <button 
+            className="btn-registro-voluntario"
+            onClick={() => setShowVolunteerModal(true)}
+          >
+            Registrarme como Voluntario
+          </button>
+        </div>
+      </section>
+
+      {/* Habilidades Section */}
+      <section className="habilidades-section">
+        <div className="container">
+          <h2>¿En qué puedes ayudar?</h2>
+          <p>Selecciona las habilidades que puedes ofrecer como voluntario:</p>
+          
+          <div className="habilidades-grid">
+            {volunteerSkills.map(skill => (
+              <div 
+                key={skill.id}
+                className={`habilidad-card ${selectedSkills.includes(skill.id) ? 'selected' : ''}`}
+                onClick={() => handleSkillToggle(skill.id)}
+              >
+                <div className="habilidad-icon">{skill.icon}</div>
+                <h3>{skill.label}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+     
 
 
       {/* Modal de Registro de Voluntario */}
