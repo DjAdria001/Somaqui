@@ -33,6 +33,7 @@ const FormularioAyuda: React.FC = () => {
 
   const [ubicacionTexto, setUbicacionTexto] = useState('📍 Detectar mi ubicación automáticamente');
   const [isDetectingLocation, setIsDetectingLocation] = useState(false);
+  const [ubicacionDetectada, setUbicacionDetectada] = useState(false);
   const [showOtrosDetalle, setShowOtrosDetalle] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
@@ -131,7 +132,7 @@ const FormularioAyuda: React.FC = () => {
   };
 
   const handleLocationSelect = async (lat: number, lng: number) => {
-    console.log('📍 Ubicación seleccionada:', { lat, lng });
+    console.log('📍 Ubicación seleccionada manualmente en el mapa:', { lat, lng });
     
     const ubicacionStr = `${lat.toFixed(6)},${lng.toFixed(6)}`;
     setFormData(prev => ({
@@ -139,25 +140,23 @@ const FormularioAyuda: React.FC = () => {
       ubicacion: ubicacionStr
     }));
     
-    // Mostrar coordenadas inicialmente
-    const displayText = `📍 Ubicación seleccionada: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
-    setUbicacionTexto(displayText);
-    
     console.log('✅ Datos del formulario actualizados:', { ubicacion: ubicacionStr });
     
-    // Intentar obtener la dirección
+    // Intentar obtener la dirección para el campo de descripción
     const address = await getAddressFromCoordinates(lat, lng);
     
     if (address) {
       console.log('✅ Dirección obtenida para ubicación seleccionada:', address);
-      setUbicacionTexto(`📍 ${address}`);
       
-      // Actualizar el campo de descripción con la dirección
+      // Solo actualizar el campo de descripción, NO el texto del botón
       setFormData(prev => ({
         ...prev,
         desc_ubic: address
       }));
     }
+    
+    // Mantener el texto del botón sin cambios para selección manual
+    console.log('📍 Ubicación seleccionada manualmente, botón mantiene su texto actual');
   };
 
   // Función para obtener la dirección a partir de coordenadas (geocodificación inversa)
@@ -245,6 +244,17 @@ const FormularioAyuda: React.FC = () => {
   const detectLocation = () => {
     console.log('🔍 Iniciando detección de ubicación...');
     
+    // Si ya se detectó la ubicación, permitir redetectar
+    if (ubicacionDetectada) {
+      console.log('🔄 Redetectando ubicación...');
+      setUbicacionDetectada(false);
+      setFormData(prev => ({
+        ...prev,
+        ubicacion: '',
+        desc_ubic: ''
+      }));
+    }
+    
     if (!navigator.geolocation) {
       console.error('❌ Geolocalización no soportada');
       alert('Tu navegador no soporta geolocalización. Por favor, selecciona tu ubicación manualmente en el mapa.');
@@ -291,7 +301,10 @@ const FormularioAyuda: React.FC = () => {
           console.warn('⚠️ Referencia del mapa no disponible');
         }
         
-        // Mostrar coordenadas inicialmente
+        // Marcar que la ubicación fue detectada automáticamente
+        setUbicacionDetectada(true);
+        
+        // Mostrar coordenadas inicialmente en el botón
         setUbicacionTexto(`📍 Ubicación detectada: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`);
         
         // Intentar obtener la dirección
@@ -400,6 +413,7 @@ const FormularioAyuda: React.FC = () => {
         descripcion: '',
       });
       setUbicacionTexto('📍 Detectar mi ubicación automáticamente');
+      setUbicacionDetectada(false);
       setTermsAccepted(false);
       setShowOtrosDetalle(false);
       
