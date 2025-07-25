@@ -2,45 +2,61 @@
 
 /* Reducir espacio entre header y contenido principal */
 main {
-  margin-top: 0.5rem !important;
-  padding-top: 0.2rem !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 /* Contenedor principal del formulario */
 .formulario-ayuda-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .formulario-header {
   text-align: center;
-  margin: 1rem 0;
+  padding: 0.5rem 2rem 0.3rem;
+  background: #ffffff;
+  margin-bottom: 0.5rem;
+  border-radius: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .formulario-header h1 {
-  font-size: 1.8rem;
-  color: #004d4a;
-  margin-bottom: 0.3rem;
+  font-size: 1.6rem;
+  color: #39e4c9;
+  margin-bottom: 0.2rem;
 }
 
 .formulario-header p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #666;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
+}
+
+.formulario-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 /* Layout horizontal para ubicación y contacto */
 .ubicacion-contacto-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 0;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .ubicacion-mapa {
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   align-items: flex-start;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
+  padding: 0 2rem;
 }
 
 /* Contenedor del mapa (lado izquierdo) */
@@ -51,7 +67,7 @@ main {
 
 .mapa-contenedor h2 {
   font-size: 1.4rem;
-  color: #004d4a;
+  color: #39e4c9;
   margin-bottom: 1rem;
   text-align: left;
 }
@@ -256,10 +272,9 @@ main {
 }
 
 .form-derecha h2 {
-  font-size: 1.4rem;
-  color: #004d4a;
-  margin-bottom: 1rem;
-  margin-top: 0;
+  font-size: 1.6rem;
+  color: #39e4c9;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
@@ -297,6 +312,7 @@ main {
   border: 2px solid #39e4c9;
   border-radius: 12px;
   padding: 2rem;
+  position: relative;
 }
 
 /* Estilos generales para inputs */
@@ -353,12 +369,12 @@ textarea {
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .categoria-recuadro:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.15);
 }
 
 .categoria-header {
@@ -463,8 +479,24 @@ textarea {
 }
 
 /* Secciones del formulario */
-.tags-section,
-.descripcion-section,
+.tags-section {
+  margin: 3rem 0;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.descripcion-section {
+  margin: 3rem 0;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
 .terms-section,
 .submit-section {
   margin: 2rem 0;
@@ -472,16 +504,17 @@ textarea {
 
 .tags-section h2,
 .descripcion-section h2 {
-  font-size: 1.4rem;
-  color: #004d4a;
-  margin-bottom: 1rem;
+  font-size: 2.2rem;
+  color: #39e4c9;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 .tags-section p {
   text-align: center;
   color: #666;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
 }
 
 /* Categorías de etiquetas */
@@ -554,21 +587,31 @@ textarea {
 
 /* Términos y condiciones */
 .terms-section {
-  margin: 2rem 0;
+  margin: 3rem 0;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 2px solid rgba(57, 228, 201, 0.2);
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .terms-checkbox {
   display: flex;
   align-items: flex-start;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  line-height: 1.4;
+  gap: 0.8rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .terms-checkbox input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-top: 2px;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
   flex-shrink: 0;
   accent-color: #39e4c9;
 }
@@ -590,31 +633,37 @@ textarea {
 /* Botón de envío */
 .submit-section {
   text-align: center;
-  margin: 2rem 0;
+  margin: 3rem 0;
+  padding: 3rem 2rem;
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid rgba(57, 228, 201, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .submit-btn {
-  background: #39e4c9;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
   color: white;
   border: none;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
   border-radius: 30px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  min-width: 250px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 300px;
+  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.3);
 }
 
 .submit-btn:hover {
-  background: #27b3a3;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(57, 228, 201, 0.3);
+  background: linear-gradient(135deg, #27b3a3, #1e9085);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.4);
 }
 
 .submit-help {
-  margin-top: 1rem;
-  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  font-size: 1rem;
   color: #666;
   max-width: 500px;
   margin-left: auto;
@@ -781,11 +830,86 @@ textarea {
   margin-bottom: 1rem;
 }
 
+/* Efectos adicionales para mejorar la apariencia */
+.ayuda-form {
+  position: relative;
+}
+
+.mapa-contenedor h2 {
+  font-size: 1.6rem;
+  color: #39e4c9;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-derecha h2 {
+  font-size: 1.6rem;
+  color: #39e4c9;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Mejoras en las secciones */
+.ubicacion-contacto-section,
+.tags-section,
+.descripcion-section,
+.submit-section {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Animaciones suaves */
+.categoria-recuadro {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.categoria-recuadro:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.15);
+}
+
 /* Responsive para pantallas pequeñas */
+@media (max-width: 1200px) {
+  .formulario-content {
+    padding: 0 1.5rem;
+  }
+  
+  .ubicacion-mapa {
+    padding: 0 1.5rem;
+  }
+  
+  .tags-section,
+  .descripcion-section,
+  .submit-section {
+    padding: 2rem 1.5rem;
+  }
+}
+
 @media (max-width: 900px) {
+  .formulario-content {
+    padding: 0 1rem;
+  }
+  
+  .formulario-header {
+    padding: 1rem 1rem 0.8rem;
+  }
+  
+  .formulario-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .formulario-header p {
+    font-size: 0.9rem;
+  }
+  
   .ubicacion-mapa {
     flex-direction: column;
     gap: 1.5rem;
+    padding: 0 1rem;
+  }
+  
+  .ubicacion-contacto-section {
+    padding: 1.5rem 0;
   }
   
   .mapa-contenedor,
@@ -796,6 +920,17 @@ textarea {
   
   #map {
     height: 300px;
+  }
+  
+  .tags-section,
+  .descripcion-section,
+  .submit-section {
+    padding: 2rem 1rem;
+  }
+  
+  .tags-section h2,
+  .descripcion-section h2 {
+    font-size: 1.8rem;
   }
   
   .form-derecha {
@@ -826,6 +961,24 @@ textarea {
     padding: 0 0.5rem;
   }
 
+  .formulario-header {
+    padding: 0.3rem 1rem 0.2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .formulario-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .formulario-header p {
+    font-size: 0.8rem;
+  }
+
+  .ubicacion-contacto-section {
+    padding: 0.8rem 0;
+    margin-bottom: 1rem;
+  }
+
   .ayuda-form {
     padding: 1.5rem;
   }
@@ -850,13 +1003,5 @@ textarea {
   
   .categoria-otros {
     grid-column: 1;
-  }
-
-  .formulario-header h1 {
-    font-size: 1.5rem;
-  }
-
-  .formulario-header p {
-    font-size: 0.9rem;
   }
 }
