@@ -19,17 +19,48 @@ const Home: React.FC = () => {
     { src: '/images/icono_default.png', alt: 'Ayuda general', title: 'Ayuda general' },
   ];
 
-  const helpActivityImages = [
-    { src: '/images/ambulancia.jpg', alt: 'Transporte de emergencia', title: 'Transporte' },
-    { src: '/images/comida.jpg', alt: 'Proporcionar comida', title: 'Alimentación' },
-    { src: '/images/medicamento.jpg', alt: 'Medicamentos', title: 'Medicamentos' },
-    { src: '/images/acompanar.jpg', alt: 'Acompañamiento', title: 'Acompañamiento' },
-    { src: '/images/mantas.jpg', alt: 'Ropa y mantas', title: 'Ropa y abrigo' },
-    { src: '/images/hablar.jpg', alt: 'Apoyo emocional', title: 'Apoyo emocional' },
-  ];
-
   return (
     <main>
+      {/* Sección ¿Cómo funciona? */}
+      <section className="como-funciona">
+        <div className="container">
+          <h2>¿Cómo Funciona SomAqui.cat?</h2>
+          <p className="subtitle">Un proceso simple y efectivo para conectar ayuda</p>
+          <div className="pasos-grid">
+            <div className="paso">
+              <div className="paso-icono">
+                <div className="paso-numero">1</div>
+                <i className="fa fa-user-plus" aria-hidden="true"></i>
+              </div>
+              <div className="paso-contenido">
+                <h3>Regístrate</h3>
+                <p>Completa tu perfil con tus habilidades y disponibilidad para ayudar a tu comunidad</p>
+              </div>
+            </div>
+            <div className="paso">
+              <div className="paso-icono">
+                <div className="paso-numero">2</div>
+                <i className="fa fa-search" aria-hidden="true"></i>
+              </div>
+              <div className="paso-contenido">
+                <h3>Encuentra Oportunidades</h3>
+                <p>Explora las emergencias activas en tu zona y encuentra donde puedes ayudar más</p>
+              </div>
+            </div>
+            <div className="paso">
+              <div className="paso-icono">
+                <div className="paso-numero">3</div>
+                <i className="fa fa-heart" aria-hidden="true"></i>
+              </div>
+              <div className="paso-contenido">
+                <h3>Ayuda y Conecta</h3>
+                <p>Conecta con personas que necesitan ayuda y marca la diferencia en tu comunidad</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Slider de imágenes */}
       <Slider images={sliderImages} />
 
