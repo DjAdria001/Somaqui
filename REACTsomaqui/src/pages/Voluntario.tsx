@@ -144,6 +144,51 @@ const Voluntario: React.FC = () => {
         </div>
       </section>
 
+      {/* Información sobre Voluntariado Section */}
+      <section className="info-voluntariado-section">
+        <div className="container">
+          <h2>¿Qué puedes hacer como voluntario?</h2>
+          
+          <div className="info-grid">
+            <div className="info-card">
+              <div className="info-icon">🚨</div>
+              <h3>Respuesta Inmediata</h3>
+              <p>Participa en la respuesta inicial a emergencias, ayudando en evacuaciones, primeros auxilios y coordinación de recursos.</p>
+            </div>
+
+            <div className="info-card">
+              <div className="info-icon">🏠</div>
+              <h3>Apoyo Comunitario</h3>
+              <p>Brinda apoyo directo a familias afectadas, desde distribución de alimentos hasta acompañamiento emocional.</p>
+            </div>
+
+            <div className="info-card">
+              <div className="info-icon">🔧</div>
+              <h3>Reconstrucción</h3>
+              <p>Participa en tareas de limpieza, reparación y reconstrucción de infraestructuras comunitarias.</p>
+            </div>
+
+            <div className="info-card">
+              <div className="info-icon">📋</div>
+              <h3>Coordinación</h3>
+              <p>Ayuda en la organización de recursos, voluntarios y comunicación entre diferentes grupos de ayuda.</p>
+            </div>
+
+            <div className="info-card">
+              <div className="info-icon">🎓</div>
+              <h3>Formación</h3>
+              <p>Comparte tus conocimientos y habilidades, formando a otros voluntarios y a la comunidad.</p>
+            </div>
+
+            <div className="info-card">
+              <div className="info-icon">💝</div>
+              <h3>Prevención</h3>
+              <p>Participa en actividades de prevención y concienciación para reducir riesgos en la comunidad.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       
       {/* Header Section */}
       <section className="voluntario-header">

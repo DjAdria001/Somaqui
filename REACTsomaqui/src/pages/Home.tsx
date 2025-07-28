@@ -37,6 +37,66 @@ const Home: React.FC = () => {
       {/* Gallery compacto */}
       <Slider images={sliderImages} compact={true} />
 
+      {/* Sección de Apoyo y Donaciones */}
+      <section className="apoyo-donaciones">
+        <div className="apoyo-content">
+          <div className="apoyo-text">
+            <h2>Tu apoyo <span className="highlight">salva vidas</span></h2>
+            <p>
+              Cada donación nos permite mantener una red de respuesta rápida ante emergencias, 
+              entrenar voluntarios especializados y proporcionar recursos esenciales cuando 
+              más se necesitan.
+            </p>
+            
+            <div className="impacto-stats">
+              <div className="stat">
+                <span className="stat-number">1.247</span>
+                <span className="stat-label">Personas ayudadas</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">89</span>
+                <span className="stat-label">Emergencias atendidas</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">24/7</span>
+                <span className="stat-label">Disponibilidad</span>
+              </div>
+            </div>
+
+            <div className="donacion-actions">
+              <Link to="/quiero-donar" className="btn-donar-primary">
+                <i className="fas fa-heart"></i>
+                Quiero Donar
+              </Link>
+              <Link to="/voluntario" className="btn-voluntario-secondary">
+                <i className="fas fa-hands-helping"></i>
+                Ser Voluntario
+              </Link>
+            </div>
+          </div>
+
+          <div className="apoyo-visual">
+            <div className="apoyo-card">
+              <div className="apoyo-icon">💰</div>
+              <h3>Donación Económica</h3>
+              <p>Contribuye económicamente para mantener nuestros recursos de emergencia y entrenar voluntarios.</p>
+            </div>
+            
+            <div className="apoyo-card">
+              <div className="apoyo-icon">⏰</div>
+              <h3>Donación de Tiempo</h3>
+              <p>Ofrece tu tiempo como voluntario y participa directamente en operaciones de rescate y apoyo.</p>
+            </div>
+            
+            <div className="apoyo-card">
+              <div className="apoyo-icon">🎯</div>
+              <h3>Donación de Habilidades</h3>
+              <p>Comparte tus conocimientos especializados en primeros auxilios, rescate o coordinación.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Características principales */}
       <section className="features">
         <div className="feature">

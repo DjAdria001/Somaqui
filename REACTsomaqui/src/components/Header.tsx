@@ -103,6 +103,15 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               Quiero ser voluntario
             </Link>
           </li>
+          <li className="nav-item">
+            <Link 
+              to="/quiero-donar" 
+              className={`nav-link ${isActive('/quiero-donar') ? 'active' : ''}`}
+              onClick={closeMenu}
+            >
+              Quiero Donar
+            </Link>
+          </li>
           <li 
             className={`nav-item dropdown ${isDropdownOpen ? 'expanded' : ''}`} 
             tabIndex={0}

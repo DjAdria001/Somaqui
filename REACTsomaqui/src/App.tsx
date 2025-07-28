@@ -7,6 +7,7 @@ import RegisterModal from './components/RegisterModal';
 import Home from './pages/Home';
 import FormularioAyuda from './pages/FormularioAyuda';
 import Voluntario from './pages/Voluntario';
+import QuieroDonar from './pages/QuieroDonar';
 import Equipo from './pages/Equipo';
 import MisionVision from './pages/MisionVision';
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes';
@@ -52,6 +53,7 @@ function App() {
               {/* Nueva ruta para Emergencias */}
               <Route path="/emergencias" element={<Emergencias />} />
               <Route path="/voluntario" element={<Voluntario />} />
+              <Route path="/quiero-donar" element={<QuieroDonar />} />
               <Route path="/equipo" element={<Equipo />} />
               <Route path="/mision-vision" element={<MisionVision />} />
               <Route path="/preguntas-frecuentes" element={<PreguntasFrecuentes />} />

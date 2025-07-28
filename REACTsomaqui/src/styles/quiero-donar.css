@@ -1,0 +1,596 @@
+/* Estilos para la página Quiero Donar */
+/* Usa las variables tipográficas definidas en global.css */
+
+.quiero-donar-page {
+  min-height: 100vh;
+  background-color: #f0fdfd;
+}
+
+/* Container común */
+.container {
+  width: 92vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header Section */
+.quiero-donar-header {
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  color: white;
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiero-donar-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+.quiero-donar-header .container {
+  position: relative;
+  z-index: 2;
+}
+
+.quiero-donar-header h1 {
+  font-family: var(--font-primary);
+  font-size: 3.5rem;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.quiero-donar-header .subtitle {
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  opacity: 0.95;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Información sobre Donaciones Section */
+.info-donaciones-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.info-donaciones-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #003333;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.info-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #f0fdfd 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-8px);
+  border-color: #39e4c9;
+  box-shadow: 0 15px 35px rgba(57, 228, 201, 0.2);
+}
+
+.info-card:hover::before {
+  opacity: 1;
+}
+
+.info-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.info-card h3 {
+  color: #003333;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.info-card p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Sección de Donaciones */
+.donaciones-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f0fdfd 0%, #e6f9f8 100%);
+  position: relative;
+}
+
+.donaciones-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="hearts" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="10" fill="rgba(57,228,201,0.1)">❤️</text></pattern></defs><rect width="100" height="100" fill="url(%23hearts)"/></svg>');
+  opacity: 0.3;
+}
+
+.donaciones-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.donaciones-text h2 {
+  font-size: 2.5rem;
+  color: #003333;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.donaciones-text .highlight {
+  color: #39e4c9;
+  position: relative;
+}
+
+.donaciones-text .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #39e4c9, transparent);
+  border-radius: 2px;
+}
+
+.donaciones-description {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.estadisticas {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  flex: 1;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #39e4c9;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.donaciones-widget {
+  background: white;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e9ecef;
+}
+
+.donacion-progress {
+  margin-bottom: 2rem;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.current-progress {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #39e4c9;
+}
+
+.goal-text {
+  font-size: 1rem;
+  color: #003333;
+  font-weight: 600;
+}
+
+.progress-subtext {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.donacion-tabs {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #666;
+}
+
+.tab.active {
+  background: white;
+  color: #39e4c9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.amount-description {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.amount-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.amount-btn {
+  flex: 1;
+  background: white;
+  border: 2px solid #e9ecef;
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.amount-btn:hover {
+  border-color: #39e4c9;
+  background: #f0fdfd;
+}
+
+.amount-btn.selected {
+  border-color: #39e4c9;
+  background: #39e4c9;
+  color: white;
+  transform: scale(1.05);
+}
+
+.amount-btn.primary {
+  border-color: #39e4c9;
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  color: white;
+}
+
+.btn-donar {
+  width: 100%;
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.btn-donar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.3);
+}
+
+.donacion-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.donacion-info p {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.donacion-info i {
+  color: #39e4c9;
+  width: 16px;
+}
+
+/* Otras Formas de Ayudar Section */
+.otras-formas-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.otras-formas-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #003333;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.otras-formas-section > .container > p {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.formas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.forma-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.forma-card:hover {
+  transform: translateY(-5px);
+  border-color: #39e4c9;
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.15);
+}
+
+.forma-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.forma-card h3 {
+  color: #003333;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.forma-card p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-forma {
+  display: inline-block;
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  color: white;
+  text-decoration: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-forma:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
+  text-decoration: none;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .donaciones-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .donaciones-text h2 {
+    font-size: 2rem;
+  }
+  
+  .estadisticas {
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+  }
+  
+  .info-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .quiero-donar-header {
+    padding: 60px 0;
+  }
+  
+  .quiero-donar-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .quiero-donar-header .subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .info-donaciones-section {
+    padding: 60px 0;
+  }
+  
+  .info-donaciones-section h2 {
+    font-size: 2rem;
+  }
+  
+  .info-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .donaciones-section {
+    padding: 60px 0;
+  }
+  
+  .donaciones-widget {
+    padding: 1.5rem;
+  }
+  
+  .donaciones-text h2 {
+    font-size: 1.8rem;
+  }
+  
+  .estadisticas {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .amount-options {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .donacion-tabs {
+    margin-bottom: 1rem;
+  }
+  
+  .otras-formas-section {
+    padding: 60px 0;
+  }
+  
+  .otras-formas-section h2 {
+    font-size: 2rem;
+  }
+  
+  .formas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-card {
+    padding: 1.5rem;
+  }
+  
+  .donaciones-widget {
+    padding: 1rem;
+  }
+  
+  .donaciones-text h2 {
+    font-size: 1.5rem;
+  }
+  
+  .quiero-donar-header h1 {
+    font-size: 2rem;
+  }
+  
+  .info-donaciones-section h2,
+  .otras-formas-section h2 {
+    font-size: 1.8rem;
+  }
+}
