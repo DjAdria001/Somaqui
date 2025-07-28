@@ -128,7 +128,7 @@ const filteredEmergencies = emergencies.filter(
         </div>
       </section>
       {/* Habilidades Section */}
-      <section className="habilidades-section">
+      {/* <section className="habilidades-section">
         <div className="container">
           <h2>¿En qué puedes ayudar?</h2>
           <p>Selecciona las habilidades que puedes ofrecer como voluntario:</p>
@@ -146,7 +146,7 @@ const filteredEmergencies = emergencies.filter(
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Información sobre Voluntariado Section */}
       <section className="info-voluntariado-section">
@@ -203,7 +203,7 @@ const filteredEmergencies = emergencies.filter(
             className="btn-registro-voluntario"
             onClick={() => setShowVolunteerModal(true)}
           >
-            Registrarme como Voluntario
+            Registrarme
           </button>
         </div>
       </section>

@@ -16,12 +16,13 @@
 
 /* Header Section */
 .voluntario-header {
-  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
-  color: white;
+  background: linear-gradient(135deg, #f0fdfd 0%, #e6f9f8 100%);
+  color: #003333;
   padding: 50px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-bottom: 1px solid rgba(57, 228, 201, 0.1);
 }
 
 .voluntario-header::before {
@@ -31,7 +32,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(57,228,201,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
   opacity: 0.3;
 }
 
@@ -47,7 +48,8 @@
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
   margin-bottom: 0.8rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
+  color: #003333;
 }
 
 .voluntario-header .subtitle {
@@ -57,12 +59,13 @@
   line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-normal);
   margin-bottom: 2rem;
-  opacity: 0.95;
+  opacity: 0.8;
+  color: #555;
 }
 
 .btn-registro-voluntario {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  color: #39e4c9;
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  color: white;
   border: 2px solid #39e4c9;
   padding: 12px 30px;
   font-size: 1rem;
@@ -70,14 +73,14 @@
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.2);
 }
 
 .btn-registro-voluntario:hover {
-  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  background: linear-gradient(135deg, #27b3a3 0%, #1e9085 100%);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.4);
+  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.3);
 }
 
 /* Habilidades Section */
