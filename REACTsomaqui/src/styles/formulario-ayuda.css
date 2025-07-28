@@ -14,7 +14,7 @@ main {
 }
 
 .formulario-header {
-  text-align: center;
+  text-align: left;
   padding: 0.5rem 2rem 0.3rem;
   background: transparent;
   margin-bottom: 1.5rem;
@@ -221,6 +221,7 @@ main {
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
+  min-height: 420px;
 }
 
 .ubicacion-mapa {
@@ -655,6 +656,7 @@ textarea {
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
+  min-height: 420px;
 }
 
 .descripcion-section {
