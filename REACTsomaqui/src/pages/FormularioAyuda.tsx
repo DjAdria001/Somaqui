@@ -432,10 +432,51 @@ const FormularioAyuda: React.FC = () => {
         <p>Conectamos tu necesidad con voluntarios cercanos</p>
       </header>
 
+      {/* Indicador de pasos */}
+      <div className="pasos-container">
+        <div className="pasos-navegacion">
+          <div className="paso">
+            <div className="paso-numero activo">1</div>
+            <div className="paso-texto activo">
+              <strong>Ubicación</strong><br />
+              <small>¿Dónde necesitas ayuda?</small>
+            </div>
+          </div>
+          
+          <div className="paso-linea"></div>
+          
+          <div className="paso">
+            <div className="paso-numero">2</div>
+            <div className="paso-texto">
+              <strong>Tus datos</strong><br />
+              <small>Información de contacto</small>
+            </div>
+          </div>
+          
+          <div className="paso-linea"></div>
+          
+          <div className="paso">
+            <div className="paso-numero">3</div>
+            <div className="paso-texto">
+              <strong>Tipo de ayuda</strong><br />
+              <small>¿Qué necesitas exactamente?</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="formulario-content">
         <form onSubmit={handleSubmit} className="ayuda-form">
-          {/* Sección de ubicación y contacto - Layout horizontal */}
+          {/* PASO 1: Sección de ubicación y contacto */}
           <section className="ubicacion-contacto-section">
+            <div className="seccion-titulo">
+              <div className="seccion-numero">1</div>
+              <div className="seccion-info">
+                <h2>📍 Indica tu ubicación</h2>
+                <p>Necesitamos saber dónde estás para enviarte ayuda cercana</p>
+              </div>
+            </div>
+            
             <div className="ubicacion-mapa">
               {/* Sección de ubicación - Lado izquierdo */}
               <div className="mapa-contenedor">
@@ -474,9 +515,15 @@ const FormularioAyuda: React.FC = () => {
                 </div>
               </div>
 
-              {/* Sección de contacto - Lado derecho */}
+              {/* PASO 2: Sección de contacto - Lado derecho */}
               <div className="form-derecha">
-                <h2>📞 Información de contacto</h2>
+                <div className="seccion-titulo">
+                  <div className="seccion-numero">2</div>
+                  <div className="seccion-info">
+                    <h2>📞 Tus datos de contacto</h2>
+                    <p>Para que los voluntarios puedan comunicarse contigo</p>
+                  </div>
+                </div>
                 
                 <div className="form-group">
                   <label htmlFor="nombre">Nombre completo:</label>
@@ -542,10 +589,15 @@ const FormularioAyuda: React.FC = () => {
             </div>
           </section>
 
-          {/* Sección de etiquetas/categorías */}
+          {/* PASO 3: Sección de etiquetas/categorías */}
           <section className="tags-section">
-            <h2>🏷️ ¿Qué tipo de ayuda necesitas?</h2>
-            <p>Selecciona todas las categorías que apliquen a tu situación:</p>
+            <div className="seccion-titulo">
+              <div className="seccion-numero">3</div>
+              <div className="seccion-info">
+                <h2>🏷️ ¿Qué tipo de ayuda necesitas?</h2>
+                <p>Selecciona todas las categorías que apliquen a tu situación</p>
+              </div>
+            </div>
 
             <div className="categorias-grid">
               {Object.entries(categorias).map(([key, categoria]) => (

@@ -40,37 +40,37 @@ const QuieroDonar: React.FC = () => {
                 
                 <div className="info-grid">
                   <div className="info-card">
-                    <div className="info-icon">⚡</div>
+                    <i className="info-icon fas fa-bolt"></i>
                     <h3>Respuesta Rápida</h3>
                     <p>Nos permite mantener equipos de emergencia listos para actuar en cualquier momento, reduciendo el tiempo de respuesta crucial en situaciones críticas.</p>
                   </div>
 
                   <div className="info-card">
-                    <div className="info-icon">🎯</div>
+                    <i className="info-icon fas fa-bullseye"></i>
                     <h3>Recursos Especializados</h3>
                     <p>Financiamos equipamiento médico, herramientas de rescate, vehículos de emergencia y suministros esenciales para diferentes tipos de crisis.</p>
                   </div>
 
                   <div className="info-card">
-                    <div className="info-icon">👥</div>
+                    <i className="info-icon fas fa-users"></i>
                     <h3>Formación de Voluntarios</h3>
                     <p>Invertimos en la capacitación continua de nuestros voluntarios en primeros auxilios, rescate y gestión de emergencias.</p>
                   </div>
 
                   <div className="info-card">
-                    <div className="info-icon">🌐</div>
+                    <i className="info-icon fas fa-globe"></i>
                     <h3>Red de Apoyo</h3>
                     <p>Mantenemos una red coordinada de voluntarios y recursos que permite cubrir todo el territorio de manera eficiente.</p>
                   </div>
 
                   <div className="info-card">
-                    <div className="info-icon">📱</div>
+                    <i className="info-icon fas fa-mobile-alt"></i>
                     <h3>Tecnología de Emergencia</h3>
                     <p>Desarrollamos y mantenemos sistemas tecnológicos como esta plataforma para coordinar ayuda de manera más efectiva.</p>
                   </div>
 
                   <div className="info-card">
-                    <div className="info-icon">🏥</div>
+                    <i className="info-icon fas fa-hospital"></i>
                     <h3>Apoyo Post-Emergencia</h3>
                     <p>Proporcionamos seguimiento y apoyo a las familias afectadas durante su proceso de recuperación y normalización.</p>
                   </div>
@@ -154,30 +154,30 @@ const QuieroDonar: React.FC = () => {
                 <h2>Otras formas de colaborar</h2>
                 <p>Si no puedes donar económicamente, hay muchas otras maneras de ayudar a nuestra comunidad</p>
                 
-                <div className="formas-grid">
+                                <div className="formas-grid">
                   <div className="forma-card">
-                    <div className="forma-icon">🙋‍♀️</div>
+                    <i className="forma-icon fas fa-hand-paper"></i>
                     <h3>Voluntariado</h3>
                     <p>Únete a nuestro equipo de voluntarios y participa directamente en las operaciones de emergencia.</p>
                     <a href="/voluntario" className="btn-forma">Ser Voluntario</a>
                   </div>
 
                   <div className="forma-card">
-                    <div className="forma-icon">📢</div>
+                    <i className="forma-icon fas fa-bullhorn"></i>
                     <h3>Difusión</h3>
                     <p>Ayúdanos a llegar a más personas compartiendo nuestra misión en redes sociales.</p>
                     <a href="#" className="btn-forma">Compartir</a>
                   </div>
 
                   <div className="forma-card">
-                    <div className="forma-icon">🏢</div>
+                    <i className="forma-icon fas fa-building"></i>
                     <h3>Empresa Colaboradora</h3>
                     <p>Si representas una empresa, puedes formar parte de nuestro programa de responsabilidad social.</p>
                     <a href="/contacto" className="btn-forma">Colaborar</a>
                   </div>
 
                   <div className="forma-card">
-                    <div className="forma-icon">🎓</div>
+                    <i className="forma-icon fas fa-graduation-cap"></i>
                     <h3>Formación</h3>
                     <p>Ofrece talleres o cursos especializados para mejorar las capacidades de nuestros voluntarios.</p>
                     <a href="/contacto" className="btn-forma">Formar</a>
