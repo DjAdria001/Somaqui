@@ -1,4 +1,4 @@
-/* Estilos para la página de Contacto */
+/* Estilos para la página de Contacto - Tipografía unificada con sistema global */
 .contacto-page {
   min-height: 100vh;
   background-color: #f8f9fa;
@@ -31,17 +31,23 @@
 }
 
 .contacto-header h1 {
-  font-size: 3rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
   margin-bottom: 1rem;
-  font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .contacto-header .subtitle {
-  font-size: 1.3rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   margin-bottom: 0;
   opacity: 0.95;
-  font-weight: 300;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -62,10 +68,13 @@
 
 /* Contact Info */
 .contacto-info h2 {
-  font-size: 2rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
   color: #333;
   margin-bottom: 2rem;
-  font-weight: 700;
 }
 
 .info-item {
@@ -197,10 +206,13 @@
 
 .form-group label {
   display: block;
-  font-weight: 600;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   color: #333;
   margin-bottom: 8px;
-  font-size: 0.95rem;
 }
 
 .form-group input,
@@ -210,7 +222,11 @@
   padding: 12px 15px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 1rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   transition: all 0.3s ease;
   box-sizing: border-box;
   font-family: inherit;

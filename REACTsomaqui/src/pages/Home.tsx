@@ -5,18 +5,20 @@ import '../styles/home.css';
 
 const Home: React.FC = () => {
   const sliderImages = [
-    { src: '/images/medicamento.jpg', alt: 'Comunidad de ayuda SomAqui' },
+    { src: '/images/acompanar.jpg', alt: 'Comunidad de ayuda SomAqui' },
     { src: '/images/levantar.jpg', alt: 'Situaciones de emergencia' },
-    { src: '/images/Ayuda.png', alt: 'Asistencia y apoyo' },
+    { src: '/images/sillaruedas.jpg', alt: 'Asistencia y apoyo' },
   ];
 
   const emergencyTypeImages = [
-    { src: '/images/icono_medica.png', alt: 'Emergencia médica', title: 'Asistencia médica' },
-    { src: '/images/icono_incendio.png', alt: 'Incendios', title: 'Incendios' },
-    { src: '/images/icono_inundacion.png', alt: 'Inundaciones', title: 'Inundaciones' },
-    { src: '/images/icono_rescate.png', alt: 'Rescate', title: 'Rescate' },
-    { src: '/images/icono_otros.png', alt: 'Otras emergencias', title: 'Otras emergencias' },
-    { src: '/images/icono_default.png', alt: 'Ayuda general', title: 'Ayuda general' },
+    { icon: '🏥', alt: 'Primeros Auxilios', title: 'Primeros Auxilios' },
+    { icon: '⛑️', alt: 'Rescate', title: 'Rescate' },
+    { icon: '📦', alt: 'Logística', title: 'Logística' },
+    { icon: '📢', alt: 'Comunicación', title: 'Comunicación' },
+    { icon: '🚗', alt: 'Transporte', title: 'Transporte' },
+    { icon: '🔨', alt: 'Construcción', title: 'Construcción' },
+    { icon: '🍳', alt: 'Cocina', title: 'Cocina' },
+    { icon: '👥', alt: 'Cuidado de Personas', title: 'Cuidado de Personas' },
   ];
 
   return (
@@ -32,8 +34,8 @@ const Home: React.FC = () => {
         <Link to="/voluntario">Ser voluntario</Link>
       </section>
 
-      {/* Slider de imágenes */}
-      <Slider images={sliderImages} />
+      {/* Gallery compacto */}
+      <Slider images={sliderImages} compact={true} />
 
       {/* Características principales */}
       <section className="features">
@@ -66,15 +68,25 @@ const Home: React.FC = () => {
           </p>
           <Link to="/contacto">Más información</Link>
         </div>
+
+        <div className="feature">
+          <i className="fa fa-shield" aria-hidden="true"></i>
+          <h3>Ayuda segura</h3>
+          <p>
+            Plataforma verificada con medidas de seguridad para 
+            proteger tanto a solicitantes como a voluntarios.
+          </p>
+          <Link to="/preguntas-frecuentes">Conocer más</Link>
+        </div>
       </section>
 
-      {/* Tipos de emergencias que manejamos */}
+      {/* Tipos de ayuda que puedes ofrecer */}
       <section className="emergency-types">
-        <h2>🚨 Tipos de emergencias que atendemos</h2>
+        <h2>🤝 ¿En qué puedes ayudar?</h2>
         <div className="emergency-grid">
           {emergencyTypeImages.map((emergency, index) => (
             <div key={index} className="emergency-card">
-              <img src={emergency.src} alt={emergency.alt} />
+              <div className="emergency-icon">{emergency.icon}</div>
               <h3>{emergency.title}</h3>
             </div>
           ))}

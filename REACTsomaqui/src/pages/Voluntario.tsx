@@ -65,47 +65,7 @@ const Voluntario: React.FC = () => {
   return (
     
     <main className="voluntario-page">
-<<<<<<< HEAD
-
-       {/* Emergencias Activas Section */}
-=======
-      {/* Header Section */}
-      <section className="voluntario-header">
-        <div className="container">
-          <h1>Quiero ser Voluntario</h1>
-          <p className="subtitle">Únete a nuestra comunidad de ayuda mutua</p>
-          <button
-            className="btn-registro-voluntario"
-            onClick={() => setShowVolunteerModal(true)}
-          >
-            Registrarme como Voluntario
-          </button>
-        </div>
-      </section>
-
-      {/* Habilidades Section */}
-      <section className="habilidades-section">
-        <div className="container">
-          <h2>¿En qué puedes ayudar?</h2>
-          <p>Selecciona las habilidades que puedes ofrecer como voluntario:</p>
-
-          <div className="habilidades-grid">
-            {volunteerSkills.map((skill) => (
-              <div
-                key={skill.id}
-                className={`habilidad-card ${selectedSkills.includes(skill.id) ? 'selected' : ''}`}
-                onClick={() => handleSkillToggle(skill.id)}
-              >
-                <div className="habilidad-icon">{skill.icon}</div>
-                <h3>{skill.label}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Emergencias Activas Section */}
->>>>>>> 6d6ad058fac90cb04cf9fd221fec17996df1e6b1
       <section className="emergencias-section">
         <div className="container">
           <h2>Emergencias Activas</h2>
@@ -163,6 +123,28 @@ const Voluntario: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* Habilidades Section */}
+      <section className="habilidades-section">
+        <div className="container">
+          <h2>¿En qué puedes ayudar?</h2>
+          <p>Selecciona las habilidades que puedes ofrecer como voluntario:</p>
+
+          <div className="habilidades-grid">
+            {volunteerSkills.map((skill) => (
+              <div
+                key={skill.id}
+                className={`habilidad-card ${selectedSkills.includes(skill.id) ? 'selected' : ''}`}
+                onClick={() => handleSkillToggle(skill.id)}
+              >
+                <div className="habilidad-icon">{skill.icon}</div>
+                <h3>{skill.label}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      
       {/* Header Section */}
       <section className="voluntario-header">
         <div className="container">
@@ -177,28 +159,7 @@ const Voluntario: React.FC = () => {
         </div>
       </section>
 
-      {/* Habilidades Section */}
-      <section className="habilidades-section">
-        <div className="container">
-          <h2>¿En qué puedes ayudar?</h2>
-          <p>Selecciona las habilidades que puedes ofrecer como voluntario:</p>
-          
-          <div className="habilidades-grid">
-            {volunteerSkills.map(skill => (
-              <div 
-                key={skill.id}
-                className={`habilidad-card ${selectedSkills.includes(skill.id) ? 'selected' : ''}`}
-                onClick={() => handleSkillToggle(skill.id)}
-              >
-                <div className="habilidad-icon">{skill.icon}</div>
-                <h3>{skill.label}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-     
+      
 
       {/* Modal de Registro de Voluntario */}
       {showVolunteerModal && (

@@ -1,4 +1,5 @@
 /* Estilos específicos para la página Home */
+/* Importa las variables tipográficas del archivo global */
 
 /* Estilos específicos del slider */
 .slider-container {
@@ -139,22 +140,22 @@
 /* Estilos específicos del change theory */
 .teoria-cambio {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 2.5rem 2rem;
   background: transparent;
   color: #222;
   font-family: 'Segoe UI', sans-serif;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .teoria-cambio h2 {
-  font-size: 2.4rem;
+  font-size: 2rem;
   color: #39e4c9;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .teoria-cambio .subtitulo {
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
+  font-size: 1rem;
+  margin-bottom: 2rem;
   color: #444;
 }
 
@@ -163,18 +164,18 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .grafico-cambio {
-  flex: 0 0 280px;
+  flex: 0 0 220px;
   background: linear-gradient(135deg, #ffffff 0%, #e8faf9 100%);
   border-radius: 50%;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.15);
+  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.15);
   border: 2px solid rgba(57, 228, 201, 0.1);
 }
 
@@ -187,30 +188,30 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  max-width: 520px;
+  gap: 1.5rem;
+  max-width: 480px;
 }
 
 .paso {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   align-items: flex-start;
   text-align: left;
 }
 
 .paso img {
-  width: 55px;
-  height: 55px;
+  width: 48px;
+  height: 48px;
 }
 
 .paso strong {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #222;
 }
 
 .paso p {
-  margin-top: 0.3rem;
-  font-size: 0.95rem;
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
   color: #333;
 }
 
@@ -295,54 +296,130 @@
 /* Sección de tipos de emergencias */
 .emergency-types {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fdfd 100%);
+  background: linear-gradient(135deg, 
+    rgba(57, 228, 201, 0.08) 0%, 
+    rgba(240, 253, 253, 0.6) 30%, 
+    rgba(255, 255, 255, 0.4) 70%,
+    rgba(39, 179, 163, 0.06) 100%
+  );
   text-align: center;
-  border-radius: 0;
-  border-top: 1px solid rgba(57, 228, 201, 0.15);
-  border-bottom: 1px solid rgba(57, 228, 201, 0.15);
+  border-radius: 25px;
+  margin: 3rem auto;
+  max-width: 1400px;
+  border: 2px solid rgba(57, 228, 201, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(57, 228, 201, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-types::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(57, 228, 201, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(39, 179, 163, 0.08) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.emergency-types > * {
+  position: relative;
+  z-index: 1;
 }
 
 .emergency-types h2 {
-  font-size: 2.2rem;
-  color: #39e4c9;
-  margin-bottom: 3rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: #003333;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .emergency-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .emergency-card {
-  background: linear-gradient(135deg, #ffffff 0%, #fafefe 100%);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
   border-radius: 15px;
-  padding: 2rem 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid rgba(57, 228, 201, 0.1);
-  box-shadow: 0 4px 12px rgba(57, 228, 201, 0.05);
+  padding: 1.5rem 1rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid rgba(57, 228, 201, 0.2);
+  box-shadow: 
+    0 4px 15px rgba(57, 228, 201, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.emergency-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .emergency-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(57, 228, 201, 0.2);
-  border-color: #39e4c9;
-  background: linear-gradient(135deg, #ffffff 0%, #f0fdfd 100%);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 
+    0 10px 25px rgba(57, 228, 201, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(57, 228, 201, 0.4);
+  background: rgba(255, 255, 255, 0.95);
 }
 
-.emergency-card img {
-  width: 64px;
-  height: 64px;
+.emergency-card:hover::before {
+  opacity: 1;
+}
+
+.emergency-card .emergency-icon {
+  font-size: 3.5rem;
   margin-bottom: 1rem;
-  object-fit: contain;
+  display: block;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 3px 6px rgba(57, 228, 201, 0.2));
+}
+
+.emergency-card:hover .emergency-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 8px rgba(57, 228, 201, 0.4));
 }
 
 .emergency-card h3 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-normal);
   color: #003333;
-  font-size: 1.1rem;
   margin: 0;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  transition: color 0.3s ease;
+}
+
+.emergency-card:hover h3 {
+  color: #39e4c9;
 }
 
 /* Sección de actividades de ayuda */
@@ -893,57 +970,130 @@
 }
 
 /* Media queries específicos para la estructura de colores */
+@media (max-width: 1200px) {
+  .emergency-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .emergency-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     padding: 3rem 1.5rem;
-    margin-bottom: 2rem;
+    margin: 2rem 1rem;
+    border-radius: 20px;
   }
   
   .features {
-    padding: 3rem 1rem;
+    padding: 3rem 1.5rem;
+    margin: 2rem 1rem;
+    border-radius: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
   }
   
   .feature {
     padding: 2rem 1.5rem;
+    max-width: 300px;
+  }
+  
+  .compact-gallery {
+    margin: 2rem 1rem;
+    padding: 0 1.5rem;
   }
   
   .emergency-types {
     padding: 3rem 1.5rem;
+    margin: 2rem 1rem;
+    border-radius: 20px;
+  }
+  
+  .emergency-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  
+  .emergency-card {
+    padding: 1.2rem 0.8rem;
+  }
+  
+  .emergency-types h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
   }
   
   .teoria-cambio {
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
   }
   
   .grafico-cambio {
-    flex: 0 0 200px;
-    padding: 1.5rem;
+    flex: 0 0 180px;
+    padding: 1.2rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
     padding: 2rem 1rem;
-    border-radius: 8px;
-
+    margin: 1.5rem 0.5rem;
+    border-radius: 15px;
   }
   
   .features {
-    padding: 2rem 0.5rem;
+    padding: 2rem 1rem;
+    margin: 1.5rem 0.5rem;
+    border-radius: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
   }
   
   .feature {
     padding: 1.5rem;
-    border-radius: 12px;
+    border-radius: 15px;
+  }
+  
+  .compact-gallery {
+    margin: 1.5rem 0.5rem;
+    padding: 0 1rem;
   }
   
   .emergency-types {
     padding: 2rem 1rem;
+    margin: 1.5rem 0.5rem;
+    border-radius: 15px;
+  }
+  
+  .emergency-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    padding: 0;
+  }
+  
+  .emergency-card {
+    padding: 1rem 0.6rem;
+    border-radius: 12px;
+  }
+  
+  .emergency-card .emergency-icon {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .emergency-types h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
   }
   
   .teoria-cambio {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
 }
 
@@ -1019,4 +1169,195 @@ section {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(57, 228, 201, 0.3) 50%, transparent 100%);
+}
+
+/* ==========================================
+   COMPACT GALLERY STYLES
+   ========================================== */
+
+.compact-gallery {
+  max-width: 1400px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.gallery-header h3 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.gallery-header p {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  color: #666;
+  margin: 0;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.gallery-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.gallery-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(57, 228, 201, 0.2);
+  border-color: rgba(57, 228, 201, 0.3);
+}
+
+.gallery-card.featured {
+  border-color: #39e4c9;
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.3);
+  transform: translateY(-4px);
+}
+
+.gallery-card.featured::before {
+  content: '✨';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  font-size: 1.2rem;
+  background: rgba(57, 228, 201, 0.9);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .image-container img {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(57, 228, 201, 0.1),
+    rgba(39, 179, 163, 0.05)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-card:hover .overlay {
+  opacity: 1;
+}
+
+.card-indicator {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  transform: scale(1.5);
+  box-shadow: 0 0 10px rgba(57, 228, 201, 0.4);
+}
+
+.gallery-footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.gallery-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(57, 228, 201, 0.3);
+}
+
+/* Responsive para gallery compacto */
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .gallery-header h3 {
+    font-size: 1.5rem;
+  }
+  
+  .image-container {
+    height: 180px;
+  }
+  
+  .compact-gallery {
+    margin: 1.5rem 0.5rem;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container {
+    height: 160px;
+  }
+  
+  .gallery-header h3 {
+    font-size: 1.3rem;
+  }
+  
+  .gallery-header p {
+    font-size: 0.9rem;
+  }
 }

@@ -5,14 +5,16 @@ interface SliderProps {
     src: string;
     alt: string;
   }>;
+  compact?: boolean;
   autoSlide?: boolean;
   autoSlideInterval?: number;
 }
 
 const Slider: React.FC<SliderProps> = ({ 
   images, 
+  compact = false,
   autoSlide = true, 
-  autoSlideInterval = 5000 
+  autoSlideInterval = 4000 
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -35,6 +37,41 @@ const Slider: React.FC<SliderProps> = ({
     return () => clearInterval(interval);
   }, [autoSlide, autoSlideInterval, currentSlide]);
 
+  // Versión compacta - gallery de tarjetas
+  if (compact) {
+    return (
+      <div className="compact-gallery">
+        <div className="gallery-header">
+          <h3>Nuestra Comunidad en Acción</h3>
+          <p>Momentos de solidaridad y ayuda mutua</p>
+        </div>
+        <div className="gallery-grid">
+          {images.map((image, index) => (
+            <div 
+              key={index} 
+              className={`gallery-card ${index === currentSlide ? 'featured' : ''}`}
+              onClick={() => goToSlide(index)}
+            >
+              <div className="image-container">
+                <img src={image.src} alt={image.alt} />
+                <div className="overlay"></div>
+              </div>
+              <div className="card-indicator">
+                <div className={`indicator-dot ${index === currentSlide ? 'active' : ''}`}></div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="gallery-footer">
+          <span className="gallery-counter">
+            {currentSlide + 1} de {images.length}
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  // Versión original del slider
   return (
     <div className="slider-container">
       <div className="slider">

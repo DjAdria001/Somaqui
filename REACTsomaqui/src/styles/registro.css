@@ -1,4 +1,4 @@
-/* Estilos para la página de registro */
+/* Estilos para la página de registro - Tipografía unificada con sistema global */
 
 .registro-container {
   width: 100%;
@@ -17,13 +17,21 @@
 }
 
 .registro-header h1 {
-  font-size: 1.5rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
   color: #003333;
   margin-bottom: 0.5rem;
 }
 
 .registro-header p {
-  font-size: 1rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   color: #003333;
   max-width: 500px;
   margin: 0 auto;

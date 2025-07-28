@@ -1,4 +1,4 @@
-/* Estilos específicos para el formulario de ayuda */
+/* Estilos específicos para el formulario de ayuda - Tipografía unificada con sistema global */
 
 /* Reducir espacio entre header y contenido principal */
 main {
@@ -23,13 +23,21 @@ main {
 }
 
 .formulario-header h1 {
-  font-size: 1.6rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
   color: #39e4c9;
   margin-bottom: 0.2rem;
 }
 
 .formulario-header p {
-  font-size: 0.9rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   color: #666;
   max-width: 600px;
   margin: 0 auto;

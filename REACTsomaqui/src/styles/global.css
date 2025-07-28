@@ -1,3 +1,38 @@
+/* Variables tipográficas globales */
+:root {
+  /* Font families */
+  --font-primary: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  --font-secondary: 'Segoe UI', sans-serif;
+  
+  /* Font sizes - Sistema escalable */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+  
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Line heights */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+  
+  /* Letter spacing */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,13 +40,93 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   background-color: #f0fdfd;
   color: #003333;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
+
+/* Tipografía base para headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: #003333;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-base); }
+
+/* Tipografía base para párrafos y texto */
+p {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: 1em;
+}
+
+/* Links */
+a {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Botones */
+button, .btn {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Inputs y forms */
+input, textarea, select {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+/* Clases de utilidad tipográfica */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+.text-4xl { font-size: var(--font-size-4xl); }
+.text-5xl { font-size: var(--font-size-5xl); }
+
+.font-light { font-weight: var(--font-weight-light); }
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-normal { line-height: var(--line-height-normal); }
+.leading-relaxed { line-height: var(--line-height-relaxed); }
+
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
 
 /* HEADER y menú */
 
@@ -29,8 +144,10 @@ header.site-header {
 
 /* Logo centrado */
 header.site-header .logo {
-  font-weight: 700;
-  font-size: 1.8rem;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-3xl);
+  letter-spacing: var(--letter-spacing-tight);
   text-decoration: none;
   color: white;
   display: flex;
@@ -49,7 +166,7 @@ header.site-header .logo img {
   background: none;
   border: none;
   color: white;
-  font-size: 1.8rem;
+  font-size: var(--font-size-3xl);
   cursor: pointer;
 }
 
@@ -82,10 +199,12 @@ nav.main-nav .nav-item {
 }
 
 nav.main-nav .nav-link {
+  font-family: var(--font-primary);
   color: white;
   text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  letter-spacing: var(--letter-spacing-normal);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -101,7 +220,7 @@ nav.main-nav .nav-link:focus {
 
 nav.main-nav .nav-link.active {
   color: #006e5f;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
 }
 
 /* Estilos específicos para botón dropdown */
@@ -110,8 +229,10 @@ nav.main-nav .nav-item.dropdown .nav-link {
   border: none;
   text-decoration: none;
   color: white;
-  font-weight: 600;
-  font-size: 1rem;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  letter-spacing: var(--letter-spacing-normal);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -148,7 +269,10 @@ nav.main-nav .dropdown-menu .dropdown-link {
   display: block;
   padding: 0.5rem 1rem;
   color: white;
-  font-weight: 500;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-normal);
   text-decoration: none;
   transition: background-color 0.2s ease;
 }
@@ -238,97 +362,239 @@ main {
 /* Contenido principal */
 .hero {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fdfd 100%);
+  background: linear-gradient(135deg, 
+    rgba(57, 228, 201, 0.15) 0%, 
+    rgba(240, 253, 253, 0.8) 30%, 
+    rgba(255, 255, 255, 0.6) 70%,
+    rgba(39, 179, 163, 0.1) 100%
+  );
   text-align: center;
-  border-radius: 12px;
-  margin-bottom: 3rem;
-  border: 1px solid rgba(57, 228, 201, 0.2);
-  box-shadow: 0 4px 20px rgba(57, 228, 201, 0.1);
+  border-radius: 20px;
+  margin: 3rem auto;
+  max-width: 1400px;
+  border: 2px solid rgba(57, 228, 201, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(57, 228, 201, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(57, 228, 201, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(39, 179, 163, 0.08) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .hero h2 {
-  font-size: 2rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
   margin-bottom: 1rem;
   color: #003333;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .hero p {
-  font-size: 1.2rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
   max-width: 700px;
   margin: 0 auto;
   color: #003333;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+  opacity: 0.9;
 }
 
 .hero a {
-  background: #39e4c9;
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
-  padding: 0.8rem 2rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-normal);
+  padding: 1rem 2.5rem;
   border-radius: 30px;
   text-decoration: none;
-  font-weight: 700;
   margin: 1.5rem 1rem 0 1rem;
   display: inline-block;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  box-shadow: 
+    0 6px 20px rgba(57, 228, 201, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 2px solid transparent;
 }
 
 .hero a:hover,
 .hero a:focus {
-  background: #27b3a3;
+  background: linear-gradient(135deg, #27b3a3 0%, #1e9688 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(57, 228, 201, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   outline: none;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .features {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  padding: 4rem 1rem;
-  background: transparent;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, 
+    rgba(57, 228, 201, 0.06) 0%, 
+    rgba(240, 253, 253, 0.4) 30%, 
+    rgba(255, 255, 255, 0.3) 70%,
+    rgba(39, 179, 163, 0.05) 100%
+  );
+  border-radius: 25px;
+  margin: 3rem auto;
+  max-width: 1400px;
+  border: 2px solid rgba(57, 228, 201, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(57, 228, 201, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.features::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(57, 228, 201, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(39, 179, 163, 0.06) 0%, transparent 50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.features > * {
+  position: relative;
+  z-index: 1;
 }
 
 .feature {
-  background: linear-gradient(135deg, #ffffff 0%, #fafefe 100%);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
   border: 2px solid rgba(57, 228, 201, 0.2);
-  border-radius: 15px;
+  border-radius: 20px;
   padding: 2.5rem;
-  max-width: 300px;
   text-align: center;
   color: #003333;
-  flex: 1 1 280px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 6px 20px rgba(57, 228, 201, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .feature:hover {
-  background: linear-gradient(135deg, #ffffff 0%, #f0fdfd 100%);
-  border-color: rgba(57, 228, 201, 0.6);
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(57, 228, 201, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 12px 30px rgba(57, 228, 201, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(57, 228, 201, 0.4);
+}
+
+.feature:hover::before {
+  opacity: 1;
 }
 
 .feature i {
-  font-size: 2rem;
+  font-size: var(--font-size-4xl);
   color: #39e4c9;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(57, 228, 201, 0.2));
+}
+
+.feature:hover i {
+  transform: scale(1.1);
+  color: #27b3a3;
+  filter: drop-shadow(0 6px 12px rgba(57, 228, 201, 0.4));
 }
 
 .feature h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 1rem;
+  color: #003333;
+  transition: color 0.3s ease;
+}
+
+.feature:hover h3 {
+  color: #39e4c9;
 }
 
 .feature p {
-  font-size: 0.95rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
 }
 
 .feature a {
-  color: #39e4c9;
+  color: white;
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-normal);
   text-decoration: none;
-  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
 }
 
 .feature a:hover {
-  text-decoration: underline;
+  background: linear-gradient(135deg, #27b3a3 0%, #1e9688 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.4);
+  text-decoration: none;
 }
 
 /* FOOTER */
@@ -396,10 +662,12 @@ footer small {
 }
 
 .modal-header h3 {
-  font-size: 1.5rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
   color: #004d4a;
   margin: 0;
-  font-weight: 600;
 }
 
 .modal-close {
@@ -434,10 +702,12 @@ footer small {
 
 .login-form .form-group label {
   display: block;
-  font-weight: 600;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  letter-spacing: var(--letter-spacing-normal);
   color: #004d4a;
   margin-bottom: 8px;
-  font-size: 0.95rem;
 }
 
 .login-form .form-group input {
@@ -445,7 +715,10 @@ footer small {
   padding: 12px 15px;
   border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 1rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-normal);
   transition: all 0.3s ease;
   box-sizing: border-box;
 }
@@ -469,10 +742,12 @@ footer small {
   border: none;
   padding: 12px 25px;
   border-radius: 8px;
-  font-weight: 600;
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  letter-spacing: var(--letter-spacing-normal);
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1rem;
 }
 
 .login-form .btn-primary:hover {
@@ -743,6 +1018,38 @@ footer small {
 
 /* Leaflet Map Styles - Fix para asegurar que los estilos se carguen */
 @import url('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
+
+/* Media queries específicos para features con 4 elementos */
+@media (max-width: 1200px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 3rem 1.5rem;
+  }
+  
+  .feature {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .features {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 2.5rem 1rem;
+  }
+  
+  .feature {
+    padding: 1.8rem;
+  }
+}
 
 /* Fix adicional para iconos de Leaflet */
 .leaflet-default-icon-path {

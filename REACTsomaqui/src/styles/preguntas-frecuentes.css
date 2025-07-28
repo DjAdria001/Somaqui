@@ -1,4 +1,4 @@
-/* Estilos para la página de Preguntas Frecuentes */
+/* Estilos para la página de Preguntas Frecuentes - Tipografía unificada con sistema global */
 .preguntas-page {
   min-height: 100vh;
   background-color: #f8f9fa;
@@ -31,21 +31,26 @@
 }
 
 .faq-header h1 {
-  font-size: 3rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
   margin-bottom: 1rem;
-  font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .faq-header .subtitle {
-  font-size: 1.3rem;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: var(--letter-spacing-normal);
   margin-bottom: 0;
   opacity: 0.95;
-  font-weight: 300;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
 }
 
 /* Navigation */
