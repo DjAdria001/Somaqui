@@ -2,22 +2,17 @@ import React, { useState, useEffect } from 'react';
 import '../styles/quiero-donar.css';
 
 const QuieroDonar: React.FC = () => {
-  const [selectedDonationAmount, setSelectedDonationAmount] = useState<number>(150);
-  const [donationPeriod, setDonationPeriod] = useState<'mensual' | 'anual'>('anual');
-  const [isSticky, setIsSticky] = useState(false);
+  const [selectedDonationAmount, setSelectedDonationAmount] = useState<number>(15);
+  const [donationPeriod, setDonationPeriod] = useState<'mensual' | 'anual'>('mensual');
 
+  // Configurar los montos por defecto según el período
   useEffect(() => {
-    const handleScroll = () => {
-      const header = document.querySelector('.quiero-donar-header');
-      if (header) {
-        const headerBottom = header.getBoundingClientRect().bottom;
-        setIsSticky(headerBottom <= 0);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (donationPeriod === 'mensual') {
+      setSelectedDonationAmount(15);
+    } else {
+      setSelectedDonationAmount(180);
+    }
+  }, [donationPeriod]);
 
   return (
     <main className="quiero-donar-page">
@@ -29,7 +24,170 @@ const QuieroDonar: React.FC = () => {
               <h1>Quiero Donar</h1>
               <p className="subtitle">Tu apoyo hace la diferencia en situaciones de emergencia</p>
             </div>
-            <div className={`donaciones-widget-sticky ${isSticky ? 'is-sticky' : ''}`}>
+          </div>
+        </div>
+      </section>
+
+      {/* Contenido principal con widget sticky */}
+      <div className="main-content-with-widget">
+        <div className="container">
+          <div className="content-grid">
+            {/* Contenido principal */}
+            <div className="main-content">
+              {/* Información sobre Donaciones */}
+              <section className="info-donaciones-section">
+                <h2>¿Por qué es importante tu donación?</h2>
+                
+                <div className="info-grid">
+                  <div className="info-card">
+                    <div className="info-icon">⚡</div>
+                    <h3>Respuesta Rápida</h3>
+                    <p>Nos permite mantener equipos de emergencia listos para actuar en cualquier momento, reduciendo el tiempo de respuesta crucial en situaciones críticas.</p>
+                  </div>
+
+                  <div className="info-card">
+                    <div className="info-icon">🎯</div>
+                    <h3>Recursos Especializados</h3>
+                    <p>Financiamos equipamiento médico, herramientas de rescate, vehículos de emergencia y suministros esenciales para diferentes tipos de crisis.</p>
+                  </div>
+
+                  <div className="info-card">
+                    <div className="info-icon">👥</div>
+                    <h3>Formación de Voluntarios</h3>
+                    <p>Invertimos en la capacitación continua de nuestros voluntarios en primeros auxilios, rescate y gestión de emergencias.</p>
+                  </div>
+
+                  <div className="info-card">
+                    <div className="info-icon">🌐</div>
+                    <h3>Red de Apoyo</h3>
+                    <p>Mantenemos una red coordinada de voluntarios y recursos que permite cubrir todo el territorio de manera eficiente.</p>
+                  </div>
+
+                  <div className="info-card">
+                    <div className="info-icon">📱</div>
+                    <h3>Tecnología de Emergencia</h3>
+                    <p>Desarrollamos y mantenemos sistemas tecnológicos como esta plataforma para coordinar ayuda de manera más efectiva.</p>
+                  </div>
+
+                  <div className="info-card">
+                    <div className="info-icon">🏥</div>
+                    <h3>Apoyo Post-Emergencia</h3>
+                    <p>Proporcionamos seguimiento y apoyo a las familias afectadas durante su proceso de recuperación y normalización.</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Sección de Información sobre Donaciones */}
+              <section className="donaciones-info-section">
+                <div className="donaciones-text">
+                  <h2>Necesitamos tu ayuda para seguir <span className="highlight">acompañando en emergencias</span></h2>
+                  <p className="donaciones-description">
+                    Tu donación nos permite mantener nuestros recursos de emergencia, entrenar voluntarios 
+                    y responder rápidamente cuando la comunidad más lo necesita.
+                  </p>
+                  
+                  <div className="estadisticas">
+                    <div className="stat-card">
+                      <div className="stat-number">1.247</div>
+                      <div className="stat-label">Personas ayudadas este año</div>
+                    </div>
+                    <div className="stat-card">
+                      <div className="stat-number">89</div>
+                      <div className="stat-label">Emergencias atendidas</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Qué hacemos con tu donación */}
+                <div className="que-hacemos-section">
+                  <h3>Qué hacemos con tu donación</h3>
+                  <p className="compromiso">Nos comprometemos a destinar tu donación a los programas de respuesta a emergencias.</p>
+                  
+                  <div className="breakdown-grid">
+                    <div className="breakdown-item">
+                      <div className="breakdown-header">
+                        <span className="breakdown-percentage">85%</span>
+                        <h4>Respuesta directa a emergencias</h4>
+                      </div>
+                      <ul>
+                        <li>Equipamiento médico y de rescate</li>
+                        <li>Suministros de emergencia</li>
+                        <li>Apoyo inmediato a afectados</li>
+                        <li>Coordinación de voluntarios</li>
+                        <li>Seguimiento post-emergencia</li>
+                      </ul>
+                    </div>
+
+                    <div className="breakdown-item">
+                      <div className="breakdown-header">
+                        <span className="breakdown-percentage">10%</span>
+                        <h4>Formación y capacitación</h4>
+                      </div>
+                      <ul>
+                        <li>Entrenamiento de voluntarios</li>
+                        <li>Cursos de primeros auxilios</li>
+                        <li>Capacitación especializada</li>
+                      </ul>
+                    </div>
+
+                    <div className="breakdown-item">
+                      <div className="breakdown-header">
+                        <span className="breakdown-percentage">5%</span>
+                        <h4>Costes operacionales</h4>
+                      </div>
+                      <ul>
+                        <li>Mantenimiento de la plataforma</li>
+                        <li>Gastos administrativos básicos</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="transparency-note">
+                    <p><i className="fas fa-shield-alt"></i> <strong>Donación segura</strong></p>
+                    <p>Somos una organización independiente. Nuestra actividad se sostiene gracias al apoyo de personas comprometidas con la ayuda comunitaria.</p>
+                  </div>
+                </div>
+              </section>
+
+              {/* Otras Formas de Ayudar */}
+              <section className="otras-formas-section">
+                <h2>Otras formas de colaborar</h2>
+                <p>Si no puedes donar económicamente, hay muchas otras maneras de ayudar a nuestra comunidad</p>
+                
+                <div className="formas-grid">
+                  <div className="forma-card">
+                    <div className="forma-icon">🙋‍♀️</div>
+                    <h3>Voluntariado</h3>
+                    <p>Únete a nuestro equipo de voluntarios y participa directamente en las operaciones de emergencia.</p>
+                    <a href="/voluntario" className="btn-forma">Ser Voluntario</a>
+                  </div>
+
+                  <div className="forma-card">
+                    <div className="forma-icon">📢</div>
+                    <h3>Difusión</h3>
+                    <p>Ayúdanos a llegar a más personas compartiendo nuestra misión en redes sociales.</p>
+                    <a href="#" className="btn-forma">Compartir</a>
+                  </div>
+
+                  <div className="forma-card">
+                    <div className="forma-icon">🏢</div>
+                    <h3>Empresa Colaboradora</h3>
+                    <p>Si representas una empresa, puedes formar parte de nuestro programa de responsabilidad social.</p>
+                    <a href="/contacto" className="btn-forma">Colaborar</a>
+                  </div>
+
+                  <div className="forma-card">
+                    <div className="forma-icon">🎓</div>
+                    <h3>Formación</h3>
+                    <p>Ofrece talleres o cursos especializados para mejorar las capacidades de nuestros voluntarios.</p>
+                    <a href="/contacto" className="btn-forma">Formar</a>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            {/* Widget sticky lateral */}
+            <div className="donaciones-widget-sticky">
               <div className="donaciones-widget">
                 <div className="donacion-progress">
                   <div className="progress-text">
@@ -66,28 +224,7 @@ const QuieroDonar: React.FC = () => {
                   </div>
                   
                   <div className="amount-options">
-                    {donationPeriod === 'anual' ? (
-                      <>
-                        <button 
-                          className={selectedDonationAmount === 90 ? 'amount-btn selected' : 'amount-btn'}
-                          onClick={() => setSelectedDonationAmount(90)}
-                        >
-                          90€
-                        </button>
-                        <button 
-                          className={selectedDonationAmount === 150 ? 'amount-btn selected primary' : 'amount-btn'}
-                          onClick={() => setSelectedDonationAmount(150)}
-                        >
-                          150€
-                        </button>
-                        <button 
-                          className={selectedDonationAmount === 250 ? 'amount-btn selected' : 'amount-btn'}
-                          onClick={() => setSelectedDonationAmount(250)}
-                        >
-                          250€
-                        </button>
-                      </>
-                    ) : (
+                    {donationPeriod === 'mensual' ? (
                       <>
                         <button 
                           className={selectedDonationAmount === 10 ? 'amount-btn selected' : 'amount-btn'}
@@ -108,6 +245,27 @@ const QuieroDonar: React.FC = () => {
                           25€
                         </button>
                       </>
+                    ) : (
+                      <>
+                        <button 
+                          className={selectedDonationAmount === 120 ? 'amount-btn selected' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(120)}
+                        >
+                          120€
+                        </button>
+                        <button 
+                          className={selectedDonationAmount === 180 ? 'amount-btn selected primary' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(180)}
+                        >
+                          180€
+                        </button>
+                        <button 
+                          className={selectedDonationAmount === 300 ? 'amount-btn selected' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(300)}
+                        >
+                          300€
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>
@@ -125,166 +283,7 @@ const QuieroDonar: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Información sobre Donaciones */}
-      <section className="info-donaciones-section">
-        <div className="container">
-          <h2>¿Por qué es importante tu donación?</h2>
-          
-          <div className="info-grid">
-            <div className="info-card">
-              <div className="info-icon">⚡</div>
-              <h3>Respuesta Rápida</h3>
-              <p>Nos permite mantener equipos de emergencia listos para actuar en cualquier momento, reduciendo el tiempo de respuesta crucial en situaciones críticas.</p>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">🎯</div>
-              <h3>Recursos Especializados</h3>
-              <p>Financiamos equipamiento médico, herramientas de rescate, vehículos de emergencia y suministros esenciales para diferentes tipos de crisis.</p>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">👥</div>
-              <h3>Formación de Voluntarios</h3>
-              <p>Invertimos en la capacitación continua de nuestros voluntarios en primeros auxilios, rescate y gestión de emergencias.</p>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">🌐</div>
-              <h3>Red de Apoyo</h3>
-              <p>Mantenemos una red coordinada de voluntarios y recursos que permite cubrir todo el territorio de manera eficiente.</p>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">📱</div>
-              <h3>Tecnología de Emergencia</h3>
-              <p>Desarrollamos y mantenemos sistemas tecnológicos como esta plataforma para coordinar ayuda de manera más efectiva.</p>
-            </div>
-
-            <div className="info-card">
-              <div className="info-icon">🏥</div>
-              <h3>Apoyo Post-Emergencia</h3>
-              <p>Proporcionamos seguimiento y apoyo a las familias afectadas durante su proceso de recuperación y normalización.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sección de Información sobre Donaciones */}
-      <section className="donaciones-section">
-        <div className="container">
-          <div className="donaciones-content-info">
-            <div className="donaciones-text">
-              <h2>Necesitamos tu ayuda para seguir <span className="highlight">acompañando en emergencias</span></h2>
-              <p className="donaciones-description">
-                Tu donación nos permite mantener nuestros recursos de emergencia, entrenar voluntarios 
-                y responder rápidamente cuando la comunidad más lo necesita.
-              </p>
-              
-              <div className="estadisticas">
-                <div className="stat-card">
-                  <div className="stat-number">1.247</div>
-                  <div className="stat-label">Personas ayudadas este año</div>
-                </div>
-                <div className="stat-card">
-                  <div className="stat-number">89</div>
-                  <div className="stat-label">Emergencias atendidas</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Qué hacemos con tu donación */}
-            <div className="que-hacemos-section">
-              <h3>Qué hacemos con tu donación</h3>
-              <p className="compromiso">Nos comprometemos a destinar tu donación a los programas de respuesta a emergencias.</p>
-              
-              <div className="breakdown-grid">
-                <div className="breakdown-item">
-                  <div className="breakdown-header">
-                    <span className="breakdown-percentage">85%</span>
-                    <h4>Respuesta directa a emergencias</h4>
-                  </div>
-                  <ul>
-                    <li>Equipamiento médico y de rescate</li>
-                    <li>Suministros de emergencia</li>
-                    <li>Apoyo inmediato a afectados</li>
-                    <li>Coordinación de voluntarios</li>
-                    <li>Seguimiento post-emergencia</li>
-                  </ul>
-                </div>
-
-                <div className="breakdown-item">
-                  <div className="breakdown-header">
-                    <span className="breakdown-percentage">10%</span>
-                    <h4>Formación y capacitación</h4>
-                  </div>
-                  <ul>
-                    <li>Entrenamiento de voluntarios</li>
-                    <li>Cursos de primeros auxilios</li>
-                    <li>Capacitación especializada</li>
-                  </ul>
-                </div>
-
-                <div className="breakdown-item">
-                  <div className="breakdown-header">
-                    <span className="breakdown-percentage">5%</span>
-                    <h4>Costes operacionales</h4>
-                  </div>
-                  <ul>
-                    <li>Mantenimiento de la plataforma</li>
-                    <li>Gastos administrativos básicos</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="transparency-note">
-                <p><i className="fas fa-shield-alt"></i> <strong>Donación segura</strong></p>
-                <p>Somos una organización independiente. Nuestra actividad se sostiene gracias al apoyo de personas comprometidas con la ayuda comunitaria.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Otras Formas de Ayudar */}
-      <section className="otras-formas-section">
-        <div className="container">
-          <h2>Otras formas de colaborar</h2>
-          <p>Si no puedes donar económicamente, hay muchas otras maneras de ayudar a nuestra comunidad</p>
-          
-          <div className="formas-grid">
-            <div className="forma-card">
-              <div className="forma-icon">🙋‍♀️</div>
-              <h3>Voluntariado</h3>
-              <p>Únete a nuestro equipo de voluntarios y participa directamente en las operaciones de emergencia.</p>
-              <a href="/voluntario" className="btn-forma">Ser Voluntario</a>
-            </div>
-
-            <div className="forma-card">
-              <div className="forma-icon">📢</div>
-              <h3>Difusión</h3>
-              <p>Ayúdanos a llegar a más personas compartiendo nuestra misión en redes sociales.</p>
-              <a href="#" className="btn-forma">Compartir</a>
-            </div>
-
-            <div className="forma-card">
-              <div className="forma-icon">🏢</div>
-              <h3>Empresa Colaboradora</h3>
-              <p>Si representas una empresa, puedes formar parte de nuestro programa de responsabilidad social.</p>
-              <a href="/contacto" className="btn-forma">Colaborar</a>
-            </div>
-
-            <div className="forma-card">
-              <div className="forma-icon">🎓</div>
-              <h3>Formación</h3>
-              <p>Ofrece talleres o cursos especializados para mejorar las capacidades de nuestros voluntarios.</p>
-              <a href="/contacto" className="btn-forma">Formar</a>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
   );
 };
