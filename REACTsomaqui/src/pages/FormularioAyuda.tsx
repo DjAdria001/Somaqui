@@ -15,6 +15,7 @@ interface FormData {
   tags: string[];
   otros_detalle: string;
   descripcion: string;
+  activo?: boolean; // Campo opcional para indicar si la solicitud está activa
 }
 
 const FormularioAyuda: React.FC = () => {
@@ -29,6 +30,7 @@ const FormularioAyuda: React.FC = () => {
     tags: [],
     otros_detalle: '',
     descripcion: '',
+    activo: true // Por defecto, la solicitud está activa
   });
 
   const [ubicacionTexto, setUbicacionTexto] = useState('📍 Detectar mi ubicación automáticamente');
@@ -648,11 +650,14 @@ const FormularioAyuda: React.FC = () => {
           <div className="submit-section">
             <button type="submit" className="submit-btn">
               🚨 Enviar solicitud de ayuda
+              
             </button>
             <p className="submit-help">
               Una vez enviada tu solicitud, notificaremos a voluntarios cercanos que podrán contactarte directamente.
             </p>
+            
           </div>
+          
         </form>
       </div>
 

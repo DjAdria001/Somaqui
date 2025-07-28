@@ -14,6 +14,7 @@ interface FormData {
   otros_detalle: string;
   descripcion: string;
   fecha_envio?: string;
+  activo?: boolean; // Campo opcional para indicar si la solicitud está activa
 }
 
 const TablaFirebase: React.FC = () => {
@@ -63,6 +64,7 @@ const TablaFirebase: React.FC = () => {
               <td>{s.tags?.join(', ')}</td>
               <td>{s.otros_detalle}</td>
               <td>{s.descripcion}</td>
+              <td>{s.activo ? 'Activo' : 'Inactivo'}</td>
             </tr>
           ))}
         </tbody>
