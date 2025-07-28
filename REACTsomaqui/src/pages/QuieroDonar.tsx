@@ -1,17 +1,129 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/quiero-donar.css';
 
 const QuieroDonar: React.FC = () => {
   const [selectedDonationAmount, setSelectedDonationAmount] = useState<number>(150);
   const [donationPeriod, setDonationPeriod] = useState<'mensual' | 'anual'>('anual');
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.querySelector('.quiero-donar-header');
+      if (header) {
+        const headerBottom = header.getBoundingClientRect().bottom;
+        setIsSticky(headerBottom <= 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <main className="quiero-donar-page">
       {/* Header Section */}
       <section className="quiero-donar-header">
         <div className="container">
-          <h1>Quiero Donar</h1>
-          <p className="subtitle">Tu apoyo hace la diferencia en situaciones de emergencia</p>
+          <div className="header-content">
+            <div className="header-text">
+              <h1>Quiero Donar</h1>
+              <p className="subtitle">Tu apoyo hace la diferencia en situaciones de emergencia</p>
+            </div>
+            <div className={`donaciones-widget-sticky ${isSticky ? 'is-sticky' : ''}`}>
+              <div className="donaciones-widget">
+                <div className="donacion-progress">
+                  <div className="progress-text">
+                    <span className="current-progress">57%</span>
+                    <span className="goal-text">Ya somos 1.247 colaboradores</span>
+                  </div>
+                  <div className="progress-subtext">Necesitamos llegar a 2.500 para continuar</div>
+                  <div className="progress-bar">
+                    <div className="progress-fill" style={{width: '57%'}}></div>
+                  </div>
+                </div>
+
+                <div className="donacion-tabs">
+                  <button 
+                    className={donationPeriod === 'mensual' ? 'tab active' : 'tab'}
+                    onClick={() => setDonationPeriod('mensual')}
+                  >
+                    Mensual
+                  </button>
+                  <button 
+                    className={donationPeriod === 'anual' ? 'tab active' : 'tab'}
+                    onClick={() => setDonationPeriod('anual')}
+                  >
+                    Anual
+                  </button>
+                </div>
+
+                <div className="donacion-amounts">
+                  <div className="amount-description">
+                    {donationPeriod === 'anual' 
+                      ? 'Apoyaremos emergencias durante todo el año'
+                      : 'Ayudaremos en emergencias cada mes'
+                    }
+                  </div>
+                  
+                  <div className="amount-options">
+                    {donationPeriod === 'anual' ? (
+                      <>
+                        <button 
+                          className={selectedDonationAmount === 90 ? 'amount-btn selected' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(90)}
+                        >
+                          90€
+                        </button>
+                        <button 
+                          className={selectedDonationAmount === 150 ? 'amount-btn selected primary' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(150)}
+                        >
+                          150€
+                        </button>
+                        <button 
+                          className={selectedDonationAmount === 250 ? 'amount-btn selected' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(250)}
+                        >
+                          250€
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button 
+                          className={selectedDonationAmount === 10 ? 'amount-btn selected' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(10)}
+                        >
+                          10€
+                        </button>
+                        <button 
+                          className={selectedDonationAmount === 15 ? 'amount-btn selected primary' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(15)}
+                        >
+                          15€
+                        </button>
+                        <button 
+                          className={selectedDonationAmount === 25 ? 'amount-btn selected' : 'amount-btn'}
+                          onClick={() => setSelectedDonationAmount(25)}
+                        >
+                          25€
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                <button className="btn-donar">
+                  Quiero donar {selectedDonationAmount}€ {donationPeriod === 'anual' ? 'al año' : 'al mes'}
+                </button>
+
+                <div className="donacion-info">
+                  <p><i className="fas fa-shield-alt"></i> Donación segura y deducible</p>
+                  <p><i className="fas fa-heart"></i> 100% destinado a emergencias</p>
+                  <p><i className="fas fa-times-circle"></i> Puedes cancelar cuando quieras</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -60,10 +172,10 @@ const QuieroDonar: React.FC = () => {
         </div>
       </section>
 
-      {/* Sección de Donaciones */}
+      {/* Sección de Información sobre Donaciones */}
       <section className="donaciones-section">
         <div className="container">
-          <div className="donaciones-content">
+          <div className="donaciones-content-info">
             <div className="donaciones-text">
               <h2>Necesitamos tu ayuda para seguir <span className="highlight">acompañando en emergencias</span></h2>
               <p className="donaciones-description">
@@ -83,96 +195,53 @@ const QuieroDonar: React.FC = () => {
               </div>
             </div>
 
-            <div className="donaciones-widget">
-              <div className="donacion-progress">
-                <div className="progress-text">
-                  <span className="current-progress">57%</span>
-                  <span className="goal-text">Ya somos 1.247 colaboradores</span>
+            {/* Qué hacemos con tu donación */}
+            <div className="que-hacemos-section">
+              <h3>Qué hacemos con tu donación</h3>
+              <p className="compromiso">Nos comprometemos a destinar tu donación a los programas de respuesta a emergencias.</p>
+              
+              <div className="breakdown-grid">
+                <div className="breakdown-item">
+                  <div className="breakdown-header">
+                    <span className="breakdown-percentage">85%</span>
+                    <h4>Respuesta directa a emergencias</h4>
+                  </div>
+                  <ul>
+                    <li>Equipamiento médico y de rescate</li>
+                    <li>Suministros de emergencia</li>
+                    <li>Apoyo inmediato a afectados</li>
+                    <li>Coordinación de voluntarios</li>
+                    <li>Seguimiento post-emergencia</li>
+                  </ul>
                 </div>
-                <div className="progress-subtext">Necesitamos llegar a 2.500 para continuar</div>
-                <div className="progress-bar">
-                  <div className="progress-fill" style={{width: '57%'}}></div>
-                </div>
-              </div>
 
-              <div className="donacion-tabs">
-                <button 
-                  className={donationPeriod === 'mensual' ? 'tab active' : 'tab'}
-                  onClick={() => setDonationPeriod('mensual')}
-                >
-                  Mensual
-                </button>
-                <button 
-                  className={donationPeriod === 'anual' ? 'tab active' : 'tab'}
-                  onClick={() => setDonationPeriod('anual')}
-                >
-                  Anual
-                </button>
-              </div>
-
-              <div className="donacion-amounts">
-                <div className="amount-description">
-                  {donationPeriod === 'anual' 
-                    ? 'Apoyaremos emergencias durante todo el año'
-                    : 'Ayudaremos en emergencias cada mes'
-                  }
+                <div className="breakdown-item">
+                  <div className="breakdown-header">
+                    <span className="breakdown-percentage">10%</span>
+                    <h4>Formación y capacitación</h4>
+                  </div>
+                  <ul>
+                    <li>Entrenamiento de voluntarios</li>
+                    <li>Cursos de primeros auxilios</li>
+                    <li>Capacitación especializada</li>
+                  </ul>
                 </div>
-                
-                <div className="amount-options">
-                  {donationPeriod === 'anual' ? (
-                    <>
-                      <button 
-                        className={selectedDonationAmount === 90 ? 'amount-btn selected' : 'amount-btn'}
-                        onClick={() => setSelectedDonationAmount(90)}
-                      >
-                        90€
-                      </button>
-                      <button 
-                        className={selectedDonationAmount === 150 ? 'amount-btn selected primary' : 'amount-btn'}
-                        onClick={() => setSelectedDonationAmount(150)}
-                      >
-                        150€
-                      </button>
-                      <button 
-                        className={selectedDonationAmount === 250 ? 'amount-btn selected' : 'amount-btn'}
-                        onClick={() => setSelectedDonationAmount(250)}
-                      >
-                        250€
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button 
-                        className={selectedDonationAmount === 10 ? 'amount-btn selected' : 'amount-btn'}
-                        onClick={() => setSelectedDonationAmount(10)}
-                      >
-                        10€
-                      </button>
-                      <button 
-                        className={selectedDonationAmount === 15 ? 'amount-btn selected primary' : 'amount-btn'}
-                        onClick={() => setSelectedDonationAmount(15)}
-                      >
-                        15€
-                      </button>
-                      <button 
-                        className={selectedDonationAmount === 25 ? 'amount-btn selected' : 'amount-btn'}
-                        onClick={() => setSelectedDonationAmount(25)}
-                      >
-                        25€
-                      </button>
-                    </>
-                  )}
+
+                <div className="breakdown-item">
+                  <div className="breakdown-header">
+                    <span className="breakdown-percentage">5%</span>
+                    <h4>Costes operacionales</h4>
+                  </div>
+                  <ul>
+                    <li>Mantenimiento de la plataforma</li>
+                    <li>Gastos administrativos básicos</li>
+                  </ul>
                 </div>
               </div>
 
-              <button className="btn-donar">
-                Quiero donar {selectedDonationAmount}€ {donationPeriod === 'anual' ? 'al año' : 'al mes'}
-              </button>
-
-              <div className="donacion-info">
-                <p><i className="fas fa-shield-alt"></i> Donación segura y deducible</p>
-                <p><i className="fas fa-heart"></i> 100% destinado a emergencias</p>
-                <p><i className="fas fa-times-circle"></i> Puedes cancelar cuando quieras</p>
+              <div className="transparency-note">
+                <p><i className="fas fa-shield-alt"></i> <strong>Donación segura</strong></p>
+                <p>Somos una organización independiente. Nuestra actividad se sostiene gracias al apoyo de personas comprometidas con la ayuda comunitaria.</p>
               </div>
             </div>
           </div>

@@ -140,19 +140,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Tipos de ayuda que puedes ofrecer */}
-      <section className="emergency-types">
-        <h2>🤝 ¿En qué puedes ayudar?</h2>
-        <div className="emergency-grid">
-          {emergencyTypeImages.map((emergency, index) => (
-            <div key={index} className="emergency-card">
-              <div className="emergency-icon">{emergency.icon}</div>
-              <h3>{emergency.title}</h3>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Teoría del cambio */}
       <section className="teoria-cambio">
         <h2>Teoría del Cambio</h2>
@@ -200,6 +187,19 @@ const Home: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Tipos de ayuda que puedes ofrecer */}
+      <section className="emergency-types">
+        <h2>🤝 ¿En qué puedes ayudar?</h2>
+        <div className="emergency-grid">
+          {emergencyTypeImages.map((emergency, index) => (
+            <div key={index} className="emergency-card">
+              <div className="emergency-icon">{emergency.icon}</div>
+              <h3>{emergency.title}</h3>
+            </div>
+          ))}
         </div>
       </section>
     </main>
