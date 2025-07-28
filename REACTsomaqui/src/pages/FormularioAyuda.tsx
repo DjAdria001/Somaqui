@@ -15,6 +15,7 @@ interface FormData {
   tags: string[];
   otros_detalle: string;
   descripcion: string;
+  activo?: boolean; // Campo opcional para indicar si la solicitud está activa
 }
 
 const FormularioAyuda: React.FC = () => {
@@ -29,6 +30,7 @@ const FormularioAyuda: React.FC = () => {
     tags: [],
     otros_detalle: '',
     descripcion: '',
+    activo: true // Por defecto, la solicitud está activa
   });
 
   const [ubicacionTexto, setUbicacionTexto] = useState('📍 Detectar mi ubicación automáticamente');

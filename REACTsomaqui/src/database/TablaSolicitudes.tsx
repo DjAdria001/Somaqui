@@ -11,6 +11,7 @@ interface FormData {
   tags: string[];
   otros_detalle: string;
   descripcion: string;
+  activo?: boolean; // Campo opcional para indicar si la solicitud está activa
 }
 
 const datosEjemplo: Record<string, FormData> = {
@@ -24,7 +25,8 @@ const datosEjemplo: Record<string, FormData> = {
     tiempo: "Urgente",
     tags: ["comida", "ropa", "refugio"],
     otros_detalle: "Sin trabajo desde hace meses",
-    descripcion: "Necesitamos comida y abrigo, vivimos sin calefacción"
+    descripcion: "Necesitamos comida y abrigo, vivimos sin calefacción",
+    activo: true // Por defecto, la solicitud está activa
   },
   sol_002: {
     ubicacion: "Girona",
@@ -36,7 +38,8 @@ const datosEjemplo: Record<string, FormData> = {
     tiempo: "Flexible",
     tags: ["acompañamiento"],
     otros_detalle: "Se siente solo desde hace tiempo",
-    descripcion: "Busca alguien que lo acompañe a caminar o hablar"
+    descripcion: "Busca alguien que lo acompañe a caminar o hablar",
+    activo: true // Por defecto, la solicitud está activa
   }
 };
 
@@ -56,6 +59,7 @@ const TablaSolicitudes: React.FC = () => {
             <th>Ayuda solicitada</th>
             <th>Otros detalles</th>
             <th>Descripción del problema</th>
+            <th>Estado</th>
           </tr>
         </thead>
         <tbody>
@@ -70,6 +74,7 @@ const TablaSolicitudes: React.FC = () => {
               <td>{s.tags.join(', ')}</td>
               <td>{s.otros_detalle}</td>
               <td>{s.descripcion}</td>
+              <td>{s.activo ? 'Activo' : 'Inactivo'}</td>
             </tr>
           ))}
         </tbody>
