@@ -12,6 +12,7 @@ interface Emergency {
   descripcion: string;
   tipo: string;
   tags: string[];
+  activo?: boolean; // Campo opcional para indicar si la emergencia está activa
 }
 
 const Voluntario: React.FC = () => {
@@ -35,6 +36,7 @@ const Voluntario: React.FC = () => {
           descripcion: value.descripcion || '',
           tipo: value.tipo || 'general',
           tags: value.tags || [],
+          activo: value.activo !== undefined ? value.activo : true // Por defecto, la emergencia está activa
         }));
         setEmergencies(formatted);
       }
@@ -47,9 +49,11 @@ const Voluntario: React.FC = () => {
     );
   };
 
-  const filteredEmergencies = emergencies.filter(
-    (emergency) => filter === '' || emergency.tipo === filter
-  );
+const filteredEmergencies = emergencies.filter(
+  (emergency) =>
+    emergency.activo && (filter === '' || emergency.tipo === filter)
+);
+
 
   const volunteerSkills = [
     { id: 'primeros-auxilios', label: 'Primeros Auxilios', icon: '🏥' },

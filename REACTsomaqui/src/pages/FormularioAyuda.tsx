@@ -650,11 +650,14 @@ const FormularioAyuda: React.FC = () => {
           <div className="submit-section">
             <button type="submit" className="submit-btn">
               🚨 Enviar solicitud de ayuda
+              
             </button>
             <p className="submit-help">
               Una vez enviada tu solicitud, notificaremos a voluntarios cercanos que podrán contactarte directamente.
             </p>
+            
           </div>
+          
         </form>
       </div>
 

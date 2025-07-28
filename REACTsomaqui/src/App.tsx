@@ -15,6 +15,10 @@ import Contacto from './pages/Contacto';
 import Emergencias from './pages/Emergencias';
 import './App.css';
 import './styles/global.css';
+import Chat from './pages/Chat'; // asegúrate de que el path sea correcto
+
+
+
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -46,6 +50,7 @@ function App() {
           <Header onLoginClick={handleLoginClick} />
           <main>
             <Routes>
+              <Route path="/chat/:id" element={<Chat />} />
               <Route path="/" element={<Home />} />
               <Route path="/formulario-ayuda" element={<FormularioAyuda />} />
               <Route path="/ayuda" element={<FormularioAyuda />} />
