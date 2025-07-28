@@ -415,38 +415,70 @@
 
 /* Información sobre Donaciones Section */
 .info-donaciones-section {
-  padding: 40px 0;
-  background: white;
-  margin-bottom: 40px;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
+  margin-bottom: 30px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-donaciones-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(57, 228, 201, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(39, 179, 163, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .info-donaciones-section h2 {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: #003333;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.info-donaciones-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  border-radius: 2px;
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .info-card {
-  background: #f8f9fa;
-  border-radius: 15px;
-  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fdffff 100%);
+  border-radius: 20px;
+  padding: 1.8rem;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .info-card::before {
@@ -456,54 +488,187 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #f0fdfd 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(57, 228, 201, 0.05) 0%, transparent 50%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.4s ease;
+  border-radius: 20px;
+}
+
+.info-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3, #39e4c9);
+  border-radius: 22px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: -1;
 }
 
 .info-card:hover {
-  transform: translateY(-5px);
-  border-color: #39e4c9;
-  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.15);
-  background: white;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(57, 228, 201, 0.15);
 }
 
 .info-card:hover::before {
   opacity: 1;
 }
 
+.info-card:hover::after {
+  opacity: 1;
+}
+
 .info-icon {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.8rem;
+  margin-bottom: 1.2rem;
   display: block;
   position: relative;
   z-index: 2;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(57, 228, 201, 0.3));
 }
 
 .info-card h3 {
   color: #003333;
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
   position: relative;
   z-index: 2;
+  line-height: 1.3;
 }
 
 .info-card p {
   color: #666;
-  line-height: 1.6;
-  font-size: 0.95rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
   position: relative;
   z-index: 2;
+  margin: 0;
 }
 
 /* Sección de información de donaciones (antes donaciones-section) */
 .donaciones-info-section {
-  padding: 40px 0;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  margin-bottom: 40px;
+  padding: 30px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
+  margin-bottom: 30px;
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.donaciones-info-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(57, 228, 201, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.donaciones-text h2 {
+  font-size: 2rem;
+  color: #003333;
+  margin-bottom: 1.2rem;
+  line-height: 1.3;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.donaciones-text .highlight {
+  color: #39e4c9;
+  position: relative;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.donaciones-text .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+.donaciones-description {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
+  padding: 1.5rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(57, 228, 201, 0.08);
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  border-radius: 16px 16px 0 0;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(57, 228, 201, 0.15);
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .progress-text {
@@ -657,71 +822,152 @@
 
 /* Otras Formas de Ayudar Section */
 .otras-formas-section {
-  padding: 40px 0;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 30px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.otras-formas-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(57, 228, 201, 0.03) 0%, transparent 60%),
+              radial-gradient(circle at 30% 70%, rgba(39, 179, 163, 0.03) 0%, transparent 60%);
+  pointer-events: none;
 }
 
 .otras-formas-section h2 {
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   color: #003333;
   margin-bottom: 1rem;
   font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.otras-formas-section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  border-radius: 2px;
 }
 
 .otras-formas-section > .container > p {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #666;
-  margin-bottom: 3rem;
-  max-width: 600px;
+  margin-bottom: 2rem;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  position: relative;
+  z-index: 2;
+  line-height: 1.5;
 }
 
 .formas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
   margin-top: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .forma-card {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
-  border-radius: 15px;
-  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #fdffff 100%);
+  border-radius: 20px;
+  padding: 1.5rem;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.forma-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(57, 228, 201, 0.05) 0%, transparent 50%);
+  opacity: 0;
+  transition: all 0.4s ease;
+  border-radius: 20px;
+}
+
+.forma-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3, #39e4c9);
+  border-radius: 22px;
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: -1;
 }
 
 .forma-card:hover {
-  transform: translateY(-5px);
-  border-color: #39e4c9;
-  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.15);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(57, 228, 201, 0.15);
+}
+
+.forma-card:hover::before {
+  opacity: 1;
+}
+
+.forma-card:hover::after {
+  opacity: 1;
 }
 
 .forma-icon {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   display: block;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px rgba(57, 228, 201, 0.3));
+  position: relative;
+  z-index: 2;
 }
 
 .forma-card h3 {
   color: #003333;
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
 }
 
 .forma-card p {
   color: #666;
-  line-height: 1.6;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  line-height: 1.4;
+  font-size: 0.85rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .btn-forma {
@@ -729,15 +975,19 @@
   background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
   text-decoration: none;
-  padding: 12px 25px;
-  border-radius: 25px;
+  padding: 10px 20px;
+  border-radius: 20px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
+  position: relative;
+  z-index: 2;
 }
 
 .btn-forma:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
+  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.4);
   text-decoration: none;
   color: white;
 }
@@ -786,65 +1036,117 @@
 
 /* Sección Qué hacemos con tu donación */
 .que-hacemos-section {
-  background: white;
-  border-radius: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
+  border-radius: 24px;
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e9ecef;
+  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.que-hacemos-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 10% 80%, rgba(39, 179, 163, 0.03) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .que-hacemos-section h3 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #003333;
   margin-bottom: 1rem;
   font-weight: 700;
+  position: relative;
+  z-index: 2;
+}
+
+.que-hacemos-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #39e4c9, #27b3a3);
+  border-radius: 2px;
 }
 
 .compromiso {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: #666;
-  margin-bottom: 2rem;
-  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
   font-style: italic;
+  position: relative;
+  z-index: 2;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(57, 228, 201, 0.3);
 }
 
 .breakdown-grid {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 1.2rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
 .breakdown-item {
-  border-left: 4px solid #39e4c9;
-  padding-left: 1.5rem;
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 0 12px 12px 0;
+  background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(57, 228, 201, 0.1);
+  box-shadow: 0 2px 12px rgba(57, 228, 201, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.breakdown-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  border-radius: 0 4px 4px 0;
+}
+
+.breakdown-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(57, 228, 201, 0.12);
 }
 
 .breakdown-header {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .breakdown-percentage {
   background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
   font-weight: 700;
-  font-size: 1.1rem;
-  min-width: 60px;
+  font-size: 1rem;
+  min-width: 50px;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(57, 228, 201, 0.3);
 }
 
 .breakdown-header h4 {
   color: #003333;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   margin: 0;
 }
 
@@ -852,13 +1154,18 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.3rem;
 }
 
 .breakdown-item li {
   color: #666;
-  padding: 0.3rem 0;
+  padding: 0.2rem 0;
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .breakdown-item li::before {
@@ -867,30 +1174,36 @@
   left: 0;
   color: #39e4c9;
   font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .transparency-note {
-  background: linear-gradient(135deg, #f0fdfd 0%, #e6f9f8 100%);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1px solid #39e4c9;
+  background: linear-gradient(135deg, rgba(57, 228, 201, 0.05) 0%, rgba(39, 179, 163, 0.05) 100%);
+  padding: 1.2rem;
+  border-radius: 16px;
+  border: 1px solid rgba(57, 228, 201, 0.2);
+  position: relative;
+  z-index: 2;
 }
 
 .transparency-note p {
-  margin: 0.5rem 0;
+  margin: 0.3rem 0;
   color: #003333;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .transparency-note p:first-child {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: #39e4c9;
 }
 
 .transparency-note i {
   color: #39e4c9;
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
@@ -923,21 +1236,26 @@
   }
   
   .info-donaciones-section {
-    padding: 25px 20px;
-    margin-bottom: 25px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
   }
   
   .info-donaciones-section h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .info-card {
-    padding: 1.5rem;
+    padding: 1.3rem;
   }
   
   .donaciones-info-section {
-    padding: 25px 20px;
-    margin-bottom: 25px;
+    padding: 20px 15px;
+    margin-bottom: 20px;
   }
   
   .donaciones-widget {
@@ -945,11 +1263,11 @@
   }
   
   .donaciones-text h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
   
   .estadisticas {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     gap: 1rem;
   }
   
@@ -958,7 +1276,7 @@
   }
   
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   
   .amount-options {
@@ -971,23 +1289,28 @@
   }
   
   .otras-formas-section {
-    padding: 25px 20px;
+    padding: 20px 15px;
   }
   
   .otras-formas-section h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   .formas-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .forma-card {
+    padding: 1.2rem;
   }
   
   .que-hacemos-section {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
   
   .que-hacemos-section h3 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
   
   .breakdown-header {
@@ -999,9 +1322,44 @@
   .breakdown-percentage {
     align-self: flex-start;
   }
+  
+  .breakdown-item ul {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
+  .quiero-donar-header {
+    padding: 20px 0;
+  }
+  
+  .header-content {
+    min-height: 100px;
+  }
+  
+  .quiero-donar-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .quiero-donar-header .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .main-content-with-widget {
+    padding: 15px 0;
+  }
+  
+  .content-grid {
+    gap: 1.5rem;
+  }
+  
+  .info-donaciones-section,
+  .donaciones-info-section,
+  .otras-formas-section {
+    padding: 15px 10px;
+    margin-bottom: 15px;
+  }
+  
   .info-grid {
     grid-template-columns: 1fr;
   }
@@ -1015,16 +1373,45 @@
   }
   
   .donaciones-text h2 {
-    font-size: 1.4rem;
-  }
-  
-  .quiero-donar-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
   }
   
   .info-donaciones-section h2,
   .otras-formas-section h2 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+  
+  .amount-button {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .donacion-form .button {
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
+  .info-card h3,
+  .forma-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .info-card p,
+  .forma-card p {
+    font-size: 0.85rem;
+  }
+  
+  .formas-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .que-hacemos-section {
@@ -1032,11 +1419,26 @@
   }
   
   .que-hacemos-section h3 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   
   .breakdown-item {
     padding: 1rem;
+  }
+  
+  .breakdown-item h4 {
+    font-size: 1rem;
+  }
+  
+  .breakdown-item ul li {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+  }
+  
+  .transparencia-note {
+    margin-top: 1rem;
+    padding: 0.8rem;
+    font-size: 0.8rem;
   }
   
   .transparency-note {
