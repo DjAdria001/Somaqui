@@ -427,25 +427,12 @@
 /* Información sobre Donaciones Section */
 .info-donaciones-section {
   padding: 30px 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
+  background: transparent;
   margin-bottom: 30px;
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
-  border: 1px solid rgba(57, 228, 201, 0.1);
-  position: relative;
-  overflow: hidden;
 }
 
 .info-donaciones-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 50%, rgba(57, 228, 201, 0.03) 0%, transparent 50%),
-              radial-gradient(circle at 80% 20%, rgba(39, 179, 163, 0.03) 0%, transparent 50%);
-  pointer-events: none;
+  display: none;
 }
 
 .info-donaciones-section h2 {
@@ -472,8 +459,8 @@
 
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
   margin-top: 2rem;
   position: relative;
   z-index: 2;
@@ -482,7 +469,7 @@
 .info-card {
   background: linear-gradient(135deg, #ffffff 0%, #fdffff 100%);
   border-radius: 20px;
-  padding: 1.8rem;
+  padding: 2rem;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -490,6 +477,10 @@
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .info-card::before {
@@ -549,8 +540,8 @@
 
 .info-card h3 {
   color: #003333;
-  font-size: 1.2rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
   font-weight: 700;
   position: relative;
   z-index: 2;
@@ -559,34 +550,26 @@
 
 .info-card p {
   color: #666;
-  line-height: 1.5;
-  font-size: 0.9rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
   position: relative;
   z-index: 2;
   margin: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 /* Sección de información de donaciones (antes donaciones-section) */
 .donaciones-info-section {
   padding: 30px 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
+  background: transparent;
   margin-bottom: 30px;
-  border: 1px solid rgba(57, 228, 201, 0.1);
-  position: relative;
-  overflow: hidden;
 }
 
 .donaciones-info-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(57, 228, 201, 0.04) 0%, transparent 60%);
-  pointer-events: none;
+  display: none;
 }
 
 .donaciones-text h2 {
@@ -836,24 +819,11 @@
 /* Otras Formas de Ayudar Section */
 .otras-formas-section {
   padding: 30px 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f8ffff 100%);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(57, 228, 201, 0.08);
-  border: 1px solid rgba(57, 228, 201, 0.1);
-  position: relative;
-  overflow: hidden;
+  background: transparent;
 }
 
 .otras-formas-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 70% 30%, rgba(57, 228, 201, 0.03) 0%, transparent 60%),
-              radial-gradient(circle at 30% 70%, rgba(39, 179, 163, 0.03) 0%, transparent 60%);
-  pointer-events: none;
+  display: none;
 }
 
 .otras-formas-section h2 {
@@ -893,8 +863,8 @@
 
 .formas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
   margin-top: 2rem;
   position: relative;
   z-index: 2;
@@ -903,13 +873,17 @@
 .forma-card {
   background: linear-gradient(135deg, #ffffff 0%, #fdffff 100%);
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 2rem;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .forma-card::before {
@@ -969,8 +943,8 @@
 
 .forma-card h3 {
   color: #003333;
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
   font-weight: 700;
   position: relative;
   z-index: 2;
@@ -978,11 +952,12 @@
 
 .forma-card p {
   color: #666;
-  line-height: 1.4;
-  font-size: 0.85rem;
-  margin-bottom: 1.2rem;
+  line-height: 1.5;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
   position: relative;
   z-index: 2;
+  flex-grow: 1;
 }
 
 .btn-forma {
@@ -990,7 +965,7 @@
   background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
   text-decoration: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 20px;
   font-weight: 600;
   font-size: 0.9rem;
@@ -998,6 +973,7 @@
   box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
   position: relative;
   z-index: 2;
+  margin-top: auto;
 }
 
 .btn-forma:hover {
@@ -1261,11 +1237,12 @@
   
   .info-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .info-card {
-    padding: 1.3rem;
+    padding: 1.8rem;
+    min-height: 240px;
   }
   
   .donaciones-info-section {
@@ -1313,11 +1290,12 @@
   
   .formas-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .forma-card {
-    padding: 1.2rem;
+    padding: 1.8rem;
+    min-height: 240px;
   }
   
   .que-hacemos-section {
@@ -1380,7 +1358,8 @@
   }
   
   .info-card {
-    padding: 1.2rem;
+    padding: 1.5rem;
+    min-height: 220px;
   }
   
   .donaciones-widget {
@@ -1426,7 +1405,12 @@
   
   .formas-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
+  }
+  
+  .forma-card {
+    padding: 1.5rem;
+    min-height: 220px;
   }
   
   .que-hacemos-section {
