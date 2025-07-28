@@ -16,9 +16,9 @@
 
 /* Header Section */
 .quiero-donar-header {
-  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
-  color: white;
-  padding: 40px 0 30px 0;
+  background: linear-gradient(135deg, #f8ffff 0%, #e8f9f9 100%);
+  color: #003333;
+  padding: 20px 0 15px 0;
   position: relative;
   overflow: hidden;
 }
@@ -30,8 +30,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-  opacity: 0.3;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(57,228,201,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.4;
 }
 
 .quiero-donar-header .container {
@@ -43,7 +43,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 150px;
+  min-height: 80px;
 }
 
 .header-text {
@@ -52,21 +52,25 @@
 
 .quiero-donar-header h1 {
   font-family: var(--font-primary);
-  font-size: 2.8rem;
+  font-size: 2.2rem;
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
-  margin-bottom: 0.5rem;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 0.3rem;
+  color: #003333;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .quiero-donar-header .subtitle {
   font-family: var(--font-primary);
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-normal);
-  opacity: 0.95;
+  color: #666;
   max-width: 500px;
 }
 
@@ -158,6 +162,13 @@
   display: block;
   position: relative;
   z-index: 2;
+  color: #39e4c9;
+  transition: all 0.3s ease;
+}
+
+.info-card:hover .info-icon {
+  color: #27b3a3;
+  transform: scale(1.1);
 }
 
 .info-card h3 {
@@ -527,11 +538,13 @@
   display: block;
   position: relative;
   z-index: 2;
-  background: linear-gradient(135deg, #39e4c9, #27b3a3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(57, 228, 201, 0.3));
+  color: #39e4c9;
+  transition: all 0.3s ease;
+}
+
+.info-card:hover .info-icon {
+  color: #27b3a3;
+  transform: scale(1.1);
 }
 
 .info-card h3 {
@@ -943,13 +956,15 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   display: block;
-  background: linear-gradient(135deg, #39e4c9, #27b3a3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 2px 4px rgba(57, 228, 201, 0.3));
+  color: #39e4c9;
+  transition: all 0.3s ease;
   position: relative;
   z-index: 2;
+}
+
+.forma-card:hover .forma-icon {
+  color: #27b3a3;
+  transform: scale(1.1);
 }
 
 .forma-card h3 {
@@ -1208,11 +1223,11 @@
 
 @media (max-width: 768px) {
   .quiero-donar-header {
-    padding: 30px 0;
+    padding: 15px 0 10px 0;
   }
   
   .header-content {
-    min-height: 120px;
+    min-height: 60px;
   }
   
   .header-text {
@@ -1220,11 +1235,11 @@
   }
   
   .quiero-donar-header h1 {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
   
   .quiero-donar-header .subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   
   .main-content-with-widget {
@@ -1330,19 +1345,19 @@
 
 @media (max-width: 480px) {
   .quiero-donar-header {
-    padding: 20px 0;
+    padding: 10px 0 8px 0;
   }
   
   .header-content {
-    min-height: 100px;
+    min-height: 50px;
   }
   
   .quiero-donar-header h1 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   
   .quiero-donar-header .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
   .main-content-with-widget {
