@@ -1,80 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getDatabase, ref, onValue, push } from 'firebase/database';
-import { useAuth } from '../context/AuthContext';
+import React, { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { database, auth } from '../firebase';
+import { onValue, push, ref } from 'firebase/database';
 
-interface Message {
+interface Mensaje {
   id: string;
-  text: string;
-  sender: string;
+  texto: string;
+  remitente: string;
   timestamp: number;
 }
 
-const Chat = () => {
-  const { id } = useParams(); // ID de la emergencia
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [newMessage, setNewMessage] = useState('');
-
-  const db = getDatabase();
+const Chat: React.FC = () => {
+  const { id: emergenciaId } = useParams<{ id: string }>();
+  const [mensajes, setMensajes] = useState<Mensaje[]>([]);
+  const [nuevoMensaje, setNuevoMensaje] = useState('');
+  const chatRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/login');
-      return;
-    }
+    if (!emergenciaId) return;
 
-    const messagesRef = ref(db, `Chats/${id}`);
-    onValue(messagesRef, (snapshot) => {
+    const mensajesRef = ref(database, `chats/${emergenciaId}`);
+    const unsubscribe = onValue(mensajesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const loadedMessages = Object.entries(data).map(([key, val]: any) => ({
+        const mensajesArray = Object.entries(data).map(([key, val]: [string, any]) => ({
           id: key,
-          ...val,
+          texto: val.texto,
+          remitente: val.remitente,
+          timestamp: val.timestamp || 0,
         }));
-        setMessages(loadedMessages.sort((a, b) => a.timestamp - b.timestamp));
+        mensajesArray.sort((a, b) => a.timestamp - b.timestamp);
+        setMensajes(mensajesArray);
+        scrollToBottom();
       } else {
-        setMessages([]);
+        setMensajes([]);
       }
     });
-  }, [id, user]);
 
-  const sendMessage = async () => {
-    if (!newMessage.trim()) return;
+    return () => unsubscribe();
+  }, [emergenciaId]);
 
-    const messageRef = ref(db, `Chats/${id}`);
-    await push(messageRef, {
-      text: newMessage,
-      sender: user?.email || 'Anónimo',
+  const enviarMensaje = async () => {
+    if (!nuevoMensaje.trim() || !auth.currentUser || !emergenciaId) return;
+
+    const mensaje = {
+      texto: nuevoMensaje,
+      remitente: auth.currentUser.email || 'Anónimo',
       timestamp: Date.now(),
-    });
-    setNewMessage('');
+    };
+
+    const mensajesRef = ref(database, `chats/${emergenciaId}`);
+    await push(mensajesRef, mensaje);
+    setNuevoMensaje('');
+  };
+
+  const scrollToBottom = () => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Chat de Emergencia</h2>
-      <div className="bg-gray-100 p-4 rounded h-96 overflow-y-auto mb-4">
-        {messages.map((msg) => (
-          <div key={msg.id} className="mb-2">
-            <p className="text-sm text-gray-600">{msg.sender}</p>
-            <div className="bg-white p-2 rounded shadow">{msg.text}</div>
-          </div>
-        ))}
+    <div style={{ maxWidth: 600, margin: '0 auto', padding: 16, border: '1px solid #ccc', borderRadius: 8 }}>
+      <h2>Chat de Emergencia: {emergenciaId}</h2>
+      <div
+        ref={chatRef}
+        style={{ maxHeight: 300, overflowY: 'auto', marginBottom: 16, padding: 8, backgroundColor: '#f9f9f9', borderRadius: 4 }}
+      >
+        {mensajes.length === 0 ? (
+          <p>No hay mensajes aún.</p>
+        ) : (
+          mensajes.map((msg) => (
+            <div key={msg.id} style={{ marginBottom: 8 }}>
+              <strong>{msg.remitente}:</strong> {msg.texto}
+            </div>
+          ))
+        )}
       </div>
-      <div className="flex gap-2">
+      <div style={{ display: 'flex', gap: 8 }}>
         <input
           type="text"
-          className="flex-1 border rounded p-2"
+          value={nuevoMensaje}
+          onChange={(e) => setNuevoMensaje(e.target.value)}
           placeholder="Escribe tu mensaje"
-          value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          style={{ flexGrow: 1, padding: 8, borderRadius: 4, border: '1px solid #ccc' }}
+          onKeyDown={(e) => { if (e.key === 'Enter') enviarMensaje(); }}
         />
-        <button
-          onClick={sendMessage}
-          className="bg-green-500 text-white px-4 py-2 rounded"
-        >
+        <button onClick={enviarMensaje} style={{ padding: '8px 16px' }}>
           Enviar
         </button>
       </div>

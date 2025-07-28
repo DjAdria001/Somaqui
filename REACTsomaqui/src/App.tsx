@@ -21,6 +21,7 @@ import Chat from './pages/Chat'; // asegúrate de que el path sea correcto
 
 
 
+
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
@@ -48,7 +49,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
-          <Header onLoginClick={handleLoginClick} />
+              {/* <Route path="/chat/:id" element={<Chat />} /> */}
           <main>
             <Routes>
               <Route path="/chat/:id" element={<Chat />} />
