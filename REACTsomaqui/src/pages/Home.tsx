@@ -23,16 +23,26 @@ const Home: React.FC = () => {
 
   return (
     <main>
-      {/* Sección hero */}
-      <section className="hero">
-        <h2> Conectamos a quienes necesitan ayuda con quienes pueden ofrecerla</h2>
-        <p>
-          SomAqui.cat es una plataforma comunitaria que facilita la conexión entre personas 
-          que necesitan asistencia y voluntarios dispuestos a ayudar en situaciones de emergencia.
-        </p>
-        <Link to="/ayuda">Pedir ayuda ahora</Link>
-        <Link to="/voluntario">Ser voluntario</Link>
+      {/* Sección hero combinado */}
+      <section className="hero-combinado">
+        <div className="contenido-hero">
+          <h1><span className="destacado">Emergencias invisibles.</span> Respuestas humanas.</h1>
+          <p className="frase-impacto">
+            No todas las urgencias se ven: una crisis emocional, una persona mayor sola, la falta de alimentos...
+            <span className="resaltado">Para eso estamos aquí.</span>
+          </p>
+          <p className="frase-info">
+            <strong>SomAqui.cat</strong> es una plataforma comunitaria que conecta a quienes <u>necesitan ayuda</u> con personas que <u>pueden ofrecerla</u>, en situaciones donde el 112 no llega.
+          </p>
+          <div className="botones-accion">
+            <Link to="/formulario-ayuda" className="btn btn-ayuda">🆘 Necesito ayuda</Link>
+            <Link to="/voluntario" className="btn btn-voluntario">🤝 Quiero ayudar</Link>
+          </div>
+        </div>
       </section>
+
+
+  
 
       {/* Gallery compacto */}
       <Slider images={sliderImages} compact={true} />
@@ -106,7 +116,7 @@ const Home: React.FC = () => {
             Conecta al instante con personas de tu zona dispuestas a ayudar 
             en situaciones de emergencia.
           </p>
-          <Link to="/ayuda">Solicitar ayuda</Link>
+          <Link to="/formulario-ayuda">Solicitar ayuda</Link>
         </div>
         
         <div className="feature">
