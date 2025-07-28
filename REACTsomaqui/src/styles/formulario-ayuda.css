@@ -144,19 +144,14 @@ main {
   box-shadow: 0 1px 4px rgba(39, 179, 163, 0.2);
 }
 
-/* Títulos de sección con numeración - Mejorados */
+/* Títulos de sección con numeración - Limpios sin fondos */
 .seccion-titulo {
   display: flex;
   align-items: center;
   gap: 1.2rem;
   margin-bottom: 2rem;
-  padding: 1.2rem 0 1rem 0;
-  border-bottom: 3px solid transparent;
-  background: linear-gradient(90deg, #39e4c9, #27b3a3) padding-box,
-              linear-gradient(90deg, #39e4c9, #27b3a3) border-box;
-  border-image: linear-gradient(90deg, #39e4c9, #27b3a3) 1;
-  border-bottom: 3px solid;
-  border-image-slice: 1;
+  padding: 0;
+  border: none;
   position: relative;
 }
 
@@ -173,21 +168,6 @@ main {
   font-size: 1.4rem;
   flex-shrink: 0;
   box-shadow: 0 4px 16px rgba(57, 228, 201, 0.25);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  position: relative;
-}
-
-.seccion-numero::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(135deg, #39e4c9, #27b3a3);
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0.2;
 }
 
 .seccion-info h2 {
@@ -196,10 +176,11 @@ main {
   color: #39e4c9;
   font-weight: 700;
   line-height: 1.2;
+  margin-bottom: 0.5rem;
 }
 
 .seccion-info p {
-  margin: 0.4rem 0 0 0;
+  margin: 0;
   color: #666;
   font-size: 0.95rem;
   font-weight: 500;
@@ -233,27 +214,13 @@ main {
   padding: 0 1.5rem;
 }
 
-/* Layout horizontal para ubicación y contacto - PASO 1 */
+/* Layout horizontal para ubicación y contacto - PASO 1 - Ajustado */
 .ubicacion-contacto-section {
   margin-bottom: 3rem;
-  padding: 2rem 0;
+  padding: 3rem 2rem;
   background: #ffffff;
   border-radius: 20px;
-  border: 2px solid #39e4c9;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
-  position: relative;
-}
-
-.ubicacion-contacto-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(57, 228, 201, 0.02) 0%, transparent 50%);
-  border-radius: 18px;
-  pointer-events: none;
 }
 
 .ubicacion-mapa {
@@ -261,20 +228,13 @@ main {
   gap: 3rem;
   align-items: flex-start;
   margin-bottom: 0;
-  padding: 0 2rem;
+  padding: 0;
 }
 
 /* Contenedor del mapa (lado izquierdo) */
 .mapa-contenedor {
   flex: 1;
   min-width: 50%;
-}
-
-.mapa-contenedor h2 {
-  font-size: 1.4rem;
-  color: #39e4c9;
-  margin-bottom: 1rem;
-  text-align: left;
 }
 
 .ubicacion-controls {
@@ -483,6 +443,11 @@ main {
   text-align: left;
 }
 
+.form-derecha .seccion-titulo {
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
 .form-derecha .form-group {
   margin-bottom: 1rem;
 }
@@ -511,13 +476,14 @@ main {
   box-shadow: 0 0 5px rgba(57, 228, 201, 0.3);
 }
 
-/* Estilos para el formulario general */
+/* Estilos para el formulario general - Ajustado al mismo ancho que home */
 .ayuda-form {
   background: white;
-  border: 2px solid #39e4c9;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 0;
   position: relative;
+  max-width: none;
+  margin: 0;
 }
 
 /* Estilos generales para inputs */
@@ -658,7 +624,6 @@ textarea {
   padding: 1.5rem;
   background: #f8f9fa;
   border-radius: 12px;
-  border: 2px solid #39e4c9;
 }
 
 .descripcion-seccion label {
@@ -683,27 +648,13 @@ textarea {
   gap: 0.5rem;
 }
 
-/* Secciones del formulario - PASO 2 Y 3 */
+/* Secciones del formulario - PASO 2 Y 3 - Limpias */
 .tags-section {
   margin: 3rem 0;
   padding: 3rem 2rem;
   background: #ffffff;
   border-radius: 20px;
-  border: 2px solid #39e4c9;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
-  position: relative;
-}
-
-.tags-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(57, 228, 201, 0.02) 0%, transparent 50%);
-  border-radius: 18px;
-  pointer-events: none;
 }
 
 .descripcion-section {
@@ -711,21 +662,7 @@ textarea {
   padding: 3rem 2rem;
   background: #ffffff;
   border-radius: 20px;
-  border: 2px solid #39e4c9;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
-  position: relative;
-}
-
-.descripcion-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(57, 228, 201, 0.02) 0%, transparent 50%);
-  border-radius: 18px;
-  pointer-events: none;
 }
 
 .terms-section,
@@ -822,7 +759,6 @@ textarea {
   padding: 2rem;
   background: #ffffff;
   border-radius: 12px;
-  border: 2px solid rgba(57, 228, 201, 0.2);
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -861,28 +797,14 @@ textarea {
   color: #27b3a3;
 }
 
-/* Botón de envío - PASO FINAL */
+/* Botón de envío - PASO FINAL - Limpio */
 .submit-section {
   text-align: center;
   margin: 3rem 0;
   padding: 3rem 2rem;
   background: #ffffff;
   border-radius: 20px;
-  border: 2px solid #39e4c9;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
-  position: relative;
-}
-
-.submit-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(57, 228, 201, 0.02) 0%, transparent 50%);
-  border-radius: 18px;
-  pointer-events: none;
 }
 
 .submit-btn {
@@ -1079,13 +1001,6 @@ textarea {
   position: relative;
 }
 
-.mapa-contenedor h2 {
-  font-size: 1.6rem;
-  color: #39e4c9;
-  margin-bottom: 1.5rem;
-  text-align: left;
-}
-
 .form-derecha h2 {
   font-size: 1.6rem;
   color: #39e4c9;
@@ -1114,18 +1029,18 @@ textarea {
 
 /* Responsive para pantallas pequeñas - Optimizado */
 @media (max-width: 1200px) {
-  .formulario-content {
-    padding: 0 1.5rem;
-  }
-  
   .ubicacion-mapa {
-    padding: 0 1.5rem;
+    padding: 0;
   }
   
   .tags-section,
   .descripcion-section,
   .submit-section {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .ubicacion-contacto-section {
+    padding: 2.5rem 1.5rem;
   }
   
   .pasos-container {
@@ -1189,7 +1104,7 @@ textarea {
   
   .seccion-titulo {
     gap: 1rem;
-    padding: 1rem 0 0.8rem 0;
+    padding: 0;
   }
   
   .seccion-numero {
@@ -1209,11 +1124,11 @@ textarea {
   .ubicacion-mapa {
     flex-direction: column;
     gap: 1.5rem;
-    padding: 0 1rem;
+    padding: 0;
   }
   
   .ubicacion-contacto-section {
-    padding: 1.5rem 0;
+    padding: 2rem 1rem;
   }
   
   .mapa-contenedor,
@@ -1241,7 +1156,6 @@ textarea {
     padding: 1.5rem;
   }
 
-  .mapa-contenedor h2,
   .form-derecha h2 {
     text-align: center;
   }
@@ -1304,7 +1218,7 @@ textarea {
     flex-direction: column;
     text-align: center;
     gap: 0.8rem;
-    padding: 0.8rem 0 0.6rem 0;
+    padding: 0;
   }
   
   .seccion-numero {
@@ -1354,12 +1268,12 @@ textarea {
   }
 
   .ubicacion-contacto-section {
-    padding: 1rem 0;
+    padding: 1.5rem 0.8rem;
     margin-bottom: 1rem;
   }
 
   .ayuda-form {
-    padding: 1.5rem;
+    padding: 0;
   }
 
   .ubicacion-mapa {
