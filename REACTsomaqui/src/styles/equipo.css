@@ -1,14 +1,15 @@
 /* Estilos para la página de Equipo - Tipografía unificada con sistema global */
 .equipo-page {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: #f0fdfd;
 }
+
 
 /* Header Section */
 .equipo-header {
-  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
-  padding: 80px 0;
+  padding: 40px 0 30px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -32,36 +33,36 @@
 
 .equipo-header h1 {
   font-family: var(--font-primary);
-  font-size: var(--font-size-4xl);
+  font-size: 2.8rem;
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .equipo-header .subtitle {
   font-family: var(--font-primary);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-light);
-  line-height: var(--line-height-relaxed);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
   letter-spacing: var(--letter-spacing-normal);
-  margin-bottom: 0;
   opacity: 0.95;
-  max-width: 700px;
+  max-width: 500px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 0;
 }
 
 /* Mission Statement */
 .mission-statement {
   padding: 80px 0;
-  background: white;
+  background: #fff;
 }
 
 .mission-content h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 2rem;
   font-weight: 700;
   text-align: center;
@@ -86,15 +87,15 @@
 .stat-item {
   text-align: center;
   padding: 30px 20px;
-  background: #f8f9fa;
+  background: #fff;
   border-radius: 15px;
-  border-top: 4px solid #6f42c1;
+  border-top: 4px solid #39e4c9;
 }
 
 .stat-number {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #6f42c1;
+  color: #39e4c9;
   margin-bottom: 10px;
 }
 
@@ -107,12 +108,12 @@
 /* Team Members */
 .team-members {
   padding: 80px 0;
-  background: #f8f9fa;
+  background: #f0fdfd;
 }
 
 .team-members h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 3rem;
   font-weight: 700;
   text-align: center;
@@ -125,10 +126,10 @@
 }
 
 .team-card {
-  background: white;
+  background: #fff;
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.08);
   transition: all 0.3s ease;
   text-align: center;
 }
@@ -146,7 +147,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,14 +158,14 @@
 
 .team-info h3 {
   font-size: 1.4rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 8px;
   font-weight: 600;
 }
 
 .team-info h4 {
   font-size: 1rem;
-  color: #6f42c1;
+  color: #39e4c9;
   margin-bottom: 15px;
   font-weight: 500;
   text-transform: uppercase;
@@ -185,8 +186,8 @@
 }
 
 .team-social a {
-  background: #f8f9fa;
-  color: #6f42c1;
+  background: #f0fdfd;
+  color: #39e4c9;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -199,20 +200,20 @@
 }
 
 .team-social a:hover {
-  background: #6f42c1;
-  color: white;
+  background: #39e4c9;
+  color: #fff;
   transform: translateY(-2px);
 }
 
 /* Advisors */
 .advisors {
   padding: 80px 0;
-  background: white;
+  background: #fff;
 }
 
 .advisors h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 1rem;
   font-weight: 700;
   text-align: center;
@@ -234,23 +235,23 @@
 }
 
 .advisor-card {
-  background: #f8f9fa;
+  background: #fff;
   border-radius: 12px;
   padding: 25px;
   text-align: center;
-  border-left: 4px solid #6f42c1;
+  border-left: 4px solid #39e4c9;
 }
 
 .advisor-info h3 {
   font-size: 1.2rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 8px;
   font-weight: 600;
 }
 
 .advisor-info h4 {
   font-size: 1rem;
-  color: #6f42c1;
+  color: #39e4c9;
   margin-bottom: 10px;
   font-weight: 500;
 }
@@ -264,12 +265,12 @@
 /* Values */
 .values {
   padding: 80px 0;
-  background: #f8f9fa;
+  background: #f0fdfd;
 }
 
 .values h2 {
   font-size: 2.5rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 3rem;
   font-weight: 700;
   text-align: center;
@@ -282,11 +283,11 @@
 }
 
 .value-item {
-  background: white;
+  background: #fff;
   padding: 30px;
   border-radius: 15px;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.08);
   transition: all 0.3s ease;
 }
 
@@ -296,7 +297,7 @@
 }
 
 .value-icon {
-  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
   width: 70px;
   height: 70px;
@@ -306,12 +307,12 @@
   justify-content: center;
   font-size: 1.8rem;
   margin: 0 auto 20px;
-  box-shadow: 0 4px 15px rgba(111, 66, 193, 0.3);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
 }
 
 .value-item h3 {
   font-size: 1.3rem;
-  color: #333;
+  color: #003333;
   margin-bottom: 15px;
   font-weight: 600;
 }
@@ -326,7 +327,7 @@
 /* Join Team */
 .join-team {
   padding: 80px 0;
-  background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+  background: linear-gradient(135deg, #39e4c9 0%, #27b3a3 100%);
   color: white;
   text-align: center;
 }
@@ -355,8 +356,8 @@
 }
 
 .join-actions button {
-  background: white;
-  color: #6f42c1;
+  background: #fff;
+  color: #003333;
   border: none;
   padding: 15px 30px;
   border-radius: 25px;
@@ -370,9 +371,10 @@
 }
 
 .join-actions button:hover {
-  background: #f8f9fa;
+  background: #39e4c9;
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.2);
 }
 
 /* Responsive Design */
