@@ -16,7 +16,7 @@ const Equipo: React.FC = () => {
   const teamMembers: TeamMember[] = [
     {
       id: 1,
-      nombre: "María García",
+      nombre: "Maria Paula Diaz Fernández",
       cargo: "Fundadora y Directora Ejecutiva",
       descripcion: "Experta en gestión de emergencias con más de 10 años de experiencia en organizaciones humanitarias. Lidera la visión estratégica de SomAqui.cat.",
       imagen: "/api/placeholder/200/200",
@@ -25,7 +25,7 @@ const Equipo: React.FC = () => {
     },
     {
       id: 2,
-      nombre: "Carlos Rodríguez",
+      nombre: "Adrian Galera",
       cargo: "Director de Tecnología",
       descripcion: "Ingeniero de software especializado en sistemas de respuesta a emergencias. Responsable del desarrollo y mantenimiento de la plataforma.",
       imagen: "/api/placeholder/200/200",
@@ -34,7 +34,7 @@ const Equipo: React.FC = () => {
     },
     {
       id: 3,
-      nombre: "Ana López",
+      nombre: "Malik Hassan",
       cargo: "Coordinadora de Voluntarios",
       descripcion: "Psicóloga social con experiencia en gestión de equipos de voluntarios. Coordina la formación y asignación de voluntarios en emergencias.",
       imagen: "/api/placeholder/200/200",
@@ -43,30 +43,14 @@ const Equipo: React.FC = () => {
     },
     {
       id: 4,
-      nombre: "David Martínez",
+      nombre: "Enya Stephanie Rodriguez",
       cargo: "Especialista en Comunicaciones",
       descripcion: "Periodista especializado en comunicación de crisis. Gestiona las comunicaciones públicas y relaciones con medios durante emergencias.",
       imagen: "/api/placeholder/200/200",
       twitter: "#",
       email: "david@somaqui.cat"
     },
-    {
-      id: 5,
-      nombre: "Laura Sánchez",
-      cargo: "Coordinadora Regional",
-      descripcion: "Experta en gestión territorial con conocimiento profundo de las comunidades locales. Coordina las operaciones regionales.",
-      imagen: "/api/placeholder/200/200",
-      linkedin: "#"
-    },
-    {
-      id: 6,
-      nombre: "Javier Moreno",
-      cargo: "Analista de Datos",
-      descripcion: "Científico de datos especializado en análisis de riesgos y patrones de emergencias. Desarrolla modelos predictivos para mejorar la respuesta.",
-      imagen: "/api/placeholder/200/200",
-      linkedin: "#",
-      email: "javier@somaqui.cat"
-    }
+ 
   ];
 
   const advisors = [
@@ -104,7 +88,6 @@ const Equipo: React.FC = () => {
       <section className="mission-statement">
         <div className="container">
           <div className="mission-content">
-            <h2>Nuestra Misión</h2>
             <p>
               En SomAqui.cat creemos que la solidaridad y la colaboración comunitaria son fundamentales 
               para superar las crisis y emergencias. Nuestro equipo multidisciplinario trabaja con 
@@ -136,7 +119,7 @@ const Equipo: React.FC = () => {
       {/* Team Members */}
       <section className="team-members">
         <div className="container">
-          <h2>Nuestro Equipo Principal</h2>
+          <h2>Nuestro Equipo</h2>
           <div className="team-grid">
             {teamMembers.map(member => (
               <div key={member.id} className="team-card">
