@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { auth, database } from '../firebase'; // Ajusta la ruta según dónde esté tu archivo firebase.ts
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { ref, set } from 'firebase/database';
+
 
 interface FormData {
   nombre: string;
@@ -98,22 +102,53 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin 
 
     setIsSubmitting(true);
 
-    try {
-      // Aquí iría la llamada a la API
-      console.log('Datos de registro:', formData);
-      
-      // Simular registro
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      alert('¡Registro completado exitosamente! Te hemos enviado un correo de confirmación.');
-      onClose();
-      
-    } catch (error) {
-      console.error('Error en el registro:', error);
-      alert('Error al procesar el registro. Por favor, inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
-    }
+try {
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    formData.correo,
+    formData.password
+  );
+
+  const user = userCredential.user;
+
+  // Guardar usuario en la base de datos
+  await set(ref(database, 'usuarios/' + user.uid), {
+    nombre: formData.nombre,
+    apellidos: formData.apellidos,
+    correo: formData.correo,
+    telefono: formData.telefono,
+    fechaNacimiento: formData.fechaNacimiento,
+    ubicacion: formData.ubicacion,
+  });
+
+  // Enviar correo de verificación
+  await sendEmailVerification(user);
+
+  alert('¡Registro completado exitosamente! Te hemos enviado un correo de confirmación.');
+  onClose();
+
+  // Limpiar formulario
+  setFormData({
+    nombre: '',
+    apellidos: '',
+    correo: '',
+    telefono: '',
+    password: '',
+    confirmPassword: '',
+    fechaNacimiento: '',
+    ubicacion: '',
+    terminos: false,
+  });
+
+} catch (error: any) {
+  console.error('Error en el registro:', error);
+  if (error.code === 'auth/email-already-in-use') {
+    alert('El correo ya está registrado.');
+  } else {
+    alert('Error al procesar el registro. Por favor, inténtalo de nuevo.');
+  }
+}
+
   };
 
   return (

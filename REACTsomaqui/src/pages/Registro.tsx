@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/registro.css';
+import { auth, database } from '../firebase'; // ruta según tu estructura
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { ref, set } from 'firebase/database'; // si usas Realtime DB
+// import { doc, setDoc } from 'firebase/firestore'; // si usas Firestore
+import { useNavigate } from 'react-router-dom';
+import { sendEmailVerification } from 'firebase/auth';
+
+
 
 interface FormData {
   nombre: string;
@@ -34,6 +42,7 @@ interface FormErrors {
 }
 
 const Registro: React.FC = () => {
+  
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
     apellidos: '',
@@ -51,6 +60,7 @@ const Registro: React.FC = () => {
     terminos: false,
     privacidad: false,
   });
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -134,50 +144,79 @@ const Registro: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  console.log("✅ Envío del formulario detectado");
 
-    setIsSubmitting(true);
+  const isValid = validateForm();
+  console.log("🧪 Validación:", isValid);
 
-    try {
-      // Aquí iría la llamada a la API
-      console.log('Datos de registro:', formData);
-      
-      // Simular registro
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      alert('¡Registro completado exitosamente! Te hemos enviado un correo de confirmación.');
-      
-      // Redireccionar o resetear formulario
-      setFormData({
-        nombre: '',
-        apellidos: '',
-        correo: '',
-        telefono: '',
-        password: '',
-        confirmPassword: '',
-        fechaNacimiento: '',
-        ubicacion: '',
-        habilidades: [],
-        disponibilidad: [],
-        experiencia: '',
-        motivacion: '',
-        emergencias: false,
-        terminos: false,
-        privacidad: false,
-      });
-      
-    } catch (error) {
-      console.error('Error en el registro:', error);
-      alert('Error al procesar el registro. Por favor, inténtalo de nuevo.');
-    } finally {
-      setIsSubmitting(false);
+  if (!isValid) {
+    console.log("❌ Formulario inválido:", formData);
+    return;
+  }
+
+  setIsSubmitting(true);
+  console.log("🚀 Enviando datos a Firebase:", formData);
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, formData.correo, formData.password);
+    const user = userCredential.user;
+    console.log("Usuario creado:", user);
+
+    await set(ref(database, 'Voluntarios/' + user.uid), {
+      nombre: formData.nombre,
+      apellidos: formData.apellidos,
+      correo: formData.correo,
+      telefono: formData.telefono,
+      fechaNacimiento: formData.fechaNacimiento,
+      ubicacion: formData.ubicacion,
+      habilidades: formData.habilidades,
+      disponibilidad: formData.disponibilidad,
+      experiencia: formData.experiencia,
+      motivacion: formData.motivacion,
+      emergencias: formData.emergencias,
+      terminos: formData.terminos,
+      privacidad: formData.privacidad,
+      fechaRegistro: new Date().toISOString()
+    });
+    console.log("Datos del voluntario guardados en Firebase");
+
+    await sendEmailVerification(user);
+    alert('¡Registro completado exitosamente!');
+    navigate('/home');
+
+    setFormData({
+      nombre: '',
+      apellidos: '',
+      correo: '',
+      telefono: '',
+      password: '',
+      confirmPassword: '',
+      fechaNacimiento: '',
+      ubicacion: '',
+      habilidades: [],
+      disponibilidad: [],
+      experiencia: '',
+      motivacion: '',
+      emergencias: false,
+      terminos: false,
+      privacidad: false,
+    });
+
+  } catch (error: any) {
+    let message = 'Error desconocido';
+    if (error.code === 'auth/email-already-in-use') {
+      message = 'Este correo ya está registrado.';
+    } else if (error.code === 'auth/weak-password') {
+      message = 'La contraseña es muy débil.';
     }
-  };
+    alert(message);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+
 
   return (
     <div className="registro-container">
