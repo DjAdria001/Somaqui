@@ -18,36 +18,36 @@ const Equipo: React.FC = () => {
     {
       id: 1,
       nombre: "Maria Paula Diaz Fernández",
-      cargo: "Fundadora y Directora Ejecutiva",
+      cargo: "Desarrolladora Fullstack",
       descripcion: "Experta en gestión de emergencias con más de 10 años de experiencia en organizaciones humanitarias. Lidera la visión estratégica de SomAqui.cat.",
-      imagen: "/api/placeholder/200/200",
+      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Paula.jfif",
       linkedin: "https://www.linkedin.com/in/maria-paula-diaz-hernandez/",
       github: "https://github.com/pauladhernandez"
     },
     {
       id: 2,
       nombre: "Adrià Galera",
-      cargo: "Director de Tecnología",
+      cargo: "Desarrollador Fullstack",
       descripcion: "Ingeniero de software especializado en sistemas de respuesta a emergencias. Responsable del desarrollo y mantenimiento de la plataforma.",
-      imagen: "/api/placeholder/200/200",
+      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Adria.jfif",
       linkedin: "https://www.linkedin.com/in/adriagalerasanchez/",
      github: "https://github.com/DjAdria001"
     },
     {
       id: 3,
       nombre: "Malik Hassan",
-      cargo: "Coordinadora de Voluntarios",
+      cargo: "Desarrollador Fullstack",
       descripcion: "Psicóloga social con experiencia en gestión de equipos de voluntarios. Coordina la formación y asignación de voluntarios en emergencias.",
-      imagen: "/api/placeholder/200/200",
+      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Malik.jfif",
       linkedin: "https://www.linkedin.com/in/malik-hassan-58b4b41b9/",
       github: "https://github.com/Hassansohail839"
     },
     {
       id: 4,
       nombre: "Enya Stephanie Rodriguez",
-      cargo: "Especialista en Comunicaciones",
+      cargo: "Desarrolladora Fullstack",
       descripcion: "Periodista especializado en comunicación de crisis. Gestiona las comunicaciones públicas y relaciones con medios durante emergencias.",
-      imagen: "/api/placeholder/200/200",
+      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Enya.jfif",
       linkedin: "https://www.linkedin.com/in/enya-stephanie-rodr%C3%ADguez/",
       github: "https://github.com/EnyaRdz"
     },
@@ -125,9 +125,15 @@ const Equipo: React.FC = () => {
             {teamMembers.map(member => (
               <div key={member.id} className="team-card">
                 <div className="team-photo">
-                  <div className="photo-placeholder">
-                    <i className="fas fa-user"></i>
-                  </div>
+                  {/* Solo mostrar el icono si es Maria Paula (id 1), los demás solo la foto */}
+                  {member.id === 1 ? (
+                    <>
+                    
+                      <img src={member.imagen} alt={member.nombre} className="team-image" />
+                    </>
+                  ) : (
+                    <img src={member.imagen} alt={member.nombre} className="team-image" />
+                  )}
                 </div>
                 <div className="team-info">
                   <h3>{member.nombre}</h3>
@@ -139,7 +145,6 @@ const Equipo: React.FC = () => {
                         <i className="fab fa-linkedin"></i>
                       </a>
                     )}
-                    {/* Show GitHub icon for any member with github field */}
                     {member.github && (
                       <a href={member.github.startsWith('http') ? member.github : `https://github.com/${member.github}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                         <i className="fab fa-github"></i>

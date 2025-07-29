@@ -374,7 +374,14 @@ background-color: #f0fdfd;;
   gap: 10px;
   font-size: 1rem;
 }
-
+.team-image {
+  width:222px;
+  height:222px;
+  border: #27b3a3 5px solid;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
 .join-actions button:hover {
   background: #39e4c9;
   color: #fff;
