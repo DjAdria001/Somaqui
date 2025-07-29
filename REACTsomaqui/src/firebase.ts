@@ -18,4 +18,3 @@ const database = getDatabase(app);
 const auth = getAuth(app);  // <-- INICIALIZA auth
 
 export { database, auth };  // <-- EXPORTA auth también
-

@@ -25,7 +25,7 @@ const Equipo: React.FC = () => {
     },
     {
       id: 2,
-      nombre: "Adrian Galera",
+      nombre: "Adrià Galera",
       cargo: "Director de Tecnología",
       descripcion: "Ingeniero de software especializado en sistemas de respuesta a emergencias. Responsable del desarrollo y mantenimiento de la plataforma.",
       imagen: "/api/placeholder/200/200",
