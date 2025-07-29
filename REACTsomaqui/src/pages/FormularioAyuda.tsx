@@ -427,10 +427,14 @@ const FormularioAyuda: React.FC = () => {
 
   return (
     <div className="formulario-ayuda-container">
-      <header className="formulario-header">
-        <h1>Solicitar ayuda inmediata</h1>
-        <p>Conectamos tu necesidad con voluntarios cercanos</p>
-      </header>
+      <section className="formulario-header">
+        <div className="formulario-header-content">
+          <div className="formulario-header-text">
+            <h1>Solicitar ayuda inmediata</h1>
+            <p className="subtitle">Conectamos tu necesidad con voluntarios cercanos</p>
+          </div>
+        </div>
+      </section>
 
       {/* Indicador de pasos */}
       <div className="pasos-container">
@@ -465,129 +469,120 @@ const FormularioAyuda: React.FC = () => {
         </div>
       </div>
 
-      <div className="formulario-content">
-        <form onSubmit={handleSubmit} className="ayuda-form">
-          {/* PASO 1: Sección de ubicación y contacto */}
-          <section className="ubicacion-contacto-section">
-            <div className="seccion-titulo">
-              <div className="seccion-numero">1</div>
-              <div className="seccion-info">
-                <h2>📍 Indica tu ubicación</h2>
-                <p>Necesitamos saber dónde estás para enviarte ayuda cercana</p>
-              </div>
-            </div>
-            
-            <div className="ubicacion-mapa">
-              {/* Sección de ubicación - Lado izquierdo */}
-              <div className="mapa-contenedor">
-                <div className="ubicacion-controls">
-                  <button 
-                    type="button" 
-                    onClick={detectLocation}
-                    disabled={isDetectingLocation}
-                    className="detect-location-btn"
-                  >
-                    {ubicacionTexto}
-                  </button>
-                  
-                  <div className="ubicacion-input-group">
-                    <label htmlFor="desc_ubic">Dirección específica del lugar:</label>
-                    <input
-                      type="text"
-                      id="desc_ubic"
-                      name="desc_ubic"
-                      value={formData.desc_ubic}
-                      onChange={handleInputChange}
-                      placeholder="Se completará automáticamente al detectar ubicación..."
-                    />
-                    <small style={{color: '#666', fontSize: '0.8rem', marginTop: '0.25rem', display: 'block'}}>
-                      💡 Este campo se completa automáticamente cuando detectas tu ubicación
-                    </small>
-                  </div>
-                </div>
-
-                <div className="map-container">
-                  <MapComponent 
-                    ref={mapRef}
-                    onLocationSelect={handleLocationSelect}
-                    height="400px"
-                  />
+    <div className="formulario-content">
+      <form onSubmit={handleSubmit} className="ayuda-form">
+        {/* PASO 1: Sección de ubicación y contacto */}
+        <section className="ubicacion-contacto-section-flex">
+          <div className="paso1-contenedor-flex">
+            {/* Ubicación - Lado izquierdo, mismo estilo que form-derecha */}
+            <div className="paso1-card">
+              <div className="seccion-titulo">
+                <div className="seccion-numero">1</div>
+                <div className="seccion-info">
+                  <h2>📍 Indica tu ubicación</h2>
+                  <p>Necesitamos saber dónde estás para enviarte ayuda cercana</p>
                 </div>
               </div>
-
-              {/* PASO 2: Sección de contacto - Lado derecho */}
-              <div className="form-derecha">
-                <div className="seccion-titulo">
-                  <div className="seccion-numero">2</div>
-                  <div className="seccion-info">
-                    <h2>📞 Tus datos de contacto</h2>
-                    <p>Para que los voluntarios puedan comunicarse contigo</p>
-                  </div>
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="nombre">Nombre completo:</label>
+              <div className="ubicacion-controls">
+                <button 
+                  type="button" 
+                  onClick={detectLocation}
+                  disabled={isDetectingLocation}
+                  className="detect-location-btn"
+                >
+                  {ubicacionTexto}
+                </button>
+                <div className="ubicacion-input-group">
+                  <label htmlFor="desc_ubic">Dirección específica del lugar:</label>
                   <input
                     type="text"
-                    id="nombre"
-                    name="nombre"
-                    value={formData.nombre}
+                    id="desc_ubic"
+                    name="desc_ubic"
+                    value={formData.desc_ubic}
                     onChange={handleInputChange}
-                    required
+                    placeholder="Se completará automáticamente al detectar ubicación..."
                   />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="correo">Correo electrónico:</label>
-                  <input
-                    type="email"
-                    id="correo"
-                    name="correo"
-                    value={formData.correo}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="telefono">Teléfono de contacto:</label>
-                  <input
-                    type="tel"
-                    id="telefono"
-                    name="telefono"
-                    value={formData.telefono}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="personales">¿Cuántas personas necesitan ayuda?</label>
-                  <input
-                    type="number"
-                    id="personales"
-                    name="personales"
-                    value={formData.personales}
-                    onChange={handleInputChange}
-                    min="1"
-                    placeholder="1"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="tiempo">¿Desde cuándo ocurre la situación?</label>
-                  <input
-                    type="text"
-                    id="tiempo"
-                    name="tiempo"
-                    value={formData.tiempo}
-                    onChange={handleInputChange}
-                    placeholder="Ej: 30 minutos, 2 días..."
-                  />
+                  <small style={{color: '#666', fontSize: '0.8rem', marginTop: '0.25rem', display: 'block'}}>
+                    💡 Este campo se completa automáticamente cuando detectas tu ubicación
+                  </small>
                 </div>
               </div>
+              <div className="map-container">
+                <MapComponent 
+                  ref={mapRef}
+                  onLocationSelect={handleLocationSelect}
+                  height="400px"
+                />
+              </div>
             </div>
-          </section>
+            {/* Contacto - Lado derecho, igual que antes */}
+            <div className="paso1-card form-derecha">
+              <div className="seccion-titulo">
+                <div className="seccion-numero">2</div>
+                <div className="seccion-info">
+                  <h2>📞 Tus datos de contacto</h2>
+                  <p>Para que los voluntarios puedan comunicarse contigo</p>
+                </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="nombre">Nombre completo:</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="correo">Correo electrónico:</label>
+                <input
+                  type="email"
+                  id="correo"
+                  name="correo"
+                  value={formData.correo}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="telefono">Teléfono de contacto:</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="personales">¿Cuántas personas necesitan ayuda?</label>
+                <input
+                  type="number"
+                  id="personales"
+                  name="personales"
+                  value={formData.personales}
+                  onChange={handleInputChange}
+                  min="1"
+                  placeholder="1"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="tiempo">¿Desde cuándo ocurre la situación?</label>
+                <input
+                  type="text"
+                  id="tiempo"
+                  name="tiempo"
+                  value={formData.tiempo}
+                  onChange={handleInputChange}
+                  placeholder="Ej: 30 minutos, 2 días..."
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
           {/* PASO 3: Sección de etiquetas/categorías */}
           <section className="tags-section">
