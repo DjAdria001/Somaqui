@@ -3,7 +3,6 @@ import { auth, database } from '../firebase'; // Ajusta la ruta según dónde es
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { ref, set } from 'firebase/database';
 
-
 interface FormData {
   nombre: string;
   apellidos: string;
@@ -31,9 +30,10 @@ interface FormErrors {
 interface RegisterModalProps {
   onClose: () => void;
   onSwitchToLogin: () => void;
+  onRegisterSuccess?: () => void;
 }
 
-const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin }) => {
+const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin, onRegisterSuccess }) => {
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
     apellidos: '',
@@ -57,7 +57,6 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin 
       [name]: type === 'checkbox' ? checked : value
     }));
 
-    // Limpiar error del campo cuando el usuario empiece a escribir
     if (errors[name as keyof FormErrors]) {
       setErrors(prev => ({
         ...prev,
@@ -95,60 +94,61 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
+
+    if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-try {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    formData.correo,
-    formData.password
-  );
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.correo,
+        formData.password
+      );
 
-  const user = userCredential.user;
+      const user = userCredential.user;
 
-  // Guardar usuario en la base de datos
-  await set(ref(database, 'usuarios/' + user.uid), {
-    nombre: formData.nombre,
-    apellidos: formData.apellidos,
-    correo: formData.correo,
-    telefono: formData.telefono,
-    fechaNacimiento: formData.fechaNacimiento,
-    ubicacion: formData.ubicacion,
-  });
+      await set(ref(database, 'usuarios/' + user.uid), {
+        nombre: formData.nombre,
+        apellidos: formData.apellidos,
+        correo: formData.correo,
+        telefono: formData.telefono,
+        fechaNacimiento: formData.fechaNacimiento,
+        ubicacion: formData.ubicacion,
+      });
 
-  // Enviar correo de verificación
-  await sendEmailVerification(user);
+      await sendEmailVerification(user);
 
-  alert('¡Registro completado exitosamente! Te hemos enviado un correo de confirmación.');
-  onClose();
+      alert('¡Registro completado exitosamente! Te hemos enviado un correo de confirmación.');
 
-  // Limpiar formulario
-  setFormData({
-    nombre: '',
-    apellidos: '',
-    correo: '',
-    telefono: '',
-    password: '',
-    confirmPassword: '',
-    fechaNacimiento: '',
-    ubicacion: '',
-    terminos: false,
-  });
+      if (onRegisterSuccess) {
+        onRegisterSuccess();
+      } else {
+        onClose();
+      }
 
-} catch (error: any) {
-  console.error('Error en el registro:', error);
-  if (error.code === 'auth/email-already-in-use') {
-    alert('El correo ya está registrado.');
-  } else {
-    alert('Error al procesar el registro. Por favor, inténtalo de nuevo.');
-  }
-}
+      setFormData({
+        nombre: '',
+        apellidos: '',
+        correo: '',
+        telefono: '',
+        password: '',
+        confirmPassword: '',
+        fechaNacimiento: '',
+        ubicacion: '',
+        terminos: false,
+      });
 
+    } catch (error: any) {
+      console.error('Error en el registro:', error);
+      if (error.code === 'auth/email-already-in-use') {
+        alert('El correo ya está registrado.');
+      } else {
+        alert('Error al procesar el registro. Por favor, inténtalo de nuevo.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -159,12 +159,13 @@ try {
           <button 
             className="modal-close"
             onClick={onClose}
+            aria-label="Cerrar"
           >
             <i className="fas fa-times"></i>
           </button>
         </div>
         
-        <form onSubmit={handleSubmit} className="register-form">
+        <form onSubmit={handleSubmit} className="register-form" noValidate>
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="nombre">Nombre *</label>
@@ -314,9 +315,19 @@ try {
             </button>
           </div>
         </form>
-        
-        <div className="login-link">
-          <p>¿Ya tienes cuenta? <button type="button" onClick={onSwitchToLogin} className="link-button">Inicia sesión aquí</button></p>
+
+        <div className="login-link" style={{ marginTop: '1rem', textAlign: 'center' }}>
+          <p>
+            ¿Ya tienes cuenta?{' '}
+            <button 
+              type="button" 
+              onClick={onSwitchToLogin} 
+              className="link-button"
+              style={{ background: 'none', border: 'none', color: '#39e4c9', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
+            >
+              Inicia sesión aquí
+            </button>
+          </p>
         </div>
       </div>
     </div>

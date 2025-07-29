@@ -1,0 +1,38 @@
+/* src/styles/UserInfo.css */
+
+.user-info {
+  border: 1px solid #39e4c9;
+  border-radius: 8px;
+  padding: 1rem;
+  max-width: 280px;
+  background-color: #e0fbf9;
+  color: #003333;
+  font-family: var(--font-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  text-align: center;
+}
+
+.user-info h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.user-info p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+}
+
+.user-info button {
+  background-color: #39e4c9;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.user-info button:hover {
+  background-color: #27b3a3;
+}

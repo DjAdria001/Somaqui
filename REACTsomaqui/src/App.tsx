@@ -13,52 +13,46 @@ import Equipo from './pages/Equipo';
 import MisionVision from './pages/MisionVision';
 import PreguntasFrecuentes from './pages/PreguntasFrecuentes';
 import Contacto from './pages/Contacto';
-// Importamos el nuevo componente Emergencias
 import Emergencias from './pages/Emergencias';
+import Chat from './pages/Chat';
 import './App.css';
 import './styles/global.css';
-import Chat from './pages/Chat'; // asegúrate de que el path sea correcto
-
-
-
-
 
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-  const [showTermsModal, setShowTermsModal] = useState(false);
 
-  const handleLoginClick = () => {
+  const openLoginModal = () => {
+    setShowRegisterModal(false);
     setShowLoginModal(true);
   };
 
-  const handleTermsClick = () => {
-    setShowTermsModal(true);
-  };
-
-  const switchToRegister = () => {
+  const openRegisterModal = () => {
     setShowLoginModal(false);
     setShowRegisterModal(true);
   };
 
-  const switchToLogin = () => {
+  const closeModals = () => {
+    setShowLoginModal(false);
     setShowRegisterModal(false);
-    setShowLoginModal(true);
+  };
+
+  // Cierra modal al iniciar sesión con éxito
+  const handleLoginSuccess = () => {
+    closeModals();
   };
 
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-          <Header onLoginClick={handleLoginClick} />
-              {/* <Route path="/chat/:id" element={<Chat />} /> */}
+          <Header onLoginClick={openLoginModal} />
           <main>
             <Routes>
               <Route path="/chat/:id" element={<Chat />} />
               <Route path="/" element={<Home />} />
               <Route path="/formulario-ayuda" element={<FormularioAyuda />} />
               <Route path="/ayuda" element={<FormularioAyuda />} />
-              {/* Nueva ruta para Emergencias */}
               <Route path="/emergencias" element={<Emergencias />} />
               <Route path="/voluntario" element={<Voluntario />} />
               <Route path="/quiero-donar" element={<QuieroDonar />} />
@@ -68,54 +62,21 @@ function App() {
               <Route path="/contacto" element={<Contacto />} />
             </Routes>
           </main>
-          <Footer onTermsClick={handleTermsClick} />
+          <Footer />
 
-          {/* Login Modal */}
-         {showLoginModal && (
-            <LoginModal 
-              onClose={() => setShowLoginModal(false)} 
-              onSwitchToRegister={switchToRegister}
+          {showLoginModal && (
+            <LoginModal
+              onClose={closeModals}
+              switchToRegister={openRegisterModal}
+              onLoginSuccess={handleLoginSuccess}
             />
           )}
 
-          {/* Terms Modal */}
-          {showTermsModal && (
-            <div className="modal-overlay" onClick={() => setShowTermsModal(false)}>
-              <div className="modal-content terms-modal" onClick={e => e.stopPropagation()}>
-                <div className="modal-header">
-                  <h3>Términos y Condiciones</h3>
-                  <button 
-                    className="modal-close"
-                    onClick={() => setShowTermsModal(false)}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                </div>
-                <div className="terms-content">
-                  <h4>1. Aceptación de los Términos</h4>
-                  <p>Al utilizar SomAqui.cat, aceptas estos términos y condiciones en su totalidad.</p>
-                  
-                  <h4>2. Descripción del Servicio</h4>
-                  <p>SomAqui.cat es una plataforma que conecta personas que necesitan ayuda con voluntarios disponibles durante emergencias.</p>
-                  
-                  <h4>3. Responsabilidades del Usuario</h4>
-                  <p>Los usuarios se comprometen a proporcionar información veraz y a usar la plataforma de manera responsable.</p>
-                  
-                  <h4>4. Limitación de Responsabilidad</h4>
-                  <p>SomAqui.cat facilita las conexiones pero no se hace responsable de las acciones de los voluntarios o usuarios.</p>
-                  
-                  <h4>5. Privacidad</h4>
-                  <p>Respetamos tu privacidad y protegemos tus datos según nuestra política de privacidad.</p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Register Modal */}
           {showRegisterModal && (
-            <RegisterModal 
-              onClose={() => setShowRegisterModal(false)} 
-              onSwitchToLogin={switchToLogin}
+            <RegisterModal
+              onClose={closeModals}
+              onSwitchToLogin={openLoginModal}
+              onRegisterSuccess={handleLoginSuccess}
             />
           )}
         </div>

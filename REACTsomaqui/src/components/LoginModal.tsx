@@ -3,22 +3,17 @@ import Login from "../pages/Login";
 
 interface LoginModalProps {
   onClose: () => void;
-  onSwitchToRegister: () => void;
+  switchToRegister: () => void;
+  onLoginSuccess: () => void;
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSwitchToRegister }) => (
-  <div className="modal-overlay" onClick={onClose}>
+const LoginModal: React.FC<LoginModalProps> = ({ onClose, switchToRegister, onLoginSuccess }) => (
+  <div className="modal-overlay" onClick={onClose} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
     <div className="modal-content" onClick={e => e.stopPropagation()}>
       <button className="modal-close" onClick={onClose}>
         &times;
       </button>
-      <Login />
-      <p>
-        ¿No tienes cuenta?{" "}
-        <button onClick={onSwitchToRegister} style={{ color: "blue", background: "none", border: "none", cursor: "pointer" }}>
-          Regístrate aquí
-        </button>
-      </p>
+      <Login onLoginSuccess={onLoginSuccess} switchToRegister={switchToRegister} />
     </div>
   </div>
 );

@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import LogoImage from '../assets/LogoSF.png';
+import { useAuth } from "../context/AuthContext";
+import UserInfo from "./UserInfo";
 
 interface HeaderProps {
-  onLoginClick?: () => void;
+  onLoginClick?: () => void; // en caso de que quieras abrir modal aún
 }
 
 const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
+  const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
   const location = useLocation();
+
+  const userDropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
   const closeMenu = () => {
     setIsMenuOpen(false);
     setIsDropdownOpen(false);
+    setShowUserDropdown(false);
   };
 
   const isActive = (path: string) => {
@@ -30,32 +33,90 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
     return false;
   };
 
-  // Cerrar menú al hacer clic fuera
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element;
-      if (!target.closest('.site-header')) {
-        closeMenu();
-      }
-    };
+  // Toggle desplegable usuario o login
+  const toggleUserDropdown = () => {
+    setShowUserDropdown((prev) => !prev);
+  };
 
-    if (isMenuOpen || isDropdownOpen) {
-      document.addEventListener('click', handleClickOutside);
+  // Cerrar desplegables al hacer clic fuera
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      const target = event.target as Node;
+      if (
+        userDropdownRef.current && 
+        !userDropdownRef.current.contains(target)
+      ) {
+        setShowUserDropdown(false);
+      }
+    }
+
+    if (showUserDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('click', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isMenuOpen, isDropdownOpen]);
+  }, [showUserDropdown]);
 
   return (
     <header className="site-header">
       <div className="header-top">
-        <button id="btn-login" aria-label="Iniciar sesión" onClick={onLoginClick}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
-            <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z" />
-          </svg>
-        </button>
+        <div className="user-dropdown-container" ref={userDropdownRef} style={{ position: "relative" }}>
+          <button 
+            id="btn-login" 
+            aria-label={user ? "Perfil de usuario" : "Iniciar sesión"} 
+            onClick={toggleUserDropdown}
+            style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="28" height="28" viewBox="0 0 24 24">
+              <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5zm0 14c-4.418 0-8 3.134-8 7h2c0-2.761 2.686-5 6-5s6 2.239 6 5h2c0-3.866-3.582-7-8-7z" />
+            </svg>
+          </button>
+
+          {showUserDropdown && (
+            <div 
+              className="user-dropdown"
+              style={{
+                position: "absolute",
+                top: "calc(100% + 5px)",
+                right: 0,
+                backgroundColor: "#e0fbf9",
+                border: "1px solid #39e4c9",
+                borderRadius: "8px",
+                padding: "1rem",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                width: "260px",
+                zIndex: 1000
+              }}
+            >
+              {user ? (
+                <UserInfo />
+              ) : (
+                <button
+                  onClick={() => {
+                    setShowUserDropdown(false);
+                    if (onLoginClick) onLoginClick();
+                  }}
+                  style={{
+                    width: '100%',
+                    padding: '0.5rem 1rem',
+                    backgroundColor: '#39e4c9',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '6px',
+                    cursor: 'pointer',
+                    fontWeight: 600
+                  }}
+                >
+                  Iniciar Sesión
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
 
       <Link to="/" className="logo" aria-label="Ir a la página principal de SomAqui.cat">
@@ -75,6 +136,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
 
       <nav className="main-nav" role="navigation" aria-label="Menú principal">
         <ul className={`nav-list ${isMenuOpen ? 'show' : ''}`} id="main-menu">
+          {/* aquí va tu nav list igual */}
           <li className="nav-item">
             <Link 
               to="/" 
@@ -85,6 +147,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               Home
             </Link>
           </li>
+          {/* Resto de links... */}
           <li className="nav-item">
             <Link 
               to="/ayuda" 
@@ -120,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               className="nav-link" 
               aria-haspopup="true" 
               aria-expanded={isDropdownOpen}
-              onClick={toggleDropdown}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               ¿Quiénes Somos? <i className="fa fa-caret-down" aria-hidden="true"></i>
             </button>
