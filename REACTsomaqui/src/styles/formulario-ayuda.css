@@ -690,7 +690,10 @@ textarea {
 .tags-section {
   margin: 3rem 0;
   padding: 3rem 2rem;
-  background: #ffffff;
+  background: #f8fdfd;
+  border: 2px solid #e0fbf9;
+  box-shadow: 0 2px 8px rgba(0,228,201,0.1);
+;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
 }
@@ -698,14 +701,17 @@ textarea {
 .descripcion-section {
   margin: 3rem 0;
   padding: 3rem 2rem;
-  background: #ffffff;
+  background:#f8fdfd;
   border-radius: 20px;
-  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.1);
+  border: 2px solid #e0fbf9;
+  box-shadow: 0 2px 8px rgba(0,228,201,0.1);
 }
 
 .terms-section,
 .submit-section {
   margin: 2rem 0;
+  border: 2px solid #e0fbf9;
+  box-shadow: 0 2px 8px rgba(0,228,201,0.1);
 }
 
 .tags-section h2,
