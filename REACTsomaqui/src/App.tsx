@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-// import Header from './components/Header';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import RegisterModal from './components/RegisterModal';
 import Home from './pages/Home';
@@ -27,9 +27,9 @@ function App() {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
 
-  // const handleLoginClick = () => {
-  //   setShowLoginModal(true);
-  // };
+  const handleLoginClick = () => {
+    setShowLoginModal(true);
+  };
 
   const handleTermsClick = () => {
     setShowTermsModal(true);
@@ -49,6 +49,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="App">
+          <Header onLoginClick={handleLoginClick} />
               {/* <Route path="/chat/:id" element={<Chat />} /> */}
           <main>
             <Routes>
