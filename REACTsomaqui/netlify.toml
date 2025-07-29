@@ -1,0 +1,9 @@
+
+[build]
+  command = "npm run build"
+  publish = "build"  # O "build" según tu proyecto
+
+[[redirects]]
+  from = "/*"
+  to = "/src/pages/Home.tsx"
+  status = 200
