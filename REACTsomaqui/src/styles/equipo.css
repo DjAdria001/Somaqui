@@ -8,7 +8,7 @@ background-color: #f0fdfd;;
 /* Header Section */
 .equipo-header {
   background: linear-gradient(135deg, #f8ffff 0%, #e8f9f9 100%);
-  color: #003333;
+  color: #33001c;
   padding: 20px 0 15px 0;
   position: relative;
   overflow: hidden;
@@ -35,18 +35,14 @@ background-color: #f0fdfd;;
 }
 
 .equipo-header h1 {
-   font-family: var(--font-primary);
+  font-family: var(--font-primary);
   font-size: 2.2rem;
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-tight);
-  margin-bottom: 0.3rem;
-  color: #003333;
-  background: linear-gradient(135deg, #39e4c9, #27b3a3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  margin-bottom: 0.5rem;
   text-align: center;
+  color: #27b3a3;
 }
 
 .equipo-header .subtitle {
@@ -130,7 +126,7 @@ background-color: #f0fdfd;;
 
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
 
@@ -389,9 +385,8 @@ background-color: #f0fdfd;;
 /* Responsive Design */
 @media (max-width: 992px) {
   .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
   }
-  
   .values-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }

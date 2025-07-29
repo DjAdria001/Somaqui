@@ -20,7 +20,7 @@ const Equipo: React.FC = () => {
       cargo: "Fundadora y Directora Ejecutiva",
       descripcion: "Experta en gestión de emergencias con más de 10 años de experiencia en organizaciones humanitarias. Lidera la visión estratégica de SomAqui.cat.",
       imagen: "/api/placeholder/200/200",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/maria-paula-diaz-hernandez/",
       email: "maria@somaqui.cat"
     },
     {
@@ -29,7 +29,7 @@ const Equipo: React.FC = () => {
       cargo: "Director de Tecnología",
       descripcion: "Ingeniero de software especializado en sistemas de respuesta a emergencias. Responsable del desarrollo y mantenimiento de la plataforma.",
       imagen: "/api/placeholder/200/200",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/adriagalerasanchez/",
       twitter: "#"
     },
     {
@@ -38,7 +38,7 @@ const Equipo: React.FC = () => {
       cargo: "Coordinadora de Voluntarios",
       descripcion: "Psicóloga social con experiencia en gestión de equipos de voluntarios. Coordina la formación y asignación de voluntarios en emergencias.",
       imagen: "/api/placeholder/200/200",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/malik-hassan-58b4b41b9/",
       email: "ana@somaqui.cat"
     },
     {
@@ -47,7 +47,7 @@ const Equipo: React.FC = () => {
       cargo: "Especialista en Comunicaciones",
       descripcion: "Periodista especializado en comunicación de crisis. Gestiona las comunicaciones públicas y relaciones con medios durante emergencias.",
       imagen: "/api/placeholder/200/200",
-      twitter: "#",
+      linkedin: "https://www.linkedin.com/in/enya-stephanie-rodr%C3%ADguez/",
       email: "david@somaqui.cat"
     },
  
