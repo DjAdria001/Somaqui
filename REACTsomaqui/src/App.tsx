@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import RegisterModal from './components/RegisterModal';
+import LoginModal from './components/LoginModal';
 import Home from './pages/Home';
 import FormularioAyuda from './pages/FormularioAyuda';
 import Voluntario from './pages/Voluntario';
@@ -70,37 +71,11 @@ function App() {
           <Footer onTermsClick={handleTermsClick} />
 
           {/* Login Modal */}
-          {showLoginModal && (
-            <div className="modal-overlay" onClick={() => setShowLoginModal(false)}>
-              <div className="modal-content" onClick={e => e.stopPropagation()}>
-                <div className="modal-header">
-                  <h3>Iniciar Sesión</h3>
-                  <button 
-                    className="modal-close"
-                    onClick={() => setShowLoginModal(false)}
-                  >
-                    <i className="fas fa-times"></i>
-                  </button>
-                </div>
-                <form className="login-form">
-                  <div className="form-group">
-                    <label htmlFor="email">Correo Electrónico</label>
-                    <input type="email" id="email" required />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" id="password" required />
-                  </div>
-                  <div className="form-actions">
-                    <button type="submit" className="btn-primary">Iniciar Sesión</button>
-                    <a href="#" className="forgot-password">¿Olvidaste tu contraseña?</a>
-                  </div>
-                </form>
-                <div className="register-link">
-                  <p>¿No tienes cuenta? <button type="button" onClick={switchToRegister} className="link-button">Regístrate aquí</button></p>
-                </div>
-              </div>
-            </div>
+         {showLoginModal && (
+            <LoginModal 
+              onClose={() => setShowLoginModal(false)} 
+              onSwitchToRegister={switchToRegister}
+            />
           )}
 
           {/* Terms Modal */}
