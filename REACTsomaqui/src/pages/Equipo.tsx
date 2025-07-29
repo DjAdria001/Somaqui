@@ -10,6 +10,7 @@ interface TeamMember {
   linkedin?: string;
   twitter?: string;
   email?: string;
+  github?: string;
 }
 
 const Equipo: React.FC = () => {
@@ -21,7 +22,7 @@ const Equipo: React.FC = () => {
       descripcion: "Experta en gestión de emergencias con más de 10 años de experiencia en organizaciones humanitarias. Lidera la visión estratégica de SomAqui.cat.",
       imagen: "/api/placeholder/200/200",
       linkedin: "https://www.linkedin.com/in/maria-paula-diaz-hernandez/",
-      email: "maria@somaqui.cat"
+      github: "https://github.com/pauladhernandez"
     },
     {
       id: 2,
@@ -30,7 +31,7 @@ const Equipo: React.FC = () => {
       descripcion: "Ingeniero de software especializado en sistemas de respuesta a emergencias. Responsable del desarrollo y mantenimiento de la plataforma.",
       imagen: "/api/placeholder/200/200",
       linkedin: "https://www.linkedin.com/in/adriagalerasanchez/",
-      twitter: "#"
+     github: "https://github.com/DjAdria001"
     },
     {
       id: 3,
@@ -39,7 +40,7 @@ const Equipo: React.FC = () => {
       descripcion: "Psicóloga social con experiencia en gestión de equipos de voluntarios. Coordina la formación y asignación de voluntarios en emergencias.",
       imagen: "/api/placeholder/200/200",
       linkedin: "https://www.linkedin.com/in/malik-hassan-58b4b41b9/",
-      email: "ana@somaqui.cat"
+      github: "https://github.com/Hassansohail839"
     },
     {
       id: 4,
@@ -48,7 +49,7 @@ const Equipo: React.FC = () => {
       descripcion: "Periodista especializado en comunicación de crisis. Gestiona las comunicaciones públicas y relaciones con medios durante emergencias.",
       imagen: "/api/placeholder/200/200",
       linkedin: "https://www.linkedin.com/in/enya-stephanie-rodr%C3%ADguez/",
-      email: "david@somaqui.cat"
+      github: "https://github.com/EnyaRdz"
     },
  
   ];
@@ -136,6 +137,12 @@ const Equipo: React.FC = () => {
                     {member.linkedin && (
                       <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-linkedin"></i>
+                      </a>
+                    )}
+                    {/* Show GitHub icon for any member with github field */}
+                    {member.github && (
+                      <a href={member.github.startsWith('http') ? member.github : `https://github.com/${member.github}`} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                        <i className="fab fa-github"></i>
                       </a>
                     )}
                     {member.twitter && (
