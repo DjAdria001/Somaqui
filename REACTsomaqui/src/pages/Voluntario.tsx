@@ -6,8 +6,12 @@ import Register from '../components/RegisterModal';
 import '../styles/voluntario-new.css';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../firebase';
+//<<<<<<< HEAD
 import { Link } from 'react-router-dom'; // Add this at the top of the file
 import '../styles/global.css'; // Import global styles
+
+import { useNavigate } from 'react-router-dom';
+
 
 interface Emergency {
   id: string;
@@ -28,6 +32,7 @@ const Voluntario: React.FC = () => {
   const [filter, setFilter] = useState<string>('');
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
@@ -72,7 +77,6 @@ const Voluntario: React.FC = () => {
 
   return (
     <>
-      
 
       {showAuthModal && (
         <div
@@ -96,24 +100,50 @@ const Voluntario: React.FC = () => {
               maxWidth: '600px',
               width: '90%',
               boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
           >
+            {/* Botón "Volver al Inicio" arriba a la izquierda */}
+            <button
+              onClick={() => navigate('/')}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                left: '1rem',
+                background: 'none',
+                border: 'none',
+                color: '#39e4c9',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.3rem',
+                padding: 0,
+              }}
+              aria-label="Volver al inicio"
+            >
+              <span style={{ fontSize: '1.2rem' }}>←</span> Volver al inicio
+            </button>
+
             {isLoginMode ? (
-              <Login 
-                onLoginSuccess={handleLoginSuccess} 
-                switchToRegister={() => setIsLoginMode(false)} 
+              <Login
+                onLoginSuccess={handleLoginSuccess}
+                switchToRegister={() => setIsLoginMode(false)}
               />
             ) : (
-              <Register 
-                onClose={() => setShowAuthModal(false)} 
-                onSwitchToLogin={() => setIsLoginMode(true)} 
-                onRegisterSuccess={handleLoginSuccess} 
+              <Register
+                onClose={() => setShowAuthModal(false)}
+                onSwitchToLogin={() => setIsLoginMode(true)}
+                onRegisterSuccess={handleLoginSuccess}
               />
             )}
 
             <button
               style={{
-                marginTop: '1.5rem',
+                marginTop: '1rem',
                 background: 'none',
                 border: 'none',
                 color: '#39e4c9',
@@ -134,7 +164,6 @@ const Voluntario: React.FC = () => {
 
       {user && (
         <main className="voluntario-page">
-          {/* Aquí tu contenido normal de voluntario: emergencias, filtros, etc */}
           <section className="emergencias-section">
             <div className="container">
               <h2>Emergencias Activas</h2>
@@ -181,7 +210,7 @@ const Voluntario: React.FC = () => {
     Quiero Ayudar
   </button>
 </Link>
-    
+
                   </div>
                 ))}
               </div>
