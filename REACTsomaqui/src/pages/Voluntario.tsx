@@ -6,6 +6,8 @@ import Register from '../components/RegisterModal';
 import '../styles/voluntario-new.css';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../firebase';
+import { Link } from 'react-router-dom'; // Add this at the top of the file
+import '../styles/global.css'; // Import global styles
 
 interface Emergency {
   id: string;
@@ -16,6 +18,7 @@ interface Emergency {
   descripcion: string;
   tipo: string;
   tags: string[];
+  otros_detalle?: string;
   activo?: boolean;
 }
 
@@ -50,6 +53,8 @@ const Voluntario: React.FC = () => {
           descripcion: value.descripcion || '',
           tipo: value.tipo || 'general',
           tags: value.tags || [],
+          otros_detalle: value.otros_detalle || '',
+
           activo: value.activo !== undefined ? value.activo : true,
         }));
         setEmergencies(formatted);
@@ -162,14 +167,21 @@ const Voluntario: React.FC = () => {
                       {new Date(emergency.fecha_envio).toLocaleDateString('es-ES')}
                     </p>
                     <div className="emergencia-tags">
-                      {emergency.tags.map((tag, index) => (
-                        <span key={index} className="tag">{tag}</span>
-                      ))}
-                    </div>
-                    <button className="btn-ayudar">
-                      <i className="fas fa-hand-helping"></i>
-                      Quiero Ayudar
-                    </button>
+  {emergency.tags.map((tag, index) => (
+    <span key={index} className="tag">
+      {tag === 'Otros' && emergency.otros_detalle
+        ? `Otros: ${emergency.otros_detalle}`
+        : tag}
+    </span>
+  ))}
+</div>
+<Link to={`/chat/${emergency.id}`}>
+  <button className="btn-ayudar">
+    <i className="fas fa-hand-helping"></i>
+    Quiero Ayudar
+  </button>
+</Link>
+    
                   </div>
                 ))}
               </div>
