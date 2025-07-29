@@ -70,7 +70,7 @@
   padding: 12px 30px;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 50px;
+  border-radius: 50px;  
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(57, 228, 201, 0.2);
@@ -169,11 +169,18 @@
 }
 
 .emergencias-section h2 {
+    font-family: var(--font-primary);
+  font-size: 2.2rem;
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  margin-bottom: 0.3rem;
+  color: #003333;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   text-align: center;
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 0.8rem;
-  font-weight: 600;
 }
 
 .emergencias-section > .container > p {
@@ -717,7 +724,7 @@
 .info-voluntariado-section h2 {
   text-align: center;
   font-size: 2rem;
-  color: #003333;
+  color: #0cf2f2;
   margin-bottom: 3rem;
   font-weight: 600;
 }
