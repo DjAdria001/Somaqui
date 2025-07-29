@@ -1,43 +1,26 @@
-// src/components/LoginModal.tsx
-import React, { useState } from 'react';
-import { useAuth } from '../context/AuthContext';
+import React from "react";
+import Login from "../pages/Login";
 
-const LoginModal = () => {
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+interface LoginModalProps {
+  onClose: () => void;
+  onSwitchToRegister: () => void;
+}
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await login(email, password);
-      setError('');
-    } catch (err) {
-      setError('Email o contraseña incorrectos.');
-    }
-  };
-
-  return (
-    <form onSubmit={handleLogin} className="login-form">
-      <input
-        type="email"
-        placeholder="Correo"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Iniciar Sesión</button>
-      {error && <p className="error">{error}</p>}
-    </form>
-  );
-};
+const LoginModal: React.FC<LoginModalProps> = ({ onClose, onSwitchToRegister }) => (
+  <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <button className="modal-close" onClick={onClose}>
+        &times;
+      </button>
+      <Login />
+      <p>
+        ¿No tienes cuenta?{" "}
+        <button onClick={onSwitchToRegister} style={{ color: "blue", background: "none", border: "none", cursor: "pointer" }}>
+          Regístrate aquí
+        </button>
+      </p>
+    </div>
+  </div>
+);
 
 export default LoginModal;
