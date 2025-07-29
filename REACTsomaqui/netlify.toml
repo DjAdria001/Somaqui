@@ -1,9 +1,8 @@
-
 [build]
   command = "npm run build"
-  publish = "build"  # O "build" según tu proyecto
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
-  to = "/src/pages/Home.tsx"
+  to = "/index.html"
   status = 200
