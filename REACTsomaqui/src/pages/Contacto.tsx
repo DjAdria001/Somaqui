@@ -79,7 +79,7 @@ const Contacto: React.FC = () => {
                 </div>
                 <div className="info-content">
                   <h3>Correo Electrónico</h3>
-                  <p>info@somaqui.cat</p>
+                  <p>somaquipuntcat@gmail.com</p>
                   <p>emergencias@somaqui.cat</p>
                 </div>
               </div>
@@ -90,7 +90,7 @@ const Contacto: React.FC = () => {
                 </div>
                 <div className="info-content">
                   <h3>Teléfono</h3>
-                  <p>+34 123 456 789</p>
+                  <p>+34 644 465 583</p>
                   <p className="emergency-phone">Emergencias: 112</p>
                 </div>
               </div>
@@ -101,7 +101,7 @@ const Contacto: React.FC = () => {
                 </div>
                 <div className="info-content">
                   <h3>Ubicación</h3>
-                  <p>Barcelona, Catalunya</p>
+                  <p>Tarragona, Catalunya</p>
                   <p>España</p>
                 </div>
               </div>
@@ -256,33 +256,7 @@ const Contacto: React.FC = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="faq-section">
-        <div className="container">
-          <h2>Preguntas Frecuentes</h2>
-          <div className="faq-grid">
-            <div className="faq-item">
-              <h3>¿Cómo puedo reportar una emergencia?</h3>
-              <p>Puedes reportar una emergencia a través de nuestro formulario de ayuda o contactando directamente al 112 para emergencias inmediatas.</p>
-            </div>
-            
-            <div className="faq-item">
-              <h3>¿Cómo me registro como voluntario?</h3>
-              <p>Visita nuestra sección "Quiero ser Voluntario" y completa el formulario de registro con tus habilidades y disponibilidad.</p>
-            </div>
-            
-            <div className="faq-item">
-              <h3>¿SomAqui.cat es gratuito?</h3>
-              <p>Sí, todos nuestros servicios son completamente gratuitos. Nuestro objetivo es ayudar a las comunidades sin fines de lucro.</p>
-            </div>
-            
-            <div className="faq-item">
-              <h3>¿En qué zonas operamos?</h3>
-              <p>Actualmente operamos en Catalunya, España, pero estamos expandiendo nuestros servicios a otras regiones.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Emergency Notice */}
       <section className="emergency-notice">

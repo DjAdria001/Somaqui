@@ -4,11 +4,12 @@
 main {
   max-width: 800px;
   margin: 2rem auto;
-  background: white;
-  border: 2px solid #39e4c9;
+  background: #f8fdfd;
+  border: 2px solid #e0fbf9;
   border-radius: 12px;
   padding: 2rem;
   flex-grow: 1;
+  box-shadow: 0 2px 8px rgba(0,228,201,0.1);
 }
 
 /* Grid para formularios */
@@ -51,12 +52,16 @@ h1 {
   margin-bottom: 1rem;
   color: #003333;
   text-align: center;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 main > p {
   text-align: center;
   margin-bottom: 2rem;
-  color: #555;
+  color: #666;
   font-size: 1.1rem;
 }
 
@@ -72,11 +77,12 @@ input, textarea {
   width: 100%;
   padding: 0.8rem;
   margin-top: 0.3rem;
-  border: 1px solid #ccc;
+  border: 1px solid #e0fbf9;
   border-radius: 6px;
   font-size: 1rem;
   font-family: inherit;
   transition: border-color 0.3s ease;
+  background: white;
 }
 
 input:focus, textarea:focus {
@@ -93,7 +99,7 @@ textarea {
 
 button {
   margin-top: 1.5rem;
-  background-color: #39e4c9;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
   color: white;
   border: none;
   padding: 0.8rem 2rem;
@@ -102,18 +108,21 @@ button {
   border-radius: 30px;
   cursor: pointer;
   font-family: inherit;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   width: 100%;
   max-width: 300px;
   margin-left: auto;
   margin-right: auto;
   display: block;
+  box-shadow: 0 6px 20px rgba(57, 228, 201, 0.3);
 }
 
 button:hover,
 button:focus {
-  background-color: #27b3a3;
+  background: linear-gradient(135deg, #27b3a3, #1e9085);
   outline: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.4);
 }
 
 /* Mensaje de éxito/error */
@@ -125,9 +134,9 @@ button:focus {
 }
 
 .mensaje.exito {
-  background: #d4edda;
-  border: 1px solid #c3e6cb;
-  color: #155724;
+  background: #d1ecf1;
+  border: 1px solid #bee5eb;
+  color: #0c5460;
 }
 
 .mensaje.error {

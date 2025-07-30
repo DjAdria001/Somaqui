@@ -46,7 +46,7 @@ const QuieroDonar: React.FC = () => {
                   </div>
 
                   <div className="info-card">
-                    <i className="info-icon fas fa-bullseye"></i>
+                    <i className="info-icon fas fa-tools"></i>
                     <h3>Recursos Especializados</h3>
                     <p>Financiamos equipamiento médico, herramientas de rescate y suministros esenciales</p>
                   </div>
