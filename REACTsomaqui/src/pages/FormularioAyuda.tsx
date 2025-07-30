@@ -5,6 +5,7 @@ import { ref, push, set } from 'firebase/database';
 import { database } from '../firebase';
 
 interface FormData {
+  
   ubicacion: string;
   desc_ubic: string;
   nombre: string;
@@ -20,6 +21,7 @@ interface FormData {
 
 const FormularioAyuda: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
+    
     ubicacion: '',
     desc_ubic: '',
     nombre: '',
@@ -403,6 +405,7 @@ const FormularioAyuda: React.FC = () => {
       
       // Reset del formulario
       setFormData({
+        
         ubicacion: '',
         desc_ubic: '',
         nombre: '',
