@@ -66,11 +66,15 @@ const Equipo: React.FC = () => {
       {/* Header Section */}
       <section className="equipo-header">
         <div className="container">
-          <h1>Nuestro Equipo</h1>
-          <p className="subtitle">
-            Conoce a las personas comprometidas que hacen posible SomAqui.cat, 
-            trabajando incansablemente para conectar comunidades y salvar vidas.
-          </p>
+          <div className="equipo-header-content">
+            <div className="equipo-header-text">
+              <h1>Nuestro Equipo</h1>
+              <p className="subtitle">
+                Conoce a las personas comprometidas que hacen posible SomAqui.cat, 
+                trabajando incansablemente para conectar comunidades y salvar vidas.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

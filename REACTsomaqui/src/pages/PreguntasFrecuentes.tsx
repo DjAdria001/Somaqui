@@ -116,11 +116,15 @@ const PreguntasFrecuentes: React.FC = () => {
       {/* Header Section */}
       <section className="faq-header">
         <div className="container">
-          <h1>Preguntas Frecuentes</h1>
-          <p className="subtitle">
-            Encuentra respuestas a las preguntas más comunes sobre SomAqui.cat. 
-            Si no encuentras lo que buscas, no dudes en contactarnos.
-          </p>
+          <div className="faq-header-content">
+            <div className="faq-header-text">
+              <h1>Preguntas Frecuentes</h1>
+              <p className="subtitle">
+                Encuentra respuestas a las preguntas más comunes sobre SomAqui.cat. 
+                Si no encuentras lo que buscas, no dudes en contactarnos.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
