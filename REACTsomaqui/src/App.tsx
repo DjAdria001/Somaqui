@@ -18,6 +18,9 @@ import Chat from './pages/Chat';
 import './App.css';
 import './styles/global.css';
 
+// otros imports...
+
+
 function App() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);

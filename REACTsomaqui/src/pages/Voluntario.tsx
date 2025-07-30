@@ -6,6 +6,8 @@ import '../styles/voluntario-new.css';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../firebase';
 import '../styles/global.css';
+import { Link } from 'react-router-dom';
+
 
 interface Emergency {
   id: string;
@@ -174,9 +176,12 @@ const Voluntario: React.FC = () => {
                         </span>
                       ))}
                     </div>
-                    <button className="btn-ayudar">
-                      <i className="fas fa-hand-helping"></i> Quiero Ayudar
-                    </button>
+                   <Link to={`/chat/${emergency.id}`}>
+  <button className="btn-ayudar">
+    <i className="fas fa-hand-helping"></i> Quiero Ayudar
+  </button>
+</Link>
+
                   </div>
                 ))}
               </div>
