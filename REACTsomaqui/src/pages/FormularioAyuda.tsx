@@ -372,8 +372,29 @@ const FormularioAyuda: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validaciones de campos requeridos
     if (!formData.ubicacion) {
       alert('Por favor, indica tu ubicación o usa el botón para detectarla.');
+      return;
+    }
+
+    if (!formData.nombre.trim()) {
+      alert('Por favor, introduce tu nombre completo.');
+      return;
+    }
+
+    if (!formData.correo.trim()) {
+      alert('Por favor, introduce tu correo electrónico.');
+      return;
+    }
+
+    if (!formData.telefono.trim()) {
+      alert('Por favor, introduce tu teléfono de contacto.');
+      return;
+    }
+
+    if (!formData.descripcion.trim()) {
+      alert('Por favor, describe tu situación en detalle.');
       return;
     }
 
@@ -413,6 +434,7 @@ const FormularioAyuda: React.FC = () => {
         tags: [],
         otros_detalle: '',
         descripcion: '',
+        activo: true
       });
       setUbicacionTexto('📍 Detectar mi ubicación automáticamente');
       setUbicacionDetectada(false);
@@ -436,24 +458,7 @@ const FormularioAyuda: React.FC = () => {
         </div>
       </section>
 
-{/* Emergency Notice */}
-      <section className="emergency-notice">
-        <div className="container">
-          <div className="notice-content">
-            <div className="notice-icon">
-              <i className="fas fa-exclamation-triangle"></i>
-            </div>
-            <div className="notice-text">
-              <h3>¿Es una Emergencia?</h3>
-              <p>Si estás en una situación de emergencia inmediata, no uses este formulario. Llama directamente al <strong>112</strong> o a los servicios de emergencia locales.</p>
-            </div>
-            <a href="tel:112" className="btn-emergency">
-              <i className="fas fa-phone"></i>
-              Llamar 112
-            </a>
-          </div>
-        </div>
-      </section>
+
       
       {/* Indicador de pasos */}
       <div className="pasos-container">
@@ -488,8 +493,9 @@ const FormularioAyuda: React.FC = () => {
         </div>
       </div>
 
-    <div className="formulario-content">
+      <div className="formulario-content">
       <form onSubmit={handleSubmit} className="ayuda-form">
+
         {/* PASO 1: Sección de ubicación y contacto */}
         <section className="ubicacion-contacto-section-flex">
           <div className="paso1-contenedor-flex">
@@ -700,15 +706,15 @@ const FormularioAyuda: React.FC = () => {
                 required
               />
               <span className="checkmark"></span>
-              Acepto los{' '}
-              <button 
-                type="button" 
-                className="terms-link"
-                onClick={() => setShowTermsModal(true)}
-              >
-                términos y condiciones
-              </button>
-              {' '}y autorizo el tratamiento de mis datos personales para gestionar mi solicitud de ayuda.
+              <span>
+                Acepto los <button 
+                  type="button" 
+                  className="terms-link"
+                  onClick={() => setShowTermsModal(true)}
+                >
+                  términos y condiciones
+                </button> y autorizo el tratamiento de mis datos personales para gestionar mi solicitud de ayuda. Comprendo que mis datos serán utilizados únicamente para coordinar la asistencia solicitada y se manejarán de acuerdo con la normativa de protección de datos vigente.
+              </span>
             </label>
           </section>
 
@@ -721,9 +727,26 @@ const FormularioAyuda: React.FC = () => {
             <p className="submit-help">
               Una vez enviada tu solicitud, notificaremos a voluntarios cercanos que podrán contactarte directamente.
             </p>
-            
+             {/* Emergency Notice */}
+        <section className="emergency-notice">
+          <div className="container">
+            <div className="notice-content">
+              <div className="notice-icon">
+                <i className="fas fa-exclamation-triangle"></i>
+              </div>
+              <div className="notice-text">
+                <h3>¿Es una Emergencia?</h3>
+                <p>Si estás en una situación de emergencia inmediata, no uses este formulario. Llama directamente al <strong>112</strong> o a los servicios de emergencia locales.</p>
+              </div>
+              <a href="tel:112" className="btn-emergency">
+                <i className="fas fa-phone"></i>
+                Llamar 112
+              </a>
+            </div>
           </div>
-          
+        </section>
+          </div>
+         
         </form>
       </div>
 

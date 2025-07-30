@@ -884,12 +884,18 @@ textarea {
   align-items: flex-start;
   gap: 0.8rem;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: left;
   justify-content: flex-start;
   width: 100%;
   margin: 0;
   padding: 0 1rem;
+}
+
+.terms-checkbox span:not(.checkmark) {
+  flex: 1;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .terms-checkbox input[type="checkbox"] {
@@ -907,7 +913,12 @@ textarea {
   border: none;
   cursor: pointer;
   font-size: inherit;
+  font-family: inherit;
   padding: 0;
+  margin: 0;
+  display: inline;
+  line-height: inherit;
+  vertical-align: baseline;
 }
 
 .terms-link:hover {
