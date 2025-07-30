@@ -42,37 +42,25 @@ const QuieroDonar: React.FC = () => {
                   <div className="info-card">
                     <i className="info-icon fas fa-bolt"></i>
                     <h3>Respuesta Rápida</h3>
-                    <p>Nos permite mantener equipos de emergencia listos para actuar en cualquier momento, reduciendo el tiempo de respuesta crucial en situaciones críticas.</p>
+                    <p>Mantenemos equipos de emergencia listos para actuar en cualquier momento</p>
                   </div>
 
                   <div className="info-card">
                     <i className="info-icon fas fa-bullseye"></i>
                     <h3>Recursos Especializados</h3>
-                    <p>Financiamos equipamiento médico, herramientas de rescate, vehículos de emergencia y suministros esenciales para diferentes tipos de crisis.</p>
+                    <p>Financiamos equipamiento médico, herramientas de rescate y suministros esenciales</p>
                   </div>
 
                   <div className="info-card">
                     <i className="info-icon fas fa-users"></i>
                     <h3>Formación de Voluntarios</h3>
-                    <p>Invertimos en la capacitación continua de nuestros voluntarios en primeros auxilios, rescate y gestión de emergencias.</p>
-                  </div>
-
-                  <div className="info-card">
-                    <i className="info-icon fas fa-globe"></i>
-                    <h3>Red de Apoyo</h3>
-                    <p>Mantenemos una red coordinada de voluntarios y recursos que permite cubrir todo el territorio de manera eficiente.</p>
+                    <p>Capacitamos constantemente a nuestros voluntarios en primeros auxilios y gestión de emergencias</p>
                   </div>
 
                   <div className="info-card">
                     <i className="info-icon fas fa-mobile-alt"></i>
                     <h3>Tecnología de Emergencia</h3>
-                    <p>Desarrollamos y mantenemos sistemas tecnológicos como esta plataforma para coordinar ayuda de manera más efectiva.</p>
-                  </div>
-
-                  <div className="info-card">
-                    <i className="info-icon fas fa-hospital"></i>
-                    <h3>Apoyo Post-Emergencia</h3>
-                    <p>Proporcionamos seguimiento y apoyo a las familias afectadas durante su proceso de recuperación y normalización.</p>
+                    <p>Desarrollamos sistemas tecnológicos para coordinar ayuda de manera más efectiva</p>
                   </div>
                 </div>
               </section>
