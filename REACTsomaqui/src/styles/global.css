@@ -317,13 +317,17 @@ nav.main-nav .nav-item.dropdown:focus > .nav-link {
   header.site-header {
     padding: 1rem 2rem;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 
   header.site-header .logo {
     margin-bottom: 0;
     font-size: var(--font-size-2xl);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   header.site-header .logo img {
@@ -331,8 +335,9 @@ nav.main-nav .nav-item.dropdown:focus > .nav-link {
   }
 
   .header-top {
-    top: 1rem;
-    right: 2rem;
+    position: static;
+    transform: none;
+    order: 3;
   }
 
   nav.main-nav .nav-list {
@@ -379,6 +384,14 @@ nav.main-nav .nav-item.dropdown:focus > .nav-link {
 
   nav.main-nav .nav-item.dropdown.expanded>.dropdown-menu {
     display: block !important;
+  }
+  
+  /* Ajustar dropdown de usuario en móvil */
+  .user-dropdown {
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    left: 50% !important;
+    width: 240px !important;
   }
 }
 

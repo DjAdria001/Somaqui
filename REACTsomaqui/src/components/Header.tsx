@@ -13,9 +13,24 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
 
   const userDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Hook para detectar si estamos en móvil
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkIsMobile);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -63,6 +78,21 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
 
   return (
     <header className="site-header">
+      <button 
+        className="menu-toggle" 
+        aria-controls="main-menu" 
+        aria-expanded={isMenuOpen}
+        aria-label="Abrir menú de navegación"
+        onClick={toggleMenu}
+      >
+        <i className="fa fa-bars"></i>
+      </button>
+
+      <Link to="/" className="logo" aria-label="Ir a la página principal de SomAqui.cat">
+        <img src={LogoImage} alt="Logo SomAqui.cat" />
+        SomAqui.cat
+      </Link>
+
       <div className="header-top">
         <div className="user-dropdown-container" ref={userDropdownRef} style={{ position: "relative" }}>
           <button 
@@ -82,13 +112,15 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
               style={{
                 position: "absolute",
                 top: "calc(100% + 5px)",
-                right: 0,
+                right: isMobile ? "auto" : 0,
+                left: isMobile ? "50%" : "auto",
+                transform: isMobile ? "translateX(-50%)" : "none",
                 backgroundColor: "#e0fbf9",
                 border: "1px solid #39e4c9",
                 borderRadius: "8px",
                 padding: "1rem",
                 boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-                width: "260px",
+                width: isMobile ? "240px" : "260px",
                 zIndex: 1000
               }}
             >
@@ -118,21 +150,6 @@ const Header: React.FC<HeaderProps> = ({ onLoginClick }) => {
           )}
         </div>
       </div>
-
-      <Link to="/" className="logo" aria-label="Ir a la página principal de SomAqui.cat">
-        <img src={LogoImage} alt="Logo SomAqui.cat" />
-        SomAqui.cat
-      </Link>
-
-      <button 
-        className="menu-toggle" 
-        aria-controls="main-menu" 
-        aria-expanded={isMenuOpen}
-        aria-label="Abrir menú de navegación"
-        onClick={toggleMenu}
-      >
-        <i className="fa fa-bars"></i>
-      </button>
 
       <nav className="main-nav" role="navigation" aria-label="Menú principal">
         <ul className={`nav-list ${isMenuOpen ? 'show' : ''}`} id="main-menu">

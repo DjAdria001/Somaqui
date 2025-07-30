@@ -178,63 +178,95 @@ const FormularioAyuda: React.FC = () => {
       
       const data = await response.json();
       console.log('📍 Respuesta de geocodificación:', data);
+      console.log('🔍 Address object completo:', data.address);
       
       if (data && data.address) {
-        // Extraer los componentes más relevantes de la dirección
+        // Usar el mismo formato que MapComponent con más campos de búsqueda
         const address = data.address;
-        let shortAddress = '';
+        console.log('🏠 house_number:', address.house_number);
+        console.log('🛣️ road:', address.road);
+        console.log('🏘️ suburb:', address.suburb);
         
-        // Obtener el nombre de la calle (prioridad en order)
-        const street = address.road || address.pedestrian || address.cycleway || address.footway || address.path;
+        const addressParts = [];
         
-        // Obtener el número de casa
-        const houseNumber = address.house_number;
+        // Buscar el nombre de la calle en varios campos posibles
+        const streetName = address.road || address.pedestrian || address.cycleway || address.footway || address.path || address.highway;
         
-        if (street) {
-          // Formatear la calle: convertir a minúsculas y limpiar
-          shortAddress = street.toLowerCase();
+        // Buscar el número en varios campos posibles
+        let houseNumber = address.house_number || address.street_number || address.addr_housenumber;
+        
+        // Si no encontramos el número, intentar extraerlo del display_name
+        if (!houseNumber && data.display_name && streetName) {
+          const displayParts = data.display_name.split(',');
+          const firstPart = displayParts[0].trim();
           
-          // Añadir número si existe
-          if (houseNumber) {
-            shortAddress += ` ${houseNumber}`;
+          // Buscar patrón de número al final de la primera parte
+          const numberMatch = firstPart.match(/(\d+)\s*$/);
+          if (numberMatch) {
+            houseNumber = numberMatch[1];
+            console.log('🔍 Número extraído del display_name:', houseNumber);
           }
-        } else {
-          // Si no hay calle específica, usar otros elementos más específicos primero
-          const fallback = address.amenity || address.building || address.neighbourhood || address.suburb || address.hamlet;
-          if (fallback) {
-            shortAddress = fallback.toLowerCase();
-          }
-        }
-        
-        // Si tenemos una dirección pero es muy genérica, añadir contexto
-        if (shortAddress && (shortAddress.length < 10 || !houseNumber)) {
-          const context = address.neighbourhood || address.suburb || address.village || address.town;
-          if (context && !shortAddress.includes(context.toLowerCase())) {
-            shortAddress += `, ${context.toLowerCase()}`;
+          
+          // Otra estrategia: buscar patrón "calle, número"
+          const streetNumberMatch = firstPart.match(/^(.+),\s*(\d+)$/);
+          if (streetNumberMatch && !houseNumber) {
+            houseNumber = streetNumberMatch[2];
+            console.log('🔍 Número extraído del patrón calle,número:', houseNumber);
           }
         }
         
-        if (shortAddress) {
-          console.log('✅ Dirección corta generada:', shortAddress);
-          return shortAddress;
+        console.log('🏗️ Street name found:', streetName);
+        console.log('🔢 House number found:', houseNumber);
+        
+        // Agregar nombre de la calle y número
+        if (streetName && houseNumber) {
+          addressParts.push(`${streetName}, ${houseNumber}`);
+          console.log('✅ Added street with number:', `${streetName}, ${houseNumber}`);
+        } else if (streetName) {
+          addressParts.push(streetName);
+          console.log('✅ Added street without number:', streetName);
         }
         
-        // Si no pudimos construir una dirección específica, usar display_name pero simplificado
+        // Agregar barrio si no es "Eixample de Llevant" y no está ya incluido
+        const neighborhood = address.suburb || address.neighbourhood || address.quarter;
+        if (neighborhood && 
+            neighborhood.toLowerCase() !== 'eixample de llevant' &&
+            neighborhood.toLowerCase() !== "l'eixample" &&
+            !addressParts.some(part => part.toLowerCase().includes(neighborhood.toLowerCase()))) {
+          addressParts.push(neighborhood);
+          console.log('✅ Added neighborhood:', neighborhood);
+        }
+        
+        // Agregar ciudad/municipio
+        const city = address.city || address.town || address.village || address.municipality || address.hamlet;
+        if (city) {
+          addressParts.push(city);
+          console.log('✅ Added city:', city);
+        }
+        
+        // Agregar provincia/estado
+        const province = address.state || address.province || address.region;
+        if (province) {
+          addressParts.push(province);
+          console.log('✅ Added province:', province);
+        }
+        
+        const formattedAddress = addressParts.length > 0 ? addressParts.join(', ') : null;
+        
+        if (formattedAddress) {
+          console.log('✅ Dirección completa generada:', formattedAddress);
+          return formattedAddress;
+        }
+        
+        // Si no pudimos construir una dirección específica, usar display_name como fallback
         if (data.display_name) {
           const parts = data.display_name.split(',');
-          // Tomar solo la primera parte y limpiarla
-          const firstPart = parts[0].trim().toLowerCase();
+          // Tomar las primeras partes más relevantes
+          const relevantParts = parts.slice(0, 3).map((part: string) => part.trim());
+          const fallbackAddress = relevantParts.join(', ');
           
-          // Si la primera parte es muy larga, cortarla
-          if (firstPart.length > 50) {
-            const words = firstPart.split(' ');
-            shortAddress = words.slice(0, 4).join(' ');
-          } else {
-            shortAddress = firstPart;
-          }
-          
-          console.log('✅ Dirección simplificada generada:', shortAddress);
-          return shortAddress;
+          console.log('✅ Dirección de fallback generada:', fallbackAddress);
+          return fallbackAddress;
         }
       }
       
@@ -245,6 +277,16 @@ const FormularioAyuda: React.FC = () => {
     }
   };
 
+  // Función para manejar el cambio de dirección desde el MapComponent
+  const handleAddressChange = (address: string) => {
+    console.log('📍 Dirección recibida desde MapComponent:', address);
+    setFormData(prev => ({
+      ...prev,
+      desc_ubic: address
+    }));
+  };
+
+  // Función de detección de ubicación
   const detectLocation = () => {
     console.log('🔍 Iniciando detección de ubicación...');
     
@@ -543,6 +585,7 @@ const FormularioAyuda: React.FC = () => {
                 <MapComponent 
                   ref={mapRef}
                   onLocationSelect={handleLocationSelect}
+                  onAddressChange={handleAddressChange}
                   height="400px"
                 />
               </div>
