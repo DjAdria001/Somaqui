@@ -64,10 +64,10 @@ const Equipo: React.FC = () => {
   return (
     <main className="equipo-page">
       {/* Header Section */}
-      <section className="equipo-header">
+      <section className="page-header">
         <div className="container">
-          <div className="equipo-header-content">
-            <div className="equipo-header-text">
+          <div className="page-header-content">
+            <div className="page-header-text">
               <h1>Nuestro Equipo</h1>
               <p className="subtitle">
                 Conoce a las personas comprometidas que hacen posible SomAqui.cat, 

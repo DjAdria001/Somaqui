@@ -5,12 +5,16 @@ const MisionVision: React.FC = () => {
   return (
     <main className="mision-vision-page">
       {/* Header Section */}
-      <section className="mv-header">
+      <section className="page-header">
         <div className="container">
-          <h1>Misión y Visión</h1>
-          <p className="subtitle">
-            Descubre los principios que guían nuestro trabajo y el futuro que queremos construir juntos.
-          </p>
+          <div className="page-header-content">
+            <div className="page-header-text">
+              <h1>Misión y Visión</h1>
+              <p className="subtitle">
+                Descubre los principios que guían nuestro trabajo y el futuro que queremos construir juntos.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -114,10 +114,10 @@ const PreguntasFrecuentes: React.FC = () => {
   return (
     <main className="preguntas-page">
       {/* Header Section */}
-      <section className="faq-header">
+      <section className="page-header">
         <div className="container">
-          <div className="faq-header-content">
-            <div className="faq-header-text">
+          <div className="page-header-content">
+            <div className="page-header-text">
               <h1>Preguntas Frecuentes</h1>
               <p className="subtitle">
                 Encuentra respuestas a las preguntas más comunes sobre SomAqui.cat. 

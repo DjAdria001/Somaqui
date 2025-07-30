@@ -57,10 +57,16 @@ const Contacto: React.FC = () => {
   return (
     <main className="contacto-page">
       {/* Header Section */}
-      <section className="contacto-header">
+      <section className="page-header">
         <div className="container">
-          <h1>Contacta con Nosotros</h1>
-          <p className="subtitle">Estamos aquí para ayudarte. Envíanos tu consulta y te responderemos lo antes posible.</p>
+          <div className="page-header-content">
+            <div className="page-header-text">
+              <h1>Contacta con Nosotros</h1>
+              <p className="subtitle">
+                Estamos aquí para ayudarte. Envíanos tu consulta y te responderemos lo antes posible.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

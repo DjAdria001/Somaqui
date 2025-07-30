@@ -195,7 +195,7 @@ section:last-child {
   background: white;
   border-radius: 15px;
   overflow: hidden;
-  cursor: pointer;
+  cursor: default;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   border: 2px solid transparent;
@@ -1082,13 +1082,13 @@ section:last-child {
 .apoyo-visual {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .apoyo-card {
   background: white;
   border-radius: 20px;
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -1102,21 +1102,21 @@ section:last-child {
 }
 
 .apoyo-icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
   display: block;
 }
 
 .apoyo-card h3 {
   color: #003333;
   font-size: 1.2rem;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
 .apoyo-card p {
   color: #666;
-  line-height: 1.6;
+  line-height: 1.4;
   font-size: 0.95rem;
   margin: 0;
 }
@@ -1180,7 +1180,7 @@ section:last-child {
   }
   
   .apoyo-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
 }
 
@@ -1198,7 +1198,7 @@ section:last-child {
   }
   
   .apoyo-card {
-    padding: 1.2rem;
+    padding: 1rem;
   }
   
   .apoyo-card h3 {

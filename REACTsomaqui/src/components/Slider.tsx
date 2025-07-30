@@ -50,14 +50,10 @@ const Slider: React.FC<SliderProps> = ({
             <div 
               key={index} 
               className={`gallery-card ${index === currentSlide ? 'featured' : ''}`}
-              onClick={() => goToSlide(index)}
             >
               <div className="image-container">
                 <img src={image.src} alt={image.alt} />
                 <div className="overlay"></div>
-              </div>
-              <div className="card-indicator">
-                <div className={`indicator-dot ${index === currentSlide ? 'active' : ''}`}></div>
               </div>
             </div>
           ))}

@@ -452,11 +452,15 @@ const FormularioAyuda: React.FC = () => {
 
   return (
     <div className="formulario-ayuda-container">
-      <section className="formulario-header">
-        <div className="formulario-header-content">
-          <div className="formulario-header-text">
-            <h1>Solicitar ayuda inmediata</h1>
-            <p className="subtitle">Conectamos tu necesidad con voluntarios cercanos</p>
+      <section className="page-header">
+        <div className="container">
+          <div className="page-header-content">
+            <div className="page-header-text">
+              <h1>Solicitar Ayuda Inmediata</h1>
+              <p className="subtitle">
+                Conectamos tu necesidad con voluntarios cercanos
+              </p>
+            </div>
           </div>
         </div>
       </section>

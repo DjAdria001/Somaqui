@@ -17,12 +17,14 @@ const QuieroDonar: React.FC = () => {
   return (
     <main className="quiero-donar-page">
       {/* Header Section */}
-      <section className="quiero-donar-header">
+      <section className="page-header">
         <div className="container">
-          <div className="header-content">
-            <div className="header-text">
+          <div className="page-header-content">
+            <div className="page-header-text">
               <h1>Quiero Donar</h1>
-              <p className="subtitle">Tu apoyo hace la diferencia en situaciones de emergencia</p>
+              <p className="subtitle">
+                Tu apoyo hace la diferencia en situaciones de emergencia
+              </p>
             </div>
           </div>
         </div>
@@ -53,8 +55,8 @@ const QuieroDonar: React.FC = () => {
 
                   <div className="info-card">
                     <i className="info-icon fas fa-users"></i>
-                    <h3>Formación de Voluntarios</h3>
-                    <p>Capacitamos constantemente a nuestros voluntarios en primeros auxilios y gestión de emergencias</p>
+                    <h3>Equipo de Trabajo</h3>
+                    <p>Mantenemos un equipo dedicado que coordina las emergencias y desarrolla la plataforma</p>
                   </div>
 
                   <div className="info-card">
@@ -109,23 +111,23 @@ const QuieroDonar: React.FC = () => {
                     <div className="breakdown-item">
                       <div className="breakdown-header">
                         <span className="breakdown-percentage">10%</span>
-                        <h4>Formación y capacitación</h4>
+                        <h4>Sustento del equipo y tecnología</h4>
                       </div>
                       <ul>
-                        <li>Entrenamiento de voluntarios</li>
-                        <li>Cursos de primeros auxilios</li>
-                        <li>Capacitación especializada</li>
+                        <li>Mantenimiento de la página web</li>
+                        <li>Desarrollo de nuevas funcionalidades</li>
+                        <li>Apoyo al equipo de trabajo</li>
                       </ul>
                     </div>
 
                     <div className="breakdown-item">
                       <div className="breakdown-header">
                         <span className="breakdown-percentage">5%</span>
-                        <h4>Costes operacionales</h4>
+                        <h4>Comunicación y transparencia</h4>
                       </div>
                       <ul>
-                        <li>Mantenimiento de la plataforma</li>
-                        <li>Gastos administrativos básicos</li>
+                        <li>Informes de actividad y transparencia</li>
+                        <li>Comunicación con donantes y comunidad</li>
                       </ul>
                     </div>
                   </div>
@@ -165,10 +167,10 @@ const QuieroDonar: React.FC = () => {
                   </div>
 
                   <div className="forma-card">
-                    <i className="forma-icon fas fa-graduation-cap"></i>
-                    <h3>Formación</h3>
-                    <p>Ofrece talleres o cursos especializados para mejorar las capacidades de nuestros voluntarios.</p>
-                    <a href="/contacto" className="btn-forma">Formar</a>
+                    <i className="forma-icon fas fa-code"></i>
+                    <h3>Desarrollo Tecnológico</h3>
+                    <p>Contribuye con tus habilidades técnicas para mejorar y mantener nuestra plataforma digital.</p>
+                    <a href="/contacto" className="btn-forma">Colaborar</a>
                   </div>
                 </div>
               </section>
