@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import RegisterModal from './components/RegisterModal';
 import LoginModal from './components/LoginModal';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import FormularioAyuda from './pages/FormularioAyuda';
 import Voluntario from './pages/Voluntario';
@@ -82,6 +83,9 @@ function App() {
               onRegisterSuccess={handleLoginSuccess}
             />
           )}
+
+          {/* Botón de scroll to top global */}
+          <ScrollToTop />
         </div>
       </Router>
     </AuthProvider>

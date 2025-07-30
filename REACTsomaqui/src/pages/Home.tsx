@@ -26,9 +26,11 @@ const Home: React.FC = () => {
       {/* Sección hero combinado */}
       <section className="hero-combinado">
         <div className="contenido-hero">
-          <h1><span className="destacado">Emergencias invisibles.</span> Respuestas humanas.</h1>
+          <h1><span className="destacado">Emergencias invisibles.</span> <span className="respuestas-humanas">Respuestas humanas.</span></h1>
           <p className="frase-impacto">
             No todas las urgencias se ven: una crisis emocional, una persona mayor sola, la falta de alimentos...
+          </p>
+          <p className="frase-destacada">
             <span className="resaltado">Para eso estamos aquí.</span>
           </p>
           <p className="frase-info">

@@ -1253,10 +1253,26 @@ section:last-child {
   border-radius: 8px;
 }
 
+.respuestas-humanas {
+  color: #fff3cd;
+  font-weight: 800;
+  text-shadow: 
+    2px 2px 6px rgba(0, 0, 0, 1),
+    1px 1px 3px rgba(0, 51, 51, 0.8);
+  display: inline-block;
+}
+
 .frase-impacto {
   font-size: 1.3rem;
   margin-bottom: 1.2rem;
   font-weight: 500;
+}
+
+.frase-destacada {
+  font-size: 1.3rem;
+  margin-bottom: 1.2rem;
+  font-weight: 500;
+  text-align: center;
 }
 
 .frase-info {
@@ -1333,6 +1349,10 @@ section:last-child {
     font-size: 1.1rem;
   }
   
+  .frase-destacada {
+    font-size: 1.1rem;
+  }
+  
   .frase-info {
     font-size: 1rem;
   }
@@ -1360,6 +1380,67 @@ section:last-child {
   .destacado {
     display: block;
     margin-bottom: 0.5rem;
+  }
+}
+
+/* Botón Scroll to Top */
+.scroll-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #39e4c9, #27b3a3);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 15px rgba(57, 228, 201, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+  background: linear-gradient(135deg, #27b3a3, #1a8b7a);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 25px rgba(57, 228, 201, 0.4);
+}
+
+.scroll-to-top:active {
+  transform: translateY(-1px) scale(1.05);
+}
+
+/* Responsive para scroll to top */
+@media (max-width: 768px) {
+  .scroll-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-to-top {
+    bottom: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
   }
 }
 
