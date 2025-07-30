@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/equipo.css';
 
 interface TeamMember {
@@ -19,8 +20,8 @@ const Equipo: React.FC = () => {
       id: 1,
       nombre: "Maria Paula Diaz Fernández",
       cargo: "Desarrolladora Fullstack",
-      descripcion: "Experta en gestión de emergencias con más de 10 años de experiencia en organizaciones humanitarias. Lidera la visión estratégica de SomAqui.cat.",
-      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Paula.jfif",
+      descripcion: "Apasionada por ayudar a los demás, combina su experiencia en organizaciones sociales con sus estudios en desarrollo web. Le encanta encontrar soluciones digitales para situaciones reales que viven muchas personas en su día a día.",
+      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Paula.png",
       linkedin: "https://www.linkedin.com/in/maria-paula-diaz-hernandez/",
       github: "https://github.com/pauladhernandez"
     },
@@ -28,7 +29,7 @@ const Equipo: React.FC = () => {
       id: 2,
       nombre: "Adrià Galera",
       cargo: "Desarrollador Fullstack",
-      descripcion: "Ingeniero de software especializado en sistemas de respuesta a emergencias. Responsable del desarrollo y mantenimiento de la plataforma.",
+      descripcion: "Le gusta crear cosas que funcionen bien y ayuden a las personas. Está estudiando desarrollo web y se encarga de que todo en la plataforma funcione correctamente, desde cómo se ve hasta cómo responde.",
       imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Adria.jfif",
       linkedin: "https://www.linkedin.com/in/adriagalerasanchez/",
      github: "https://github.com/DjAdria001"
@@ -37,38 +38,26 @@ const Equipo: React.FC = () => {
       id: 3,
       nombre: "Malik Hassan",
       cargo: "Desarrollador Fullstack",
-      descripcion: "Psicóloga social con experiencia en gestión de equipos de voluntarios. Coordina la formación y asignación de voluntarios en emergencias.",
+      descripcion: "Tiene experiencia trabajando con personas en situaciones difíciles y ahora se forma en el desarrollo de páginas y aplicaciones web. Aporta una mirada social al proyecto y se enfoca en que la tecnología esté al servicio de quienes más lo necesitan.",
       imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Malik.jfif",
       linkedin: "https://www.linkedin.com/in/malik-hassan-58b4b41b9/",
       github: "https://github.com/Hassansohail839"
     },
-    {
-      id: 4,
-      nombre: "Enya Stephanie Rodriguez",
-      cargo: "Desarrolladora Fullstack",
-      descripcion: "Periodista especializado en comunicación de crisis. Gestiona las comunicaciones públicas y relaciones con medios durante emergencias.",
-      imagen: "https://pr0j3ct.com/wp-content/uploads/2025/07/Enya.jfif",
-      linkedin: "https://www.linkedin.com/in/enya-stephanie-rodr%C3%ADguez/",
-      github: "https://github.com/EnyaRdz"
-    },
- 
+   
   ];
 
   const advisors = [
     {
-      nombre: "Dr. Elena Ruiz",
-      cargo: "Asesora Médica",
-      organizacion: "Hospital Clínic Barcelona"
+      nombre: "Marc Esteve García",
+      cargo: "Profesor",
     },
     {
-      nombre: "Ing. Roberto Vega",
-      cargo: "Asesor en Protección Civil",
-      organizacion: "Generalitat de Catalunya"
+      nombre: "Marc Torija Alfaro",
+      cargo: "Tutor",
     },
     {
-      nombre: "Dra. Carmen Torres",
-      cargo: "Asesora en Psicología de Emergencias",
-      organizacion: "Universidad de Barcelona"
+      nombre: "Nando Coronado",
+      cargo: "Coach de Soft Skills y Comunicación",
     }
   ];
 
@@ -120,7 +109,7 @@ const Equipo: React.FC = () => {
       {/* Team Members */}
       <section className="team-members">
         <div className="container">
-          <h2>Nuestro Equipo</h2>
+          <h2>Equipo</h2>
           <div className="team-grid">
             {teamMembers.map(member => (
               <div key={member.id} className="team-card">
@@ -171,10 +160,11 @@ const Equipo: React.FC = () => {
       {/* Advisors */}
       <section className="advisors">
         <div className="container">
-          <h2>Consejo Asesor</h2>
+          <h2>Mentores de Aprendizaje</h2>
           <p className="advisors-intro">
-            Contamos con la colaboración de expertos reconocidos que nos orientan 
-            en las mejores prácticas y nos ayudan a mejorar constantemente nuestros servicios.
+            A lo largo de esta experiencia formativa, tuvimos el acompañamiento de profesionales que no solo compartieron 
+            su conocimiento, sino que también nos inspiraron a crecer como personas y como equipo. Gracias por ser parte 
+            esencial de este recorrido.
           </p>
           <div className="advisors-grid">
             {advisors.map((advisor, index) => (
@@ -182,7 +172,6 @@ const Equipo: React.FC = () => {
                 <div className="advisor-info">
                   <h3>{advisor.nombre}</h3>
                   <h4>{advisor.cargo}</h4>
-                  <p>{advisor.organizacion}</p>
                 </div>
               </div>
             ))}
@@ -256,18 +245,14 @@ const Equipo: React.FC = () => {
               nuestra visión de una sociedad más solidaria y preparada para las emergencias.
             </p>
             <div className="join-actions">
-              <button className="btn-volunteer">
+              <Link to="/voluntario" className="btn-volunteer">
                 <i className="fas fa-hand-helping"></i>
                 Ser Voluntario
-              </button>
-              <button className="btn-careers">
-                <i className="fas fa-briefcase"></i>
-                Oportunidades Laborales
-              </button>
-              <button className="btn-collaborate">
+              </Link>
+              <Link to="/contacto" className="btn-collaborate">
                 <i className="fas fa-handshake"></i>
                 Colaborar con Nosotros
-              </button>
+              </Link>
             </div>
           </div>
         </div>
