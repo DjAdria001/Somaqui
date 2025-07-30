@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-// import Header from '../components/Header';
 import Login from '../pages/Login';
 import Register from '../components/RegisterModal';
 import '../styles/voluntario-new.css';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../firebase';
-import { Link } from 'react-router-dom'; // Add this at the top of the file
-import '../styles/global.css'; // Import global styles
+import '../styles/global.css';
 
 interface Emergency {
   id: string;
@@ -54,7 +52,6 @@ const Voluntario: React.FC = () => {
           tipo: value.tipo || 'general',
           tags: value.tags || [],
           otros_detalle: value.otros_detalle || '',
-
           activo: value.activo !== undefined ? value.activo : true,
         }));
         setEmergencies(formatted);
@@ -72,8 +69,6 @@ const Voluntario: React.FC = () => {
 
   return (
     <>
-      
-
       {showAuthModal && (
         <div
           className="modal-overlay"
@@ -97,17 +92,20 @@ const Voluntario: React.FC = () => {
               width: '90%',
               boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
             }}
+            // 👇 Evita que clics en el fondo cierren el modal
+            onClick={(e) => e.stopPropagation()}
           >
             {isLoginMode ? (
-              <Login 
-                onLoginSuccess={handleLoginSuccess} 
-                switchToRegister={() => setIsLoginMode(false)} 
+              <Login
+                onLoginSuccess={handleLoginSuccess}
+                switchToRegister={() => setIsLoginMode(false)}
               />
             ) : (
-              <Register 
-                onClose={() => setShowAuthModal(false)} 
-                onSwitchToLogin={() => setIsLoginMode(true)} 
-                onRegisterSuccess={handleLoginSuccess} 
+              <Register
+                onClose={() => setShowAuthModal(false)}
+                onSwitchToLogin={() => setIsLoginMode(true)}
+                onRegisterSuccess={handleLoginSuccess}
+                hideCloseButton={true}
               />
             )}
 
@@ -126,7 +124,9 @@ const Voluntario: React.FC = () => {
               }}
               onClick={() => setIsLoginMode(!isLoginMode)}
             >
-              {isLoginMode ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión'}
+              {isLoginMode
+                ? "¿No tienes cuenta? Regístrate"
+                : "¿Ya tienes cuenta? Inicia sesión"}
             </button>
           </div>
         </div>
@@ -134,7 +134,6 @@ const Voluntario: React.FC = () => {
 
       {user && (
         <main className="voluntario-page">
-          {/* Aquí tu contenido normal de voluntario: emergencias, filtros, etc */}
           <section className="emergencias-section">
             <div className="container">
               <h2>Emergencias Activas</h2>
@@ -167,21 +166,17 @@ const Voluntario: React.FC = () => {
                       {new Date(emergency.fecha_envio).toLocaleDateString('es-ES')}
                     </p>
                     <div className="emergencia-tags">
-  {emergency.tags.map((tag, index) => (
-    <span key={index} className="tag">
-      {tag === 'Otros' && emergency.otros_detalle
-        ? `Otros: ${emergency.otros_detalle}`
-        : tag}
-    </span>
-  ))}
-</div>
-<Link to={`/chat/${emergency.id}`}>
-  <button className="btn-ayudar">
-    <i className="fas fa-hand-helping"></i>
-    Quiero Ayudar
-  </button>
-</Link>
-    
+                      {emergency.tags.map((tag, index) => (
+                        <span key={index} className="tag">
+                          {tag === 'Otros' && emergency.otros_detalle
+                            ? `Otros: ${emergency.otros_detalle}`
+                            : tag}
+                        </span>
+                      ))}
+                    </div>
+                    <button className="btn-ayudar">
+                      <i className="fas fa-hand-helping"></i> Quiero Ayudar
+                    </button>
                   </div>
                 ))}
               </div>
