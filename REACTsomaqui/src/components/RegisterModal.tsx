@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { auth, database } from '../firebase'; // Ajusta la ruta según dónde esté tu archivo firebase.ts
+import { auth, database } from '../firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { ref, set } from 'firebase/database';
+import { useNavigate } from 'react-router-dom';
 
 interface FormData {
   nombre: string;
@@ -31,9 +32,12 @@ interface RegisterModalProps {
   onClose: () => void;
   onSwitchToLogin: () => void;
   onRegisterSuccess?: () => void;
+  hideCloseButton?: boolean;
 }
 
-const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin, onRegisterSuccess }) => {
+const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin, onRegisterSuccess, hideCloseButton = false }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<FormData>({
     nombre: '',
     apellidos: '',
@@ -154,17 +158,41 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin,
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content register-modal" onClick={e => e.stopPropagation()}>
-        <div className="modal-header">
+        <div className="modal-header" style={{ position: 'relative' }}>
           <h3>Únete a SomAqui.cat</h3>
-          <button 
-            className="modal-close"
-            onClick={onClose}
-            aria-label="Cerrar"
-          >
-            <i className="fas fa-times"></i>
-          </button>
+          {!hideCloseButton ? (
+            <button
+              className="modal-close"
+              onClick={onClose}
+              aria-label="Cerrar"
+              style={{ position: 'absolute', top: '10px', right: '10px' }}
+            >
+              <i className="fas fa-times"></i>
+            </button>
+          ) : (
+            <button
+              onClick={() => navigate('/')}
+              aria-label="Volver al Inicio"
+              style={{
+                position: 'absolute',
+                top: '10px',
+                right: '10px',
+                background: 'none',
+                border: 'none',
+                color: '#39e4c9',
+                cursor: 'pointer',
+                fontSize: '1.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.2rem',
+                padding: 0,
+              }}
+            >
+              <span style={{ fontSize: '1.5rem' }}>◀</span> Volver
+            </button>
+          )}
         </div>
-        
+
         <form onSubmit={handleSubmit} className="register-form" noValidate>
           <div className="form-row">
             <div className="form-group">
@@ -306,8 +334,8 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin,
           </div>
 
           <div className="form-actions">
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="btn-primary"
               disabled={isSubmitting}
             >
@@ -319,9 +347,9 @@ const RegisterModal: React.FC<RegisterModalProps> = ({ onClose, onSwitchToLogin,
         <div className="login-link" style={{ marginTop: '1rem', textAlign: 'center' }}>
           <p>
             ¿Ya tienes cuenta?{' '}
-            <button 
-              type="button" 
-              onClick={onSwitchToLogin} 
+            <button
+              type="button"
+              onClick={onSwitchToLogin}
               className="link-button"
               style={{ background: 'none', border: 'none', color: '#39e4c9', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
             >
