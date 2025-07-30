@@ -439,6 +439,25 @@ const FormularioAyuda: React.FC = () => {
         </div>
       </section>
 
+{/* Emergency Notice */}
+      <section className="emergency-notice">
+        <div className="container">
+          <div className="notice-content">
+            <div className="notice-icon">
+              <i className="fas fa-exclamation-triangle"></i>
+            </div>
+            <div className="notice-text">
+              <h3>¿Es una Emergencia?</h3>
+              <p>Si estás en una situación de emergencia inmediata, no uses este formulario. Llama directamente al <strong>112</strong> o a los servicios de emergencia locales.</p>
+            </div>
+            <a href="tel:112" className="btn-emergency">
+              <i className="fas fa-phone"></i>
+              Llamar 112
+            </a>
+          </div>
+        </div>
+      </section>
+      
       {/* Indicador de pasos */}
       <div className="pasos-container">
         <div className="pasos-navegacion">

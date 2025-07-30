@@ -174,11 +174,12 @@ header.site-header .logo img {
   z-index: 2000;
 }
 
-/* Login arriba derecha */
+/* Login en la mitad del header a la derecha */
 .header-top {
   position: absolute;
-  top: 1rem;
+  top: 50%;
   right: 2rem;
+  transform: translateY(-50%);
 }
 
 #btn-login {
