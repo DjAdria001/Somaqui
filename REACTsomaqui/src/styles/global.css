@@ -168,12 +168,16 @@ header.site-header .logo img {
   color: white;
   font-size: var(--font-size-3xl);
   cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  left: 2rem;
+  z-index: 2000;
 }
 
 /* Login arriba derecha */
 .header-top {
   position: absolute;
-  top: 2.8rem;
+  top: 1rem;
   right: 2rem;
 }
 
@@ -309,12 +313,33 @@ nav.main-nav .nav-item.dropdown:focus > .nav-link {
     display: block;
   }
 
+  header.site-header {
+    padding: 1rem 2rem;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header.site-header .logo {
+    margin-bottom: 0;
+    font-size: var(--font-size-2xl);
+  }
+
+  header.site-header .logo img {
+    height: 36px;
+  }
+
+  .header-top {
+    top: 1rem;
+    right: 2rem;
+  }
+
   nav.main-nav .nav-list {
     flex-direction: column;
     background-color: #39e4c9;
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
     width: 220px;
     display: none;
     border-radius: 0 0 8px 8px;
