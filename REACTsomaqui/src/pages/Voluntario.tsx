@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import Header from '../components/Header';
+// import Header from '../components/Header';
 import Login from '../pages/Login';
 import Register from '../components/RegisterModal';
 import '../styles/voluntario-new.css';
