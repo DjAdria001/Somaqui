@@ -207,7 +207,7 @@ nav.main-nav .nav-link {
   letter-spacing: var(--letter-spacing-normal);
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.25rem;
   transition: color 0.3s ease;
 }
@@ -235,7 +235,7 @@ nav.main-nav .nav-item.dropdown .nav-link {
   letter-spacing: var(--letter-spacing-normal);
   cursor: pointer;
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.25rem;
   transition: color 0.3s ease;
 }
@@ -334,6 +334,12 @@ nav.main-nav .nav-item.dropdown:focus > .nav-link {
   nav.main-nav .nav-link {
     padding: 0.75rem 1.5rem;
     width: 100%;
+  }
+
+  nav.main-nav .nav-item.dropdown .nav-link {
+    padding: 0.75rem 1.5rem;
+    width: 100%;
+    justify-content: space-between;
   }
 
   nav.main-nav .dropdown-menu {
