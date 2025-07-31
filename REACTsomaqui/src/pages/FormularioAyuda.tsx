@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
 import '../styles/formulario-ayuda.css';
 import { ref, push, set } from 'firebase/database';
@@ -20,6 +21,7 @@ interface FormData {
 }
 
 const FormularioAyuda: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     
     ubicacion: '',
@@ -460,34 +462,34 @@ const FormularioAyuda: React.FC = () => {
       const emergenciaRef = ref(database, 'Emergencias');
       const newRef = push(emergenciaRef);
       // Generar un ID único del solicitante
-    const solicitanteId = crypto.randomUUID();
+      const solicitanteId = crypto.randomUUID();
+      
+      // Guardar la emergencia
       await set(newRef, {
         ...formData,
         fecha_envio: new Date().toISOString(),
+        solicitante_id: solicitanteId,
       });
-      // Guardamos el ID localmente en el navegador para que este usuario tenga control
-    localStorage.setItem(`emergencia_${newRef.key}`, solicitanteId);
-      alert('Solicitud enviada con éxito. Pronto recibirás ayuda de voluntarios cercanos.');
       
-      // Reset del formulario
-      setFormData({
-        
-        ubicacion: '',
-        desc_ubic: '',
-        nombre: '',
-        correo: '',
-        telefono: '',
-        personales: '',
-        tiempo: '',
-        tags: [],
-        otros_detalle: '',
-        descripcion: '',
-        activo: true
+      // Guardar información del usuario para el chat
+      const usuarioRef = ref(database, `usuarios/${solicitanteId}`);
+      await set(usuarioRef, {
+        nombre: formData.nombre,
+        email: formData.correo,
+        telefono: formData.telefono,
+        emergencia_id: newRef.key,
+        fecha_registro: new Date().toISOString(),
       });
-      setUbicacionTexto('📍 Detectar mi ubicación automáticamente');
-      setUbicacionDetectada(false);
-      setTermsAccepted(false);
-      setShowOtrosDetalle(false);
+      
+      // Guardamos el ID localmente en el navegador para que este usuario tenga control
+      localStorage.setItem(`emergencia_${newRef.key}`, solicitanteId);
+      localStorage.setItem(`usuario_nombre`, formData.nombre);
+      
+      // Mostrar mensaje de éxito
+      alert('Solicitud enviada con éxito. Serás redirigido al chat de tu emergencia para comunicarte con los voluntarios.');
+      
+      // Redirigir al chat de la emergencia
+      navigate(`/chat/${newRef.key}`);
       
     } catch (error) {
       console.error('Error al enviar solicitud:', error);

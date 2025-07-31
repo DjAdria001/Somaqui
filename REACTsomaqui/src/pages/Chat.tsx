@@ -1,34 +1,82 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { database, auth } from '../firebase';
-import { onValue, push, ref } from 'firebase/database';
+import { onValue, push, ref, get } from 'firebase/database';
 
 interface Mensaje {
   id: string;
   texto: string;
   remitente: string;
   timestamp: number;
+  nombre_usuario?: string;
 }
 
 const Chat: React.FC = () => {
   const { id: emergenciaId } = useParams<{ id: string }>();
   const [mensajes, setMensajes] = useState<Mensaje[]>([]);
   const [nuevoMensaje, setNuevoMensaje] = useState('');
+  const [nombreUsuario, setNombreUsuario] = useState<string>('');
   const chatRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    // Función para cargar el nombre del usuario
+    const loadUserName = async () => {
+      // Prioridad 1: Si hay un usuario autenticado (voluntario registrado), buscar en Firebase
+      if (auth.currentUser) {
+        try {
+          const userRef = ref(database, `usuarios/${auth.currentUser.uid}`);
+          const snapshot = await get(userRef);
+          
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            const nombreCompleto = `${userData.nombre} ${userData.apellidos || ''}`.trim();
+            setNombreUsuario(nombreCompleto);
+            console.log('👤 Usuario registrado encontrado:', nombreCompleto);
+            return;
+          }
+        } catch (error) {
+          console.error('❌ Error al cargar datos del usuario registrado:', error);
+        }
+      }
+
+      // Prioridad 2: Si no hay usuario registrado, usar localStorage (solicitante de ayuda)
+      const nombreGuardado = localStorage.getItem('usuario_nombre');
+      if (nombreGuardado) {
+        setNombreUsuario(nombreGuardado);
+        console.log('👤 Nombre del solicitante desde localStorage:', nombreGuardado);
+      }
+    };
+
+    loadUserName();
+
     if (!emergenciaId) return;
 
     const mensajesRef = ref(database, `chats/${emergenciaId}`);
-    const unsubscribe = onValue(mensajesRef, (snapshot) => {
+    const unsubscribe = onValue(mensajesRef, async (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const mensajesArray = Object.entries(data).map(([key, val]: [string, any]) => ({
-          id: key,
-          texto: val.texto,
-          remitente: val.remitente,
-          timestamp: val.timestamp || 0,
-        }));
+        const mensajesArray = await Promise.all(
+          Object.entries(data).map(async ([key, val]: [string, any]) => {
+            let nombreParaMostrar = val.nombre_usuario || val.remitente;
+            
+            // Si el mensaje no tiene nombre_usuario y es un email, intentar obtener el nombre
+            if (!val.nombre_usuario && val.remitente && val.remitente.includes('@')) {
+              const nombreEncontrado = await getUserNameByEmail(val.remitente);
+              if (nombreEncontrado !== val.remitente) {
+                nombreParaMostrar = nombreEncontrado;
+              }
+            }
+            
+            return {
+              id: key,
+              texto: val.texto,
+              remitente: val.remitente,
+              timestamp: val.timestamp || 0,
+              nombre_usuario: nombreParaMostrar,
+            };
+          })
+        );
+        
         mensajesArray.sort((a, b) => a.timestamp - b.timestamp);
         setMensajes(mensajesArray);
         scrollToBottom();
@@ -41,17 +89,71 @@ const Chat: React.FC = () => {
   }, [emergenciaId]);
 
   const enviarMensaje = async () => {
-    if (!nuevoMensaje.trim() || !auth.currentUser || !emergenciaId) return;
+    if (!nuevoMensaje.trim() || !emergenciaId) return;
+
+    // Determinar el nombre para mostrar
+    let nombreParaMostrar = nombreUsuario;
+    
+    // Si no hay nombre guardado, usar el email del usuario autenticado o 'Anónimo'
+    if (!nombreParaMostrar) {
+      if (auth.currentUser?.email) {
+        // Si es un usuario autenticado pero no tenemos su nombre, intentar cargarlo
+        try {
+          const userRef = ref(database, `usuarios/${auth.currentUser.uid}`);
+          const snapshot = await get(userRef);
+          
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+            nombreParaMostrar = `${userData.nombre} ${userData.apellidos || ''}`.trim();
+            setNombreUsuario(nombreParaMostrar);
+          } else {
+            nombreParaMostrar = auth.currentUser.email;
+          }
+        } catch (error) {
+          console.error('❌ Error al cargar nombre del usuario:', error);
+          nombreParaMostrar = auth.currentUser.email;
+        }
+      } else {
+        nombreParaMostrar = 'Anónimo';
+      }
+    }
 
     const mensaje = {
       texto: nuevoMensaje,
-      remitente: auth.currentUser.email || 'Anónimo',
+      remitente: auth.currentUser?.email || 'Anónimo',
+      nombre_usuario: nombreParaMostrar,
       timestamp: Date.now(),
     };
 
     const mensajesRef = ref(database, `chats/${emergenciaId}`);
     await push(mensajesRef, mensaje);
     setNuevoMensaje('');
+  };
+
+  // Función para obtener el nombre de un usuario por email
+  const getUserNameByEmail = async (email: string): Promise<string> => {
+    try {
+      // Buscar en todos los usuarios registrados
+      const usuariosRef = ref(database, 'usuarios');
+      const snapshot = await get(usuariosRef);
+      
+      if (snapshot.exists()) {
+        const usuarios = snapshot.val();
+        
+        // Buscar el usuario por email
+        for (const [, userData] of Object.entries(usuarios) as [string, any][]) {
+          if (userData.correo === email) {
+            return `${userData.nombre} ${userData.apellidos || ''}`.trim();
+          }
+        }
+      }
+      
+      // Si no se encuentra, devolver el email
+      return email;
+    } catch (error) {
+      console.error('❌ Error al buscar usuario por email:', error);
+      return email;
+    }
   };
 
   const scrollToBottom = () => {
@@ -72,7 +174,7 @@ const Chat: React.FC = () => {
         ) : (
           mensajes.map((msg) => (
             <div key={msg.id} style={{ marginBottom: 8 }}>
-              <strong>{msg.remitente}:</strong> {msg.texto}
+              <strong>{msg.nombre_usuario || msg.remitente}:</strong> {msg.texto}
             </div>
           ))
         )}
