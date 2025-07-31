@@ -459,11 +459,14 @@ const FormularioAyuda: React.FC = () => {
       // Simular envío
       const emergenciaRef = ref(database, 'Emergencias');
       const newRef = push(emergenciaRef);
+      // Generar un ID único del solicitante
+    const solicitanteId = crypto.randomUUID();
       await set(newRef, {
         ...formData,
         fecha_envio: new Date().toISOString(),
       });
-      
+      // Guardamos el ID localmente en el navegador para que este usuario tenga control
+    localStorage.setItem(`emergencia_${newRef.key}`, solicitanteId);
       alert('Solicitud enviada con éxito. Pronto recibirás ayuda de voluntarios cercanos.');
       
       // Reset del formulario
