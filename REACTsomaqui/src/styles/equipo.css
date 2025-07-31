@@ -453,3 +453,118 @@
     font-size: 1.5rem;
   }
 }
+
+/* Agradecimientos */
+.acknowledgments {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f0fdfd 0%, #e6fffe 100%);
+}
+
+.acknowledgments h2 {
+  font-size: 2.2rem;
+  color: #003333;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.acknowledgments-intro {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 3rem;
+}
+
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  margin: 3rem 0;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sponsor-item {
+  background: #fff;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(57, 228, 201, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.sponsor-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(57, 228, 201, 0.2);
+  border-color: #39e4c9;
+}
+
+.sponsor-logo {
+  max-width: 100%;
+  max-height: 120px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(20%);
+  transition: filter 0.3s ease;
+}
+
+.sponsor-item:hover .sponsor-logo {
+  filter: grayscale(0%);
+}
+
+.acknowledgments-footer {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.acknowledgments-footer p {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
+/* Responsive para agradecimientos */
+@media (max-width: 1024px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sponsors-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .sponsor-item {
+    padding: 20px;
+  }
+  
+  .sponsor-logo {
+    max-height: 80px;
+  }
+  
+  .acknowledgments h2 {
+    font-size: 1.8rem;
+  }
+  
+  .acknowledgments-intro {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sponsors-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}

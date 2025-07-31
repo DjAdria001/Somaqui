@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/equipo.css';
 
+// Importar imágenes de agradecimientos
+import clusterticLogo from '../assets/clustertic.png';
+import fundacioesplaiLogo from '../assets/fundacioesplai.png';
+import socLogo from '../assets/soc.jpeg';
+import tarragonaimpulsaLogo from '../assets/tarragonaimpulsa.png';
+
 interface TeamMember {
   id: number;
   nombre: string;
@@ -183,6 +189,39 @@ const Equipo: React.FC = () => {
         </div>
       </section>
 
+ {/* Agradecimientos */}
+      <section className="acknowledgments">
+        <div className="container">
+          <h2>Agradecimientos</h2>
+          <p className="acknowledgments-intro">
+            Este proyecto ha sido posible gracias al apoyo y la subvención de las siguientes instituciones y organizaciones 
+            que apuestan por la formación, la innovación y el desarrollo tecnológico. Su compromiso con la educación y el 
+            emprendimiento nos ha permitido desarrollar esta plataforma solidaria.
+          </p>
+          <div className="sponsors-grid">
+            <div className="sponsor-item">
+              <img src={clusterticLogo} alt="ClusterTIC" className="sponsor-logo" />
+            </div>
+            <div className="sponsor-item">
+              <img src={fundacioesplaiLogo} alt="Fundació Esplai" className="sponsor-logo" />
+            </div>
+            <div className="sponsor-item">
+              <img src={socLogo} alt="SOC - Servei d'Ocupació de Catalunya" className="sponsor-logo" />
+            </div>
+            <div className="sponsor-item">
+              <img src={tarragonaimpulsaLogo} alt="Tarragona Impulsa" className="sponsor-logo" />
+            </div>
+          </div>
+          <div className="acknowledgments-footer">
+            <p>
+              Gracias por confiar en el talento emergente y por hacer posible que proyectos como SomAqui.cat 
+              puedan contribuir a crear una sociedad más conectada y solidaria.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
       {/* Values */}
       <section className="values">
         <div className="container">
@@ -238,6 +277,8 @@ const Equipo: React.FC = () => {
           </div>
         </div>
       </section>
+
+  
 
       {/* Join Team */}
       <section className="join-team">
